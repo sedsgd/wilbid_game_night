@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Site Wilbid, accueil</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#141E4A}
+a{color:#F4F3EF}a:hover{color:#F2B705}
+</style>
+</helmet>
+<div style="background: #141E4A; color: #F4F3EF; font-family: Manrope, sans-serif">
+<header style="border-bottom: 1px solid rgba(244,243,239,0.15)">
+<nav style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px">
+<a href="#accueil" style="display: flex; align-items: center; gap: 10px; text-decoration: none; min-height: 44px">
+<svg width="30" height="30" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#F2B705"><circle cx="14" cy="14" r="9.2"></circle><circle cx="34" cy="14" r="9.2"></circle><circle cx="14" cy="34" r="9.2"></circle><circle cx="34" cy="34" r="9.2"></circle></g><path d="M24 19 29 24 24 29 19 24Z" fill="#141E4A"></path></svg>
+<span style="font-family: Syne, sans-serif; font-weight: 800; font-size: 22px; letter-spacing: -0.03em">wilbid</span>
+</a>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 22px; font-weight: 600; font-size: 15px">
+<a href="#programme" style="text-decoration: none; padding: 12px 0">{{ t.nav1 }}</a>
+<a href="#jeux" style="text-decoration: none; padding: 12px 0">{{ t.nav2 }}</a>
+<a href="#classement" style="text-decoration: none; padding: 12px 0">{{ t.nav3 }}</a>
+<button type="button" onClick="{{ toggle }}" aria-label="Changer de langue" style="min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid rgba(244,243,239,0.5); background: transparent; color: #F4F3EF; font: 800 14px Manrope, sans-serif; cursor: pointer">{{ t.lang }}</button>
+</div>
+</nav>
+</header>
+
+<section id="accueil" style="position: relative; overflow: hidden; min-height: 620px; display: flex; align-items: center">
+<img src="/_blob/54061040106702111e8dd8f26cf946df" alt="" style="position: absolute; right: 0; top: 0; height: 100%; width: 78%; object-fit: cover; object-position: right center">
+<div style="position: absolute; inset: 0; background: linear-gradient(90deg, #141E4A 38%, rgba(20,30,74,0.55) 62%, rgba(20,30,74,0))"></div>
+<div style="position: relative; max-width: 1240px; width: 100%; margin: 0 auto; padding: 72px 24px">
+<div style="max-width: 600px; display: flex; flex-direction: column; gap: 22px">
+<div style="font-family: 'Instrument Serif', serif; font-style: italic; font-size: 30px; color: #F2B705; line-height: 1">{{ t.kicker }}</div>
+<h1 style="margin: 0; font-family: Syne, sans-serif; font-weight: 800; font-size: clamp(56px, 8vw, 112px); line-height: 0.88; letter-spacing: -0.045em">Game<br>Night</h1>
+<p style="margin: 0; font-size: 19px; line-height: 1.55; color: #DCDFF0">{{ t.lead }}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="#jeux" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; border-radius: 999px; background: #F2B705; color: #141E4A; font-weight: 800; text-decoration: none">{{ t.cta1 }}</a>
+<a href="#classement" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; border-radius: 999px; border: 1.5px solid #F4F3EF; text-decoration: none; font-weight: 700">{{ t.cta2 }}</a>
+</div>
+</div>
+</div>
+</section>
+
+<section id="programme" style="background: #F4F3EF; color: #141E4A">
+<div style="max-width: 1240px; margin: 0 auto; padding: 80px 24px; display: flex; flex-wrap: wrap; gap: 40px 64px">
+<div style="flex: 1 1 300px">
+<h2 style="margin: 0; font-family: Syne, sans-serif; font-weight: 800; font-size: 48px; line-height: 1; letter-spacing: -0.035em">La nuit,<br>heure par heure</h2>
+<p style="margin: 16px 0 0; font-size: 17px; line-height: 1.55; color: #3A4270; max-width: 360px">On commence par se rencontrer, on garde la stratégie lourde pour après le repas, et on finit par la finale.</p>
+</div>
+<ol style="flex: 2 1 560px; list-style: none; margin: 0; padding: 0">
+<sc-for list="{{ program }}" as="p" hint-placeholder-count="8">
+<li style="display: grid; grid-template-columns: 110px minmax(0, 1fr) auto; gap: 18px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid #DAD8CF">
+<span style="font-family: Syne, sans-serif; font-weight: 800; font-size: 26px; white-space: nowrap">{{ p.h }}</span>
+<span style="font-size: 18px; font-weight: 700">{{ p.name }}</span>
+<span style="font-size: 14px; color: #3A4270; white-space: nowrap">{{ p.kind }}</span>
+</li>
+</sc-for>
+</ol>
+</div>
+</section>
+
+<section id="jeux">
+<div style="max-width: 1240px; margin: 0 auto; padding: 80px 24px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 36px">
+<h2 style="margin: 0; font-family: Syne, sans-serif; font-weight: 800; font-size: 48px; letter-spacing: -0.035em">Les livrets de règles</h2>
+<span style="font-family: 'Instrument Serif', serif; font-style: italic; font-size: 24px; color: #F2B705">en français et en anglais</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px">
+<sc-for list="{{ games }}" as="g" hint-placeholder-count="8">
+<a href="#jeux" style="display: flex; flex-direction: column; gap: 14px; padding: 20px; border-radius: 16px; background: #1C2860; border: 1px solid rgba(244,243,239,0.12); text-decoration: none">
+<div style="display: flex; justify-content: space-between; align-items: flex-start">
+<img src="{{ g.src }}" alt="" style="width: 76px; height: 76px; border-radius: 50%">
+<span style="font-size: 13px; font-weight: 700; color: #B9C0E6">{{ g.num }}</span>
+</div>
+<div style="font-family: Syne, sans-serif; font-weight: 800; font-size: 22px; line-height: 1.05; letter-spacing: -0.02em">{{ g.name }}</div>
+<div style="font-size: 14px; color: #B9C0E6">{{ g.kind }}</div>
+</a>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section id="classement" style="background: #0E1638">
+<div style="max-width: 1240px; margin: 0 auto; padding: 80px 24px; display: flex; flex-wrap: wrap; gap: 40px 64px">
+<div style="flex: 1 1 300px">
+<h2 style="margin: 0; font-family: Syne, sans-serif; font-weight: 800; font-size: 48px; line-height: 1; letter-spacing: -0.035em">Classement en direct</h2>
+<p style="margin: 16px 0 0; font-size: 17px; line-height: 1.55; color: #C9CDE6; max-width: 360px">Mis à jour par le comptable après chaque jeu, affiché au vidéoprojecteur. Les 4 premiers jouent la finale.</p>
+<p style="margin: 12px 0 0; font-size: 14px; color: #8D94C2">Noms et scores d'exemple, après le Jeu 5.</p>
+</div>
+<ol style="flex: 2 1 560px; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px">
+<sc-for list="{{ ranks }}" as="r" hint-placeholder-count="6">
+<li style="display: grid; grid-template-columns: 40px minmax(0, 1fr) 70px; gap: 16px; align-items: center">
+<span style="font-family: Syne, sans-serif; font-weight: 800; font-size: 30px; color: {{ r.color }}">{{ r.pos }}</span>
+<div><div style="font-weight: 700; font-size: 17px; margin-bottom: 6px">{{ r.name }}</div><div style="height: 10px; border-radius: 5px; background: rgba(244,243,239,0.1)"><div style="height: 10px; border-radius: 5px; width: {{ r.w }}; background: {{ r.color }}"></div></div></div>
+<span style="font-family: Syne, sans-serif; font-weight: 800; font-size: 22px; text-align: right; white-space: nowrap">{{ r.pw }}</span>
+</li>
+</sc-for>
+</ol>
+</div>
+</section>
+
+<footer style="position: relative; overflow: hidden">
+<img src="/_blob/9954efd94ffe4db09d0ea7e0fc8fd479" alt="" style="display: block; width: 100%; height: 90px; object-fit: cover; object-position: center 2%">
+<div style="max-width: 1240px; margin: 0 auto; padding: 32px 24px 48px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 15px; color: #C9CDE6">
+<span><b style="font-family: Syne, sans-serif; color: #F4F3EF">wilbid</b> Game Night, Bamberg, Erlangen, Nuremberg</span>
+<span>Inscriptions et questions dans le groupe WhatsApp</span>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2700}}'>
+class Component extends DCLogic {
+constructor(p) { super(p); this.state = { en: false }; }
+renderVals() {
+const en = this.state.en;
+const t = en ? {
+nav1: 'Schedule', nav2: 'Games', nav3: 'Leaderboard', lang: 'FR', kicker: 'Season 1, winter 2026',
+lead: 'A night of strategy, alliances and bluff for Cameroonians in Bavaria. Seven games, one final, and a prize pot for the podium.',
+cta1: 'Read the rules', cta2: 'See the leaderboard'
+} : {
+nav1: 'Programme', nav2: 'Jeux', nav3: 'Classement', lang: 'EN', kicker: 'Saison 1, hiver 2026',
+lead: 'Une nuit de stratégie, d’alliances et de bluff entre Camerounais de Bavière. Sept jeux, une finale, et une cagnotte pour le podium.',
+cta1: 'Lire les règles', cta2: 'Voir le classement'
+};
+const ranks = [['Nadège', 41], ['Junior B.', 37], ['Carine', 33], ['Ulrich', 29], ['Michelle', 26], ['Arnaud', 22]].map(([name, pw], i) => ({
+pos: i + 1, name, pw: pw + ' PW', w: Math.round(pw / 41 * 100) + '%', color: i === 0 ? '#F2B705' : (i < 4 ? '#F4F3EF' : '#5C6BB8')
+}));
+return {
+t, toggle: () => this.setState({ en: !en }), ranks,
+program: [
+{ h: '19h30', name: 'Accueil, badges, 10 Kola', kind: '30 min' },
+{ h: '20h00', name: 'Le Marché de Mokolo', kind: 'brise-glace' },
+{ h: '20h40', name: 'Qui est qui ?', kind: 'déduction' },
+{ h: '21h25', name: 'Le Njangi', kind: 'enchères' },
+{ h: '22h00', name: 'Le Carrefour des Duos', kind: 'rencontres' },
+{ h: '22h45', name: 'Repas et musique', kind: '60 min' },
+{ h: '23h45', name: 'Le Pont du Wouri', kind: 'négociation' },
+{ h: '00h40', name: 'Le Code du Chef', kind: 'déduction' },
+{ h: '01h50', name: 'Les Feymen', kind: 'bluff' },
+{ h: '03h00', name: 'Le Trône de Kola', kind: 'finale' }
+],
+games: [
+{ num: 'Jeu 1', name: 'Le Marché de Mokolo', kind: 'Échange, 30 min', src: '/_blob/2a8d32ef94e72306d1391c95e9c014a0' },
+{ num: 'Jeu 2', name: 'Qui est qui ?', kind: 'Déduction, 40 min', src: '/_blob/61fe3833a467e0ccbd20de78ff0ad192' },
+{ num: 'Jeu 3', name: 'Le Njangi', kind: 'Enchères, 30 min', src: '/_blob/852ac7f0f88a7528b31f51d889e06272' },
+{ num: 'Jeu 4', name: 'Le Carrefour des Duos', kind: 'Énigmes à deux, 45 min', src: '/_blob/3b75f824f0f70532f1ee357c590883a5' },
+{ num: 'Jeu 5', name: 'Le Pont du Wouri', kind: 'Négociation, 45 min', src: '/_blob/9cf4b329eef7dbdcb375b26e443df6cb' },
+{ num: 'Jeu 6', name: 'Le Code du Chef', kind: 'Déduction en équipe, 50 min', src: '/_blob/dc5fcd65b54d7f44189f740346227c7c' },
+{ num: 'Jeu 7', name: 'Les Feymen', kind: 'Rôles cachés, 50 min', src: '/_blob/0a2b54a9ea291b238fb271d08313058a' },
+{ num: 'Finale', name: 'Le Trône de Kola', kind: 'Bluff et enchères, 30 min', src: '/_blob/e5c8013db04ad369784112956351707b' }
+]
+};
+}
+}
+</script>
+</body>
+</html>

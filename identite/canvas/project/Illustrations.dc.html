@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Illustrations et emblèmes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1000px; box-sizing: border-box; padding: 64px 72px; background: #141E4A; color: #F4F3EF; font-family: Manrope, sans-serif; display: grid; grid-template-columns: 560px minmax(0, 1fr); gap: 64px">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<h2 style="margin: 0; font-family: Syne, sans-serif; font-weight: 800; font-size: 40px; letter-spacing: -0.03em; line-height: 1.05">Un emblème par jeu</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #C9CDE6">Tracés en blanc craie sur la même grille, cerclés d'une couronne de losanges ndop. Ils servent d'icône sur le site, de tampon sur les livrets et de dos de cartes.</p>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 16px">
+<sc-for list="{{ emblems }}" as="e" hint-placeholder-count="9">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<img src="{{ e.src }}" alt="{{ e.name }}" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover">
+<div style="font-size: 13px; color: #B9C0E6">{{ e.num }}</div>
+<div style="font-family: Syne, sans-serif; font-weight: 700; font-size: 16px; text-align: center; margin-top: -6px">{{ e.name }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<h2 style="margin: 0; font-family: Syne, sans-serif; font-weight: 800; font-size: 40px; letter-spacing: -0.03em">Les grandes planches</h2>
+<span style="font-family: 'Instrument Serif', serif; font-style: italic; font-size: 22px; color: #F2B705">risographie, deux à trois encres</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
+<figure style="margin: 0"><img src="/_blob/380ab804dc707edac6b1801df3d8a2d8" alt="Le Marché de Mokolo : deux jeunes marchandent au marché au coucher du soleil" style="width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 10px; display: block"><figcaption style="margin-top: 12px"><b style="font-family: Syne, sans-serif; font-size: 18px">Le Marché de Mokolo</b><div style="font-size: 14px; color: #B9C0E6">Jeu 1, brise-glace</div></figcaption></figure>
+<figure style="margin: 0"><img src="/_blob/dbbc537b3690881914e09c394df7dfd2" alt="Les Feymen : trois joueurs masqués cachent leurs cartes, l'une tient une kola dans le dos" style="width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 10px; display: block"><figcaption style="margin-top: 12px"><b style="font-family: Syne, sans-serif; font-size: 18px">Les Feymen</b><div style="font-size: 14px; color: #B9C0E6">Jeu 7, rôles cachés</div></figcaption></figure>
+<figure style="margin: 0"><img src="/_blob/0628e0182724fbfa28754bb75988324d" alt="Le Trône de Kola : un tabouret royal sculpté porte une kola, quatre finalistes se penchent" style="width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 10px; display: block"><figcaption style="margin-top: 12px"><b style="font-family: Syne, sans-serif; font-size: 18px">Le Trône de Kola</b><div style="font-size: 14px; color: #B9C0E6">Finale, quatre joueurs</div></figcaption></figure>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #C9CDE6; border-top: 1.5px solid rgba(244,243,239,0.25); padding-top: 18px">Règles de style : fond indigo, trait blanc craie gravé, au plus deux couleurs d'accent, bordure de losanges, grain d'impression visible. Personnages de profil ou à moitié masqués, jamais de caricature.</p>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+renderVals() {
+return { emblems: [
+{ num: 'Jeu 1', name: 'Marché de Mokolo', src: '/_blob/2a8d32ef94e72306d1391c95e9c014a0' },
+{ num: 'Jeu 2', name: 'Qui est qui ?', src: '/_blob/61fe3833a467e0ccbd20de78ff0ad192' },
+{ num: 'Jeu 3', name: 'Le Njangi', src: '/_blob/852ac7f0f88a7528b31f51d889e06272' },
+{ num: 'Jeu 4', name: 'Carrefour des Duos', src: '/_blob/3b75f824f0f70532f1ee357c590883a5' },
+{ num: 'Jeu 5', name: 'Pont du Wouri', src: '/_blob/9cf4b329eef7dbdcb375b26e443df6cb' },
+{ num: 'Jeu 6', name: 'Le Code du Chef', src: '/_blob/dc5fcd65b54d7f44189f740346227c7c' },
+{ num: 'Jeu 7', name: 'Les Feymen', src: '/_blob/0a2b54a9ea291b238fb271d08313058a' },
+{ num: 'Finale', name: 'Trône de Kola', src: '/_blob/e5c8013db04ad369784112956351707b' },
+{ num: 'Saison', name: 'Classement', src: '/_blob/7393529470ae761742eb406250c3e226' }
+] };
+}
+}
+</script>
+</body>
+</html>

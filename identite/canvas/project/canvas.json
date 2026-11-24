@@ -1,0 +1,14 @@
+{"v":3,"createdOnFiles":{"v":1,"at":"2026-11-24T01:00:00Z"},"title":"Wilbid Game Night, identité Ndop Nuit","launch":{"view":"canvas"},"pages":[],
+"boards":{
+"Main.dc.html":{"x":0,"y":0,"w":1440,"h":900,"title":"Visuel clé de la saison"},
+"Marque.dc.html":{"x":1520,"y":0,"w":1440,"h":900,"title":"Plateforme de marque"},
+"Illustrations.dc.html":{"x":0,"y":1020,"w":1440,"h":1000,"title":"Illustrations et emblèmes"},
+"Cartes.dc.html":{"x":1520,"y":1020,"w":1440,"h":1000,"title":"Cartes de jeu"},
+"Livret-couverture.dc.html":{"x":0,"y":2140,"w":559,"h":794,"title":"Livret A5, couverture"},
+"Livret-page.dc.html":{"x":639,"y":2140,"w":559,"h":794,"title":"Livret A5, page de règles"},
+"Badges.dc.html":{"x":1278,"y":2140,"w":1200,"h":794,"title":"Badges et matériel"},
+"Instagram.dc.html":{"x":2558,"y":2140,"w":1080,"h":1350,"title":"Annonce Instagram et WhatsApp"},
+"Site.dc.html":{"x":0,"y":3610,"w":1440,"h":2700,"title":"Site, page d'accueil","expand":"fill","is_interactive":true}
+},
+"order":["Main.dc.html","Marque.dc.html","Illustrations.dc.html","Cartes.dc.html","Livret-couverture.dc.html","Livret-page.dc.html","Badges.dc.html","Instagram.dc.html","Site.dc.html"],
+"notes":{},"designSystems":[]}

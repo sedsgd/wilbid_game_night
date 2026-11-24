@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wilbid identité visuelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;600;800&family=Unbounded:wght@500;700;900&family=Inter+Tight:wght@400;600&family=Archivo:wdth,wght@62..125,400;62..125,600;62..125,900&display=swap" rel="stylesheet">
+<style>
+/* VOICE occasion : une soirée de jeux haut de gamme, présentée comme un dossier de studio
+   IDEA trois planches de tendance, chacune imprimée comme le vrai objet (badge, livret, carte)
+   PICTURE pour chaque direction : une couverture de livret, trois badges de rôle, un logo
+   COLOUR chaque planche porte sa propre palette en aplat jusqu'aux bords ; le cadre reste neutre
+   TYPE Syne + Manrope pour le cadre (direction recommandée), chaque planche avec ses polices
+   LAYOUT bandeau d'intro, puis une bande pleine largeur par direction : maquettes à gauche, fiche à droite */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0d1233);--ink:light-dark(#111327,#eef0fb);--mute:light-dark(#4b4f6b,#b8bddc);--line:light-dark(#dfe1ee,#283068)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Manrope,system-ui,sans-serif;overflow-x:clip}
+.band{padding-block:clamp(32px,5vw,72px);padding-left:max(5vw,16px);padding-right:max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+h1,h2,h3{font-family:Syne,Manrope,sans-serif;line-height:1.05;letter-spacing:-.02em;text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,5vw,52px);font-weight:800}
+h2{font-size:clamp(28px,3.6vw,42px);font-weight:800}
+h3{font-size:18px;font-weight:700;margin:0 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(24px,4vw,56px);align-items:center}
+.hero p{color:var(--mute);font-size:17px}
+.strips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;height:clamp(220px,30vw,340px)}
+.strips a{border-radius:14px;overflow:hidden;position:relative;display:block;text-decoration:none;color:#fff}
+.strips a:focus-visible{outline:3px solid #e0452f;outline-offset:3px}
+.strips svg{position:absolute;inset:0;width:100%;height:100%}
+.strips span{position:absolute;left:12px;bottom:12px;right:12px;font:700 15px/1.2 Manrope,sans-serif;background:rgba(0,0,0,.55);padding:8px 10px;border-radius:8px}
+.nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line);color:var(--ink);text-decoration:none;font-weight:600}
+.nav a:hover{border-color:currentColor}
+.board{color:var(--bc)}
+.board .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px)}
+.bhead{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px 24px;align-items:end;justify-content:space-between}
+.bhead p{margin:8px 0 0;opacity:.88}
+.tag{display:inline-block;padding:6px 12px;border-radius:999px;font:800 14px/1 Manrope,sans-serif}
+.mocks{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:16px;align-content:start}
+.cover{aspect-ratio:148/210;border-radius:6px;overflow:hidden;position:relative;box-shadow:0 14px 30px rgba(0,0,0,.28)}
+.cover svg{position:absolute;inset:0;width:100%;height:100%}
+.badges{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-content:start}
+.badge{aspect-ratio:54/86;border-radius:8px;position:relative;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.22)}
+.badge svg{position:absolute;inset:0;width:100%;height:100%}
+.logo{grid-column:1/-1;border-radius:10px;min-height:150px;display:flex;align-items:center;justify-content:center;gap:18px;padding:20px;flex-wrap:wrap}
+.spec h3{margin-top:22px}
+.spec h3:first-child{margin-top:0}
+.pal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.chip{border-radius:8px;overflow:hidden;border:1px solid rgba(127,127,127,.35);background:rgba(255,255,255,.06)}
+.chip i{display:block;height:54px}
+.chip div{padding:6px 8px;font-size:13px;line-height:1.3}
+.chip b{display:block;font-size:14px}
+.chip button{all:unset;cursor:pointer;font-variant-numeric:tabular-nums;white-space:nowrap;border-bottom:1px dotted currentColor}
+.chip button:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.type{border-top:1px solid rgba(127,127,127,.35);padding-top:10px}
+.type .d{font-size:clamp(30px,3.4vw,40px);line-height:1.05}
+.type small{display:block;font-size:13px;opacity:.8;margin-top:4px}
+.spec ul{margin:0;padding-left:18px}
+.spec li{margin-bottom:6px}
+.meter{display:flex;gap:4px;margin-top:4px}
+.meter i{width:22px;height:8px;border-radius:2px;background:currentColor;opacity:.25}
+.meter i.on{opacity:1}
+.row{display:grid;grid-template-columns:9em minmax(0,1fr);gap:10px;align-items:center;font-size:15px;margin-bottom:4px}
+.verdict{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,4vw,56px)}
+.verdict table{border-collapse:collapse;width:100%;font-size:15px}
+.verdict th,.verdict td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.verdict th{font-weight:800}
+.web{border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow:0 14px 30px rgba(0,0,0,.18)}
+.web .bar{background:#0b1130;padding:8px 12px;display:flex;gap:6px}
+.web .bar i{width:10px;height:10px;border-radius:50%;background:#3a447a}
+.web .fig{position:relative;aspect-ratio:16/10}
+.web .fig svg{position:absolute;inset:0;width:100%;height:100%}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{padding:10px 0 10px 40px;position:relative;border-bottom:1px solid var(--line)}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:10px;width:28px;height:28px;border-radius:50%;background:#e0452f;color:#fff;font:800 14px/28px Manrope,sans-serif;text-align:center}
+.note{font-size:13px;color:var(--mute)}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#111327;color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none}
+#toast.on{opacity:1}
+@media(max-width:900px){.hero,.board .wrap,.verdict{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.strips{height:180px}.strips span{font-size:13px}.mocks{grid-template-columns:minmax(0,1fr)}.cover{max-width:340px}.pal{grid-template-columns:repeat(2,minmax(0,1fr))}.row{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@keyframes trace{from{stroke-dashoffset:600}to{stroke-dashoffset:0}}
+.trace{stroke-dasharray:600;animation:trace 2.4s ease-out both}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<pattern id="ndop" width="36" height="36" patternUnits="userSpaceOnUse"><rect width="36" height="36" fill="#141e4a"/><path d="M18 3 33 18 18 33 3 18Z" fill="none" stroke="#f4f3ef" stroke-width="2"/><path d="M18 11 25 18 18 25 11 18Z" fill="#f4f3ef"/><circle cx="0" cy="0" r="2.4" fill="#f4f3ef"/><circle cx="36" cy="0" r="2.4" fill="#f4f3ef"/><circle cx="0" cy="36" r="2.4" fill="#f4f3ef"/><circle cx="36" cy="36" r="2.4" fill="#f4f3ef"/></pattern>
+<pattern id="zig" width="24" height="16" patternUnits="userSpaceOnUse"><rect width="24" height="16" fill="#141e4a"/><path d="M0 12 6 4 12 12 18 4 24 12" fill="none" stroke="#f4f3ef" stroke-width="2.2"/></pattern>
+<pattern id="velvet" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#0f0b0d"/><circle cx="3" cy="3" r=".7" fill="#2a1f24"/></pattern>
+<pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><rect width="24" height="24" fill="#fff"/><path d="M24 0H0V24" fill="none" stroke="#e6e6e6" stroke-width="1"/></pattern>
+<symbol id="kola" viewBox="0 0 48 48"><g transform="rotate(45 24 24)"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="var(--hole,#fff)"/></symbol>
+<symbol id="p-case" viewBox="0 0 48 48"><path d="M5 23 24 6 43 23Z"/><path fill-rule="evenodd" d="M11 23h26v19H28V31h-8v11H11Z"/></symbol>
+<symbol id="p-tamtam" viewBox="0 0 48 48"><path d="M11 6h26l-7 18 7 18H11l7-18Z"/></symbol>
+<symbol id="p-cabosse" viewBox="0 0 48 48"><path fill-rule="evenodd" d="M24 3C41 12 41 36 24 45 7 36 7 12 24 3ZM24 11C30 19 30 29 24 37 18 29 18 19 24 11Z"/></symbol>
+<symbol id="p-masque" viewBox="0 0 48 48"><path fill-rule="evenodd" d="M14 5h20c5 0 7 4 7 10v9c0 12-8 20-17 22C15 44 7 36 7 24v-9c0-6 2-10 7-10ZM14 19h8v4h-8ZM26 19h8v4h-8ZM20 33h8v3h-8Z"/></symbol>
+<symbol id="p-lion" viewBox="0 0 48 48"><path fill-rule="evenodd" d="M24 2a22 22 0 1 1 0 44 22 22 0 1 1 0-44ZM24 9a15 15 0 1 0 0 30 15 15 0 1 0 0-30Z"/><circle cx="24" cy="24" r="11"/></symbol>
+<symbol id="p-elephant" viewBox="0 0 48 48"><ellipse cx="10" cy="19" rx="8" ry="11"/><ellipse cx="38" cy="19" rx="8" ry="11"/><circle cx="24" cy="19" r="11"/><path d="M21 26h6v12c0 4-2 6-6 6h-4v-5h4Z"/></symbol>
+</defs>
+</svg>
+
+<header class="band">
+<div class="wrap hero">
+<div>
+<h1>Wilbid Game Night, l'identité de la saison</h1>
+<p>Trois directions complètes pour habiller le site bilingue, les livrets de règles, les badges et les cartes. Chacune a sa palette, ses polices gratuites, son style d'illustration et son logo, et toutes s'impriment pour pas cher.</p>
+<p>Ma recommandation : <b style="color:var(--ink)">Ndop Nuit</b>. Elle vient d'un tissu camerounais précis, elle colle à une soirée qui dure jusqu'à 4h, et elle s'imprime aussi bien en noir et blanc qu'en couleur.</p>
+<nav class="nav" aria-label="Directions"><a href="#ndop-nuit">Ndop Nuit</a><a href="#toghu-velours">Toghu Velours</a><a href="#code-du-chef">Code du Chef</a><a href="#verdict">Le choix</a></nav>
+</div>
+<div class="strips" id="strips"></div>
+</div>
+</header>
+
+<main id="boards"></main>
+
+<section class="band" id="verdict" style="border-top:1px solid var(--line)">
+<div class="wrap verdict">
+<div>
+<h2>Ndop Nuit l'emporte sur les trois critères qui comptent</h2>
+<p style="margin-top:14px;color:var(--mute)">Le ndop, toile indigo à motifs blancs des Grassfields, est un vrai savoir-faire camerounais mais reste peu vu, donc il ne fait pas cliché. Son graphisme en lignes passe en une seule encre, ce qui rend chaque impression bon marché.</p>
+<table>
+<thead><tr><th>Critère</th><th>Ndop Nuit</th><th>Toghu Velours</th><th>Code du Chef</th></tr></thead>
+<tbody>
+<tr><td>Touche camerounaise</td><td>Forte, peu vue</td><td>Forte, plus attendue</td><td>Légère</td></tr>
+<tr><td>Effet premium</td><td>Élevé</td><td>Très élevé à l'écran</td><td>Moyen</td></tr>
+<tr><td>Coût d'impression</td><td>Bas</td><td>Élevé (fonds noirs)</td><td>Très bas</td></tr>
+<tr><td>Lisible la nuit</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+</tbody>
+</table>
+<h3 style="margin-top:28px">Les illustrations : oui, mais en système</h3>
+<p>Plutôt que des scènes dessinées une à une, je propose un emblème par jeu, tous construits sur la même grille de losanges ndop : un panier pour le Marché de Mokolo, des poings pour le Njangi, le pont pour le Wouri, le masque pour les Feymen, le trône pour la finale. Ils servent à la fois de couverture de livret, d'icône sur le site et de dos de carte. Je peux les dessiner en vecteur, donc nets à toutes les tailles et gratuits.</p>
+<h3 style="margin-top:22px">Les tendances qu'on exploite</h3>
+<ul style="padding-left:18px;margin:0">
+<li>Texture imprimée façon risographie : grain, aplats en deux encres, léger décalage.</li>
+<li>Typo display très large et serrée, avec des chiffres énormes pour les scores.</li>
+<li>Motion discret sur le site : le motif ndop se trace quand une page s'ouvre, et le classement monte en direct.</li>
+<li>Mode nuit par défaut sur le site, puisque tout le monde le consultera dans une salle sombre.</li>
+</ul>
+</div>
+<div>
+<div class="web"><div class="bar"><i></i><i></i><i></i></div><div class="fig"><svg id="webmock" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Maquette de la page d'accueil du site en direction Ndop Nuit"></svg></div></div>
+<p class="note" style="margin-top:8px">Maquette de l'accueil du site, en mode nuit. Noms et scores d'exemple.</p>
+<h3 style="margin-top:24px">Prochaines étapes</h3>
+<ol class="steps">
+<li>Tu valides une direction (ou un mélange, par exemple la palette Ndop avec les pictos du Code du Chef pour le Jeu 6).</li>
+<li>Je dessine les 8 emblèmes et le logo final en SVG.</li>
+<li>Je prépare les gabarits à imprimer : badges 54 × 86 mm, livrets A5, cartes 63 × 88 mm.</li>
+<li>Le site reprend les mêmes couleurs et polices quand on le construira.</li>
+</ol>
+</div>
+</div>
+</section>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+{
+const D=[
+{id:'ndop-nuit',name:'Ndop Nuit',rec:true,bg:'#141e4a',ink:'#f4f3ef',
+ pitch:'Le tissu ndop des Grassfields traduit en graphisme : indigo profond, lignes blanches en losanges et zigzags, comme une toile teinte à la main. Calme, chic, nocturne.',
+ pal:[['Indigo nuit','#141E4A','Fonds, site en mode nuit'],['Indigo ndop','#2B3F9E','Surfaces, cartes'],['Craie','#F4F3EF','Texte, motifs, badges joueurs'],['Rouge kola','#E0452F','Badge MJ, alertes, gains'],['Jaune palmiste','#F2B705','Badge organisateurs, podium'],['Safou','#7A4FA3','Rare : la finale']],
+ fd:'Syne',fdw:800,ft:'Manrope',fdn:'Syne 800',ftn:'Manrope 400 à 800',
+ ill:['Emblèmes en lignes blanches sur indigo, tracés sur une grille de losanges.','Motifs ndop en bordure : losanges, points, zigzag du Wouri.','Grain d\'impression léger, deux encres maximum.'],
+ logo:'La marque « quatre lobes » : une noix de kola vue en coupe, tournée en losange comme un motif ndop. Elle sert de jeton, de favicon et de sceau.',
+ cost:2,costTxt:'Une seule encre suffit : en noir et blanc à la fac, le motif reste beau. En couleur, l\'indigo passe bien en laser.'},
+{id:'toghu-velours',name:'Toghu Velours',bg:'#0f0b0d',ink:'#fbf6ef',
+ pitch:'Le toghu de l\'Ouest et du Nord-Ouest : velours noir et broderies vives en rayons. Spectaculaire, festif, très photogénique sur écran.',
+ pal:[['Velours','#0F0B0D','Fonds'],['Fil blanc','#FBF6EF','Texte'],['Rouge toghu','#D7263D','Badge MJ'],['Or brodé','#F5B700','Badge organisateurs'],['Orange','#F46036','Accents'],['Vert feuille','#1F9D55','Accents']],
+ fd:'Unbounded',fdw:900,ft:'Inter Tight',fdn:'Unbounded 900',ftn:'Inter Tight 400 et 600',
+ ill:['Illustrations en points de broderie : lignes en pointillés colorés.','Médaillons rayonnants inspirés du col du toghu.','Photos des joueurs détourées sur noir pour le site.'],
+ logo:'Un médaillon brodé en anneaux de points, avec le mot WILBID en capitales larges au centre.',
+ cost:4,costTxt:'Les grands fonds noirs consomment beaucoup d\'encre et ressortent mal en impression bon marché. Parfait à l\'écran, cher sur papier.'},
+{id:'code-du-chef',name:'Code du Chef',bg:'#ffffff',ink:'#111111',
+ pitch:'Un système de pictogrammes tiré du Jeu 6 (masque, tam-tam, éléphant, lion, case, cabosse), posé sur une grille suisse. Net, ludique, très « jeu de société moderne ».',
+ pal:[['Papier','#FFFFFF','Fonds'],['Encre','#111111','Texte, pictos'],['Vert forêt','#00875A','Jeux d\'équipe'],['Rouge','#E5322D','Badge MJ'],['Jaune','#FFC400','Badge organisateurs'],['Bleu Wouri','#1F5BD8','Jeux de déduction']],
+ fd:'Archivo',fdw:900,ft:'Archivo',fdn:'Archivo Expanded 900',ftn:'Archivo 400 et 600',
+ ill:['Pictogrammes pleins sur une grille de 48 : un par symbole et par jeu.','Une couleur par famille de jeu pour s\'y retrouver d\'un coup d\'œil.','Aucune texture : uniquement des aplats.'],
+ logo:'Le mot WILBID en Archivo très large, à côté d\'un carré de quatre pictos qui forme un « code ».',
+ cost:1,costTxt:'Le moins cher : noir sur blanc, une touche de couleur. Mais la touche camerounaise est plus discrète.'}
+];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+const bridge=(x,y,w,col,cls)=>{let h='';const n=9;for(let i=1;i<n;i++){const t=i/n,px=x+w*t,py=y-w*0.42*4*t*(1-t);h+=`<line x1="${px}" y1="${py}" x2="${px}" y2="${y}" stroke="${col}" stroke-width="2.2"/>`}
+ return `<path class="${cls||''}" d="M${x} ${y} Q${x+w/2} ${y-w*0.84} ${x+w} ${y}" fill="none" stroke="${col}" stroke-width="4"/>${h}<line x1="${x-14}" y1="${y}" x2="${x+w+14}" y2="${y}" stroke="${col}" stroke-width="5"/>`};
+const rays=(cx,cy,r1,r2,n,cols,sw)=>{let h='';for(let i=0;i<n;i++){const a=i/n*Math.PI*2;h+=`<line x1="${cx+Math.cos(a)*r1}" y1="${cy+Math.sin(a)*r1}" x2="${cx+Math.cos(a)*r2}" y2="${cy+Math.sin(a)*r2}" stroke="${cols[i%cols.length]}" stroke-width="${sw}" stroke-dasharray="3 3" stroke-linecap="round"/>`}return h};
+const ring=(cx,cy,r,col,sw)=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${col}" stroke-width="${sw}" stroke-dasharray="2.5 3.5" stroke-linecap="round"/>`;
+const tc='font-family';
+
+const cover={
+'ndop-nuit':()=>`<svg viewBox="0 0 148 210" role="img" aria-label="Couverture du livret du Jeu 5 en Ndop Nuit"><rect width="148" height="210" fill="#141e4a"/><rect width="148" height="64" fill="url(#ndop)"/><rect y="64" width="148" height="3" fill="#f4f3ef"/>${bridge(26,128,96,'#f4f3ef','trace')}<rect y="134" width="148" height="14" fill="url(#zig)"/><rect x="12" y="74" width="34" height="13" rx="6.5" fill="#e0452f"/><text x="29" y="83.5" text-anchor="middle" fill="#fff" style="${tc}:Manrope;font-weight:800;font-size:7.5px">Jeu 5</text><text x="12" y="168" fill="#f4f3ef" style="${tc}:Syne;font-weight:800;font-size:15px;letter-spacing:-.3px">Le Pont</text><text x="12" y="184" fill="#f4f3ef" style="${tc}:Syne;font-weight:800;font-size:15px;letter-spacing:-.3px">du Wouri</text><text x="12" y="198" fill="#b9c0e6" style="${tc}:Manrope;font-size:6.5px">Négociation, 45 min, 6 équipes de 3</text><use href="#kola" x="122" y="186" width="16" height="16" fill="#f2b705" style="--hole:#141e4a"/></svg>`,
+'toghu-velours':()=>`<svg viewBox="0 0 148 210" role="img" aria-label="Couverture du livret du Jeu 7 en Toghu Velours"><rect width="148" height="210" fill="url(#velvet)"/><rect x="7" y="7" width="134" height="196" fill="none" stroke="#f5b700" stroke-width="1.4" stroke-dasharray="3 3"/>${rays(74,82,22,50,36,['#d7263d','#f5b700','#f46036','#1f9d55','#fbf6ef'],2.2)}${ring(74,82,54,'#f5b700',1.6)}${ring(74,82,19,'#fbf6ef',1.6)}<use href="#p-masque" x="62" y="70" width="24" height="24" fill="#fbf6ef"/><text x="16" y="164" fill="#fbf6ef" style="${tc}:Unbounded;font-weight:900;font-size:16px">LES</text><text x="16" y="182" fill="#fbf6ef" style="${tc}:Unbounded;font-weight:900;font-size:16px">FEYMEN</text><text x="16" y="196" fill="#f5b700" style="${tc}:'Inter Tight';font-size:6.5px">Jeu 7, rôles cachés, 50 min</text></svg>`,
+'code-du-chef':()=>{const s=['p-masque','p-tamtam','p-elephant','p-lion','p-case','p-cabosse'],c=['#111','#1f5bd8','#111','#e5322d','#111','#00875a'];let g='';s.forEach((id,i)=>{g+=`<use href="#${id}" x="${16+(i%3)*42}" y="${22+Math.floor(i/3)*44}" width="32" height="32" fill="${c[i]}"/>`});
+ return `<svg viewBox="0 0 148 210" role="img" aria-label="Couverture du livret du Jeu 6 en Code du Chef"><rect width="148" height="210" fill="url(#grid)"/>${g}<rect y="122" width="148" height="10" fill="#1f5bd8"/><text x="12" y="156" fill="#111" style="${tc}:Archivo;font-stretch:125%;font-weight:900;font-size:13px">LE CODE</text><text x="12" y="172" fill="#111" style="${tc}:Archivo;font-stretch:125%;font-weight:900;font-size:13px">DU CHEF</text><text x="12" y="188" fill="#555" style="${tc}:Archivo;font-size:6.5px">Jeu 6, déduction en équipe, 50 min</text><text x="136" y="198" text-anchor="end" fill="#1f5bd8" style="${tc}:Archivo;font-stretch:125%;font-weight:900;font-size:16px">06</text></svg>`}
+};
+
+const people=[['Nadège','Joueuse','Bamenda'],['Junior','Maître du jeu','Douala'],['Carine','Organisation','Yaoundé']];
+const badge=(d,i)=>{const [n,r,v]=people[i];
+ if(d.id==='ndop-nuit'){const top=['url(#ndop)','#e0452f','#f2b705'][i],bg=i?['','#e0452f','#f2b705'][i]:'#f4f3ef',ink=i===1?'#fff':'#141e4a';
+  return `<svg viewBox="0 0 54 86" role="img" aria-label="Badge ${esc(r)}"><rect width="54" height="86" fill="${bg}"/><rect width="54" height="26" fill="${i?'url(#ndop)':top}"/><rect x="21" y="4" width="12" height="3" rx="1.5" fill="#fff"/><use href="#kola" x="20" y="18" width="14" height="14" fill="${i===2?'#141e4a':i===1?'#fff':'#e0452f'}" style="--hole:${bg}"/><text x="27" y="48" text-anchor="middle" fill="${ink}" style="${tc}:Syne;font-weight:800;font-size:9.5px">${esc(n)}</text><text x="27" y="57" text-anchor="middle" fill="${ink}" style="${tc}:Manrope;font-size:4.6px;font-weight:600">${esc(r)}</text><text x="27" y="64" text-anchor="middle" fill="${ink}" opacity=".75" style="${tc}:Manrope;font-size:4.2px">${esc(v)}</text><text x="27" y="80" text-anchor="middle" fill="${ink}" style="${tc}:Syne;font-weight:700;font-size:4px">WILBID</text></svg>`}
+ if(d.id==='toghu-velours'){const acc=['#fbf6ef','#d7263d','#f5b700'][i];
+  return `<svg viewBox="0 0 54 86" role="img" aria-label="Badge ${esc(r)}"><rect width="54" height="86" fill="#fbf6ef"/><rect width="54" height="34" fill="#0f0b0d"/>${rays(27,20,6,13,18,['#d7263d','#f5b700','#f46036','#1f9d55'],1.2)}<rect x="21" y="4" width="12" height="3" rx="1.5" fill="#fbf6ef"/><rect y="34" width="54" height="5" fill="${i?acc:'#0f0b0d'}"/><text x="27" y="54" text-anchor="middle" fill="#0f0b0d" style="${tc}:Unbounded;font-weight:900;font-size:7.5px">${esc(n.toUpperCase())}</text><text x="27" y="63" text-anchor="middle" fill="#0f0b0d" style="${tc}:'Inter Tight';font-size:4.6px;font-weight:600">${esc(r)}</text><text x="27" y="70" text-anchor="middle" fill="#0f0b0d" opacity=".7" style="${tc}:'Inter Tight';font-size:4.2px">${esc(v)}</text></svg>`}
+ const acc=['#111','#e5322d','#ffc400'][i],pic=['p-case','p-lion','p-tamtam'][i];
+ return `<svg viewBox="0 0 54 86" role="img" aria-label="Badge ${esc(r)}"><rect width="54" height="86" fill="#fff"/><rect x="21" y="4" width="12" height="3" rx="1.5" fill="#ddd"/><use href="#${pic}" x="6" y="14" width="18" height="18" fill="${i?acc:'#00875a'}"/><text x="6" y="48" fill="#111" style="${tc}:Archivo;font-stretch:125%;font-weight:900;font-size:7.6px">${esc(n.toUpperCase())}</text><text x="6" y="57" fill="#111" style="${tc}:Archivo;font-size:4.6px;font-weight:600">${esc(r)}</text><text x="6" y="64" fill="#666" style="${tc}:Archivo;font-size:4.2px">${esc(v)}</text><rect y="74" width="54" height="12" fill="${acc}"/></svg>`};
+
+const logo={
+'ndop-nuit':()=>`<svg width="64" height="64" viewBox="0 0 48 48" aria-hidden="true"><use href="#kola" fill="#f2b705" style="--hole:#141e4a"/></svg><div><div style="font:800 clamp(30px,4vw,44px)/1 Syne,sans-serif;letter-spacing:-.02em;color:#f4f3ef">wilbid</div><div style="font:600 14px Manrope,sans-serif;color:#b9c0e6;margin-top:4px">Game Night, saison 1</div></div>`,
+'toghu-velours':()=>`<svg width="96" height="96" viewBox="0 0 96 96" aria-hidden="true">${rays(48,48,18,40,30,['#d7263d','#f5b700','#f46036','#1f9d55','#fbf6ef'],2.4)}${ring(48,48,44,'#f5b700',1.8)}<circle cx="48" cy="48" r="15" fill="#0f0b0d" stroke="#fbf6ef" stroke-width="1.5" stroke-dasharray="2 3"/><text x="48" y="52" text-anchor="middle" fill="#fbf6ef" style="font-family:Unbounded;font-weight:900;font-size:11px">W</text></svg><div style="font:900 clamp(26px,3.6vw,38px)/1 Unbounded,sans-serif;color:#fbf6ef">WILBID</div>`,
+'code-du-chef':()=>`<svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><use href="#p-masque" x="0" y="0" width="30" height="30" fill="#111"/><use href="#p-lion" x="34" y="0" width="30" height="30" fill="#e5322d"/><use href="#p-case" x="0" y="34" width="30" height="30" fill="#00875a"/><use href="#p-cabosse" x="34" y="34" width="30" height="30" fill="#1f5bd8"/></svg><div style="font:900 clamp(26px,3.6vw,38px)/1 Archivo,sans-serif;font-stretch:125%;color:#111">WILBID</div>`
+};
+const logoBg={'ndop-nuit':'#0d1538','toghu-velours':'#1a1316','code-du-chef':'#f1f1f1'};
+
+document.getElementById('boards').innerHTML=D.map(d=>`
+<section class="band board" id="${d.id}" style="background:${d.bg};--bc:${d.ink}">
+<div class="wrap">
+<div class="bhead"><div><h2 style="font-family:${d.fd},sans-serif;font-weight:${d.fdw};${d.id==='code-du-chef'?'font-stretch:125%;':''}">${esc(d.name)}</h2><p>${esc(d.pitch)}</p></div>${d.rec?'<span class="tag" style="background:#e0452f;color:#fff">Recommandée</span>':''}</div>
+<div class="mocks">
+<div class="cover">${cover[d.id]()}</div>
+<div><div class="badges">${[0,1,2].map(i=>`<div class="badge">${badge(d,i)}</div>`).join('')}</div>
+<p style="font-size:14px;margin-top:12px;opacity:.85">Badges joueur (blanc), MJ (rouge) et organisation (jaune), au format porte-badge 54 × 86 mm. Prénoms d'exemple.</p></div>
+<div class="logo" style="background:${logoBg[d.id]}">${logo[d.id]()}</div>
+</div>
+<div class="spec">
+<h3>Palette</h3>
+<div class="pal">${d.pal.map(([n,h,u])=>`<div class="chip"><i style="background:${h}"></i><div><b>${esc(n)}</b><button type="button" data-hex="${h}" aria-label="Copier ${h}">${h}</button><br>${esc(u)}</div></div>`).join('')}</div>
+<h3>Typographies (Google Fonts, gratuites)</h3>
+<div class="type"><div class="d" style="font-family:${d.fd},sans-serif;font-weight:${d.fdw};${d.id==='code-du-chef'?'font-stretch:125%;':''}">Le Njangi 15 PW</div><small>Titres et scores : ${esc(d.fdn)}</small>
+<p style="font-family:'${d.ft}',sans-serif;margin:10px 0 0;font-size:16px">À chaque tour, chacun cache entre 0 et 4 Kola dans son poing fermé.</p><small>Texte des règles : ${esc(d.ftn)}</small></div>
+<h3>Illustrations</h3><ul>${d.ill.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+<h3>Logo et motif</h3><p>${esc(d.logo)}</p>
+<h3>Coût d'impression</h3>
+<div class="row"><span>${['','Très bas','Bas','Moyen','Élevé'][d.cost]}</span><div class="meter" aria-hidden="true">${[1,2,3,4].map(k=>`<i class="${k<=d.cost?'on':''}"></i>`).join('')}</div></div>
+<p style="font-size:15px">${esc(d.costTxt)}</p>
+</div>
+</div>
+</section>`).join('');
+
+const strip={
+'ndop-nuit':`<rect width="200" height="400" fill="url(#ndop)"/><rect y="250" width="200" height="150" fill="#141e4a"/>${bridge(40,330,120,'#f4f3ef')}`,
+'toghu-velours':`<rect width="200" height="400" fill="url(#velvet)"/>${rays(100,160,24,90,40,['#d7263d','#f5b700','#f46036','#1f9d55','#fbf6ef'],3)}${ring(100,160,96,'#f5b700',2)}`,
+'code-du-chef':(()=>{let g='<rect width="200" height="400" fill="url(#grid)"/>';const s=['p-masque','p-tamtam','p-elephant','p-lion','p-case','p-cabosse'],c=['#111','#1f5bd8','#111','#e5322d','#111','#00875a'];for(let i=0;i<12;i++)g+=`<use href="#${s[i%6]}" x="${22+(i%3)*56}" y="${24+Math.floor(i/3)*82}" width="44" height="44" fill="${c[(i+Math.floor(i/3))%6]}"/>`;return g})()
+};
+document.getElementById('strips').innerHTML=D.map(d=>`<a href="#${d.id}"><svg viewBox="0 0 200 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${strip[d.id]}</svg><span>${esc(d.name)}${d.rec?', recommandée':''}</span></a>`).join('');
+
+const scores=[['Nadège',41],['Junior B.',37],['Carine',33],['Ulrich',29],['Michelle',26]];
+document.getElementById('webmock').innerHTML=`<rect width="640" height="400" fill="#141e4a"/><rect width="640" height="40" fill="#0d1538"/><use href="#kola" x="18" y="10" width="20" height="20" fill="#f2b705" style="--hole:#0d1538"/><text x="46" y="26" fill="#f4f3ef" style="${tc}:Syne;font-weight:800;font-size:16px">wilbid</text>${['Programme','Règles','Classement','Badges'].map((t,i)=>`<text x="${250+i*82}" y="25" fill="${i===2?'#f2b705':'#b9c0e6'}" style="${tc}:Manrope;font-weight:600;font-size:12px">${t}</text>`).join('')}<rect x="582" y="12" width="44" height="18" rx="9" fill="none" stroke="#b9c0e6"/><text x="604" y="25" text-anchor="middle" fill="#f4f3ef" style="${tc}:Manrope;font-weight:800;font-size:10px">FR / EN</text>
+<rect x="400" y="40" width="240" height="360" fill="url(#ndop)" opacity=".9"/><text x="30" y="96" fill="#f4f3ef" style="${tc}:Syne;font-weight:800;font-size:30px">Classement</text><text x="30" y="122" fill="#b9c0e6" style="${tc}:Manrope;font-size:12px">En direct, après le Jeu 5</text>
+${scores.map(([n,s],i)=>{const y=150+i*46,w=s/41*250;return `<text x="30" y="${y+20}" fill="${i===0?'#f2b705':'#f4f3ef'}" style="${tc}:Syne;font-weight:800;font-size:22px">${i+1}</text><text x="62" y="${y+12}" fill="#f4f3ef" style="${tc}:Manrope;font-weight:600;font-size:13px">${n}</text><rect x="62" y="${y+20}" width="${w}" height="8" rx="4" fill="${i===0?'#f2b705':'#2b3f9e'}"/><text x="${62+w+10}" y="${y+28}" fill="#f4f3ef" style="${tc}:Manrope;font-weight:800;font-size:13px">${s} PW</text>`}).join('')}`;
+
+const toast=document.getElementById('toast');let tt;
+document.addEventListener('click',e=>{const b=e.target.closest('button[data-hex]');if(!b)return;const h=b.dataset.hex;
+ const done=m=>{toast.textContent=m;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),1600)};
+ try{navigator.clipboard.writeText(h).then(()=>done(h+' copié'),()=>done('Copie impossible, code : '+h))}catch(_){done('Code : '+h)}});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wilbid Game Night, la proposition</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>:root{--indigo:#141E4A;--indigo2:#2B3F9E;--chalk:#F4F3EF;--paper:#FFFFFF;--kola:#E0452F;--palm:#F2B705;--safou:#7A4FA3;--mute:#3A4270;--soft:#C9CDE6;--line:#DAD8CF;--tint:#EEF0FA;
+--f-display:Syne,Manrope,sans-serif;--f-text:Manrope,system-ui,sans-serif;--f-acc:'Instrument Serif',Georgia,serif}
+@page{size:338.67mm 190.5mm;margin:0}
+*{box-sizing:border-box;min-width:0}
+html{background:#cfd2e0}
+body{margin:0;font:12pt/1.45 var(--f-text);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.slide{width:338.67mm;height:190.5mm;position:relative;overflow:hidden;padding:16mm 20mm 18mm;margin:0 auto 8mm;break-after:page;page-break-after:always}
+@media print{html{background:none}.slide{margin:0}}
+@media screen and (max-width:900px){.slide{width:100%;height:auto;padding:24px 20px 56px}.split{grid-template-columns:1fr!important}.side{display:none}.grid,.flow,.big,.asks,.pillars{grid-template-columns:1fr 1fr!important}.flow .ar{display:none}.cover{min-height:640px}.cv{width:100%!important;opacity:.35}}
+.light{background:var(--paper);color:var(--indigo)}
+.dark{background:var(--indigo);color:var(--chalk)}
+h1,h2{font-family:var(--f-display);font-weight:800;letter-spacing:-.04em;margin:0}
+h2{font-size:30pt;line-height:1;margin:2mm 0 6mm;max-width:230mm;text-wrap:balance}
+.acc{font-family:var(--f-acc);font-style:italic;font-size:19pt;color:var(--kola);line-height:1}
+.acc.y{color:var(--palm)}
+.lead{font-size:13.5pt;font-weight:600;line-height:1.45;margin:0 0 7mm}
+.dark .lead{color:var(--soft)}
+.w{max-width:220mm}.mt{margin-top:8mm}
+.sfoot{position:absolute;left:20mm;right:20mm;bottom:7mm;display:flex;justify-content:space-between;font-size:9pt;font-weight:700;opacity:.7}
+.sfoot span:first-child{display:flex;gap:2mm;align-items:center}
+.split{display:grid;grid-template-columns:1fr 92mm;gap:14mm;padding-right:0}
+.split .sfoot{right:112mm}
+.split .side{height:190.5mm;width:100%;object-fit:cover;margin:-16mm 0 -18mm;align-self:stretch}
+
+/* cover */
+.cover{background:var(--indigo);color:var(--chalk);padding:0}
+.cv{position:absolute;right:0;top:0;height:100%;width:58%;object-fit:cover}
+.cover::after{content:"";position:absolute;left:38%;top:0;bottom:0;width:10%;background:linear-gradient(90deg,var(--indigo),rgba(20,30,74,0))}
+.cvl{position:absolute;left:20mm;top:16mm;bottom:18mm;width:135mm;display:flex;flex-direction:column;justify-content:flex-end;z-index:2}
+.pill{position:absolute;top:0;left:0;display:inline-flex;align-items:center;gap:2.5mm;font:800 15pt var(--f-display)}
+.cover h1{font-size:52pt;line-height:.9;margin:4mm 0 7mm}
+.cover p{font-size:13pt;color:var(--soft);margin:0;max-width:120mm}
+
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm}
+.pillars div{border-top:2mm solid var(--indigo);padding-top:4mm}
+.pillars div:nth-child(2){border-color:var(--kola)}.pillars div:nth-child(3){border-color:var(--palm)}
+.pillars b,.words b{display:block;font:800 15pt var(--f-display);letter-spacing:-.02em;margin-bottom:2mm}
+.pillars span{font-size:11pt;color:var(--mute)}
+.tags{display:flex;flex-wrap:wrap;gap:2.5mm;margin-bottom:8mm}
+.tags span{border:1.3px solid rgba(244,243,239,.45);border-radius:99px;padding:1.8mm 4.5mm;font-weight:700;font-size:10.5pt}
+.words{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm}
+.words div{font-size:10.5pt;color:var(--soft)}
+.words b{font-family:var(--f-acc);font-style:italic;font-weight:400;font-size:20pt;color:var(--palm);letter-spacing:0}
+
+/* flow */
+.flow{display:grid;grid-template-columns:1fr 8mm 1fr 8mm 1fr 8mm 1fr 8mm 1fr;align-items:stretch;margin-bottom:9mm}
+.st{background:var(--tint);border-radius:3mm;padding:7mm 5mm;min-height:42mm}
+.st:last-child{background:var(--palm)}
+.st b{display:block;font:800 17pt/1.05 var(--f-display);letter-spacing:-.03em;margin-bottom:3mm}
+.st span{font-size:11pt;color:var(--mute)}
+.ar{align-self:center;justify-self:center;width:0;height:0;border-left:3mm solid var(--kola);border-top:2.5mm solid transparent;border-bottom:2.5mm solid transparent}
+.kolarow{display:flex;gap:6mm;align-items:center;max-width:240mm}
+.kolarow p{margin:0;font-size:12pt;color:var(--mute)}
+
+/* games grid */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12mm 8mm;margin-top:4mm}
+.g{display:grid;grid-template-columns:1fr;grid-template-rows:auto 1fr;column-gap:3.5mm;align-items:start}
+.g img{width:26mm;height:26mm;border-radius:50%;margin-bottom:3mm}
+.g b{font:800 14pt/1.1 var(--f-display);letter-spacing:-.02em;margin:1mm 0 1.5mm}
+.g span{font-size:10.5pt;color:var(--soft);line-height:1.35}
+
+/* timeline */
+.tl{display:grid;grid-template-columns:repeat(7,1fr);gap:0 3mm;margin-top:6mm}
+.tl .bar{grid-column:1/-1;display:flex;height:5mm;border-radius:99px;overflow:hidden;margin-bottom:5mm}
+.bar i{display:block}.c1{background:var(--indigo2)}.c2{background:var(--palm)}.c3{background:var(--indigo)}.c4{background:var(--kola)}.c5{background:var(--safou)}
+.n b{display:block;font:800 20pt var(--f-display);letter-spacing:-.03em}
+.nl{display:block;font-weight:700;font-size:12pt;margin-top:1mm}
+.ns{display:block;font-family:var(--f-acc);font-style:italic;font-size:13pt;color:var(--kola)}
+
+/* budget */
+.big{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm;margin-bottom:6mm}
+.big b{display:block;font:800 40pt/1 var(--f-display);letter-spacing:-.04em;color:var(--palm)}
+.big span{font-size:10.5pt;color:var(--soft)}
+.pod{display:grid;grid-template-columns:repeat(3,32mm);align-items:end;gap:2mm;margin-bottom:5mm}
+.pod div{color:var(--indigo);text-align:center;font-weight:800;border-radius:2mm 2mm 0 0;padding:2mm 0;font-size:11pt}
+.pod b{display:block;font:800 14pt var(--f-display)}
+.p1{background:var(--palm);height:24mm}.p2{background:#F8D76B;height:19mm}.p3{background:#FBE7A6;height:15mm}
+.note{font-size:10pt;color:var(--soft);max-width:150mm;margin:0}
+
+/* asks */
+.asks{display:grid;grid-template-columns:repeat(4,1fr);gap:6mm;margin-bottom:8mm}
+.asks div{border-top:1.5px solid var(--indigo);padding-top:4mm}
+.asks i{font:800 24pt/1 var(--f-display);font-style:normal;color:var(--kola)}
+.asks b{display:block;font:800 14pt var(--f-display);letter-spacing:-.02em;margin:2mm 0}
+.asks span{font-size:10.5pt;color:var(--mute)}
+.ready{display:flex;gap:5mm;align-items:baseline;background:var(--indigo);color:var(--chalk);border-radius:3mm;padding:5mm 6mm}
+.ready b{font:800 13pt var(--f-display);color:var(--palm);white-space:nowrap}
+.ready span{font-size:11pt}
+
+.band{position:absolute;left:0;right:0;bottom:0;height:62mm;width:100%;object-fit:cover;object-position:center 45%}
+.band-fade{position:absolute;left:0;right:0;bottom:44mm;height:20mm;background:linear-gradient(180deg,#fff,rgba(255,255,255,0))}
+.over .sfoot{color:#fff;opacity:.9;z-index:3}
+.kolarow{margin-top:4mm}
+
+.pat{position:absolute;left:0;right:0;bottom:0;height:34mm;background:url(assets/pattern.jpg) center 30%/70mm auto repeat-x}
+
+.pub{grid-template-columns:repeat(4,1fr);margin:4mm 0 8mm}.light .big b{color:var(--kola)}.light .big span{color:var(--mute);font-size:11.5pt}
+.give{display:grid;grid-template-columns:1fr 1fr;gap:8mm;margin-bottom:6mm}
+.give h3{font:800 14pt var(--f-display);color:var(--palm);margin:0 0 3mm;letter-spacing:-.02em}
+.give ul{margin:0;padding:0;list-style:none}.give li{padding:2.2mm 0;border-bottom:1px solid rgba(244,243,239,.2);font-size:11.5pt}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm;margin-bottom:7mm}
+.tiers div{border:1.3px solid var(--line);border-radius:3mm;padding:6mm 5mm;background:#fff}
+.tiers .hl{background:var(--indigo);color:var(--chalk);border-color:var(--indigo)}
+.tiers i{display:block;font-family:var(--f-acc);font-size:19pt;color:var(--kola);margin-bottom:2mm}
+.tiers .hl i{color:var(--palm)}
+.tiers b{display:block;font:800 13pt/1.2 var(--f-display);letter-spacing:-.02em;margin-bottom:3mm}
+.tiers span{font-size:10.5pt;opacity:.85}
+.pub b{white-space:nowrap;font-size:34pt}
+.pub{grid-template-columns:.8fr 1.4fr .9fr 1fr}
+</style></head><body><section class="slide cover">
+<img class="cv" src="assets/hero.jpg" alt="">
+<div class="cvl">
+<div class="pill"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#F2B705"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#141E4A"/></svg><b>wilbid</b></div>
+<div class="acc y">dossier de partenariat, saison 1</div>
+<h1>Une nuit,<br>8 jeux,<br>une cagnotte.</h1>
+<p>Une soirée de jeux de stratégie qui réunit la communauté étudiante camerounaise de Bamberg, Erlangen et Nürnberg. Nous cherchons des partenaires pour la saison 1.</p>
+</div></section><section class="slide light split">
+<div class="txt">
+<div class="acc">le projet</div>
+<h2>Une communauté qui se retrouve autour du jeu</h2>
+<p class="lead">Wilbid Game Night réunit des étudiants camerounais de Franconie pour une nuit entière de jeux qui font réfléchir, deux fois par semestre. Les points se cumulent toute la nuit jusqu'à une finale devant tout le monde.</p>
+<div class="pillars">
+<div><b>Réunir</b><span>Un rendez-vous régulier pour une communauté loin de chez elle.</span></div>
+<div><b>Faire se rencontrer</b><span>Équipes tirées au sort à chaque jeu : chacun parle à presque tout le monde.</span></div>
+<div><b>Faire réfléchir</b><span>Déduction, négociation, enchères. Pas de jeux de hasard.</span></div>
+</div></div>
+<img class="side" src="assets/mokolo.jpg" alt="">
+<div class="sfoot"><span><svg width="13" height="13" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#F2B705"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#141E4A"/></svg> wilbid Game Night</span><span>2 / 8</span></div></section><section class="slide dark split">
+<div class="txt">
+<div class="acc y">l'inspiration</div>
+<h2>L'esprit de The Devil's Plan, avec nos codes à nous</h2>
+<p class="lead">On reprend ce qui rend la série prenante : des jeux où il faut réfléchir, bluffer et choisir ses alliés. Les règles sont originales, et chaque jeu parle du pays.</p>
+<div class="tags"><span>Déduction</span><span>Négociation</span><span>Alliances et trahisons</span><span>Enchères</span><span>Rôles cachés</span></div>
+<div class="words"><div><b>le njangi</b>la tontine devient un jeu d'enchères</div><div><b>les feymen</b>les arnaqueurs deviennent des rôles cachés</div><div><b>la kola</b>devient la monnaie de la nuit</div></div>
+</div>
+<img class="side" src="assets/feymen.jpg" alt="">
+<div class="sfoot"><span><svg width="13" height="13" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#F2B705"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#141E4A"/></svg> wilbid Game Night</span><span>3 / 8</span></div></section><section class="slide light">
+<div class="acc">notre public</div>
+<h2>Un public jeune, fidèle et très connecté</h2>
+<div class="big pub"><div><b>35</b><span>membres dans la communauté WhatsApp</span></div><div><b>15 à 20+</b><span>participants à chaque soirée</span></div><div><b>4</b><span>soirées par an, deux par semestre</span></div><div><b>8 h</b><span>de présence, de 19h30 à 4h</span></div></div>
+<p class="lead w">Des étudiants camerounais, francophones et anglophones, installés à Bamberg, Erlangen et Nürnberg. Ils s'organisent et partagent tout sur WhatsApp et Instagram, et ils recommandent ce qu'ils aiment.</p>
+<div class="kolarow"><svg width="40" height="40" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#E0452F"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg><p>Une soirée longue et rythmée : votre nom n'est pas vu une fois en passant, mais toute la nuit, sur les badges, les cartes et au moment de la finale.</p></div>
+<div class="sfoot"><span><svg width="13" height="13" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#F2B705"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#141E4A"/></svg> wilbid Game Night</span><span>4 / 8</span></div></section><section class="slide dark">
+<div class="acc y">le programme</div>
+<h2>8 jeux, du brise-glace à la finale</h2>
+<div class="grid"><div class="g"><img src="assets/em-mokolo.jpg" alt=""><b>Le Marché de Mokolo</b><span>On troque pour réunir sa combinaison secrète. Le brise-glace.</span></div><div class="g"><img src="assets/em-quiestqui.jpg" alt=""><b>Qui est qui ?</b><span>Retrouver à qui appartient chaque anecdote, sans poser la question directe.</span></div><div class="g"><img src="assets/em-njangi.jpg" alt=""><b>Le Njangi</b><span>Une tontine où seule la mise la plus haute et unique gagne.</span></div><div class="g"><img src="assets/em-duos.jpg" alt=""><b>Le Carrefour des Duos</b><span>9 tête-à-tête de 3 minutes autour d&#x27;une énigme.</span></div><div class="g"><img src="assets/em-wouri.jpg" alt=""><b>Le Pont du Wouri</b><span>Construire un pont ensemble, ou laisser les autres payer.</span></div><div class="g"><img src="assets/em-code.jpg" alt=""><b>Le Code du Chef</b><span>Casser un code secret, et vendre ses indices, vrais ou faux.</span></div><div class="g"><img src="assets/em-feymen.jpg" alt=""><b>Les Feymen</b><span>Des arnaqueurs cachés parmi nous. À démasquer.</span></div><div class="g"><img src="assets/em-trone.jpg" alt=""><b>Le Trône de Kola</b><span>La finale à 4, devant tout le monde.</span></div></div>
+<div class="sfoot"><span><svg width="13" height="13" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#F2B705"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#141E4A"/></svg> wilbid Game Night</span><span>5 / 8</span></div></section><section class="slide light over">
+<div class="acc">une nuit type</div>
+<h2>On se rencontre d'abord, on se trahit après le repas</h2>
+<div class="tl"><div class="bar"><i style="flex:3.25" class="c1"></i><i style="flex:1" class="c2"></i><i style="flex:3" class="c3"></i><i style="flex:1.25" class="c4"></i><i style="flex:.75" class="c5"></i></div><div class="n"><b>19h30</b><span class="nl">Accueil</span><span class="ns"></span></div><div class="n"><b>20h00</b><span class="nl">Mokolo, Qui est qui, Njangi, Duos</span><span class="ns">se rencontrer</span></div><div class="n"><b>22h45</b><span class="nl">Repas</span><span class="ns">chacun apporte un plat</span></div><div class="n"><b>23h45</b><span class="nl">Wouri, Code du Chef, Feymen</span><span class="ns">la stratégie</span></div><div class="n"><b>02h45</b><span class="nl">Classement</span><span class="ns"></span></div><div class="n"><b>03h00</b><span class="nl">Finale</span><span class="ns">4 joueurs</span></div><div class="n"><b>03h30</b><span class="nl">Gains, photo, ambiance</span><span class="ns"></span></div></div>
+<p class="lead w mt">De 19h30 à 4h environ, puis ambiance libre jusqu'au matin. Si la soirée prend du retard, on saute le Njangi sans casser le classement.</p>
+<img class="band" src="assets/flatlay.jpg" alt=""><div class="band-fade"></div>
+<div class="sfoot"><span><svg width="13" height="13" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#F2B705"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#141E4A"/></svg> wilbid Game Night</span><span>6 / 8</span></div></section><section class="slide dark split">
+<div class="txt">
+<div class="acc y">le partenariat</div>
+<h2>Ce que vous apportez, ce que vous y gagnez</h2>
+<div class="give"><div><h3>Vous pouvez apporter</h3><ul><li>Un lieu pour une nuit</li><li>Des lots ou une contribution à la cagnotte</li><li>Des boissons ou de la nourriture</li><li>L'impression des livrets, cartes et badges</li></ul></div>
+<div><h3>Vous y gagnez</h3><ul><li>Votre logo sur les badges, livrets et cartes</li><li>Une mention dans les annonces WhatsApp et Instagram</li><li>Un jeu ou la finale « présenté par » vous</li><li>Un lot remis en votre nom, et les photos de la soirée</li></ul></div></div>
+<p class="note">Aujourd'hui, la soirée tient sur 8 € de cotisation par joueur et 57 € de matériel. Chaque apport va directement à l'expérience des participants.</p>
+</div>
+<img class="side" src="assets/trone.jpg" alt="">
+<div class="sfoot"><span><svg width="13" height="13" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#F2B705"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#141E4A"/></svg> wilbid Game Night</span><span>7 / 8</span></div></section><section class="slide light over">
+<div class="acc">les formules</div>
+<h2>Trois façons de nous accompagner</h2>
+<div class="tiers">
+<div><i>Ami de la soirée</i><b>Un lot, des boissons ou de la nourriture</b><span>Votre nom cité à l'annonce et pendant la soirée.</span></div>
+<div class="hl"><i>Partenaire de soirée</i><b>Le lieu, ou une contribution à la cagnotte</b><span>Votre logo sur les badges, le livret et le post Instagram, et un jeu présenté par vous.</span></div>
+<div><i>Partenaire de saison</i><b>Un soutien sur les 4 soirées de l'année</b><span>Tout ce qui précède, une page sur notre site, et la finale « Le Trône de Kola » à votre nom.</span></div>
+</div>
+<div class="ready"><b>Parlons-en</b><span>Nous adaptons chaque formule à ce que vous pouvez offrir. Contact : l'équipe d'organisation Wilbid Game Night.</span></div>
+<div class="pat"></div>
+<div class="sfoot"><span><svg width="13" height="13" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#F2B705"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#141E4A"/></svg> wilbid Game Night</span><span>8 / 8</span></div></section></body></html>

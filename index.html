@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wilbid Game Night</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* VOICE  a party-night companion: confident, warm, readable in a dark room on a phone.
+   IDEA   the ndop cloth: indigo field, white diamond stitching, each game a stitched medallion.
+   PICTURE the hero illustration of hands playing kola on ndop cloth; the 8 emblems as the rulebook's covers.
+   COLOUR indigo night dominant, chalk text, palm yellow for actions and scores, kola red for game labels, safou for the final.
+   TYPE   Syne 800 titles and numbers, Manrope text, Instrument Serif italic accents. LAYOUT sticky bar, hero, schedule, rulebooks, points; one page per game. */
+:root{
+ --bg:#141E4A;--deep:#0D1538;--card:#1C2860;--indigo2:#2B3F9E;--ink:#F4F3EF;--mute:#B9C0E6;--line:rgba(244,243,239,.14);
+ --kola:#E0452F;--palm:#F2B705;--safou:#7A4FA3;--paper:#F4F3EF;--paper-ink:#141E4A;--paper-mute:#3A4270;--paper-line:#DAD8CF;
+ --fd:Syne,Manrope,sans-serif;--ft:Manrope,system-ui,sans-serif;--fa:'Instrument Serif',Georgia,serif;
+ color-scheme:dark}
+:root[data-theme=light],:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--ft);overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+a:focus-visible,button:focus-visible{outline:3px solid var(--palm);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--fd);font-weight:800;letter-spacing:-.035em;margin:0;text-wrap:balance}
+.acc{font-family:var(--fa);font-style:italic;font-weight:400}
+.wrap{max-width:1240px;margin:0 auto;padding:0 max(5vw,18px)}
+.band{padding:clamp(48px,7vw,96px) 0}
+
+/* bar */
+.bar{position:sticky;top:0;z-index:20;background:rgba(13,21,56,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:10px 24px;flex-wrap:wrap;min-height:64px}
+.logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:800 22px var(--fd);letter-spacing:-.03em;min-height:44px}
+.nav{display:flex;align-items:center;gap:2px 18px;flex-wrap:wrap;font-weight:600;font-size:15px}
+.nav a{text-decoration:none;padding:10px 0}
+.nav a:hover{color:var(--palm)}
+.lang{min-height:44px;padding:0 16px;border-radius:99px;border:1.5px solid rgba(244,243,239,.5);background:transparent;font-weight:800;font-size:14px}
+.lang:hover{border-color:var(--palm);color:var(--palm)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;min-height:min(640px,88vh);display:flex;align-items:center}
+.hero img{position:absolute;right:0;top:0;height:100%;width:78%;object-fit:cover;object-position:right center}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 36%,rgba(20,30,74,.55) 62%,rgba(20,30,74,0))}
+.hero .wrap{position:relative;z-index:1;width:100%;padding-top:64px;padding-bottom:64px}
+.hero .in{max-width:600px;display:flex;flex-direction:column;gap:20px}
+.hero .acc{font-size:clamp(22px,2.6vw,30px);color:var(--palm);line-height:1}
+.hero h1{font-size:clamp(56px,8vw,112px);line-height:.88;letter-spacing:-.045em}
+.hero p{margin:0;font-size:19px;color:#DCDFF0;max-width:520px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:52px;padding:0 26px;border-radius:99px;font-weight:800;text-decoration:none;border:1.5px solid var(--ink)}
+.btn.y{background:var(--palm);color:var(--bg);border-color:var(--palm)}
+.btn:hover{transform:translateY(-1px)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:6px;color:var(--mute);font-size:14px}
+.facts b{display:block;font:800 22px var(--fd);color:var(--ink);letter-spacing:-.02em}
+
+/* schedule */
+.light{background:var(--paper);color:var(--paper-ink)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:40px 64px}
+.split h2{font-size:clamp(32px,3.6vw,44px);line-height:1}
+.split .lead{margin:16px 0 0;font-size:17px;color:var(--paper-mute);max-width:360px}
+.sched{list-style:none;margin:0;padding:0}
+.sched li{border-bottom:1px solid var(--paper-line)}
+.sched a,.sched .row{display:grid;grid-template-columns:78px 52px minmax(0,1fr) auto;gap:16px;align-items:center;padding:10px 0;text-decoration:none}
+.sched a:hover b{color:var(--kola)}
+.sched .t{font:800 21px var(--ft);letter-spacing:-.01em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.sched img{width:52px;height:52px;border-radius:50%}
+.sched .dot{width:52px;height:52px;border-radius:50%;background:#E4E6F2;display:block}
+.sched b{font-size:17px;display:block}
+.sched small{display:block;font-size:13px;color:var(--paper-mute)}
+.sched .d{font-size:14px;color:var(--paper-mute);white-space:nowrap}
+.sched .brk b{font-weight:600;color:var(--paper-mute)}
+
+/* games grid */
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px 24px;margin-bottom:32px}
+.head h2{font-size:clamp(34px,4.4vw,48px);line-height:1}
+.head .acc{font-size:24px;color:var(--palm)}
+.games{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:16px;list-style:none;margin:0;padding:0}
+.gcard{display:flex;flex-direction:column;gap:12px;height:100%;padding:20px;border-radius:18px;background:var(--card);border:1px solid var(--line);text-decoration:none;transition:transform .2s,border-color .2s}
+.gcard:hover{transform:translateY(-3px);border-color:rgba(242,183,5,.6)}
+.gcard.fin{background:linear-gradient(135deg,rgba(122,79,163,.45),var(--card));border-color:rgba(122,79,163,.9)}
+.gcard .top{display:flex;justify-content:space-between;align-items:flex-start}
+.gcard img{width:84px;height:84px;border-radius:50%;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.tag{font-size:13px;font-weight:800;padding:5px 12px;border-radius:99px;background:var(--kola);color:#fff;white-space:nowrap}
+.fin .tag{background:var(--safou)}
+.gcard b{font:800 22px/1.05 var(--fd);letter-spacing:-.02em}
+.gcard span{font-size:14px;color:var(--mute)}
+.gcard .meta{margin-top:auto;display:flex;gap:14px;font-size:13px;font-weight:700;color:var(--ink)}
+
+/* points */
+.pts{background:var(--deep)}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.box{border:1px solid var(--line);border-radius:18px;padding:24px;background:rgba(28,40,96,.5)}
+.box h3{font-size:22px;margin-bottom:12px}
+.box p{margin:0 0 10px;color:var(--mute)}
+.box ol{margin:0;padding-left:20px;color:var(--mute)}
+.box li{margin-bottom:6px}
+.big{font:800 clamp(40px,5vw,56px)/1 var(--fd);letter-spacing:-.04em;color:var(--palm)}
+.pod{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:6px;margin:14px 0}
+.pod div{border-radius:8px 8px 0 0;text-align:center;color:var(--bg);font-weight:800;padding:8px 0}
+.pod b{display:block;font:800 18px var(--fd)}
+.p1{background:var(--palm);height:96px}.p2{background:#F8D76B;height:76px}.p3{background:#FBE7A6;height:60px}
+.roles{display:grid;gap:10px;margin-top:4px}
+.role{display:flex;gap:12px;align-items:center;border-radius:12px;padding:12px 14px;font-size:14px}
+.role b{display:block;font:800 16px var(--fd)}
+.role.r{background:var(--kola);color:#fff}.role.j{background:var(--palm);color:var(--bg)}.role.w{background:var(--ink);color:var(--bg)}
+
+/* game page */
+#game{display:none}
+body.g #game{display:block}body.g #home{display:none}
+.gp-hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.gp-hero::before{content:"";position:absolute;inset:0;background:url(assets/pattern.jpg) center/420px auto;opacity:.12}
+.gp-hero .wrap{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px 40px;align-items:center;padding-top:40px;padding-bottom:40px}
+.back{display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;font-weight:700;color:var(--mute);grid-column:1/-1}
+.back:hover{color:var(--palm)}
+.medal{width:clamp(140px,20vw,220px);height:clamp(140px,20vw,220px);border-radius:50%;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.gp-hero .acc{font-size:clamp(20px,2.4vw,26px);color:var(--kola);display:block;margin:10px 0 6px}
+.fin-on .gp-hero .acc{color:#C9A6EC}
+.gp-hero h1{font-size:clamp(42px,6.4vw,80px);line-height:.92}
+.stats{display:flex;flex-wrap:wrap;gap:8px 36px;margin-top:20px;color:var(--mute);font-size:14px}
+.stats b{display:block;font:800 26px var(--fd);color:var(--ink);letter-spacing:-.02em;white-space:nowrap}
+.gp-body{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:40px 56px;padding-top:44px;padding-bottom:64px}
+.pitch{font-size:20px;font-weight:600;line-height:1.5;margin:0 0 28px;max-width:640px}
+.gp-body h2{font-size:24px;margin-bottom:14px}
+.rules{list-style:none;counter-reset:n;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.rules li{counter-increment:n;display:grid;grid-template-columns:44px minmax(0,1fr);font-size:17px;max-width:66ch}
+.rules li::before{content:counter(n);font:800 22px/1.2 var(--fd);color:var(--palm)}
+.ex{margin-top:22px;border-radius:14px;background:var(--card);padding:16px 18px;font-size:16px;border-left:4px solid var(--palm)}
+.ex b{font-family:var(--fd);display:block;margin-bottom:2px}
+.aside{display:flex;flex-direction:column;gap:18px}
+.score{border-radius:18px;background:var(--paper);color:var(--paper-ink);padding:22px}
+.score h2{margin-bottom:8px}
+.score table{width:100%;border-collapse:collapse;font-size:15px}
+.score td{padding:10px 0;border-bottom:1px solid var(--paper-line);vertical-align:top}
+.score td:last-child{text-align:right;font-weight:800;padding-left:14px}
+.score tr:last-child td{border-bottom:0}
+.score .max{display:flex;justify-content:space-between;align-items:baseline;border-top:2px solid var(--paper-ink);margin-top:6px;padding-top:10px;font-weight:700}
+.score .max b{font:800 34px var(--fd);letter-spacing:-.03em}
+.tip{border-radius:18px;border:1px solid var(--line);padding:18px 20px;background:rgba(28,40,96,.5)}
+.tip .acc{font-size:20px;color:var(--palm);display:block;margin-bottom:4px}
+.tip p{margin:0;color:var(--mute)}
+.timer{justify-content:center}
+.pn{display:grid;grid-template-columns:1fr 1fr;gap:14px;border-top:1px solid var(--line);padding-top:24px;padding-bottom:56px}
+.pn a{display:flex;align-items:center;gap:14px;text-decoration:none;padding:14px;border-radius:16px;border:1px solid var(--line);min-height:76px}
+.pn a:hover{border-color:var(--palm)}
+.pn a.nx{justify-content:flex-end;text-align:right}
+.pn img{width:48px;height:48px;border-radius:50%}
+.pn small{display:block;color:var(--mute);font-size:13px}
+.pn b{font:800 17px var(--fd);letter-spacing:-.02em}
+
+footer{border-top:1px solid var(--line)}
+footer .pat{height:80px;background:url(assets/pattern.jpg) center 4%/auto 300% repeat-x;opacity:.55}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;padding-bottom:40px;font-size:15px;color:var(--mute)}
+footer b{font-family:var(--fd);color:var(--ink)}
+
+@media(max-width:900px){.split,.gp-body{grid-template-columns:minmax(0,1fr)}.cols{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){
+ .hero{min-height:0;align-items:flex-end}.hero img{width:100%;height:56%;opacity:.9}.hero::after{background:linear-gradient(0deg,var(--bg) 46%,rgba(20,30,74,.2) 80%)}.hero .wrap{padding-top:220px}
+ .nav{gap:0 14px;font-size:14px}
+ .sched a,.sched .row{grid-template-columns:60px 40px minmax(0,1fr);gap:10px}.sched .d{display:none}.sched .t{font-size:16px}.sched img,.sched .dot{width:40px;height:40px}
+ .gp-hero .wrap{grid-template-columns:minmax(0,1fr)}.medal{width:120px;height:120px}
+ .rules li{grid-template-columns:34px minmax(0,1fr);font-size:16px}
+ .pn{grid-template-columns:minmax(0,1fr)}
+ .stats{gap:6px 22px}.stats b{font-size:19px}.facts b{font-size:19px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+ <a class="logo" href="#accueil"><svg width="30" height="30" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#F2B705"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#141E4A"/></svg>wilbid</a>
+ <nav class="nav" aria-label="Menu">
+  <a href="#programme" data-i="nav1">Programme</a>
+  <a href="#regles" data-i="nav2">Règles</a>
+  <a href="#points" data-i="nav3">Points</a>
+  <a href="classement.html" data-i="nav5">Classement</a>
+  <a id="navTimers" href="#" data-i="nav4">Minuteurs</a>
+  <button class="lang" id="lang" type="button" aria-label="English">EN</button>
+ </nav>
+</div></header>
+
+<main id="home">
+ <section class="hero" id="accueil">
+  <img src="assets/hero.jpg" alt="">
+  <div class="wrap"><div class="in">
+   <div class="acc" data-i="kicker">Saison 1</div>
+   <h1>Game<br>Night</h1>
+   <p data-i="lead"></p>
+   <div class="ctas"><a class="btn y" href="#regles" data-i="cta1">Lire les règles</a><a class="btn" href="#programme" data-i="cta2">Voir le programme</a></div>
+   <div class="facts" id="facts"></div>
+  </div></div>
+ </section>
+
+ <section class="band light" id="programme"><div class="wrap split">
+  <div><h2 data-i="schedT"></h2><p class="lead" data-i="schedL"></p></div>
+  <ol class="sched" id="sched"></ol>
+ </div></section>
+
+ <section class="band" id="regles"><div class="wrap">
+  <div class="head"><h2 data-i="rulesT"></h2><span class="acc" data-i="rulesA"></span></div>
+  <ul class="games" id="games"></ul>
+ </div></section>
+
+ <section class="band pts" id="points"><div class="wrap">
+  <div class="head"><h2 data-i="ptsT"></h2><span class="acc" data-i="ptsA"></span></div>
+  <div class="cols" id="cols"></div>
+ </div></section>
+</main>
+
+<main id="game"></main>
+
+<footer><div class="pat"></div><div class="wrap"><span><b>wilbid</b> Game Night · Bamberg, Erlangen, Nürnberg</span><span data-i="foot"></span></div></footer>
+
+<script src="data.js"></script>
+<script>
+{
+const G=window.WB_GAMES,S=window.WB_SCHEDULE,TIMERS=window.WB_TIMERS;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const KOLA=(f,h,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="${f}"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="${h}"/></svg>`;
+const UI={
+fr:{nav1:'Programme',nav2:'Règles',nav3:'Points',nav4:'Minuteurs',nav5:'Classement',langBtn:'EN',langLbl:'Switch to English',kicker:'saison 1 · Ndop Nuit',
+ lead:'Une nuit de stratégie, d’alliances et de bluff entre Camerounais de Bavière. Sept jeux, une finale, et une cagnotte pour le podium.',
+ cta1:'Lire les règles',cta2:'Voir le programme',facts:[['19h30 à 4h','la nuit'],['7 + 1','jeux et finale'],['15 à 20+','joueurs'],['8 €','cotisation']],
+ schedT:'La nuit, heure par heure',schedL:'On commence par se rencontrer, on garde la stratégie lourde pour après le repas, et on finit par la finale.',
+ rulesT:'Le livret de règles',rulesA:'en français et en anglais',game:'Jeu',final:'Finale',min:'min',upto:'jusqu’à',
+ ptsT:'Comment on compte',ptsA:'les Points Wilbid (PW)',
+ c1T:'Les points',c1:['Après chaque jeu, le comptable note les PW de chacun.','Dans les jeux d’équipe, chaque membre reçoit les PW de l’équipe.','Avant la finale, les Kola sont converties : 1 Kola = 1 PW.','Les 4 premiers jouent la finale. Égalité : le plus de Kola passe.','Classement final = PW cumulés + PW de la finale.'],
+ c1P:'Chaque jeu vaut au plus 15 PW : aucun jeu ne décide seul du classement.',
+ c2T:'La cagnotte',c2P:'8 € de cotisation, dont 5 € pour la cagnotte. Pour 18 joueurs :',c2N:'Pour le repas, chacun apporte un plat ou une boisson.',
+ c3T:'Qui fait quoi',roles:[['r','Maître du jeu','badge rouge, annonce et tranche'],['j','Organisateurs','badge jaune, scores et matériel'],['w','Joueurs','badge blanc, prénom et ville']],
+ back:'Tous les jeux',dur:'durée',fmt:'format',max:'au maximum',rules:'Règles',ex:'Exemple',score:'Barème',maxL:'Maximum',tip:'le conseil',timer:'Ouvrir le minuteur',prev:'Jeu précédent',next:'Jeu suivant',
+ foot:'Inscriptions et questions dans le groupe WhatsApp'},
+en:{nav1:'Schedule',nav2:'Rules',nav3:'Points',nav4:'Timers',nav5:'Leaderboard',langBtn:'FR',langLbl:'Passer en français',kicker:'season 1 · Ndop Night',
+ lead:'A night of strategy, alliances and bluff for Cameroonians in Bavaria. Seven games, one final, and a prize pot for the podium.',
+ cta1:'Read the rules',cta2:'See the schedule',facts:[['7:30 pm to 4 am','the night'],['7 + 1','games and final'],['15 to 20+','players'],['€8','entry fee']],
+ schedT:'The night, hour by hour',schedL:'We start by meeting each other, keep the heavy strategy for after dinner, and end with the final.',
+ rulesT:'The rulebook',rulesA:'in French and English',game:'Game',final:'Final',min:'min',upto:'up to',
+ ptsT:'How scoring works',ptsA:'Wilbid Points (PW)',
+ c1T:'Points',c1:['After each game, the scorekeeper records everyone’s PW.','In team games, every member gets the team’s PW.','Before the final, Kola are converted: 1 Kola = 1 PW.','The top 4 play the final. Tie: most Kola goes through.','Final ranking = total PW + PW from the final.'],
+ c1P:'Each game is worth at most 15 PW, so no single game decides the ranking.',
+ c2T:'The prize pot',c2P:'An €8 entry fee, €5 of which goes to the pot. For 18 players:',c2N:'For dinner, everyone brings a dish or a drink.',
+ c3T:'Who does what',roles:[['r','Game master','red badge, announces and rules'],['j','Organisers','yellow badge, scores and kit'],['w','Players','white badge, name and hometown']],
+ back:'All games',dur:'length',fmt:'format',max:'maximum',rules:'Rules',ex:'Example',score:'Scoring',maxL:'Maximum',tip:'tip',timer:'Open the timer',prev:'Previous game',next:'Next game',
+ foot:'Sign-ups and questions in the WhatsApp group'}};
+let lang='fr';try{lang=localStorage.getItem('wb-lang')||'fr'}catch(e){}
+const L=()=>UI[lang],tx=o=>o?(o[lang]||o.fr):'';
+const time=t=>lang==='fr'?t:(()=>{const [h,m]=t.split('h').map(Number);const hh=h%12||12;return hh+':'+String(m).padStart(2,'0')+(h<12?' am':' pm')})();
+const lbl=g=>g.fin?L().final:L().game+' '+g.num;
+const $=s=>document.querySelector(s);
+
+function renderHome(){
+ $('#facts').innerHTML=L().facts.map(([a,b])=>`<div><b>${esc(a)}</b>${esc(b)}</div>`).join('');
+ $('#sched').innerHTML=S.map(s=>{const g=s.id&&G.find(x=>x.id===s.id);
+  if(g)return `<li><a href="#jeu-${g.id}"><span class="t">${time(s.at)}</span><img src="assets/em-${g.id}.jpg" alt=""><span><b>${esc(tx(g.name))}</b><small>${esc(lbl(g))} · ${esc(tx(g.kind))}</small></span><span class="d">${s.d}</span></a></li>`;
+  return `<li class="brk"><div class="row"><span class="t">${time(s.at)}</span><i class="dot"></i><span><b>${esc(tx(s))}</b></span><span class="d">${s.d}</span></div></li>`}).join('');
+ $('#games').innerHTML=G.map(g=>`<li><a class="gcard${g.fin?' fin':''}" href="#jeu-${g.id}"><div class="top"><img src="assets/em-${g.id}.jpg" alt=""><span class="tag">${esc(lbl(g))}</span></div><b>${esc(tx(g.name))}</b><span>${esc(tx(g.kind))}</span><div class="meta"><span>${g.dur} ${L().min}</span><span>${L().upto} ${g.max} PW</span></div></a></li>`).join('');
+ const u=L();
+ $('#cols').innerHTML=`<div class="box"><h3>${u.c1T}</h3><p>${esc(u.c1P)}</p><ol>${u.c1.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>
+ <div class="box"><h3>${u.c2T}</h3><p>${esc(u.c2P)}</p><div class="big">90 €</div><div class="pod"><div class="p2"><b>2</b>27 €</div><div class="p1"><b>1</b>45 €</div><div class="p3"><b>3</b>18 €</div></div><p>${esc(u.c2N)}</p></div>
+ <div class="box"><h3>${u.c3T}</h3><div class="roles">${u.roles.map(([c,a,b])=>`<div class="role ${c}">${KOLA(c==='r'?'#fff':c==='j'?'#141E4A':'#E0452F',c==='r'?'#E0452F':c==='j'?'#F2B705':'#F4F3EF',30)}<div><b>${esc(a)}</b>${esc(b)}</div></div>`).join('')}</div></div>`;
+}
+
+function renderGame(id){
+ const i=G.findIndex(x=>x.id===id),g=G[i],u=L();if(!g)return false;
+ const pv=G[(i-1+G.length)%G.length],nx=G[(i+1)%G.length];
+ const sc=tx(g.score);
+ $('#game').innerHTML=`<section class="gp-hero"><div class="wrap">
+  <a class="back" href="#regles">← ${u.back}</a>
+  <img class="medal" src="assets/em-${g.id}.jpg" alt="">
+  <div><span class="tag">${esc(lbl(g))}</span><span class="acc">${esc(tx(g.kind))}</span><h1>${esc(tx(g.name))}</h1>
+  <div class="stats"><div><b>${g.dur} min</b>${u.dur}</div><div><b>${esc(tx(g.fmt))}</b>${u.fmt}</div><div><b>${g.max} PW</b>${u.max}</div></div></div>
+ </div></section>
+ <div class="wrap gp-body">
+  <div><p class="pitch">${esc(tx(g.pitch))}</p><h2>${u.rules}</h2><ol class="rules">${tx(g.rules).map(r=>`<li>${esc(r)}</li>`).join('')}</ol>
+  ${g.example?`<div class="ex"><b>${u.ex}</b>${esc(tx(g.example))}</div>`:''}</div>
+  <aside class="aside">
+   <div class="score"><h2>${u.score}</h2><table>${sc.map(([a,b])=>`<tr><td>${esc(a)}</td><td>${esc(b)}</td></tr>`).join('')}</table><div class="max"><span>${u.maxL}</span><b>${g.max} PW</b></div></div>
+   <div class="tip"><span class="acc">${u.tip}</span><p>${esc(tx(g.tip))}</p></div>
+   <a class="btn y timer" href="${TIMERS}#${g.id}" target="_blank" rel="noopener">${u.timer}</a>
+  </aside>
+ </div>
+ <div class="wrap pn"><a href="#jeu-${pv.id}"><img src="assets/em-${pv.id}.jpg" alt=""><span><small>${u.prev}</small><b>${esc(tx(pv.name))}</b></span></a><a class="nx" href="#jeu-${nx.id}"><span><small>${u.next}</small><b>${esc(tx(nx.name))}</b></span><img src="assets/em-${nx.id}.jpg" alt=""></a></div>`;
+ document.body.classList.toggle('fin-on',!!g.fin);
+ return true;
+}
+
+function route(){
+ const h=location.hash.slice(1);
+ if(h.startsWith('jeu-')&&renderGame(h.slice(4))){document.body.classList.add('g');window.scrollTo(0,0);return}
+ document.body.classList.remove('g');
+ if(h){const el=document.getElementById(h);if(el)el.scrollIntoView()}
+}
+function applyLang(){
+ const u=L();document.documentElement.lang=lang;
+ document.querySelectorAll('[data-i]').forEach(e=>{const v=u[e.dataset.i];if(typeof v==='string')e.textContent=v});
+ const b=$('#lang');b.textContent=u.langBtn;b.setAttribute('aria-label',u.langLbl);
+ $('#navTimers').href=TIMERS;$('#navTimers').target='_blank';$('#navTimers').rel='noopener';
+ renderHome();
+ const h=location.hash.slice(1);if(h.startsWith('jeu-'))renderGame(h.slice(4));
+}
+$('#lang').addEventListener('click',()=>{lang=lang==='fr'?'en':'fr';try{localStorage.setItem('wb-lang',lang)}catch(e){}applyLang()});
+window.addEventListener('hashchange',route);
+applyLang();route();
+}
+</script>
+</body>
+</html>
