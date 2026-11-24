@@ -1,6 +1,14 @@
 /* Contenu du site : modifiable sans toucher au moteur. Chaque texte existe en français (fr) et en anglais (en). */
-/* Sur GitHub Pages ou en local, les minuteurs sont dans le dossier minuteurs/ ; ailleurs, on ouvre la version Claude. */
-window.WB_TIMERS = (location.protocol === 'file:' || location.hostname.endsWith('github.io')) ? 'minuteurs/index.html' : 'https://claude.ai/artifact/6mQzfqrQMX5pHaj2fk6MAy';
+/* Liens entre les pages. Sur GitHub Pages ou en local, on reste dans le dépôt ; ailleurs (versions Claude), on ouvre les artefacts. */
+window.WB_LOCAL = location.protocol === 'file:' || location.hostname.endsWith('github.io');
+window.WB_LINKS = window.WB_LOCAL ? {
+  site: 'index.html', timers: 'minuteurs/index.html', app: 'classement.html',
+  partners: 'documents/proposition/index.html', dossier: 'documents/dossier-mj/index.html'
+} : {
+  site: 'https://claude.ai/artifact/2QtXWpNXxMSQ8yavfC1Kc6', timers: 'https://claude.ai/artifact/6mQzfqrQMX5pHaj2fk6MAy',
+  app: 'classement.html', partners: 'https://claude.ai/artifact/1oh4MXRkS3SR4KRsE5VuGz', dossier: 'https://claude.ai/artifact/Q26Zry3aeHvFVvAFvMXst9'
+};
+window.WB_TIMERS = window.WB_LINKS.timers;
 
 window.WB_SCHEDULE = [
  {at:'19h30', id:null, fr:'Accueil, badges, cotisation, 10 Kola par joueur', en:'Welcome, badges, fee, 10 Kola per player', d:'30 min'},

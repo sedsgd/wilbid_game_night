@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wilbid, minuteurs de la nuit</title>
+<meta name="theme-color" content="#141E4A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)' fill='%23F2B705'%3E%3Ccircle cx='14' cy='14' r='9.2'/%3E%3Ccircle cx='34' cy='14' r='9.2'/%3E%3Ccircle cx='14' cy='34' r='9.2'/%3E%3Ccircle cx='34' cy='34' r='9.2'/%3E%3C/g%3E%3Cpath d='M24 19 29 24 24 29 19 24Z' fill='%23141E4A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
@@ -49,6 +51,9 @@ kbd{font:700 12px var(--ft);border:1px solid var(--line);border-bottom-width:2px
 .ib{height:44px;min-width:44px;padding:0 12px;border-radius:99px;border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:14px;background:rgba(13,21,56,.5);transition:background .2s}
 .ib:hover{background:var(--indigo2)}
 .ib svg{width:20px;height:20px}
+.ib.lnk{text-decoration:none;color:var(--chalk)}
+.ib[hidden]{display:none}
+@media(max-width:700px){.ib .bk,.ib.lnk span{display:none}.ib.lnk#toRules span{display:inline}}
 .ib[aria-pressed=false]{opacity:.55}
 
 /* ---------- timer ---------- */
@@ -149,7 +154,7 @@ body.idle .foot,body.idle .t-top .tools{opacity:0}body.idle{cursor:none}
 <main id="home">
  <div class="h-top">
   <a class="logo" href="#"><svg width="34" height="34"><use href="#kola"/></svg>wilbid</a>
-  <div class="tools"><button class="ib js-lang" type="button" aria-label="Langue / Language">FR · EN</button></div>
+  <div class="tools"><a class="ib lnk js-site" href="../index.html"><svg><use href="#i-home"/></svg><span data-i="site">Le site</span></a><button class="ib js-lang" type="button" aria-label="Langue / Language">FR · EN</button></div>
  </div>
  <header class="h-head">
   <div class="acc" data-i="kick">saison 1 · Ndop Nuit</div>
@@ -164,10 +169,11 @@ body.idle .foot,body.idle .t-top .tools{opacity:0}body.idle{cursor:none}
 <section id="timer" aria-live="off">
  <div class="t-top">
   <div class="t-game">
-   <button class="ib" type="button" id="back" aria-label="Retour"><svg><use href="#i-home"/></svg></button>
+   <button class="ib" type="button" id="back" aria-label="Tous les minuteurs"><svg><use href="#i-home"/></svg><span class="bk" data-i="home">Tous les minuteurs</span></button>
    <span class="pill" id="tNum"></span><b id="tName"></b>
   </div>
   <div class="tools">
+   <a class="ib lnk" id="toRules" href="../index.html"><span data-i="rules">Règles du jeu</span></a>
    <button class="ib js-lang" type="button" aria-label="Langue / Language">FR · EN</button>
    <button class="ib" type="button" id="snd" aria-pressed="true" aria-label="Son"><svg><use href="#i-sound"/></svg></button>
    <button class="ib" type="button" id="fs" aria-label="Plein écran"><svg><use href="#i-full"/></svg></button>
@@ -268,9 +274,13 @@ window.WILBID_TIMERS=[
 {
 const $=s=>document.querySelector(s),T=window.WILBID_TIMERS;
 const ORDER=['mokolo','quiestqui','njangi','duos','repas','wouri','code','pause','feymen','trone'];
+/* Retour vers le site : dans le dépôt (GitHub Pages ou local) on remonte d'un dossier, sinon on ouvre le site publié sur Claude. */
+const SITE=(location.protocol==='file:'||location.hostname.endsWith('github.io'))?'../index.html':'https://claude.ai/artifact/2QtXWpNXxMSQ8yavfC1Kc6';
+const EXT=/^https?:/.test(SITE);
+document.querySelectorAll('.js-site').forEach(a=>{a.href=SITE;if(EXT){a.target='_blank';a.rel='noopener'}});
 const I18N={
- fr:{kick:'saison 1 · Ndop Nuit',title:'Les minuteurs de la nuit',lead:'Un minuteur par jeu, pensé pour le projecteur. Chaque jeu enchaîne ses phases tout seul, prévient à 5 minutes et à 1 minute, et sonne à la fin.',start:'Démarrer',pause:'Pause',resume:'Reprendre',prev:'Phase',next:'Phase',reset:'Recommencer',auto:'Enchaîner les phases',then:'Ensuite',endGame:'Fin du jeu dans',last:'Dernière phase',game:'Jeu',final:'Finale',brk:'Pause',over:'Temps écoulé !',again:'Rejouer',home:'Tous les minuteurs',left:'Plus que',min:'minutes',one:'Dernière minute',phases:'phases',of:'sur',done:'est terminé',keys:[['Espace','démarrer ou pause'],['← →','phase'],['R','recommencer la phase'],['+ −','une minute'],['F','plein écran'],['M','son'],['Échap','retour']]},
- en:{kick:'season 1 · Ndop Night',title:'Timers for the night',lead:'One timer per game, built for the projector. Each game runs through its phases on its own, warns at 5 minutes and 1 minute, and rings at the end.',start:'Start',pause:'Pause',resume:'Resume',prev:'Phase',next:'Phase',reset:'Restart',auto:'Run phases back to back',then:'Next',endGame:'Game ends in',last:'Last phase',game:'Game',final:'Final',brk:'Break',over:'Time’s up!',again:'Play again',home:'All timers',left:'Only',min:'minutes left',one:'Last minute',phases:'phases',of:'of',done:'is over',keys:[['Space','start or pause'],['← →','phase'],['R','restart phase'],['+ −','one minute'],['F','fullscreen'],['M','sound'],['Esc','back']]}};
+ fr:{site:'Le site',rules:'Règles du jeu',kick:'saison 1 · Ndop Nuit',title:'Les minuteurs de la nuit',lead:'Un minuteur par jeu, pensé pour le projecteur. Chaque jeu enchaîne ses phases tout seul, prévient à 5 minutes et à 1 minute, et sonne à la fin.',start:'Démarrer',pause:'Pause',resume:'Reprendre',prev:'Phase',next:'Phase',reset:'Recommencer',auto:'Enchaîner les phases',then:'Ensuite',endGame:'Fin du jeu dans',last:'Dernière phase',game:'Jeu',final:'Finale',brk:'Pause',over:'Temps écoulé !',again:'Rejouer',home:'Tous les minuteurs',left:'Plus que',min:'minutes',one:'Dernière minute',phases:'phases',of:'sur',done:'est terminé',keys:[['Espace','démarrer ou pause'],['← →','phase'],['R','recommencer la phase'],['+ −','une minute'],['F','plein écran'],['M','son'],['Échap','retour']]},
+ en:{site:'Website',rules:'Game rules',kick:'season 1 · Ndop Night',title:'Timers for the night',lead:'One timer per game, built for the projector. Each game runs through its phases on its own, warns at 5 minutes and 1 minute, and rings at the end.',start:'Start',pause:'Pause',resume:'Resume',prev:'Phase',next:'Phase',reset:'Restart',auto:'Run phases back to back',then:'Next',endGame:'Game ends in',last:'Last phase',game:'Game',final:'Final',brk:'Break',over:'Time’s up!',again:'Play again',home:'All timers',left:'Only',min:'minutes left',one:'Last minute',phases:'phases',of:'of',done:'is over',keys:[['Space','start or pause'],['← →','phase'],['R','restart phase'],['+ −','one minute'],['F','fullscreen'],['M','sound'],['Esc','back']]}};
 let lang='fr';try{lang=localStorage.getItem('wb-lang')||'fr'}catch(e){}
 const L=()=>I18N[lang],tx=o=>o?o[lang]||o.fr:'';
 const fmt=sec=>{sec=Math.max(0,Math.ceil(sec));const m=Math.floor(sec/60),s=sec%60;return m+':'+String(s).padStart(2,'0')};
@@ -314,6 +324,7 @@ function buildRing(g){
 let dms=[];
 
 function open(id){
+ {const r=document.getElementById('toRules');const gg=T.find(x=>x.id===id);r.hidden=!gg||!!gg.brk;r.href=SITE+'#jeu-'+id;if(EXT){r.target='_blank';r.rel='noopener'}}
  const g=T.find(x=>x.id===id);if(!g){close();return}
  game=g;steps=flat(g);document.body.classList.add('on');document.body.classList.toggle('fin-on',!!g.fin);
  buildRing(g);dms=[...ring.querySelectorAll('.dm')];

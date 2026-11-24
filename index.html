@@ -4,6 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wilbid Game Night</title>
+<meta name="description" content="Une nuit de stratégie, d’alliances et de bluff entre Camerounais de Bavière. Sept jeux, une finale, une cagnotte. Règles en français et en anglais.">
+<meta property="og:title" content="Wilbid Game Night">
+<meta property="og:description" content="Sept jeux, une finale, une cagnotte. Les règles en français et en anglais.">
+<meta property="og:image" content="https://sedsgd.github.io/wilbid_game_night/assets/hero.jpg">
+<meta property="og:url" content="https://sedsgd.github.io/wilbid_game_night/">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#141E4A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)' fill='%23F2B705'%3E%3Ccircle cx='14' cy='14' r='9.2'/%3E%3Ccircle cx='34' cy='14' r='9.2'/%3E%3Ccircle cx='14' cy='34' r='9.2'/%3E%3Ccircle cx='34' cy='34' r='9.2'/%3E%3C/g%3E%3Cpath d='M24 19 29 24 24 29 19 24Z' fill='%23141E4A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
@@ -153,6 +161,13 @@ footer{border-top:1px solid var(--line)}
 footer .pat{height:80px;background:url(assets/pattern.jpg) center 4%/auto 300% repeat-x;opacity:.55}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;padding-bottom:40px;font-size:15px;color:var(--mute)}
 footer b{font-family:var(--fd);color:var(--ink)}
+.flinks{display:flex;flex-wrap:wrap;gap:4px 22px}.flinks a{text-decoration:none;font-weight:700;min-height:44px;display:inline-flex;align-items:center}.flinks a:hover{color:var(--palm)}
+.faq details{border-bottom:1px solid var(--paper-line)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:16px 0;font-weight:800;font-size:18px;min-height:44px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:800 26px var(--fd);color:var(--kola);flex:none;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{margin:0 0 18px;color:var(--paper-mute);font-size:17px;max-width:62ch}
 
 @media(max-width:900px){.split,.gp-body{grid-template-columns:minmax(0,1fr)}.cols{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:600px){
@@ -174,7 +189,7 @@ footer b{font-family:var(--fd);color:var(--ink)}
   <a href="#programme" data-i="nav1">Programme</a>
   <a href="#regles" data-i="nav2">Règles</a>
   <a href="#points" data-i="nav3">Points</a>
-  <a href="classement.html" data-i="nav5">Classement</a>
+  <a href="#faq" data-i="nav5">FAQ</a>
   <a id="navTimers" href="#" data-i="nav4">Minuteurs</a>
   <button class="lang" id="lang" type="button" aria-label="English">EN</button>
  </nav>
@@ -206,11 +221,16 @@ footer b{font-family:var(--fd);color:var(--ink)}
   <div class="head"><h2 data-i="ptsT"></h2><span class="acc" data-i="ptsA"></span></div>
   <div class="cols" id="cols"></div>
  </div></section>
+
+ <section class="band light" id="faq"><div class="wrap split">
+  <div><h2 data-i="faqT">Vos questions</h2><p class="lead" data-i="faqL"></p></div>
+  <div class="faq" id="faqList"></div>
+ </div></section>
 </main>
 
 <main id="game"></main>
 
-<footer><div class="pat"></div><div class="wrap"><span><b>wilbid</b> Game Night · Bamberg, Erlangen, Nürnberg</span><span data-i="foot"></span></div></footer>
+<footer><div class="pat"></div><div class="wrap"><span><b>wilbid</b> Game Night · Bamberg, Erlangen, Nürnberg<br><span data-i="foot"></span></span><nav class="flinks" aria-label="Liens"><a id="lPartners" href="#" data-i="partners">Devenir partenaire</a><a id="lTimers" href="#" data-i="nav4">Minuteurs</a><a id="lApp" href="#" data-i="orga">Espace organisation</a></nav></div></footer>
 
 <script src="data.js"></script>
 <script>
@@ -219,7 +239,7 @@ const G=window.WB_GAMES,S=window.WB_SCHEDULE,TIMERS=window.WB_TIMERS;
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const KOLA=(f,h,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="${f}"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="${h}"/></svg>`;
 const UI={
-fr:{nav1:'Programme',nav2:'Règles',nav3:'Points',nav4:'Minuteurs',nav5:'Classement',langBtn:'EN',langLbl:'Switch to English',kicker:'saison 1 · Ndop Nuit',
+fr:{nav1:'Programme',nav2:'Règles',nav3:'Points',nav4:'Minuteurs',nav5:'Questions',langBtn:'EN',langLbl:'Switch to English',kicker:'saison 1 · Ndop Nuit',
  lead:'Une nuit de stratégie, d’alliances et de bluff entre Camerounais de Bavière. Sept jeux, une finale, et une cagnotte pour le podium.',
  cta1:'Lire les règles',cta2:'Voir le programme',facts:[['19h30 à 4h','la nuit'],['7 + 1','jeux et finale'],['15 à 20+','joueurs'],['8 €','cotisation']],
  schedT:'La nuit, heure par heure',schedL:'On commence par se rencontrer, on garde la stratégie lourde pour après le repas, et on finit par la finale.',
@@ -230,8 +250,10 @@ fr:{nav1:'Programme',nav2:'Règles',nav3:'Points',nav4:'Minuteurs',nav5:'Classem
  c2T:'La cagnotte',c2P:'8 € de cotisation, dont 5 € pour la cagnotte. Pour 18 joueurs :',c2N:'Pour le repas, chacun apporte un plat ou une boisson.',
  c3T:'Qui fait quoi',roles:[['r','Maître du jeu','badge rouge, annonce et tranche'],['j','Organisateurs','badge jaune, scores et matériel'],['w','Joueurs','badge blanc, prénom et ville']],
  back:'Tous les jeux',dur:'durée',fmt:'format',max:'au maximum',rules:'Règles',ex:'Exemple',score:'Barème',maxL:'Maximum',tip:'le conseil',timer:'Ouvrir le minuteur',prev:'Jeu précédent',next:'Jeu suivant',
- foot:'Inscriptions et questions dans le groupe WhatsApp'},
-en:{nav1:'Schedule',nav2:'Rules',nav3:'Points',nav4:'Timers',nav5:'Leaderboard',langBtn:'FR',langLbl:'Passer en français',kicker:'season 1 · Ndop Night',
+ foot:'Inscriptions et questions dans le groupe WhatsApp',partners:'Devenir partenaire',orga:'Espace organisation',
+ faqT:'Vos questions',faqL:'Tout ce qu’on nous demande avant la première soirée.',
+ faq:[['Faut-il connaître les jeux avant de venir ?','Non. Le MJ explique chaque jeu avant de commencer, et toutes les règles sont sur ce site, en français et en anglais.'],['Combien ça coûte ?','8 € de cotisation, dont 5 € vont à la cagnotte des 3 premiers. Pour le repas, chacun apporte un plat ou une boisson.'],['Je ne connais personne, c’est un problème ?','Au contraire. Les équipes sont tirées au sort à chaque jeu et le Carrefour des Duos fait parler tout le monde avec presque tout le monde.'],['Faut-il rester toute la nuit ?','Tu peux arriver ou partir quand tu veux. Mais les points se cumulent : pour viser la finale, mieux vaut être là dès 20h.'],['Les Kola, c’est de l’argent ?','Non, ce sont des jetons de jeu. Ils servent à miser et à négocier, et chaque Kola restante vaut 1 point à la fin. Le seul argent réel est la cagnotte.'],['Où et quand a lieu la prochaine soirée ?','La date et le lieu sont annoncés dans le groupe WhatsApp, environ 3 semaines avant. Les inscriptions se font aussi là-bas.']]},
+en:{nav1:'Schedule',nav2:'Rules',nav3:'Points',nav4:'Timers',nav5:'FAQ',langBtn:'FR',langLbl:'Passer en français',kicker:'season 1 · Ndop Night',
  lead:'A night of strategy, alliances and bluff for Cameroonians in Bavaria. Seven games, one final, and a prize pot for the podium.',
  cta1:'Read the rules',cta2:'See the schedule',facts:[['7:30 pm to 4 am','the night'],['7 + 1','games and final'],['15 to 20+','players'],['€8','entry fee']],
  schedT:'The night, hour by hour',schedL:'We start by meeting each other, keep the heavy strategy for after dinner, and end with the final.',
@@ -242,7 +264,9 @@ en:{nav1:'Schedule',nav2:'Rules',nav3:'Points',nav4:'Timers',nav5:'Leaderboard',
  c2T:'The prize pot',c2P:'An €8 entry fee, €5 of which goes to the pot. For 18 players:',c2N:'For dinner, everyone brings a dish or a drink.',
  c3T:'Who does what',roles:[['r','Game master','red badge, announces and rules'],['j','Organisers','yellow badge, scores and kit'],['w','Players','white badge, name and hometown']],
  back:'All games',dur:'length',fmt:'format',max:'maximum',rules:'Rules',ex:'Example',score:'Scoring',maxL:'Maximum',tip:'tip',timer:'Open the timer',prev:'Previous game',next:'Next game',
- foot:'Sign-ups and questions in the WhatsApp group'}};
+ foot:'Sign-ups and questions in the WhatsApp group',partners:'Become a partner',orga:'Organisers’ area',
+ faqT:'Your questions',faqL:'Everything people ask us before the first night.',
+ faq:[['Do I need to know the games beforehand?','No. The game master explains each game before it starts, and every rule is on this site, in French and English.'],['How much does it cost?','An €8 entry fee, €5 of which goes to the prize pot for the top 3. For dinner, everyone brings a dish or a drink.'],['I don’t know anyone. Is that a problem?','Quite the opposite. Teams are drawn at random for every game, and Duos Crossroads gets everyone talking to almost everyone.'],['Do I have to stay all night?','Come and go as you like. But points add up over the night: to aim for the final, be there by 8 pm.'],['Are Kola real money?','No, they are game tokens. You use them to bid and haggle, and each Kola left is worth 1 point at the end. The only real money is the prize pot.'],['When and where is the next night?','The date and venue are announced in the WhatsApp group about 3 weeks ahead. Sign-ups happen there too.']]}};
 let lang='fr';try{lang=localStorage.getItem('wb-lang')||'fr'}catch(e){}
 const L=()=>UI[lang],tx=o=>o?(o[lang]||o.fr):'';
 const time=t=>lang==='fr'?t:(()=>{const [h,m]=t.split('h').map(Number);const hh=h%12||12;return hh+':'+String(m).padStart(2,'0')+(h<12?' am':' pm')})();
@@ -277,7 +301,7 @@ function renderGame(id){
   <aside class="aside">
    <div class="score"><h2>${u.score}</h2><table>${sc.map(([a,b])=>`<tr><td>${esc(a)}</td><td>${esc(b)}</td></tr>`).join('')}</table><div class="max"><span>${u.maxL}</span><b>${g.max} PW</b></div></div>
    <div class="tip"><span class="acc">${u.tip}</span><p>${esc(tx(g.tip))}</p></div>
-   <a class="btn y timer" href="${TIMERS}#${g.id}" target="_blank" rel="noopener">${u.timer}</a>
+   <a class="btn y timer" href="${TIMERS}#${g.id}"${window.WB_LOCAL?'':' target="_blank" rel="noopener"'}>${u.timer}</a>
   </aside>
  </div>
  <div class="wrap pn"><a href="#jeu-${pv.id}"><img src="assets/em-${pv.id}.jpg" alt=""><span><small>${u.prev}</small><b>${esc(tx(pv.name))}</b></span></a><a class="nx" href="#jeu-${nx.id}"><span><small>${u.next}</small><b>${esc(tx(nx.name))}</b></span><img src="assets/em-${nx.id}.jpg" alt=""></a></div>`;
@@ -295,7 +319,10 @@ function applyLang(){
  const u=L();document.documentElement.lang=lang;
  document.querySelectorAll('[data-i]').forEach(e=>{const v=u[e.dataset.i];if(typeof v==='string')e.textContent=v});
  const b=$('#lang');b.textContent=u.langBtn;b.setAttribute('aria-label',u.langLbl);
- $('#navTimers').href=TIMERS;$('#navTimers').target='_blank';$('#navTimers').rel='noopener';
+ const K=window.WB_LINKS,ext=!window.WB_LOCAL;
+ const setL=(sel,href)=>{const a=$(sel);a.href=href;if(ext&&/^https?:/.test(href)){a.target='_blank';a.rel='noopener'}else{a.removeAttribute('target')}};
+ setL('#navTimers',K.timers);setL('#lTimers',K.timers);setL('#lPartners',K.partners);setL('#lApp',K.app);
+ $('#faqList').innerHTML=u.faq.map(([q,a])=>`<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('');
  renderHome();
  const h=location.hash.slice(1);if(h.startsWith('jeu-'))renderGame(h.slice(4));
 }

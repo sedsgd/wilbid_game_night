@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wilbid Game Night, dossier du maître du jeu</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)' fill='%23F2B705'%3E%3Ccircle cx='14' cy='14' r='9.2'/%3E%3Ccircle cx='34' cy='14' r='9.2'/%3E%3Ccircle cx='14' cy='34' r='9.2'/%3E%3Ccircle cx='34' cy='34' r='9.2'/%3E%3C/g%3E%3Cpath d='M24 19 29 24 24 29 19 24Z' fill='%23141E4A'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>:root{
  --indigo:#141E4A;--indigo2:#2B3F9E;--chalk:#F4F3EF;--paper:#FFFFFF;--kola:#E0452F;--palm:#F2B705;--safou:#7A4FA3;
@@ -110,7 +111,12 @@ p{margin:0 0 2mm}
 .check li::before{content:"";position:absolute;left:0;top:1mm;width:3mm;height:3mm;border:1.3px solid var(--palm);border-radius:.6mm}
 .pattern-band{position:absolute;left:5mm;right:0;bottom:16mm;height:26mm;background:url(assets/pattern.jpg) center 30%/62mm auto repeat-x}
 .wide{margin-bottom:0}
+.wb-back{position:fixed;top:12px;left:12px;z-index:9;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 16px;border-radius:99px;background:#141E4A;color:#F4F3EF;font:800 14px Manrope,sans-serif;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+.wb-back:hover{background:#2B3F9E}
+@media print{.wb-back{display:none}}
 </style></head><body>
+<a class="wb-back" id="wbBack" href="../../index.html">← Wilbid</a>
+<script>{const l=location.protocol==='file:'||location.hostname.endsWith('github.io');if(!l){const a=document.getElementById('wbBack');a.href='https://claude.ai/artifact/2QtXWpNXxMSQ8yavfC1Kc6';a.target='_blank';a.rel='noopener'}}</script>
 <section class="page cover">
 <img class="cv-img" src="assets/hero.jpg" alt="">
 <div class="cv-fade"></div>

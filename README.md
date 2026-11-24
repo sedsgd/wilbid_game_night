@@ -26,7 +26,10 @@ Tout est en HTML, CSS et JavaScript, sans dépendance à installer. Le dépôt p
 
 ## L'appli de classement
 
-- Les données restent dans le navigateur de l'appareil du comptable (localStorage). Rien n'est envoyé sur internet.
+- L'espace organisation est protégé par un code propre à chaque appareil. À la première ouverture, on choisit le code ; ensuite il est demandé à chaque nouvelle session du navigateur. Le bouton **Verrouiller** referme l'accès. Seule une empreinte SHA-256 du code est enregistrée.
+- Les données restent dans le navigateur de l'appareil du comptable (localStorage). Rien n'est envoyé sur internet : un visiteur qui ouvre `classement.html` sur son téléphone ne voit rien de la soirée et ne peut rien modifier.
+- Code oublié : **Effacer cet appareil** supprime le code et les données de la soirée sur cet appareil.
+- L'**Écran** du classement reste visible sans code, pour le vidéoprojecteur.
 - **Écran** ouvre le classement en grand pour le vidéoprojecteur. Ouvert dans un deuxième onglet ou une deuxième fenêtre du même navigateur, il se met à jour tout seul à chaque saisie.
 - **Exporter** télécharge la soirée en JSON, pour la sauvegarder ou la reprendre sur un autre appareil avec **Importer**.
 - **Badges** imprime les badges 54 × 86 mm : blanc pour les joueurs, rouge pour le MJ, jaune pour l'organisation.
