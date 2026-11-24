@@ -6,8 +6,7 @@
 <title>Wilbid, minuteurs de la nuit</title>
 <meta name="theme-color" content="#141E4A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)' fill='%23F2B705'%3E%3Ccircle cx='14' cy='14' r='9.2'/%3E%3Ccircle cx='34' cy='14' r='9.2'/%3E%3Ccircle cx='14' cy='34' r='9.2'/%3E%3Ccircle cx='34' cy='34' r='9.2'/%3E%3C/g%3E%3Cpath d='M24 19 29 24 24 29 19 24Z' fill='%23141E4A'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../fonts/fonts.css">
 <style>
 /* VOICE: a stage clock for a party night, calm when it runs, loud when time is up.
    IDEA: the game's emblem is a ndop medallion; its stitched diamond border unpicks itself as time runs out.
@@ -28,6 +27,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--palm);outline-offse
 
 /* ---------- home ---------- */
 #home{min-height:100%;position:relative;padding:clamp(22px,3.4vw,52px) max(5vw,18px) calc(min(14vh,120px) + 28px)}
+.hfoot{position:relative;z-index:1;margin:28px 0 0;font-size:13px;color:var(--mute,#B9C0E6)}.hfoot a{font-weight:700;color:inherit;display:inline-flex;align-items:center;min-height:44px;margin-left:8px}
 .h-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 .h-head{margin:clamp(28px,5vh,60px) 0 clamp(20px,3.5vh,40px);max-width:900px}
 .h-head .acc{font-size:clamp(20px,2.2vw,28px)}
@@ -53,7 +53,7 @@ kbd{font:700 12px var(--ft);border:1px solid var(--line);border-bottom-width:2px
 .ib svg{width:20px;height:20px}
 .ib.lnk{text-decoration:none;color:var(--chalk)}
 .ib[hidden]{display:none}
-@media(max-width:700px){.ib .bk,.ib.lnk span{display:none}.ib.lnk#toRules span{display:inline}}
+@media(max-width:700px){.ib .bk,.ib.lnk span{display:none}.ib.lnk#toRules span,.ib.js-org span{display:inline}}
 .ib[aria-pressed=false]{opacity:.55}
 
 /* ---------- timer ---------- */
@@ -153,8 +153,8 @@ body.idle .foot,body.idle .t-top .tools{opacity:0}body.idle{cursor:none}
 
 <main id="home">
  <div class="h-top">
-  <a class="logo" href="#"><svg width="34" height="34"><use href="#kola"/></svg>wilbid</a>
-  <div class="tools"><a class="ib lnk js-site" href="../index.html"><svg><use href="#i-home"/></svg><span data-i="site">Le site</span></a><button class="ib js-lang" type="button" aria-label="Langue / Language">FR · EN</button></div>
+  <a class="logo js-site" href="../index.html" aria-label="wilbid, accueil du site"><svg width="34" height="34"><use href="#kola"/></svg>wilbid</a>
+  <div class="tools"><a class="ib lnk js-org" href="../classement.html"><span data-i="org">Organisation</span></a><a class="ib lnk js-site" href="../index.html"><svg><use href="#i-home"/></svg><span data-i="site">Le site</span></a><button class="ib js-lang" type="button" aria-label="Langue / Language">FR · EN</button></div>
  </div>
  <header class="h-head">
   <div class="acc" data-i="kick">saison 1 · Ndop Nuit</div>
@@ -163,6 +163,7 @@ body.idle .foot,body.idle .t-top .tools{opacity:0}body.idle{cursor:none}
  </header>
  <ol class="grid" id="grid"></ol>
  <div class="keys" id="keys"></div>
+ <p class="hfoot">© <span class="yr">2026</span> Wilbid Game Night. <span data-i="rights">Tous droits réservés.</span> <a class="js-legal" href="../legal.html" data-i="legal">Mentions légales</a></p>
  <div class="band-pattern"></div>
 </main>
 
@@ -278,9 +279,12 @@ const ORDER=['mokolo','quiestqui','njangi','duos','repas','wouri','code','pause'
 const SITE=(location.protocol==='file:'||location.hostname.endsWith('github.io'))?'../index.html':'https://claude.ai/artifact/2QtXWpNXxMSQ8yavfC1Kc6';
 const EXT=/^https?:/.test(SITE);
 document.querySelectorAll('.js-site').forEach(a=>{a.href=SITE;if(EXT){a.target='_blank';a.rel='noopener'}});
+const ORG=EXT?'https://sedsgd.github.io/wilbid_game_night/classement.html':'../classement.html';
+document.querySelectorAll('.js-legal').forEach(a=>{a.href=EXT?'https://sedsgd.github.io/wilbid_game_night/legal.html':'../legal.html';if(EXT){a.target='_blank';a.rel='noopener'}});
+document.querySelectorAll('.js-org').forEach(a=>{a.href=ORG;if(EXT){a.target='_blank';a.rel='noopener'}});
 const I18N={
- fr:{site:'Le site',rules:'Règles du jeu',kick:'saison 1 · Ndop Nuit',title:'Les minuteurs de la nuit',lead:'Un minuteur par jeu, pensé pour le projecteur. Chaque jeu enchaîne ses phases tout seul, prévient à 5 minutes et à 1 minute, et sonne à la fin.',start:'Démarrer',pause:'Pause',resume:'Reprendre',prev:'Phase',next:'Phase',reset:'Recommencer',auto:'Enchaîner les phases',then:'Ensuite',endGame:'Fin du jeu dans',last:'Dernière phase',game:'Jeu',final:'Finale',brk:'Pause',over:'Temps écoulé !',again:'Rejouer',home:'Tous les minuteurs',left:'Plus que',min:'minutes',one:'Dernière minute',phases:'phases',of:'sur',done:'est terminé',keys:[['Espace','démarrer ou pause'],['← →','phase'],['R','recommencer la phase'],['+ −','une minute'],['F','plein écran'],['M','son'],['Échap','retour']]},
- en:{site:'Website',rules:'Game rules',kick:'season 1 · Ndop Night',title:'Timers for the night',lead:'One timer per game, built for the projector. Each game runs through its phases on its own, warns at 5 minutes and 1 minute, and rings at the end.',start:'Start',pause:'Pause',resume:'Resume',prev:'Phase',next:'Phase',reset:'Restart',auto:'Run phases back to back',then:'Next',endGame:'Game ends in',last:'Last phase',game:'Game',final:'Final',brk:'Break',over:'Time’s up!',again:'Play again',home:'All timers',left:'Only',min:'minutes left',one:'Last minute',phases:'phases',of:'of',done:'is over',keys:[['Space','start or pause'],['← →','phase'],['R','restart phase'],['+ −','one minute'],['F','fullscreen'],['M','sound'],['Esc','back']]}};
+ fr:{site:'Le site',org:'Organisation',rights:'Tous droits réservés.',legal:'Mentions légales',rules:'Règles du jeu',kick:'saison 1 · Ndop Nuit',title:'Les minuteurs de la nuit',lead:'Un minuteur par jeu, pensé pour le projecteur. Chaque jeu enchaîne ses phases tout seul, prévient à 5 minutes et à 1 minute, et sonne à la fin.',start:'Démarrer',pause:'Pause',resume:'Reprendre',prev:'Phase',next:'Phase',reset:'Recommencer',auto:'Enchaîner les phases',then:'Ensuite',endGame:'Fin du jeu dans',last:'Dernière phase',game:'Jeu',final:'Finale',brk:'Pause',over:'Temps écoulé !',again:'Rejouer',home:'Tous les minuteurs',left:'Plus que',min:'minutes',one:'Dernière minute',phases:'phases',of:'sur',done:'est terminé',keys:[['Espace','démarrer ou pause'],['← →','phase'],['R','recommencer la phase'],['+ −','une minute'],['F','plein écran'],['M','son'],['Échap','retour']]},
+ en:{site:'Website',org:'Organisers',rights:'All rights reserved.',legal:'Legal notice',rules:'Game rules',kick:'season 1 · Ndop Night',title:'Timers for the night',lead:'One timer per game, built for the projector. Each game runs through its phases on its own, warns at 5 minutes and 1 minute, and rings at the end.',start:'Start',pause:'Pause',resume:'Resume',prev:'Phase',next:'Phase',reset:'Restart',auto:'Run phases back to back',then:'Next',endGame:'Game ends in',last:'Last phase',game:'Game',final:'Final',brk:'Break',over:'Time’s up!',again:'Play again',home:'All timers',left:'Only',min:'minutes left',one:'Last minute',phases:'phases',of:'of',done:'is over',keys:[['Space','start or pause'],['← →','phase'],['R','restart phase'],['+ −','one minute'],['F','fullscreen'],['M','sound'],['Esc','back']]}};
 let lang='fr';try{lang=localStorage.getItem('wb-lang')||'fr'}catch(e){}
 const L=()=>I18N[lang],tx=o=>o?o[lang]||o.fr:'';
 const fmt=sec=>{sec=Math.max(0,Math.ceil(sec));const m=Math.floor(sec/60),s=sec%60;return m+':'+String(s).padStart(2,'0')};

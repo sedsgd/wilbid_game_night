@@ -7,8 +7,7 @@
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#141E4A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)' fill='%23F2B705'%3E%3Ccircle cx='14' cy='14' r='9.2'/%3E%3Ccircle cx='34' cy='14' r='9.2'/%3E%3Ccircle cx='14' cy='34' r='9.2'/%3E%3Ccircle cx='34' cy='34' r='9.2'/%3E%3C/g%3E%3Cpath d='M24 19 29 24 24 29 19 24Z' fill='%23141E4A'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
 /* VOICE  the scorekeeper's desk: fast to type into at 2 am, loud on the projector.
    IDEA   a scoreboard stitched on ndop cloth; the leader wears palm yellow, finalists chalk, the rest indigo.
@@ -24,6 +23,7 @@ a{color:inherit}button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--palm);outline-offset:2px}
 h1,h2,h3{font-family:var(--fd);font-weight:800;letter-spacing:-.035em;margin:0}
+h1,h2,h3{overflow-wrap:break-word;hyphens:auto}
 .wrap{max-width:1240px;margin:0 auto;padding:0 max(4vw,16px)}
 .bar{position:sticky;top:0;z-index:10;background:rgba(13,21,56,.95);border-bottom:1px solid var(--line)}
 .bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:8px 20px;flex-wrap:wrap;min-height:64px}
@@ -46,7 +46,7 @@ main{padding:32px 0 72px}
 .head p{margin:6px 0 0;color:var(--mute);max-width:620px}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
-input[type=text],input[type=number],select,textarea{min-height:46px;border-radius:12px;border:1.5px solid rgba(244,243,239,.25);background:var(--deep);padding:0 14px;font-size:16px}
+input[type=text],input[type=number],input[type=email],input[type=password],select,textarea{min-height:46px;border-radius:12px;border:1.5px solid rgba(244,243,239,.25);background:var(--deep);padding:0 14px;font-size:16px}
 textarea{width:100%;min-height:110px;padding:12px 14px;font:16px/1.5 var(--ft);color:var(--ink);resize:vertical}
 input[type=number]{width:96px;text-align:right;font-variant-numeric:tabular-nums}
 label.f{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:700;color:var(--mute)}
@@ -117,7 +117,8 @@ table.full th{font-size:12px;color:var(--mute)}
 table.full td.tot{font-weight:800;color:var(--palm)}
 
 /* projector */
-body.ecran .bar,body.ecran main>.wrap>.view:not(#v-ecran){display:none}
+body.ecran .bar,body.ecran .cfoot,body.ecran main>.wrap>.view:not(#v-ecran){display:none}
+.cfoot{border-top:1px solid var(--line);margin-top:40px}.cfoot .wrap{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;padding-top:12px;padding-bottom:20px;font-size:13px;color:var(--mute)}.cfoot a{min-height:44px;display:inline-flex;align-items:center;font-weight:700}
 #v-ecran{min-height:100vh;padding:clamp(20px,3vw,48px) clamp(20px,4vw,64px) 110px;position:relative}
 body.ecran main{padding:0}body.ecran main>.wrap{max-width:none;padding:0}
 .ec-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(16px,3vh,32px)}
@@ -147,7 +148,17 @@ body.ecran main{padding:0}body.ecran main>.wrap{max-width:none;padding:0}
 .lknote p{margin-bottom:12px}
 .lkreset{font-size:14px;color:var(--mute)}.lkreset summary{cursor:pointer;min-height:44px;display:flex;align-items:center;justify-content:center}
 .lkreset p{margin:0 0 10px}
-body.locked .tabs,body.locked #lockBtn,body.locked #toDossier,body.locked .bar .lk[href="#ecran"]{display:none}
+body.locked .tabs,body.locked #lockBtn,body.locked #toDossier,body.locked #toTimers,body.locked .bar .lk[href="#ecran"],body.locked #sync{display:none}
+.lkf[hidden],.cs[hidden],.lkreset[hidden]{display:none}
+.cf input{font:600 17px var(--ft);letter-spacing:0;text-align:left}
+.cf .ok{margin:0;color:var(--palm);font-size:14px}.cf .ok:empty,.cf .warn:empty{display:none}
+.cl{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.tl{background:none;border:0;color:var(--mute);font:700 14px var(--ft);text-decoration:underline;min-height:44px;padding:0;cursor:pointer}.tl:hover{color:var(--ink)}
+.cs p{margin:0 0 14px}
+.sync{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:var(--mute);min-height:44px;white-space:nowrap}
+.sync::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--mute)}
+.sync[data-s=ok]::before{background:#3BB273}.sync[data-s=saving]::before{background:var(--palm)}.sync[data-s=err]::before{background:var(--kola)}
+.sync[hidden]{display:none}
 /* badges */
 .bsheet{display:grid;grid-template-columns:repeat(auto-fill,54mm);gap:6mm;justify-content:center;background:#fff;padding:10mm;border-radius:12px}
 .badge{width:54mm;height:86mm;position:relative;overflow:hidden;color:#141E4A;background:#F4F3EF;border:.3mm solid #DAD8CF;display:flex;flex-direction:column;align-items:center;text-align:center;font-family:var(--ft)}
@@ -167,6 +178,14 @@ body.locked .tabs,body.locked #lockBtn,body.locked #toDossier,body.locked .bar .
  .badge{-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
 }
 @media(max-width:900px){.grid2{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:820px){
+ .bar .wrap{gap:4px 12px;padding-top:6px;padding-bottom:6px}
+ .tabs,.bar .acts{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ .tabs::-webkit-scrollbar,.bar .acts::-webkit-scrollbar{display:none}
+ .tabs{order:3}.bar .acts{order:2;gap:6px}
+ .tabs a{padding:0 12px;flex:none}.ib{flex:none;padding:0 12px;font-size:13px}
+ .logo{font-size:20px}.logo small{font-size:18px}
+}
 @media(max-width:600px){
  .plist li{grid-template-columns:minmax(0,1fr) 84px 44px;}
  .plist li .city,.plist li .role{grid-column:auto}
@@ -186,7 +205,7 @@ body.locked .tabs,body.locked #lockBtn,body.locked #toDossier,body.locked .bar .
   <a href="#classement" data-v="classement" data-i="t4">Classement</a>
   <a href="#badges" data-v="badges" data-i="t5">Badges</a>
  </nav>
- <div class="row"><a class="ib lk" id="toSite" href="index.html" data-i="site">Site</a><a class="ib lk" id="toDossier" href="#" data-i="dossier">Dossier du MJ</a><a class="ib lk" href="#ecran" data-i="proj">Écran</a><button class="ib" id="lockBtn" type="button" data-i="lockB">Verrouiller</button><button class="ib" id="lang" type="button">EN</button></div>
+ <div class="row acts"><a class="ib lk" id="toSite" href="index.html" data-i="site">Site</a><a class="ib lk" id="toDossier" href="#" data-i="dossier">Dossier du MJ</a><a class="ib lk" id="toTimers" href="minuteurs/index.html" data-i="timers">Minuteurs</a><a class="ib lk" href="#ecran" data-i="proj">Écran</a><span class="sync" id="sync" hidden></span><button class="ib" id="lockBtn" type="button" data-i="lockB">Verrouiller</button><button class="ib" id="lang" type="button">EN</button></div>
 </div></header>
 
 <main><div class="wrap">
@@ -202,8 +221,16 @@ body.locked .tabs,body.locked #lockBtn,body.locked #toDossier,body.locked .bar .
   <button class="btn" type="submit" id="lkGo"></button>
   <p class="warn" id="lkErr" role="alert"></p>
  </form>
- <div class="lknote"><p data-i="lkWhy"></p><a class="ib lk" href="#ecran" data-i="lkScreen">Voir l’écran du classement</a> <a class="ib lk" id="lkSite" href="index.html" data-i="site">Site</a></div>
- <details class="lkreset"><summary data-i="forgot">Code oublié ?</summary><p data-i="forgotL"></p><button class="btn red" type="button" id="wipe" data-i="wipe">Effacer cet appareil</button></details>
+ <form id="cForm" class="lkf cf" hidden>
+  <input type="email" id="cMail" autocomplete="username" required>
+  <input type="password" id="cPw" autocomplete="current-password" minlength="8" required>
+  <button class="btn" type="submit" id="cGo"></button>
+  <p class="warn" id="cErr" role="alert"></p><p class="ok" id="cMsg" role="status"></p>
+  <div class="cl"><button type="button" class="tl" id="cMode"></button><button type="button" class="tl" id="cForgot"></button></div>
+ </form>
+ <div id="cState" class="cs" hidden><p id="cWho"></p><div class="row" style="justify-content:center"><button class="btn" type="button" id="cRetry"></button><button class="btn ghost" type="button" id="cOut"></button></div></div>
+ <div class="lknote"><p data-i="lkWhy" id="lkWhy"></p><a class="ib lk" id="lkScreen" href="#ecran" data-i="lkScreen">Voir l’écran du classement</a> <a class="ib lk" id="lkSite" href="index.html" data-i="site">Site</a></div>
+ <details class="lkreset" id="lkReset"><summary data-i="forgot">Code oublié ?</summary><p data-i="forgotL"></p><button class="btn red" type="button" id="wipe" data-i="wipe">Effacer cet appareil</button></details>
 </section>
 
 <section class="view" id="v-joueurs">
@@ -260,9 +287,11 @@ body.locked .tabs,body.locked #lockBtn,body.locked #toDossier,body.locked .bar .
 </section>
 
 </div></main>
+<footer class="cfoot"><div class="wrap">© <span class="yr">2026</span> Wilbid Game Night. <span data-i="rights">Tous droits réservés.</span> <a href="legal.html" id="toLegal" data-i="legal">Mentions légales et confidentialité</a></div></footer>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="data.js"></script>
+<script src="vendor/supabase.js"></script>
 <script>
 {
 const G=window.WB_GAMES,KEY='wb-score-v1';
@@ -274,7 +303,7 @@ const UI={
 fr:{sub:'classement',t1:'Joueurs',t2:'Équipes',t3:'Scores',t4:'Classement',t5:'Badges',proj:'Écran',langBtn:'EN',
  pT:'Les joueurs',pL:'Inscris tout le monde à l’accueil. Le MJ et les organisateurs restent hors classement. Le genre sert seulement à équilibrer les équipes.',
  addT:'Ajouter',fName:'Prénom',fCity:'Ville d’origine',add:'Ajouter',bulkT:'Coller une liste (un prénom par ligne, ville après une virgule)',bulkAdd:'Ajouter la liste',
- role:{p:'Joueur',mj:'MJ',org:'Organisation'},g:{'':'–',F:'F',H:'H'},noP:'Aucun joueur pour l’instant. Ajoute le premier à gauche.',players:'joueurs',staff:'organisation',
+ role:{p:'Joueur',mj:'MJ',org:'Organisation'},g:{'':'–',F:'F',H:'H'},noP:'Aucun joueur pour l’instant. Ajoute le premier avec le formulaire.',players:'joueurs',staff:'organisation',
  eT:'Tirage des équipes',eL:'Un nouveau tirage pour chaque jeu d’équipe, avec filles et garçons répartis au mieux.',size:'Par équipe',draw:'Tirer au sort',clearT:'Effacer le tirage',team:'Équipe',noT:'Pas encore de tirage pour ce jeu.',needP:'Ajoute au moins 4 joueurs.',
  sT:'Saisir les points',sL:'Choisis un jeu, tape les PW, puis enregistre. Dans les jeux d’équipe, la note d’équipe remplit chaque membre.',save:'Enregistrer',saved:'Points enregistrés',undo:'Annuler la dernière saisie',undone:'Saisie annulée',over:'au-dessus du maximum',teamPW:'PW de l’équipe',kolaHint:'Compte les Kola de chaque joueur avant la finale : 1 Kola = 1 PW.',parisHint:'+3 PW pour chaque spectateur qui a deviné le vainqueur de la finale.',noTeamsHint:'Pas de tirage pour ce jeu : saisie joueur par joueur.',
  cT:'Classement',exp:'Exporter',imp:'Importer',reset:'Nouvelle soirée',after:'Après',none:'Aucun point saisi',finalist:'finale',pw:'PW',total:'Total',name:'Joueur',
@@ -287,11 +316,23 @@ fr:{sub:'classement',t1:'Joueurs',t2:'Équipes',t3:'Scores',t4:'Classement',t5:'
  pinA:'Code (4 chiffres ou plus)',pinB:'Retape le code',create:'Créer le code',open:'Déverrouiller',
  errShort:'Le code doit faire au moins 4 caractères.',errSame:'Les deux codes ne sont pas identiques.',errBad:'Code incorrect.',
  lkWhy:'Les joueurs, les équipes et les scores sont enregistrés uniquement sur cet appareil. Quelqu’un qui ouvre cette page sur son propre téléphone ne voit rien de la soirée et ne peut rien modifier.',
- lkScreen:'Voir l’écran du classement',forgot:'Code oublié ?',forgotL:'Le code ne peut pas être récupéré. Tu peux effacer toutes les données de la soirée sur cet appareil et choisir un nouveau code. Exporte d’abord la soirée si tu peux encore l’ouvrir ailleurs.',wipe:'Effacer cet appareil',locked:'Espace verrouillé'},
+ lkScreen:'Voir l’écran du classement',forgot:'Code oublié ?',forgotL:'Le code ne peut pas être récupéré. Tu peux effacer toutes les données de la soirée sur cet appareil et choisir un nouveau code. Exporte d’abord la soirée si tu peux encore l’ouvrir ailleurs.',wipe:'Effacer cet appareil',locked:'Espace verrouillé',timers:'Minuteurs',rights:'Tous droits réservés.',legal:'Mentions légales et confidentialité',
+ cT:'Connexion organisation',cL:'Connecte-toi avec ton compte organisateur. La soirée est enregistrée en ligne et partagée entre les appareils de l’équipe.',
+ cSuT:'Créer mon compte',cSuL:'Choisis un mot de passe. L’accès s’ouvre une fois ton e-mail ajouté à la liste des organisateurs.',
+ cFgT:'Mot de passe oublié',cFgL:'Entre ton e-mail. Tu reçois un lien pour choisir un nouveau mot de passe.',
+ cNwT:'Nouveau mot de passe',cNwL:'Choisis ton nouveau mot de passe.',
+ mail:'E-mail',pw:'Mot de passe (8 caractères ou plus)',pwNew:'Nouveau mot de passe',cIn:'Se connecter',cUp:'Créer le compte',cSend:'Envoyer le lien',cSave:'Enregistrer',
+ toUp:'Pas encore de compte ? Créer un compte',toIn:'J’ai déjà un compte',toFg:'Mot de passe oublié ?',
+ cErrBad:'E-mail ou mot de passe incorrect.',cErrConf:'Confirme d’abord ton e-mail avec le lien reçu.',cErrNet:'Connexion impossible. Vérifie ta connexion internet.',cErrGen:'Erreur : ',
+ cSent:'C’est envoyé. Ouvre le lien reçu par e-mail.',cCheck:'Compte créé. Confirme ton e-mail avec le lien reçu, puis connecte-toi.',cPwOk:'Mot de passe changé.',
+ cWait:'Connexion en cours…',cNo:e=>`Le compte ${e} n’est pas encore sur la liste des organisateurs. Demande à l’organisateur principal de l’ajouter, puis réessaie.`,
+ cDown:'La base en ligne ne répond pas. Réessaie dans un instant.',retry:'Réessayer',logout:'Se déconnecter',loggedOut:'Déconnecté',
+ lkWhyC:'Le classement public se met à jour tout seul sur le site. Seuls les comptes organisateurs peuvent modifier la soirée.',lkScreenC:'Voir le classement public',
+ sync:{off:'Hors ligne',ok:'Synchronisé',saving:'Envoi…',err:'Pas de réseau, nouvel essai'},newOk:'Nouvelle soirée créée'},
 en:{sub:'leaderboard',t1:'Players',t2:'Teams',t3:'Scores',t4:'Leaderboard',t5:'Badges',proj:'Screen',langBtn:'FR',
  pT:'Players',pL:'Register everyone at the door. The game master and organisers are not ranked. Gender is only used to balance teams.',
  addT:'Add',fName:'First name',fCity:'Hometown',add:'Add',bulkT:'Paste a list (one name per line, hometown after a comma)',bulkAdd:'Add the list',
- role:{p:'Player',mj:'GM',org:'Organiser'},g:{'':'–',F:'F',H:'M'},noP:'No players yet. Add the first one on the left.',players:'players',staff:'staff',
+ role:{p:'Player',mj:'GM',org:'Organiser'},g:{'':'–',F:'F',H:'M'},noP:'No players yet. Add the first one with the form.',players:'players',staff:'staff',
  eT:'Team draw',eL:'A fresh draw for every team game, spreading women and men as evenly as possible.',size:'Per team',draw:'Draw teams',clearT:'Clear draw',team:'Team',noT:'No draw for this game yet.',needP:'Add at least 4 players.',
  sT:'Enter points',sL:'Pick a game, type the PW, then save. In team games, the team score fills in every member.',save:'Save',saved:'Points saved',undo:'Undo last entry',undone:'Entry undone',over:'above the maximum',teamPW:'Team PW',kolaHint:'Count each player’s Kola before the final: 1 Kola = 1 PW.',parisHint:'+3 PW for each spectator who guessed the final’s winner.',noTeamsHint:'No draw for this game: enter player by player.',
  cT:'Leaderboard',exp:'Export',imp:'Import',reset:'New night',after:'After',none:'No points yet',finalist:'final',pw:'PW',total:'Total',name:'Player',
@@ -304,7 +345,19 @@ en:{sub:'leaderboard',t1:'Players',t2:'Teams',t3:'Scores',t4:'Leaderboard',t5:'B
  pinA:'Code (4 digits or more)',pinB:'Type the code again',create:'Create the code',open:'Unlock',
  errShort:'The code must be at least 4 characters.',errSame:'The two codes do not match.',errBad:'Wrong code.',
  lkWhy:'Players, teams and scores are stored on this device only. Someone opening this page on their own phone sees nothing of the night and cannot change anything.',
- lkScreen:'See the leaderboard screen',forgot:'Forgot the code?',forgotL:'The code cannot be recovered. You can erase all of the night’s data on this device and choose a new code. Export the night first if you can still open it elsewhere.',wipe:'Erase this device',locked:'Area locked'}};
+ lkScreen:'See the leaderboard screen',forgot:'Forgot the code?',forgotL:'The code cannot be recovered. You can erase all of the night’s data on this device and choose a new code. Export the night first if you can still open it elsewhere.',wipe:'Erase this device',locked:'Area locked',timers:'Timers',rights:'All rights reserved.',legal:'Legal notice and privacy',
+ cT:'Organiser sign-in',cL:'Sign in with your organiser account. The night is saved online and shared between the team’s devices.',
+ cSuT:'Create my account',cSuL:'Choose a password. Access opens once your email is on the organiser list.',
+ cFgT:'Forgot password',cFgL:'Enter your email. You will get a link to choose a new password.',
+ cNwT:'New password',cNwL:'Choose your new password.',
+ mail:'Email',pw:'Password (8 characters or more)',pwNew:'New password',cIn:'Sign in',cUp:'Create account',cSend:'Send the link',cSave:'Save',
+ toUp:'No account yet? Create one',toIn:'I already have an account',toFg:'Forgot password?',
+ cErrBad:'Wrong email or password.',cErrConf:'Confirm your email first with the link you received.',cErrNet:'Cannot connect. Check your internet connection.',cErrGen:'Error: ',
+ cSent:'Sent. Open the link in your email.',cCheck:'Account created. Confirm your email with the link you received, then sign in.',cPwOk:'Password changed.',
+ cWait:'Signing in…',cNo:e=>`The account ${e} is not on the organiser list yet. Ask the lead organiser to add it, then try again.`,
+ cDown:'The online database is not answering. Try again in a moment.',retry:'Try again',logout:'Sign out',loggedOut:'Signed out',
+ lkWhyC:'The public leaderboard updates by itself on the website. Only organiser accounts can change the night.',lkScreenC:'See the public leaderboard',
+ sync:{off:'Offline',ok:'Synced',saving:'Saving…',err:'No network, retrying'},newOk:'New night created'}};
 let lang='fr';try{lang=localStorage.getItem('wb-lang')||'fr'}catch(e){}
 const L=()=>UI[lang],tx=o=>o?(o[lang]||o.fr):'';
 
@@ -312,7 +365,9 @@ const L=()=>UI[lang],tx=o=>o?(o[lang]||o.fr):'';
 const blank=()=>({players:[],scores:{},teams:{},order:[],hist:[]});
 let st=blank();
 const load=()=>{try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.players)st={...blank(),...s}}catch(e){}};
-const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+let onPersist=()=>{};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+const persist=()=>{save();onPersist()};
 load();
 const uid=()=>Math.random().toString(36).slice(2,9);
 const ranked=()=>st.players.filter(p=>p.role==='p');
@@ -416,7 +471,7 @@ $('#expBtn').addEventListener('click',()=>{const b=new Blob([JSON.stringify({...
 $('#impFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const s=JSON.parse(await f.text());if(!Array.isArray(s.players))throw 0;st={...blank(),...s};persist();toast(L().imported);renderCurrent()}catch(_){toast(L().badFile)}e.target.value=''});
 $('#resetBtn').addEventListener('click',()=>{const u=L();const box=document.createElement('div');box.className='card';box.style.cssText='margin-top:16px;border-color:var(--kola)';box.innerHTML=`<p style="margin-top:0">${u.resetQ}</p><div class="row"><button class="btn red" type="button" data-y>${u.yes}</button><button class="btn ghost" type="button" data-n>${u.cancel}</button></div>`;
  const old=document.getElementById('resetBox');if(old)old.remove();box.id='resetBox';$('#v-classement .head').after(box);
- box.addEventListener('click',ev=>{if(ev.target.closest('[data-y]')){st=blank();persist();box.remove();renderCurrent()}if(ev.target.closest('[data-n]'))box.remove()})});
+ box.addEventListener('click',ev=>{if(ev.target.closest('[data-y]')){st=blank();box.remove();if(cloud.night)newNight();else{persist();renderCurrent()}}if(ev.target.closest('[data-n]'))box.remove()})});
 
 /* ---- badges ---- */
 const KOLA=(f,h,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="${f}"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="${h}"/></svg>`;
@@ -436,7 +491,7 @@ const getPin=()=>{try{return localStorage.getItem(PINK)}catch(e){return null}};
 const isOpen=()=>{try{return sessionStorage.getItem(SESS)==='1'}catch(e){return window.__wbOpen===true}};
 const setOpen=v=>{try{v?sessionStorage.setItem(SESS,'1'):sessionStorage.removeItem(SESS)}catch(e){}window.__wbOpen=v};
 async function digest(t){t='wilbid:'+t;try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){let h=5381;for(const c of t)h=((h<<5)+h+c.charCodeAt(0))>>>0;return 'djb2-'+h}}
-function renderLock(){const u=L(),has=!!getPin();
+function renderPinLock(){const u=L(),has=!!getPin();
  $('#lkT').textContent=has?u.lkT:u.lkNewT;$('#lkL').textContent=has?u.lkL:u.lkNewL;
  $('#pin1').placeholder=u.pinA;$('#pin1').setAttribute('aria-label',u.pinA);$('#pin2').placeholder=u.pinB;$('#pin2').setAttribute('aria-label',u.pinB);
  $('#pin2').hidden=has;$('#pin2').required=!has;$('#lkGo').textContent=has?u.open:u.create;}
@@ -445,18 +500,98 @@ $('#lkForm').addEventListener('submit',async e=>{e.preventDefault();const u=L(),
  if(!has){if(a!==b){$('#lkErr').textContent=u.errSame;return}try{localStorage.setItem(PINK,await digest(a))}catch(_){}}
  else if(await digest(a)!==has){$('#lkErr').textContent=u.errBad;$('#pin1').select();return}
  $('#lkErr').textContent='';$('#pin1').value='';$('#pin2').value='';setOpen(true);route()});
-$('#lockBtn').addEventListener('click',()=>{setOpen(false);toast(L().locked);route()});
+$('#lockBtn').addEventListener('click',()=>{if(sb)return logout();setOpen(false);toast(L().locked);route()});
 $('#wipe').addEventListener('click',()=>{try{localStorage.removeItem(KEY);localStorage.removeItem(PINK)}catch(e){}st=blank();setOpen(false);$('.lkreset').open=false;route()});
+/* ---- mode en ligne (Supabase) : comptes organisateurs, soirée partagée, classement public ---- */
+const CFG=window.WB_SUPABASE;
+const sb=(CFG&&CFG.url&&CFG.key&&window.supabase)?window.supabase.createClient(CFG.url,CFG.key):null;
+const ME='c'+Math.random().toString(36).slice(2,10);
+const cloud={ready:!sb,user:null,org:false,night:null,down:false,mode:'in',chan:null};
+const unlocked=()=>sb?!!(cloud.user&&cloud.org&&cloud.night):!!(getPin()&&isOpen());
+function setSync(k){const e=$('#sync');if(!e)return;e.hidden=!sb;e.dataset.s=k;e.textContent=L().sync[k]||'';}
+const nightTitle=()=>'Wilbid Game Night · '+new Date().toLocaleDateString(lang==='en'?'en-GB':'fr-FR',{day:'numeric',month:'long',year:'numeric'});
+const publicBoard=()=>st.order.length?standings().map(r=>({name:r.p.name,city:r.p.city||'',total:r.t})):[];
+const lastCol=()=>{const c=COLS.find(x=>x.id===st.order[st.order.length-1]);return c?c.name:null};
+let pushT=null,pushing=false,again=false;
+function schedulePush(){if(!cloud.night)return;setSync('saving');clearTimeout(pushT);pushT=setTimeout(()=>{pushT=null;push()},700)}
+async function push(){if(!cloud.night)return;if(pushing){again=true;return}pushing=true;const n=cloud.night;
+ try{const a=await sb.from('nights').update({state:{...st,hist:[]},updated_by:ME}).eq('id',n.id);if(a.error)throw a.error;
+  const b=await sb.from('boards').upsert({night_id:n.id,title:n.title,board:publicBoard(),last:lastCol(),is_live:true});if(b.error)throw b.error;
+  setSync('ok')}catch(e){console.warn('wilbid sync',e);setSync('err');clearTimeout(pushT);pushT=setTimeout(()=>{pushT=null;push()},5000)}
+ pushing=false;if(again){again=false;push()}}
+onPersist=()=>{if(sb)schedulePush()};
+function useState(s){if(s&&Array.isArray(s.players)){st={...blank(),...s,hist:st.hist||[]};save()}}
+async function fetchNight(){if(!cloud.night||pushT||pushing)return;
+ const {data,error}=await sb.from('nights').select('state,is_live').eq('id',cloud.night.id).maybeSingle();
+ if(error)return setSync('err');if(!data||data.is_live===false)return openNight().then(route);useState(data.state);setSync('ok');if(unlocked())renderCurrent()}
+function listen(){if(cloud.chan)sb.removeChannel(cloud.chan);
+ cloud.chan=sb.channel('night-'+cloud.night.id).on('postgres_changes',{event:'UPDATE',schema:'public',table:'nights',filter:'id=eq.'+cloud.night.id},p=>{const n=p.new||{};if(n.is_live===false){setTimeout(()=>openNight().then(route),800);return}if(n.updated_by!==ME)fetchNight()}).subscribe()}
+async function openNight(){
+ const {data,error}=await sb.from('nights').select('id,title,state').eq('is_live',true).order('updated_at',{ascending:false}).limit(1);
+ if(error)throw error;
+ if(data&&data.length){cloud.night={id:data[0].id,title:data[0].title};useState(data[0].state)}
+ else{const r=await sb.from('nights').insert({title:nightTitle(),state:{...st,hist:[]},updated_by:ME}).select('id,title').single();if(r.error)throw r.error;cloud.night=r.data}
+ listen();setSync('ok');push()}
+async function newNight(){const old=cloud.night;setSync('saving');
+ try{const r=await sb.from('nights').insert({title:nightTitle(),state:blank(),updated_by:ME}).select('id,title').single();if(r.error)throw r.error;
+  cloud.night=r.data;listen();
+  await sb.from('nights').update({is_live:false,updated_by:ME}).eq('id',old.id);await sb.from('boards').update({is_live:false}).eq('night_id',old.id);
+  save();await push();toast(L().newOk)}catch(e){console.warn(e);setSync('err')}
+ renderCurrent()}
+let authBusy=null,authFor=null;
+function afterAuth(session){const id=session?session.user.id:'';if(authBusy&&authFor===id)return authBusy;authFor=id;authBusy=doAuth(session).finally(()=>{authBusy=null});return authBusy}
+async function doAuth(session){cloud.user=session?session.user:null;cloud.org=false;cloud.down=false;
+ if(cloud.user){try{const {data,error}=await sb.from('organisers').select('email').limit(1);if(error)throw error;cloud.org=!!(data&&data.length);
+   if(cloud.org&&!cloud.night)await openNight()}catch(e){console.warn(e);cloud.down=true;setSync('err')}}
+ cloud.ready=true;route()}
+async function logout(){try{await sb.auth.signOut()}catch(e){}if(cloud.chan)sb.removeChannel(cloud.chan);cloud.chan=null;cloud.night=null;cloud.user=null;cloud.org=false;setSync('off');toast(L().loggedOut);route()}
+function renderCloudLock(){const u=L(),m=cloud.mode;$('#lkForm').hidden=true;$('#lkReset').hidden=true;
+ const showForm=cloud.ready&&(!cloud.user||m==='new');
+ $('#cForm').hidden=!showForm;$('#cState').hidden=showForm;
+ $('#lkWhy').textContent=u.lkWhyC;$('#lkScreen').textContent=u.lkScreenC;const K=window.WB_LINKS||{};$('#lkScreen').href=(K.site||'index.html')+'#live';
+ if(showForm){const T={in:[u.cT,u.cL,u.cIn],up:[u.cSuT,u.cSuL,u.cUp],fg:[u.cFgT,u.cFgL,u.cSend],new:[u.cNwT,u.cNwL,u.cSave]}[m];
+  $('#lkT').textContent=T[0];$('#lkL').textContent=T[1];$('#cGo').textContent=T[2];
+  $('#cMail').hidden=m==='new';$('#cMail').required=m!=='new';$('#cMail').placeholder=u.mail;$('#cMail').setAttribute('aria-label',u.mail);
+  $('#cPw').hidden=m==='fg';$('#cPw').required=m!=='fg';const ph=m==='new'?u.pwNew:u.pw;$('#cPw').placeholder=ph;$('#cPw').setAttribute('aria-label',ph);
+  $('#cPw').autocomplete=m==='in'?'current-password':'new-password';
+  $('#cMode').textContent=m==='in'?u.toUp:u.toIn;$('#cMode').hidden=m==='new';$('#cForgot').textContent=u.toFg;$('#cForgot').hidden=m!=='in';return}
+ $('#lkT').textContent=!cloud.ready?u.cWait:cloud.down?u.cDown:u.cT;$('#lkL').textContent='';
+ $('#cWho').textContent=!cloud.ready?'':cloud.down?'':u.cNo(cloud.user.email);
+ $('#cRetry').textContent=u.retry;$('#cRetry').hidden=!cloud.ready;$('#cOut').textContent=u.logout;$('#cOut').hidden=!cloud.ready||!cloud.user}
+function renderLock(){sb?renderCloudLock():renderPinLock()}
+const authErr=e=>{const u=L(),m=String(e&&e.message||e);return /invalid login/i.test(m)?u.cErrBad:/not confirmed/i.test(m)?u.cErrConf:/fetch|network/i.test(m)?u.cErrNet:u.cErrGen+m};
+if(sb){
+ const here=location.origin+location.pathname;
+ $('#cMode').addEventListener('click',()=>{cloud.mode=cloud.mode==='in'?'up':'in';$('#cErr').textContent='';$('#cMsg').textContent='';renderLock()});
+ $('#cForgot').addEventListener('click',()=>{cloud.mode='fg';$('#cErr').textContent='';$('#cMsg').textContent='';renderLock()});
+ $('#cForm').addEventListener('submit',async e=>{e.preventDefault();const u=L(),m=cloud.mode,mail=$('#cMail').value.trim().toLowerCase(),pw=$('#cPw').value;
+  $('#cErr').textContent='';$('#cMsg').textContent='';$('#cGo').disabled=true;
+  try{if(m==='in'){const r=await sb.auth.signInWithPassword({email:mail,password:pw});if(r.error)throw r.error}
+   else if(m==='up'){const r=await sb.auth.signUp({email:mail,password:pw,options:{emailRedirectTo:here}});if(r.error)throw r.error;if(!r.data.session){$('#cMsg').textContent=u.cCheck;cloud.mode='in';renderLock()}}
+   else if(m==='fg'){const r=await sb.auth.resetPasswordForEmail(mail,{redirectTo:here});if(r.error)throw r.error;$('#cMsg').textContent=u.cSent}
+   else{const r=await sb.auth.updateUser({password:pw});if(r.error)throw r.error;cloud.mode='in';toast(u.cPwOk);await afterAuth((await sb.auth.getSession()).data.session)}
+   $('#cPw').value=''}catch(err){$('#cErr').textContent=authErr(err)}
+  $('#cGo').disabled=false});
+ $('#cRetry').addEventListener('click',async()=>{cloud.ready=false;renderLock();await afterAuth((await sb.auth.getSession()).data.session)});
+ $('#cOut').addEventListener('click',logout);
+ sb.auth.onAuthStateChange((ev,session)=>{if(ev==='PASSWORD_RECOVERY'){cloud.mode='new';cloud.user=session&&session.user;cloud.ready=true;route();return}
+  if(ev==='SIGNED_IN'&&(!cloud.user||cloud.user.id!==session.user.id))setTimeout(()=>afterAuth(session),0);
+  if(ev==='SIGNED_OUT'&&cloud.user){cloud.user=null;cloud.night=null;route()}});
+ sb.auth.getSession().then(r=>{if(cloud.mode!=='new')afterAuth(r.data.session)}).catch(()=>{cloud.ready=true;cloud.down=true;route()});
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&cloud.night)fetchNight()});
+ window.addEventListener('online',()=>{if(cloud.night)schedulePush()});
+ setSync('off');
+}
 function renderCurrent(){({joueurs:renderPlayers,equipes:renderTeams,scores:renderEntry,classement:renderBoard,badges:renderBadges,ecran:renderEcran})[view]()}
 function route(){const h=location.hash.slice(1);view=VIEWS.includes(h)?h:(st.players.length?'classement':'joueurs');
- const locked=view!=='ecran'&&(!getPin()||!isOpen());
+ const locked=view!=='ecran'&&!unlocked();
  document.body.classList.toggle('locked',locked);$('#lock').hidden=!locked;
- if(locked){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));document.body.classList.remove('ecran');renderLock();setTimeout(()=>$('#pin1').focus(),50);return}
+ if(locked){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));document.body.classList.remove('ecran');renderLock();setTimeout(()=>{const f=sb?(cloud.mode==='new'?$('#cPw'):$('#cMail')):$('#pin1');if(f&&!f.hidden&&!matchMedia('(pointer:coarse)').matches)f.focus()},50);return}
  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+view));
  document.querySelectorAll('.tabs a').forEach(a=>a.classList.toggle('on',a.dataset.v===view));
  document.body.classList.toggle('ecran',view==='ecran');renderCurrent()}
-function applyLang(){const u=L();document.documentElement.lang=lang;document.querySelectorAll('[data-i]').forEach(e=>{const v=u[e.dataset.i];if(typeof v==='string')e.textContent=v});$('#lang').textContent=u.langBtn;
- const K=window.WB_LINKS||{};const ext=h=>/^https?:/.test(h);[['#toSite',K.site],['#lkSite',K.site],['#toDossier',K.dossier]].forEach(([sel,h])=>{const a=$(sel);if(!a||!h)return;a.href=h;if(ext(h)){a.target='_blank';a.rel='noopener'}});
+function applyLang(){const u=L();document.documentElement.lang=lang;document.querySelectorAll('[data-i]').forEach(e=>{const v=u[e.dataset.i];if(typeof v==='string')e.textContent=v});$('#lang').textContent=u.langBtn;if(sb){$('#lockBtn').textContent=u.logout;const y=$('#sync');setSync(y.dataset.s||'off')}
+ const K=window.WB_LINKS||{};const ext=h=>/^https?:/.test(h);[['#toLegal',/^https?:/.test(K.site||'')?'https://sedsgd.github.io/wilbid_game_night/legal.html':'legal.html'],['.bar .logo',K.site],['#toSite',K.site],['#lkSite',K.site],['#toDossier',K.dossier],['#toTimers',K.timers]].forEach(([sel,h])=>{const a=$(sel);if(!a||!h)return;a.href=h;if(ext(h)){a.target='_blank';a.rel='noopener'}});
  if(document.body.classList.contains('locked'))renderLock();else renderCurrent()}
 $('#lang').addEventListener('click',()=>{lang=lang==='fr'?'en':'fr';try{localStorage.setItem('wb-lang',lang)}catch(e){}applyLang()});
 window.addEventListener('hashchange',route);

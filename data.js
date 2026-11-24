@@ -9,6 +9,21 @@ window.WB_LINKS = window.WB_LOCAL ? {
   app: 'classement.html', partners: 'https://claude.ai/artifact/1oh4MXRkS3SR4KRsE5VuGz', dossier: 'https://claude.ai/artifact/Q26Zry3aeHvFVvAFvMXst9'
 };
 window.WB_TIMERS = window.WB_LINKS.timers;
+/* Mentions légales (Impressum, § 5 DDG) : à remplir par la personne responsable du site.
+   Tant qu'un champ est vide, la page legal.html affiche « à compléter ». */
+window.WB_LEGAL = {
+  name: '',      // Prénom Nom de la personne responsable
+  street: '',    // Rue et numéro
+  city: '',      // Code postal et ville, par ex. 96047 Bamberg
+  email: ''      // Adresse de contact
+};
+/* Base Supabase (UE, Francfort) : classement en ligne et comptes organisateurs.
+   La clé « anon » est publique par conception : la sécurité vient des règles RLS de la base.
+   Les artefacts Claude bloquent les connexions externes, donc la base n'est utilisée que sur GitHub Pages ou en local. */
+window.WB_SUPABASE = window.WB_LOCAL ? {
+  url: 'https://yfawosftdsmrczyecxns.supabase.co',
+  key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmYXdvc2Z0ZHNtcmN6eWVjeG5zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU1MDY3MjcsImV4cCI6MjExMTA4MjcyN30.Neyhu_rMhMr822D6LR__t1xRy_l7BNykbwvYbd4SDTc'
+} : null;
 
 window.WB_SCHEDULE = [
  {at:'19h30', id:null, fr:'Accueil, badges, cotisation, 10 Kola par joueur', en:'Welcome, badges, fee, 10 Kola per player', d:'30 min'},

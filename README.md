@@ -11,7 +11,11 @@ Tout est en HTML, CSS et JavaScript, sans dépendance à installer. Le dépôt p
 | `index.html` | Le site : accueil, programme, livret de règles des 8 jeux en français et en anglais, système de points |
 | `data.js` | Tous les textes du site et des règles, en `fr` et `en`. On corrige une règle ici, sans toucher au reste |
 | `classement.html` | L'appli du comptable : joueurs, tirage des équipes, saisie des PW, Kola, classement, écran projecteur, badges à imprimer |
-| `minuteurs/` | Un minuteur par jeu pour le projecteur, avec les phases enchaînées et les alertes sonores |
+| `minuteurs/` | Un minuteur par jeu pour le projecteur, avec les phases enchaînées et les alertes sonores (outil de l'espace organisation) |
+| `legal.html` | Mentions légales (Impressum), confidentialité (RGPD) et droits d'auteur, en français et en anglais |
+| `fonts/` | Les polices hébergées sur le site, sans appel à Google (RGPD) |
+| `vendor/` | La bibliothèque supabase-js 2.45.4 (licence MIT) |
+| `supabase/` | Le schéma de la base en ligne |
 | `documents/dossier-mj/` | Le dossier du maître du jeu, en page web et en PDF A4 |
 | `documents/proposition/` | Le dossier de partenariat, en page web et en PDF 16:9 |
 | `documents/sources/` | Les scripts qui génèrent ces deux documents |
@@ -26,13 +30,30 @@ Tout est en HTML, CSS et JavaScript, sans dépendance à installer. Le dépôt p
 
 ## L'appli de classement
 
+### En ligne (GitHub Pages)
+
+- Sur `sedsgd.github.io`, l'espace organisation passe par la base **Supabase** du projet (serveurs à Francfort, UE). Chaque organisateur se connecte avec son e-mail et son mot de passe ; seuls les e-mails de la table `organisers` ont accès à la soirée.
+- Ajouter un organisateur : dans Supabase, **Table Editor** > `organisers` > ajouter l'e-mail en minuscules. La personne crée ensuite son compte depuis l'écran de connexion.
+- La soirée est partagée entre les appareils des organisateurs et sauvegardée à chaque saisie. Le **classement public** (prénom, ville, total) s'affiche en direct sur la page d'accueil du site.
+- **Nouvelle soirée** archive la soirée en cours et en ouvre une nouvelle.
+- Réglage à faire une fois dans Supabase : **Authentication** > **URL Configuration** > *Site URL* = `https://sedsgd.github.io/wilbid_game_night/classement.html`, pour que les liens de confirmation et de mot de passe oublié reviennent sur l'appli.
+
+### Hors ligne (artefact Claude ou fichier local sans base)
+
 - L'espace organisation est protégé par un code propre à chaque appareil. À la première ouverture, on choisit le code ; ensuite il est demandé à chaque nouvelle session du navigateur. Le bouton **Verrouiller** referme l'accès. Seule une empreinte SHA-256 du code est enregistrée.
-- Les données restent dans le navigateur de l'appareil du comptable (localStorage). Rien n'est envoyé sur internet : un visiteur qui ouvre `classement.html` sur son téléphone ne voit rien de la soirée et ne peut rien modifier.
+- Les données restent dans le navigateur de l'appareil du comptable (localStorage).
 - Code oublié : **Effacer cet appareil** supprime le code et les données de la soirée sur cet appareil.
-- L'**Écran** du classement reste visible sans code, pour le vidéoprojecteur.
+
+### Dans les deux cas
+
+- **Minuteurs** ouvre les minuteurs des jeux, depuis la barre de l'espace organisation.
 - **Écran** ouvre le classement en grand pour le vidéoprojecteur. Ouvert dans un deuxième onglet ou une deuxième fenêtre du même navigateur, il se met à jour tout seul à chaque saisie.
 - **Exporter** télécharge la soirée en JSON, pour la sauvegarder ou la reprendre sur un autre appareil avec **Importer**.
 - **Badges** imprime les badges 54 × 86 mm : blanc pour les joueurs, rouge pour le MJ, jaune pour l'organisation.
+
+## Mentions légales
+
+Remplir `WB_LEGAL` dans `data.js` (nom, adresse, e-mail de la personne responsable). Tant qu'un champ est vide, `legal.html` affiche « à compléter ».
 
 ## Identité visuelle
 

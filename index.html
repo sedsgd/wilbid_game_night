@@ -12,8 +12,7 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#141E4A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)' fill='%23F2B705'%3E%3Ccircle cx='14' cy='14' r='9.2'/%3E%3Ccircle cx='34' cy='14' r='9.2'/%3E%3Ccircle cx='14' cy='34' r='9.2'/%3E%3Ccircle cx='34' cy='34' r='9.2'/%3E%3C/g%3E%3Cpath d='M24 19 29 24 24 29 19 24Z' fill='%23141E4A'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
 /* VOICE  a party-night companion: confident, warm, readable in a dark room on a phone.
    IDEA   the ndop cloth: indigo field, white diamond stitching, each game a stitched medallion.
@@ -33,13 +32,36 @@ a{color:inherit}
 button{font:inherit;color:inherit;cursor:pointer}
 a:focus-visible,button:focus-visible{outline:3px solid var(--palm);outline-offset:3px;border-radius:6px}
 h1,h2,h3{font-family:var(--fd);font-weight:800;letter-spacing:-.035em;margin:0;text-wrap:balance}
+h1,h2,h3{overflow-wrap:break-word;hyphens:auto}
 .acc{font-family:var(--fa);font-style:italic;font-weight:400}
 .wrap{max-width:1240px;margin:0 auto;padding:0 max(5vw,18px)}
 .band{padding:clamp(48px,7vw,96px) 0}
 
 /* bar */
 .bar{position:sticky;top:0;z-index:20;background:rgba(13,21,56,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:10px 24px;flex-wrap:wrap;min-height:64px}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:10px 24px;min-height:64px;position:relative}
+.menu-btn{display:none;align-items:center;gap:10px;min-height:44px;padding:0 14px;border-radius:99px;border:1.5px solid rgba(244,243,239,.4);background:transparent;font-weight:800;font-size:14px}
+.menu-btn .bars{display:flex;flex-direction:column;gap:3px}
+.menu-btn .bars span{display:block;width:16px;height:2px;background:currentColor;border-radius:2px}
+/* live */
+.live{padding:clamp(36px,5vw,64px) 0;background:var(--deep);border-bottom:1px solid var(--line)}
+.live .head{margin-bottom:20px}
+.note{color:var(--mute);font-size:15px;margin:6px 0 0}
+.lboard{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.lboard li{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;align-items:center;padding:10px 16px;border-radius:14px;background:var(--card);border:1px solid var(--line)}
+.lboard .r{font:800 24px var(--fd);text-align:center}
+.lboard .n{font-weight:800;font-size:17px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lboard .n small{font-weight:600;color:var(--mute);font-size:13px}
+.lboard .fin{font-size:11px;font-weight:800;background:var(--safou);color:#fff;border-radius:99px;padding:2px 9px}
+.lboard .trk{height:8px;border-radius:4px;background:rgba(244,243,239,.1);margin-top:6px;overflow:hidden}.lboard .trk i{display:block;height:100%;background:var(--indigo2);border-radius:4px;transition:width .6s}
+.lboard .t{font:800 22px var(--fd);white-space:nowrap}.lboard .t small{font-size:13px}
+.lboard li.lead{background:var(--palm);color:var(--bg);border-color:var(--palm)}.lboard li.lead small{color:rgba(20,30,74,.7)}.lboard li.lead .trk{background:rgba(20,30,74,.15)}.lboard li.lead .trk i{background:var(--bg)}
+.lboard li.top .trk i{background:var(--ink)}
+.lboard .empty{display:block;padding:22px;text-align:center;color:var(--mute);border:1.5px dashed var(--line);border-radius:14px;background:none}
+.dot-live{display:inline-flex;align-items:center;gap:8px;font-weight:800;color:var(--palm)}.dot-live[hidden]{display:none}
+.dot-live i{width:10px;height:10px;border-radius:50%;background:var(--kola);animation:pulse 1.4s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.copy{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;padding-top:0!important;font-size:13px;color:var(--mute);border-top:1px solid var(--line);padding-top:16px!important;padding-bottom:28px!important}
 .logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:800 22px var(--fd);letter-spacing:-.03em;min-height:44px}
 .nav{display:flex;align-items:center;gap:2px 18px;flex-wrap:wrap;font-weight:600;font-size:15px}
 .nav a{text-decoration:none;padding:10px 0}
@@ -170,6 +192,15 @@ footer b{font-family:var(--fd);color:var(--ink)}
 .faq p{margin:0 0 18px;color:var(--paper-mute);font-size:17px;max-width:62ch}
 
 @media(max-width:900px){.split,.gp-body{grid-template-columns:minmax(0,1fr)}.cols{grid-template-columns:minmax(0,1fr)}}
+@media(min-width:601px) and (max-width:900px){.cols{grid-template-columns:repeat(2,minmax(0,1fr))}.cols .box:last-child{grid-column:1/-1}}
+@media(max-width:860px){
+ .menu-btn{display:inline-flex}
+ .nav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--deep);flex-direction:column;align-items:stretch;gap:0;padding:6px max(5vw,18px) 18px;border-bottom:1px solid var(--line);box-shadow:0 16px 30px rgba(0,0,0,.35)}
+ .nav.open{display:flex}
+ .nav a{padding:14px 0;border-bottom:1px solid var(--line);font-size:17px}
+ .lang{align-self:flex-start;margin-top:14px}
+}
+@media(min-width:1600px){.wrap{max-width:1400px}}
 @media(max-width:600px){
  .hero{min-height:0;align-items:flex-end}.hero img{width:100%;height:56%;opacity:.9}.hero::after{background:linear-gradient(0deg,var(--bg) 46%,rgba(20,30,74,.2) 80%)}.hero .wrap{padding-top:220px}
  .nav{gap:0 14px;font-size:14px}
@@ -185,12 +216,13 @@ footer b{font-family:var(--fd);color:var(--ink)}
 <body>
 <header class="bar"><div class="wrap">
  <a class="logo" href="#accueil"><svg width="30" height="30" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#F2B705"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#141E4A"/></svg>wilbid</a>
- <nav class="nav" aria-label="Menu">
+ <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mainNav"><i class="bars" aria-hidden="true"><span></span><span></span><span></span></i><b data-i="menu">Menu</b></button>
+ <nav class="nav" id="mainNav" aria-label="Menu">
+  <a href="#live" data-i="nav6">Classement</a>
   <a href="#programme" data-i="nav1">Programme</a>
   <a href="#regles" data-i="nav2">Règles</a>
   <a href="#points" data-i="nav3">Points</a>
   <a href="#faq" data-i="nav5">FAQ</a>
-  <a id="navTimers" href="#" data-i="nav4">Minuteurs</a>
   <button class="lang" id="lang" type="button" aria-label="English">EN</button>
  </nav>
 </div></header>
@@ -206,6 +238,11 @@ footer b{font-family:var(--fd);color:var(--ink)}
    <div class="facts" id="facts"></div>
   </div></div>
  </section>
+
+ <section class="live" id="live"><div class="wrap">
+  <div class="head"><div><h2 data-i="liveT">Classement en direct</h2><p class="note" id="liveSub"></p></div><span class="dot-live" id="liveDot" hidden><i></i><span data-i="liveOn">en direct</span></span></div>
+  <ol class="lboard" id="lboard"></ol>
+ </div></section>
 
  <section class="band light" id="programme"><div class="wrap split">
   <div><h2 data-i="schedT"></h2><p class="lead" data-i="schedL"></p></div>
@@ -230,16 +267,17 @@ footer b{font-family:var(--fd);color:var(--ink)}
 
 <main id="game"></main>
 
-<footer><div class="pat"></div><div class="wrap"><span><b>wilbid</b> Game Night · Bamberg, Erlangen, Nürnberg<br><span data-i="foot"></span></span><nav class="flinks" aria-label="Liens"><a id="lPartners" href="#" data-i="partners">Devenir partenaire</a><a id="lTimers" href="#" data-i="nav4">Minuteurs</a><a id="lApp" href="#" data-i="orga">Espace organisation</a></nav></div></footer>
+<footer><div class="pat"></div><div class="wrap"><span><b>wilbid</b> Game Night · Bamberg, Erlangen, Nürnberg<br><span data-i="foot"></span></span><nav class="flinks" aria-label="Liens"><a id="lPartners" href="#" data-i="partners">Devenir partenaire</a><a id="lApp" href="#" data-i="orga">Espace organisation</a><a href="legal.html#mentions" data-i="legal">Mentions légales</a><a href="legal.html#confidentialite" data-i="privacy">Confidentialité</a></nav></div><div class="wrap copy"><span>© <span class="yr">2026</span> Wilbid Game Night. <span data-i="rights">Tous droits réservés.</span></span><span data-i="madeIn">Fait avec soin en Franconie.</span></div></footer>
 
 <script src="data.js"></script>
+<script src="vendor/supabase.js"></script>
 <script>
 {
 const G=window.WB_GAMES,S=window.WB_SCHEDULE,TIMERS=window.WB_TIMERS;
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const KOLA=(f,h,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="${f}"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="${h}"/></svg>`;
 const UI={
-fr:{nav1:'Programme',nav2:'Règles',nav3:'Points',nav4:'Minuteurs',nav5:'Questions',langBtn:'EN',langLbl:'Switch to English',kicker:'saison 1 · Ndop Nuit',
+fr:{menu:'Menu',nav6:'Classement',liveT:'Classement en direct',liveOn:'en direct',liveNone:'Le classement s’affiche ici en direct pendant la soirée.',liveOff:'Classement de la dernière soirée',liveAfter:'Après',liveFinal:'finale',legal:'Mentions légales',privacy:'Confidentialité',rights:'Tous droits réservés.',madeIn:'Fait avec soin en Franconie.',nav1:'Programme',nav2:'Règles',nav3:'Points',nav4:'Minuteurs',nav5:'Questions',langBtn:'EN',langLbl:'Switch to English',kicker:'saison 1 · Ndop Nuit',
  lead:'Une nuit de stratégie, d’alliances et de bluff entre Camerounais de Bavière. Sept jeux, une finale, et une cagnotte pour le podium.',
  cta1:'Lire les règles',cta2:'Voir le programme',facts:[['19h30 à 4h','la nuit'],['7 + 1','jeux et finale'],['15 à 20+','joueurs'],['8 €','cotisation']],
  schedT:'La nuit, heure par heure',schedL:'On commence par se rencontrer, on garde la stratégie lourde pour après le repas, et on finit par la finale.',
@@ -253,7 +291,7 @@ fr:{nav1:'Programme',nav2:'Règles',nav3:'Points',nav4:'Minuteurs',nav5:'Questio
  foot:'Inscriptions et questions dans le groupe WhatsApp',partners:'Devenir partenaire',orga:'Espace organisation',
  faqT:'Vos questions',faqL:'Tout ce qu’on nous demande avant la première soirée.',
  faq:[['Faut-il connaître les jeux avant de venir ?','Non. Le MJ explique chaque jeu avant de commencer, et toutes les règles sont sur ce site, en français et en anglais.'],['Combien ça coûte ?','8 € de cotisation, dont 5 € vont à la cagnotte des 3 premiers. Pour le repas, chacun apporte un plat ou une boisson.'],['Je ne connais personne, c’est un problème ?','Au contraire. Les équipes sont tirées au sort à chaque jeu et le Carrefour des Duos fait parler tout le monde avec presque tout le monde.'],['Faut-il rester toute la nuit ?','Tu peux arriver ou partir quand tu veux. Mais les points se cumulent : pour viser la finale, mieux vaut être là dès 20h.'],['Les Kola, c’est de l’argent ?','Non, ce sont des jetons de jeu. Ils servent à miser et à négocier, et chaque Kola restante vaut 1 point à la fin. Le seul argent réel est la cagnotte.'],['Où et quand a lieu la prochaine soirée ?','La date et le lieu sont annoncés dans le groupe WhatsApp, environ 3 semaines avant. Les inscriptions se font aussi là-bas.']]},
-en:{nav1:'Schedule',nav2:'Rules',nav3:'Points',nav4:'Timers',nav5:'FAQ',langBtn:'FR',langLbl:'Passer en français',kicker:'season 1 · Ndop Night',
+en:{menu:'Menu',nav6:'Leaderboard',liveT:'Live leaderboard',liveOn:'live',liveNone:'The leaderboard appears here live during the night.',liveOff:'Leaderboard from the last night',liveAfter:'After',liveFinal:'final',legal:'Legal notice',privacy:'Privacy',rights:'All rights reserved.',madeIn:'Made with care in Franconia.',nav1:'Schedule',nav2:'Rules',nav3:'Points',nav4:'Timers',nav5:'FAQ',langBtn:'FR',langLbl:'Passer en français',kicker:'season 1 · Ndop Night',
  lead:'A night of strategy, alliances and bluff for Cameroonians in Bavaria. Seven games, one final, and a prize pot for the podium.',
  cta1:'Read the rules',cta2:'See the schedule',facts:[['7:30 pm to 4 am','the night'],['7 + 1','games and final'],['15 to 20+','players'],['€8','entry fee']],
  schedT:'The night, hour by hour',schedL:'We start by meeting each other, keep the heavy strategy for after dinner, and end with the final.',
@@ -301,13 +339,42 @@ function renderGame(id){
   <aside class="aside">
    <div class="score"><h2>${u.score}</h2><table>${sc.map(([a,b])=>`<tr><td>${esc(a)}</td><td>${esc(b)}</td></tr>`).join('')}</table><div class="max"><span>${u.maxL}</span><b>${g.max} PW</b></div></div>
    <div class="tip"><span class="acc">${u.tip}</span><p>${esc(tx(g.tip))}</p></div>
-   <a class="btn y timer" href="${TIMERS}#${g.id}"${window.WB_LOCAL?'':' target="_blank" rel="noopener"'}>${u.timer}</a>
   </aside>
  </div>
  <div class="wrap pn"><a href="#jeu-${pv.id}"><img src="assets/em-${pv.id}.jpg" alt=""><span><small>${u.prev}</small><b>${esc(tx(pv.name))}</b></span></a><a class="nx" href="#jeu-${nx.id}"><span><small>${u.next}</small><b>${esc(tx(nx.name))}</b></span><img src="assets/em-${nx.id}.jpg" alt=""></a></div>`;
  document.body.classList.toggle('fin-on',!!g.fin);
  return true;
 }
+
+/* ---- menu mobile ---- */
+const nav=$('#mainNav'),mb=$('#menuBtn');
+const setMenu=o=>{nav.classList.toggle('open',o);mb.setAttribute('aria-expanded',String(o))};
+mb.addEventListener('click',()=>setMenu(!nav.classList.contains('open')));
+nav.addEventListener('click',e=>{if(e.target.closest('a'))setMenu(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
+
+/* ---- classement public en direct (Supabase, lecture seule) ---- */
+let liveData=null,sb=null;
+function renderLive(){
+ const u=L(),el=$('#lboard');if(!el)return;
+ const b=liveData&&Array.isArray(liveData.board)?liveData.board:[];
+ $('#liveDot').hidden=!(liveData&&liveData.is_live&&b.length);
+ if(!b.length){$('#liveSub').textContent='';el.innerHTML=`<li class="empty">${esc(u.liveNone)}</li>`;return}
+ const last=liveData.last?(u.liveAfter+' '+tx(liveData.last)):'';
+ $('#liveSub').textContent=(liveData.is_live?(liveData.title||''):u.liveOff)+(last?' · '+last:'');
+ const top=Math.max(1,b[0].total||0);
+ el.innerHTML=b.map((r,i)=>`<li class="${i===0?'lead':i<4?'top':''}"><span class="r">${i+1}</span><div><div class="n">${esc(r.name)} <small>${esc(r.city||'')}</small>${i<4?`<span class="fin">${esc(u.liveFinal)}</span>`:''}</div><div class="trk"><i style="width:${Math.max(0,+r.total||0)/top*100}%"></i></div></div><span class="t">${+r.total||0} <small>PW</small></span></li>`).join('');
+}
+async function initLive(){
+ const c=window.WB_SUPABASE;if(!c||!c.url||!c.key||!window.supabase)return renderLive();
+ try{sb=window.supabase.createClient(c.url,c.key,{auth:{persistSession:false}});
+  const load=async()=>{const {data}=await sb.from('boards').select('night_id,title,board,last,is_live,updated_at').order('is_live',{ascending:false}).order('updated_at',{ascending:false}).limit(1);liveData=data&&data[0]||null;renderLive()};
+  await load();
+  sb.channel('boards-public').on('postgres_changes',{event:'*',schema:'public',table:'boards'},()=>load()).subscribe();
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)load()});
+ }catch(e){renderLive()}
+}
+initLive();
 
 function route(){
  const h=location.hash.slice(1);
@@ -321,7 +388,7 @@ function applyLang(){
  const b=$('#lang');b.textContent=u.langBtn;b.setAttribute('aria-label',u.langLbl);
  const K=window.WB_LINKS,ext=!window.WB_LOCAL;
  const setL=(sel,href)=>{const a=$(sel);a.href=href;if(ext&&/^https?:/.test(href)){a.target='_blank';a.rel='noopener'}else{a.removeAttribute('target')}};
- setL('#navTimers',K.timers);setL('#lTimers',K.timers);setL('#lPartners',K.partners);setL('#lApp',K.app);
+ setL('#lPartners',K.partners);setL('#lApp',K.app);renderLive();
  $('#faqList').innerHTML=u.faq.map(([q,a])=>`<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('');
  renderHome();
  const h=location.hash.slice(1);if(h.startsWith('jeu-'))renderGame(h.slice(4));
