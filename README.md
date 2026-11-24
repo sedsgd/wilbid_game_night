@@ -12,6 +12,9 @@ Tout est en HTML, CSS et JavaScript, sans dépendance à installer. Le dépôt p
 | `data.js` | Tous les textes du site et des règles, en `fr` et `en`. On corrige une règle ici, sans toucher au reste |
 | `classement.html` | L'appli du comptable : joueurs, tirage des équipes, saisie des PW, Kola, classement, écran projecteur, badges à imprimer |
 | `minuteurs/` | Un minuteur par jeu pour le projecteur, avec les phases enchaînées et les alertes sonores (outil de l'espace organisation) |
+| `inscription.html` | Le formulaire d'inscription des joueurs : prénom, affichage public, anecdotes pour « Qui est qui ? », plat, photos (FR/EN) |
+| `avis.html` | Le formulaire d'avis après la soirée (FR/EN) |
+| `joueurs.css` | Le style commun de ces deux pages |
 | `partenaires.html` | La page « Devenir partenaire » : formules, contreparties et formulaire de contact (FR/EN) |
 | `legal.html` | Mentions légales (Impressum), confidentialité (RGPD) et droits d'auteur, en français et en anglais |
 | `fonts/` | Les polices hébergées sur le site, sans appel à Google (RGPD) |
@@ -37,6 +40,7 @@ Tout est en HTML, CSS et JavaScript, sans dépendance à installer. Le dépôt p
 - Ajouter un organisateur : dans Supabase, **Table Editor** > `organisers` > ajouter l'e-mail en minuscules. La personne crée ensuite son compte depuis l'écran de connexion.
 - La soirée est partagée entre les appareils des organisateurs et sauvegardée à chaque saisie. Le **classement public** (prénom, ville, total) s'affiche en direct sur la page d'accueil du site.
 - **Nouvelle soirée** archive la soirée en cours et en ouvre une nouvelle.
+- L'onglet **Inscrits** liste les inscriptions de la soirée en cours, les ajoute aux joueurs en un clic (avec le pseudo ou l'anonymat choisi pour le classement public, et un repère « pas de photo » sur le badge), imprime les anecdotes de « Qui est qui ? » mélangées avec une page de réponses, et résume les avis.
 - L'onglet **Partenaires** liste les demandes envoyées depuis `partenaires.html`.
 - Réglage à faire une fois dans Supabase : **Authentication** > **URL Configuration** > *Site URL* = `https://sedsgd.github.io/wilbid_game_night/classement.html`, pour que les liens de confirmation et de mot de passe oublié reviennent sur l'appli.
 

@@ -88,3 +88,50 @@ create policy "organisers read partner requests" on public.partner_requests
 create policy "organisers update partner requests" on public.partner_requests
   for update to authenticated using ((select public.is_organiser())) with check ((select public.is_organiser()));
 create index partner_requests_created_idx on public.partner_requests (created_at desc);
+
+-- Migrations « player_forms » et « registrations_three_anecdotes », appliquées le 24/11/2026 : inscription.html et avis.html
+create table public.registrations (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  night_id uuid references public.nights(id) on delete set null,
+  first_name text not null check (char_length(first_name) between 1 and 60),
+  pseudo text check (pseudo is null or char_length(pseudo) <= 40),
+  public_name text not null default 'name' check (public_name in ('name','pseudo','hidden')),
+  city_origin text check (city_origin is null or char_length(city_origin) <= 60),
+  lives_in text check (lives_in is null or char_length(lives_in) <= 60),
+  gender text check (gender is null or gender in ('F','H')),
+  contact text check (contact is null or char_length(contact) <= 120),
+  dish text check (dish is null or char_length(dish) <= 120),
+  anecdote text check (anecdote is null or char_length(anecdote) <= 400),
+  anecdote2 text check (anecdote2 is null or char_length(anecdote2) <= 400),
+  anecdote3 text check (anecdote3 is null or char_length(anecdote3) <= 400),
+  photo_ok boolean not null default false,
+  rules_ok boolean not null check (rules_ok),
+  note text check (note is null or char_length(note) <= 600),
+  lang text check (lang is null or lang in ('fr','en')),
+  status text not null default 'new' check (status in ('new','added','cancelled'))
+);
+alter table public.registrations enable row level security;
+create policy "anyone registers" on public.registrations for insert to anon, authenticated with check (status = 'new');
+create policy "organisers read registrations" on public.registrations for select to authenticated using ((select public.is_organiser()));
+create policy "organisers update registrations" on public.registrations for update to authenticated using ((select public.is_organiser())) with check ((select public.is_organiser()));
+create policy "organisers delete registrations" on public.registrations for delete to authenticated using ((select public.is_organiser()));
+create index registrations_night_idx on public.registrations (night_id, created_at);
+
+create table public.feedback (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  night_id uuid references public.nights(id) on delete set null,
+  rating int not null check (rating between 1 and 5),
+  best_game text check (best_game is null or char_length(best_game) <= 20),
+  worst_game text check (worst_game is null or char_length(worst_game) <= 20),
+  come_back text check (come_back is null or come_back in ('oui','peutetre','non')),
+  comment text check (comment is null or char_length(comment) <= 1500),
+  name text check (name is null or char_length(name) <= 60),
+  lang text check (lang is null or lang in ('fr','en'))
+);
+alter table public.feedback enable row level security;
+create policy "anyone gives feedback" on public.feedback for insert to anon, authenticated with check (true);
+create policy "organisers read feedback" on public.feedback for select to authenticated using ((select public.is_organiser()));
+create policy "organisers delete feedback" on public.feedback for delete to authenticated using ((select public.is_organiser()));
+create index feedback_night_idx on public.feedback (night_id, created_at);

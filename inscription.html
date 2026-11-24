@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inscription · Wilbid Game Night</title>
+<meta name="description" content="Inscris-toi à la prochaine Wilbid Game Night : une nuit de jeux de stratégie entre Camerounais de Bavière.">
+<meta property="og:title" content="Inscription · Wilbid Game Night">
+<meta property="og:description" content="Deux minutes pour t’inscrire, et trois anecdotes pour le jeu « Qui est qui ? ».">
+<meta property="og:image" content="https://sedsgd.github.io/wilbid_game_night/assets/hero.jpg">
+<meta name="theme-color" content="#141E4A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)' fill='%23F2B705'%3E%3Ccircle cx='14' cy='14' r='9.2'/%3E%3Ccircle cx='34' cy='14' r='9.2'/%3E%3Ccircle cx='14' cy='34' r='9.2'/%3E%3Ccircle cx='34' cy='34' r='9.2'/%3E%3C/g%3E%3Cpath d='M24 19 29 24 24 29 19 24Z' fill='%23141E4A'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="joueurs.css">
+</head>
+<body>
+<header class="bar"><div class="wrap">
+ <a class="logo js-home" href="index.html" aria-label="wilbid, accueil du site"><svg width="30" height="30" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#F2B705"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#141E4A"/></svg>wilbid</a>
+ <nav class="nav" aria-label="Menu"><a class="pill js-home" href="index.html" data-h="#regles" data-i="nRules">Les règles</a><button class="pill" id="lang" type="button">EN</button></nav>
+</div></header>
+
+<section class="intro"><div class="wrap">
+ <div>
+  <span class="acc" data-i="kick">inscription</span>
+  <h1 data-i="h1">Réserve ta place pour la nuit.</h1>
+  <p data-i="lead">Deux minutes pour t’inscrire. Tes réponses aident le MJ à préparer les équipes, les badges et le jeu « Qui est qui ? ».</p>
+  <div class="nightbox" id="nightbox" hidden><i></i><span id="nightTxt"></span></div>
+ </div>
+ <ul class="keys" id="keys"></ul>
+</div></section>
+
+<main class="main"><div class="wrap"><div class="formwrap">
+ <div class="msg info" id="offline" hidden></div>
+ <form id="reg" novalidate>
+  <section class="step">
+   <h2><span class="n">1</span><span data-i="s1">Toi</span></h2>
+   <p class="sub" data-i="s1L">Le prénom sert pour ton badge et le classement de la soirée.</p>
+   <div class="grid">
+    <label class="f"><span data-i="first">Prénom</span><input id="first" autocomplete="given-name" required maxlength="60"></label>
+    <label class="f"><span><span data-i="origin">Ville d’origine</span> <small data-i="opt">(facultatif)</small></span><input id="origin" maxlength="60" data-ph="originPh"></label>
+    <label class="f"><span data-i="lives">Tu habites à</span><select id="lives"></select></label>
+    <fieldset class="f"><legend><span data-i="gender">Genre</span> <small data-i="genderL">(seulement pour équilibrer les équipes)</small></legend>
+     <div class="choices" id="gender"></div></fieldset>
+    <label class="f full"><span><span data-i="contact">WhatsApp ou e-mail</span> <small data-i="opt">(facultatif)</small></span><input id="contact" maxlength="120" autocomplete="tel" data-ph="contactPh"><span class="hint" data-i="contactL">Seulement pour te prévenir si l’heure ou le lieu change.</span></label>
+   </div>
+  </section>
+
+  <section class="step">
+   <h2><span class="n">2</span><span data-i="s2">Le classement public</span></h2>
+   <p class="sub" data-i="s2L">Pendant la soirée, le classement s’affiche en direct sur le site. Choisis comment tu y apparais.</p>
+   <fieldset><legend class="hp" data-i="s2">Le classement public</legend><div class="choices" id="pub"></div></fieldset>
+   <label class="f" id="pseudoBox" style="margin-top:14px" hidden><span data-i="pseudo">Ton pseudo</span><input id="pseudo" maxlength="40"></label>
+  </section>
+
+  <section class="step">
+   <h2><span class="n">3</span><span data-i="s3">Trois anecdotes pour « Qui est qui ? »</span></h2>
+   <p class="sub" data-i="s3L">Trois choses vraies et surprenantes sur toi, que peu de gens savent. Seul le MJ les lit, et il en garde une seule pour le jeu.</p>
+   <div class="grid">
+    <label class="f full"><span data-i="a1">Anecdote 1</span><textarea id="a1" maxlength="400" data-ph="a1Ph"></textarea></label>
+    <label class="f full"><span data-i="a2">Anecdote 2</span><textarea id="a2" maxlength="400" data-ph="a2Ph"></textarea></label>
+    <label class="f full"><span data-i="a3">Anecdote 3</span><textarea id="a3" maxlength="400" data-ph="a3Ph"></textarea></label>
+   </div>
+  </section>
+
+  <section class="step">
+   <h2><span class="n">4</span><span data-i="s4">Le repas et la soirée</span></h2>
+   <p class="sub" data-i="s4L">À 22h45, on mange ensemble : chacun apporte un plat ou une boisson.</p>
+   <div class="grid">
+    <label class="f full"><span data-i="dish">Ce que tu apportes</span><input id="dish" maxlength="120" data-ph="dishPh"></label>
+    <label class="f full"><span><span data-i="note">Un mot pour les organisateurs</span> <small data-i="opt">(facultatif)</small></span><textarea id="note" maxlength="600" data-ph="notePh"></textarea></label>
+   </div>
+   <div style="margin-top:14px">
+    <label class="check"><input type="checkbox" id="photo"><span><span data-i="photo">J’accepte d’apparaître sur les photos de la soirée.</span><small data-i="photoL">Sinon, ton badge porte un repère discret et on évite de te prendre en photo.</small></span></label>
+    <label class="check" id="rulesBox"><input type="checkbox" id="rules" required><span><span data-i="rules" data-html></span><small data-i="rulesL"></small></span></label>
+   </div>
+  </section>
+
+  <label class="hp" aria-hidden="true">Website<input id="web" tabindex="-1" autocomplete="off"></label>
+  <div class="msg err" id="err" role="alert" hidden></div>
+  <p class="hint" style="margin:0 0 14px" data-i="privacy" data-html></p>
+  <div class="send"><button class="btn" type="submit" id="go" data-i="go">Je m’inscris</button></div>
+ </form>
+
+ <div class="done" id="done" hidden>
+  <svg width="56" height="56" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#E0452F"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg>
+  <h2 id="doneT"></h2>
+  <p data-i="doneL">Rendez-vous à 19h30, avec 8 € de cotisation et ton plat. Le lieu et l’heure exacte sont annoncés dans le groupe WhatsApp.</p>
+  <div class="send"><a class="btn y js-home" href="index.html" data-h="#regles" data-i="doneRules">Lire les règles</a><button class="btn ol" type="button" id="again" data-i="again">Inscrire quelqu’un d’autre</button></div>
+ </div>
+</div></div></main>
+
+<footer><div class="wrap"><span>© <span class="yr">2026</span> Wilbid Game Night. <span data-i="rights">Tous droits réservés.</span></span><nav class="flinks" aria-label="Liens"><a class="js-home" href="index.html" data-i="site">Le site</a><a href="avis.html" data-i="fb">Donner ton avis</a><a class="js-legal" href="legal.html#confidentialite" data-i="priv">Confidentialité</a></nav></div></footer>
+
+<script src="data.js"></script>
+<script src="vendor/supabase.js"></script>
+<script>
+{
+const $=s=>document.querySelector(s);
+const T={
+fr:{langBtn:'EN',nRules:'Les règles',kick:'inscription',h1:'Réserve ta place pour la nuit.',lead:'Deux minutes pour t’inscrire. Tes réponses aident le MJ à préparer les équipes, les badges et le jeu « Qui est qui ? ».',
+ night:'Inscriptions ouvertes pour la prochaine soirée',
+ keys:[['19h30','accueil, jusqu’à 4h environ'],['8 €','de cotisation, dont 5 € pour la cagnotte'],['1 plat','ou une boisson pour le repas partagé'],['8 jeux','et une finale à 4, devant tout le monde']],
+ s1:'Toi',s1L:'Le prénom sert pour ton badge et le classement de la soirée.',first:'Prénom',origin:'Ville d’origine',originPh:'Par ex. Bamenda, Douala, Dschang',opt:'(facultatif)',
+ lives:'Tu habites à',livesO:[['Bamberg','Bamberg'],['Erlangen','Erlangen'],['Nürnberg','Nürnberg'],['Fürth','Fürth'],['autre','Ailleurs']],
+ gender:'Genre',genderL:'(seulement pour équilibrer les équipes)',genderO:[['F','Femme'],['H','Homme'],['','Je préfère ne pas dire']],
+ contact:'WhatsApp ou e-mail',contactPh:'+49 … ou prenom@…',contactL:'Seulement pour te prévenir si l’heure ou le lieu change.',
+ s2:'Le classement public',s2L:'Pendant la soirée, le classement s’affiche en direct sur le site. Choisis comment tu y apparais.',
+ pubO:[['name','Mon prénom'],['pseudo','Un pseudo'],['hidden','Ne pas apparaître']],pseudo:'Ton pseudo',
+ s3:'Trois anecdotes pour « Qui est qui ? »',s3L:'Trois choses vraies et surprenantes sur toi, que peu de gens savent. Seul le MJ les lit, et il en garde une seule pour le jeu.',
+ a1:'Anecdote 1',a2:'Anecdote 2',a3:'Anecdote 3',a1Ph:'Par ex. J’ai déjà serré la main d’un ministre sans le savoir.',a2Ph:'Par ex. Je parle quatre langues, dont une que personne ici ne connaît.',a3Ph:'Par ex. J’ai gagné un concours de danse à 12 ans.',
+ s4:'Le repas et la soirée',s4L:'À 22h45, on mange ensemble : chacun apporte un plat ou une boisson.',dish:'Ce que tu apportes',dishPh:'Par ex. beignets haricots, jus de bissap, plantain',
+ note:'Un mot pour les organisateurs',notePh:'Une question, une arrivée en retard, une idée…',
+ photo:'J’accepte d’apparaître sur les photos de la soirée.',photoL:'Sinon, ton badge porte un repère discret et on évite de te prendre en photo.',
+ rules:'J’ai lu <a class="js-rules" href="index.html#regles">les règles</a> et je viens avec 8 € de cotisation.',rulesL:'Pas besoin de tout retenir : le MJ réexplique chaque jeu avant de commencer.',
+ privacy:'Tes réponses sont enregistrées dans notre base en Europe et lues uniquement par les organisateurs. <a class="js-legal" href="legal.html#confidentialite">Confidentialité</a>.',
+ go:'Je m’inscris',sending:'Envoi…',
+ eFirst:'Indique ton prénom.',ePseudo:'Indique ton pseudo, ou choisis une autre option.',eRules:'Coche la case des règles pour valider ton inscription.',eAnec:'Écris au moins une anecdote : on en a besoin pour le jeu 2.',eNet:'L’inscription n’est pas passée. Vérifie ta connexion et réessaie.',
+ offline:'Cette copie du site ne peut pas envoyer d’inscription. Inscris-toi sur le site en ligne : ',
+ doneT:n=>`C’est noté, ${n} !`,doneL:'Rendez-vous à 19h30, avec 8 € de cotisation et ton plat. Le lieu et l’heure exacte sont annoncés dans le groupe WhatsApp.',doneRules:'Lire les règles',again:'Inscrire quelqu’un d’autre',
+ rights:'Tous droits réservés.',site:'Le site',fb:'Donner ton avis',priv:'Confidentialité'},
+en:{langBtn:'FR',nRules:'The rules',kick:'sign-up',h1:'Save your spot for the night.',lead:'Two minutes to sign up. Your answers help the game master prepare the teams, the badges and the “Who is who?” game.',
+ night:'Sign-ups are open for the next night',
+ keys:[['7:30 pm','welcome, until about 4 am'],['€8','fee, €5 of it goes to the prize pot'],['1 dish','or a drink for the shared dinner'],['8 games','and a final for 4, in front of everyone']],
+ s1:'You',s1L:'Your first name goes on your badge and on the night’s leaderboard.',first:'First name',origin:'Home town',originPh:'E.g. Bamenda, Douala, Dschang',opt:'(optional)',
+ lives:'You live in',livesO:[['Bamberg','Bamberg'],['Erlangen','Erlangen'],['Nürnberg','Nürnberg'],['Fürth','Fürth'],['autre','Somewhere else']],
+ gender:'Gender',genderL:'(only to balance the teams)',genderO:[['F','Woman'],['H','Man'],['','Prefer not to say']],
+ contact:'WhatsApp or email',contactPh:'+49 … or name@…',contactL:'Only to let you know if the time or place changes.',
+ s2:'The public leaderboard',s2L:'During the night, the leaderboard is shown live on the website. Choose how you appear on it.',
+ pubO:[['name','My first name'],['pseudo','A nickname'],['hidden','Don’t show me']],pseudo:'Your nickname',
+ s3:'Three stories for “Who is who?”',s3L:'Three true and surprising things about you that few people know. Only the game master reads them, and keeps just one for the game.',
+ a1:'Story 1',a2:'Story 2',a3:'Story 3',a1Ph:'E.g. I once shook hands with a minister without knowing it.',a2Ph:'E.g. I speak four languages, one of which nobody here knows.',a3Ph:'E.g. I won a dance contest when I was 12.',
+ s4:'Dinner and the night',s4L:'At 10:45 pm we eat together: everyone brings a dish or a drink.',dish:'What you bring',dishPh:'E.g. bean fritters, bissap juice, plantain',
+ note:'A note for the organisers',notePh:'A question, arriving late, an idea…',
+ photo:'I agree to appear in photos of the night.',photoL:'If not, your badge carries a discreet mark and we avoid taking your picture.',
+ rules:'I have read <a class="js-rules" href="index.html#regles">the rules</a> and will bring the €8 fee.',rulesL:'No need to remember everything: the game master explains each game before it starts.',
+ privacy:'Your answers are stored in our database in Europe and read only by the organisers. <a class="js-legal" href="legal.html#privacy">Privacy</a>.',
+ go:'Sign me up',sending:'Sending…',
+ eFirst:'Please enter your first name.',ePseudo:'Please enter your nickname, or pick another option.',eRules:'Tick the rules box to confirm your sign-up.',eAnec:'Write at least one story: we need it for game 2.',eNet:'Sign-up failed. Check your connection and try again.',
+ offline:'This copy of the site cannot send sign-ups. Sign up on the live website: ',
+ doneT:n=>`You’re in, ${n}!`,doneL:'See you at 7:30 pm, with the €8 fee and your dish. The exact place and time are announced in the WhatsApp group.',doneRules:'Read the rules',again:'Sign up someone else',
+ rights:'All rights reserved.',site:'Website',fb:'Give feedback',priv:'Privacy'}};
+let lang='fr';try{lang=localStorage.getItem('wb-lang')||'fr'}catch(e){}
+const K=window.WB_LINKS||{},SITE=K.site||'index.html',EXT=/^https?:/.test(SITE);
+const LIVE='https://sedsgd.github.io/wilbid_game_night/inscription.html';
+const CFG=window.WB_SUPABASE,sb=(CFG&&CFG.url&&CFG.key&&window.supabase)?window.supabase.createClient(CFG.url,CFG.key,{auth:{persistSession:false}}):null;
+let nightId=null;
+const radios=(el,name,opts,cur)=>{el.innerHTML='';opts.forEach(([v,l])=>{const lb=document.createElement('label');const i=document.createElement('input');i.type='radio';i.name=name;i.value=v;if(v===cur)i.checked=true;const s=document.createElement('span');s.textContent=l;lb.append(i,s);el.append(lb)})};
+const val=n=>{const c=document.querySelector(`input[name=${n}]:checked`);return c?c.value:null};
+function links(){document.querySelectorAll('.js-home').forEach(a=>{a.href=SITE+(a.dataset.h||'');if(EXT){a.target='_blank';a.rel='noopener'}});
+ document.querySelectorAll('.js-rules').forEach(a=>{a.href=SITE+'#regles';a.target='_blank';a.rel='noopener'});
+ document.querySelectorAll('.js-legal').forEach(a=>{a.href=lang==='en'?'legal.html#privacy':'legal.html#confidentialite'})}
+function apply(){const u=T[lang];document.documentElement.lang=lang;
+ document.querySelectorAll('[data-i]').forEach(e=>{const v=u[e.dataset.i];if(typeof v!=='string')return;if('html' in e.dataset)e.innerHTML=v;else e.textContent=v});
+ document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=u[e.dataset.ph]||'');
+ $('#lang').textContent=u.langBtn;$('#lang').setAttribute('aria-label',lang==='en'?'Français':'English');
+ $('#keys').innerHTML='';u.keys.forEach(([b,s])=>{const li=document.createElement('li');const x=document.createElement('b');x.textContent=b;const y=document.createElement('span');y.textContent=s;li.append(x,y);$('#keys').append(li)});
+ const lv=$('#lives').value;$('#lives').innerHTML='';u.livesO.forEach(([v,l])=>{const o=document.createElement('option');o.value=v;o.textContent=l;$('#lives').append(o)});$('#lives').value=lv||'Erlangen';
+ radios($('#gender'),'gender',u.genderO,val('gender')??'');radios($('#pub'),'pub',u.pubO,val('pub')||'name');
+ $('#nightTxt').textContent=u.night;
+ if(!sb){const o=$('#offline');o.hidden=false;o.textContent=u.offline;const a=document.createElement('a');a.href=LIVE;a.target='_blank';a.rel='noopener';a.textContent=LIVE.replace('https://','');o.append(a);$('#go').disabled=true}
+ links()}
+$('#lang').addEventListener('click',()=>{lang=lang==='fr'?'en':'fr';try{localStorage.setItem('wb-lang',lang)}catch(e){}apply()});
+$('#pub').addEventListener('change',()=>{$('#pseudoBox').hidden=val('pub')!=='pseudo'});
+const err=$('#err');const fail=(t,el)=>{err.hidden=false;err.textContent=t;if(el){el.closest('.f,.check')?.classList.add('bad');el.focus()}};
+$('#reg').addEventListener('input',e=>{e.target.closest('.f,.check')?.classList.remove('bad')});
+$('#reg').addEventListener('submit',async e=>{e.preventDefault();const u=T[lang];err.hidden=true;
+ if($('#web').value){show($('#first').value.trim());return}
+ const first=$('#first').value.trim(),pub=val('pub')||'name',pseudo=$('#pseudo').value.trim();
+ const an=[$('#a1'),$('#a2'),$('#a3')].map(x=>x.value.trim());
+ if(!first)return fail(u.eFirst,$('#first'));
+ if(pub==='pseudo'&&!pseudo)return fail(u.ePseudo,$('#pseudo'));
+ if(!an.some(Boolean))return fail(u.eAnec,$('#a1'));
+ if(!$('#rules').checked)return fail(u.eRules,$('#rules'));
+ if(!sb)return;
+ const row={night_id:nightId,first_name:first,pseudo:pub==='pseudo'?pseudo:null,public_name:pub,city_origin:$('#origin').value.trim()||null,lives_in:$('#lives').value||null,
+  gender:val('gender')||null,contact:$('#contact').value.trim()||null,dish:$('#dish').value.trim()||null,anecdote:an[0]||null,anecdote2:an[1]||null,anecdote3:an[2]||null,
+  photo_ok:$('#photo').checked,rules_ok:true,note:$('#note').value.trim()||null,lang};
+ const b=$('#go');b.disabled=true;b.textContent=u.sending;
+ try{let r=await sb.from('registrations').insert(row);
+  if(r.error&&nightId&&/foreign key/i.test(r.error.message)){row.night_id=null;r=await sb.from('registrations').insert(row)}
+  if(r.error)throw r.error;show(first)}catch(x){console.warn(x);fail(u.eNet)}
+ b.disabled=false;b.textContent=u.go});
+function show(name){$('#reg').hidden=true;$('#done').hidden=false;$('#doneT').textContent=T[lang].doneT(name);window.scrollTo({top:$('.main').offsetTop-70,behavior:'smooth'})}
+$('#again').addEventListener('click',()=>{$('#reg').reset();apply();$('#pseudoBox').hidden=true;$('#done').hidden=true;$('#reg').hidden=false;$('#first').focus()});
+apply();
+document.querySelectorAll('.yr').forEach(e=>e.textContent=Math.max(2026,new Date().getFullYear()));
+if(sb){sb.from('boards').select('night_id,is_live').order('is_live',{ascending:false}).order('updated_at',{ascending:false}).limit(1).then(({data})=>{if(data&&data[0]&&data[0].is_live){nightId=data[0].night_id;$('#nightbox').hidden=false}}).catch(()=>{})}
+}
+</script>
+</body>
+</html>

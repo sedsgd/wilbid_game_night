@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ton avis · Wilbid Game Night</title>
+<meta name="description" content="Dis-nous ce que tu as pensé de la Wilbid Game Night, en une minute.">
+<meta property="og:title" content="Ton avis · Wilbid Game Night">
+<meta property="og:description" content="Une minute pour nous aider à préparer la prochaine nuit.">
+<meta property="og:image" content="https://sedsgd.github.io/wilbid_game_night/assets/hero.jpg">
+<meta name="theme-color" content="#141E4A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)' fill='%23F2B705'%3E%3Ccircle cx='14' cy='14' r='9.2'/%3E%3Ccircle cx='34' cy='14' r='9.2'/%3E%3Ccircle cx='14' cy='34' r='9.2'/%3E%3Ccircle cx='34' cy='34' r='9.2'/%3E%3C/g%3E%3Cpath d='M24 19 29 24 24 29 19 24Z' fill='%23141E4A'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="joueurs.css">
+</head>
+<body>
+<header class="bar"><div class="wrap">
+ <a class="logo js-home" href="index.html" aria-label="wilbid, accueil du site"><svg width="30" height="30" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#F2B705"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#141E4A"/></svg>wilbid</a>
+ <nav class="nav" aria-label="Menu"><a class="pill js-home" href="index.html" data-h="#live" data-i="nBoard">Le classement</a><button class="pill" id="lang" type="button">EN</button></nav>
+</div></header>
+
+<section class="intro"><div class="wrap">
+ <div>
+  <span class="acc" data-i="kick">après la soirée</span>
+  <h1 data-i="h1">Alors, cette nuit ?</h1>
+  <p data-i="lead">Une minute pour nous dire ce qui t’a plu et ce qu’on doit changer. C’est anonyme, sauf si tu signes.</p>
+ </div>
+ <ul class="keys" id="keys"></ul>
+</div></section>
+
+<main class="main"><div class="wrap"><div class="formwrap">
+ <div class="msg info" id="offline" hidden></div>
+ <form id="fb" novalidate>
+  <section class="step">
+   <h2><span class="n">1</span><span data-i="s1">Ta note pour la soirée</span></h2>
+   <p class="sub" data-i="s1L">De 1, à oublier, à 5, à refaire vite.</p>
+   <fieldset><legend class="hp" data-i="s1">Ta note pour la soirée</legend><div class="stars" id="stars"></div></fieldset>
+  </section>
+  <section class="step">
+   <h2><span class="n">2</span><span data-i="s2">Les jeux</span></h2>
+   <div class="grid">
+    <label class="f"><span data-i="best">Ton jeu préféré</span><select id="best"></select></label>
+    <label class="f"><span data-i="worst">Le jeu à revoir</span><select id="worst"></select></label>
+   </div>
+  </section>
+  <section class="step">
+   <h2><span class="n">3</span><span data-i="s3">La suite</span></h2>
+   <fieldset class="f"><legend data-i="back">Tu reviens à la prochaine ?</legend><div class="choices" id="backC"></div></fieldset>
+   <div class="grid" style="margin-top:16px">
+    <label class="f full"><span><span data-i="comment">Ce qu’on garde, ce qu’on change</span> <small data-i="opt">(facultatif)</small></span><textarea id="comment" maxlength="1500" data-ph="commentPh"></textarea></label>
+    <label class="f"><span><span data-i="name">Ton prénom</span> <small data-i="anon">(facultatif, sinon anonyme)</small></span><input id="name" maxlength="60" autocomplete="given-name"></label>
+   </div>
+  </section>
+  <label class="hp" aria-hidden="true">Website<input id="web" tabindex="-1" autocomplete="off"></label>
+  <div class="msg err" id="err" role="alert" hidden></div>
+  <p class="hint" style="margin:0 0 14px" data-i="privacy" data-html></p>
+  <div class="send"><button class="btn" type="submit" id="go" data-i="go">Envoyer mon avis</button></div>
+ </form>
+ <div class="done" id="done" hidden>
+  <svg width="56" height="56" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#F2B705"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#141E4A"/></svg>
+  <h2 data-i="doneT">Merci !</h2>
+  <p data-i="doneL">On lit chaque avis avant de préparer la prochaine nuit. À très vite.</p>
+  <div class="send"><a class="btn y js-home" href="index.html" data-h="#live" data-i="doneBoard">Voir le classement</a><a class="btn ol" href="inscription.html" data-i="doneReg">S’inscrire à la prochaine</a></div>
+ </div>
+</div></div></main>
+
+<footer><div class="wrap"><span>© <span class="yr">2026</span> Wilbid Game Night. <span data-i="rights">Tous droits réservés.</span></span><nav class="flinks" aria-label="Liens"><a class="js-home" href="index.html" data-i="site">Le site</a><a href="inscription.html" data-i="reg">Inscription</a><a class="js-legal" href="legal.html#confidentialite" data-i="priv">Confidentialité</a></nav></div></footer>
+
+<script src="data.js"></script>
+<script src="vendor/supabase.js"></script>
+<script>
+{
+const $=s=>document.querySelector(s);
+const T={
+fr:{langBtn:'EN',nBoard:'Le classement',kick:'après la soirée',h1:'Alors, cette nuit ?',lead:'Une minute pour nous dire ce qui t’a plu et ce qu’on doit changer. C’est anonyme, sauf si tu signes.',
+ keys:[['1 min','trois questions, un commentaire si tu veux'],['anonyme','sauf si tu donnes ton prénom'],['lu','par toute l’équipe avant la prochaine nuit']],
+ s1:'Ta note pour la soirée',s1L:'De 1, à oublier, à 5, à refaire vite.',rate:['bof','moyen','bien','très bien','génial'],
+ s2:'Les jeux',best:'Ton jeu préféré',worst:'Le jeu à revoir',none:'Aucun en particulier',
+ s3:'La suite',back:'Tu reviens à la prochaine ?',backO:[['oui','Oui'],['peutetre','Peut-être'],['non','Non']],
+ comment:'Ce qu’on garde, ce qu’on change',commentPh:'L’ambiance, l’horaire, le lieu, un jeu, la cagnotte…',opt:'(facultatif)',name:'Ton prénom',anon:'(facultatif, sinon anonyme)',
+ privacy:'Ton avis est enregistré dans notre base en Europe et lu uniquement par les organisateurs. <a class="js-legal" href="legal.html#confidentialite">Confidentialité</a>.',
+ go:'Envoyer mon avis',sending:'Envoi…',eRate:'Choisis une note de 1 à 5.',eNet:'L’envoi n’a pas abouti. Vérifie ta connexion et réessaie.',
+ offline:'Cette copie du site ne peut pas envoyer d’avis. Donne ton avis sur le site en ligne : ',
+ doneT:'Merci !',doneL:'On lit chaque avis avant de préparer la prochaine nuit. À très vite.',doneBoard:'Voir le classement',doneReg:'S’inscrire à la prochaine',
+ rights:'Tous droits réservés.',site:'Le site',reg:'Inscription',priv:'Confidentialité'},
+en:{langBtn:'FR',nBoard:'Leaderboard',kick:'after the night',h1:'So, how was the night?',lead:'One minute to tell us what you enjoyed and what we should change. It is anonymous, unless you sign it.',
+ keys:[['1 min','three questions, a comment if you like'],['anonymous','unless you give your first name'],['read','by the whole team before the next night']],
+ s1:'Your rating for the night',s1L:'From 1, forget it, to 5, let’s do it again soon.',rate:['meh','okay','good','very good','amazing'],
+ s2:'The games',best:'Your favourite game',worst:'The game to rework',none:'None in particular',
+ s3:'What’s next',back:'Will you come to the next one?',backO:[['oui','Yes'],['peutetre','Maybe'],['non','No']],
+ comment:'What we keep, what we change',commentPh:'The vibe, the timing, the venue, a game, the prize pot…',opt:'(optional)',name:'Your first name',anon:'(optional, otherwise anonymous)',
+ privacy:'Your feedback is stored in our database in Europe and read only by the organisers. <a class="js-legal" href="legal.html#privacy">Privacy</a>.',
+ go:'Send my feedback',sending:'Sending…',eRate:'Pick a rating from 1 to 5.',eNet:'Sending failed. Check your connection and try again.',
+ offline:'This copy of the site cannot send feedback. Give your feedback on the live website: ',
+ doneT:'Thank you!',doneL:'We read every comment before preparing the next night. See you soon.',doneBoard:'See the leaderboard',doneReg:'Sign up for the next one',
+ rights:'All rights reserved.',site:'Website',reg:'Sign-up',priv:'Privacy'}};
+let lang='fr';try{lang=localStorage.getItem('wb-lang')||'fr'}catch(e){}
+const K=window.WB_LINKS||{},SITE=K.site||'index.html',EXT=/^https?:/.test(SITE);
+const LIVE='https://sedsgd.github.io/wilbid_game_night/avis.html';
+const CFG=window.WB_SUPABASE,sb=(CFG&&CFG.url&&CFG.key&&window.supabase)?window.supabase.createClient(CFG.url,CFG.key,{auth:{persistSession:false}}):null;
+const G=window.WB_GAMES||[];let nightId=null;
+const val=n=>{const c=document.querySelector(`input[name=${n}]:checked`);return c?c.value:null};
+const opt=(sel,list,cur)=>{sel.innerHTML='';list.forEach(([v,l])=>{const o=document.createElement('option');o.value=v;o.textContent=l;sel.append(o)});sel.value=cur||''};
+function apply(){const u=T[lang],tx=o=>o?(o[lang]||o.fr):'';document.documentElement.lang=lang;
+ document.querySelectorAll('[data-i]').forEach(e=>{const v=u[e.dataset.i];if(typeof v!=='string')return;if('html' in e.dataset)e.innerHTML=v;else e.textContent=v});
+ document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=u[e.dataset.ph]||'');
+ $('#lang').textContent=u.langBtn;$('#lang').setAttribute('aria-label',lang==='en'?'Français':'English');
+ $('#keys').innerHTML='';u.keys.forEach(([b,s])=>{const li=document.createElement('li');const x=document.createElement('b');x.textContent=b;const y=document.createElement('span');y.textContent=s;li.append(x,y);$('#keys').append(li)});
+ const r=val('rate');$('#stars').innerHTML='';u.rate.forEach((l,i)=>{const lb=document.createElement('label');const inp=document.createElement('input');inp.type='radio';inp.name='rate';inp.value=String(i+1);if(r===String(i+1))inp.checked=true;inp.setAttribute('aria-label',(i+1)+' – '+l);const s=document.createElement('span');s.innerHTML=`${i+1}<small></small>`;s.querySelector('small').textContent=l;lb.append(inp,s);$('#stars').append(lb)});
+ const games=[['',u.none],...G.map(g=>[g.id,tx(g.name)])];opt($('#best'),games,$('#best').value);opt($('#worst'),games,$('#worst').value);
+ const bk=val('back');$('#backC').innerHTML='';u.backO.forEach(([v,l])=>{const lb=document.createElement('label');const i=document.createElement('input');i.type='radio';i.name='back';i.value=v;if(v===bk)i.checked=true;const s=document.createElement('span');s.textContent=l;lb.append(i,s);$('#backC').append(lb)});
+ if(!sb){const o=$('#offline');o.hidden=false;o.textContent=u.offline;const a=document.createElement('a');a.href=LIVE;a.target='_blank';a.rel='noopener';a.textContent=LIVE.replace('https://','');o.append(a);$('#go').disabled=true}
+ document.querySelectorAll('.js-home').forEach(a=>{a.href=SITE+(a.dataset.h||'');if(EXT){a.target='_blank';a.rel='noopener'}});
+ document.querySelectorAll('.js-legal').forEach(a=>{a.href=lang==='en'?'legal.html#privacy':'legal.html#confidentialite'})}
+$('#lang').addEventListener('click',()=>{lang=lang==='fr'?'en':'fr';try{localStorage.setItem('wb-lang',lang)}catch(e){}apply()});
+const err=$('#err');
+$('#fb').addEventListener('submit',async e=>{e.preventDefault();const u=T[lang];err.hidden=true;
+ if($('#web').value)return show();
+ const rate=+val('rate');if(!rate){err.hidden=false;err.textContent=u.eRate;$('#stars input').focus();return}
+ if(!sb)return;
+ const row={night_id:nightId,rating:rate,best_game:$('#best').value||null,worst_game:$('#worst').value||null,come_back:val('back'),comment:$('#comment').value.trim()||null,name:$('#name').value.trim()||null,lang};
+ const b=$('#go');b.disabled=true;b.textContent=u.sending;
+ try{let r=await sb.from('feedback').insert(row);if(r.error&&nightId&&/foreign key/i.test(r.error.message)){row.night_id=null;r=await sb.from('feedback').insert(row)}if(r.error)throw r.error;show()}
+ catch(x){console.warn(x);err.hidden=false;err.textContent=u.eNet}
+ b.disabled=false;b.textContent=u.go});
+function show(){$('#fb').hidden=true;$('#done').hidden=false;window.scrollTo({top:$('.main').offsetTop-70,behavior:'smooth'})}
+apply();
+document.querySelectorAll('.yr').forEach(e=>e.textContent=Math.max(2026,new Date().getFullYear()));
+/* l'avis porte sur la dernière soirée jouée : le dernier classement public qui contient des points */
+if(sb){sb.from('boards').select('night_id,board').order('updated_at',{ascending:false}).limit(5).then(({data})=>{const b=(data||[]).find(x=>Array.isArray(x.board)&&x.board.length);if(b)nightId=b.night_id}).catch(()=>{})}
+}
+</script>
+</body>
+</html>

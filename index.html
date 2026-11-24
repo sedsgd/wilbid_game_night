@@ -66,6 +66,8 @@ h1,h2,h3{overflow-wrap:break-word;hyphens:auto}
 .nav{display:flex;align-items:center;gap:2px 18px;flex-wrap:wrap;font-weight:600;font-size:15px}
 .nav a{text-decoration:none;padding:10px 0}
 .nav a:hover{color:var(--palm)}
+.nav .nav-cta{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:99px;background:var(--palm);color:var(--bg);font-weight:800}
+.nav .nav-cta:hover{color:var(--bg);filter:brightness(1.06)}
 .lang{min-height:44px;padding:0 16px;border-radius:99px;border:1.5px solid rgba(244,243,239,.5);background:transparent;font-weight:800;font-size:14px}
 .lang:hover{border-color:var(--palm);color:var(--palm)}
 
@@ -199,6 +201,7 @@ footer b{font-family:var(--fd);color:var(--ink)}
  .nav.open{display:flex}
  .nav a{padding:14px 0;border-bottom:1px solid var(--line);font-size:17px}
  .lang{align-self:flex-start;margin-top:14px}
+ .nav .nav-cta{justify-content:center;margin-top:14px;border-bottom:0;padding:0 18px}
 }
 @media(min-width:1600px){.wrap{max-width:1400px}}
 @media(max-width:600px){
@@ -223,6 +226,7 @@ footer b{font-family:var(--fd);color:var(--ink)}
   <a href="#regles" data-i="nav2">Règles</a>
   <a href="#points" data-i="nav3">Points</a>
   <a href="#faq" data-i="nav5">FAQ</a>
+  <a class="nav-cta" href="inscription.html" data-i="navReg">S’inscrire</a>
   <button class="lang" id="lang" type="button" aria-label="English">EN</button>
  </nav>
 </div></header>
@@ -234,7 +238,7 @@ footer b{font-family:var(--fd);color:var(--ink)}
    <div class="acc" data-i="kicker">Saison 1</div>
    <h1>Game<br>Night</h1>
    <p data-i="lead"></p>
-   <div class="ctas"><a class="btn y" href="#regles" data-i="cta1">Lire les règles</a><a class="btn" href="#programme" data-i="cta2">Voir le programme</a></div>
+   <div class="ctas"><a class="btn y" href="inscription.html" data-i="ctaReg">S’inscrire</a><a class="btn" href="#regles" data-i="cta1">Lire les règles</a></div>
    <div class="facts" id="facts"></div>
   </div></div>
  </section>
@@ -267,7 +271,7 @@ footer b{font-family:var(--fd);color:var(--ink)}
 
 <main id="game"></main>
 
-<footer><div class="pat"></div><div class="wrap"><span><b>wilbid</b> Game Night · Bamberg, Erlangen, Nürnberg<br><span data-i="foot"></span></span><nav class="flinks" aria-label="Liens"><a id="lPartners" href="#" data-i="partners">Devenir partenaire</a><a id="lApp" href="#" data-i="orga">Espace organisation</a><a href="legal.html#mentions" data-i="legal">Mentions légales</a><a href="legal.html#confidentialite" data-i="privacy">Confidentialité</a></nav></div><div class="wrap copy"><span>© <span class="yr">2026</span> Wilbid Game Night. <span data-i="rights">Tous droits réservés.</span></span><span data-i="madeIn">Fait avec soin en Franconie.</span></div></footer>
+<footer><div class="pat"></div><div class="wrap"><span><b>wilbid</b> Game Night · Bamberg, Erlangen, Nürnberg<br><span data-i="foot"></span></span><nav class="flinks" aria-label="Liens"><a id="lPartners" href="#" data-i="partners">Devenir partenaire</a><a href="inscription.html" data-i="reg">Inscription</a><a href="avis.html" data-i="fb">Donner ton avis</a><a id="lApp" href="#" data-i="orga">Espace organisation</a><a href="legal.html#mentions" data-i="legal">Mentions légales</a><a href="legal.html#confidentialite" data-i="privacy">Confidentialité</a></nav></div><div class="wrap copy"><span>© <span class="yr">2026</span> Wilbid Game Night. <span data-i="rights">Tous droits réservés.</span></span><span data-i="madeIn">Fait avec soin en Franconie.</span></div></footer>
 
 <script src="data.js"></script>
 <script src="vendor/supabase.js"></script>
@@ -288,9 +292,9 @@ fr:{menu:'Menu',nav6:'Classement',liveT:'Classement en direct',liveOn:'en direct
  c2T:'La cagnotte',c2P:'8 € de cotisation, dont 5 € pour la cagnotte. Pour 18 joueurs :',c2N:'Pour le repas, chacun apporte un plat ou une boisson.',
  c3T:'Qui fait quoi',roles:[['r','Maître du jeu','badge rouge, annonce et tranche'],['j','Organisateurs','badge jaune, scores et matériel'],['w','Joueurs','badge blanc, prénom et ville']],
  back:'Tous les jeux',dur:'durée',fmt:'format',max:'au maximum',rules:'Règles',ex:'Exemple',score:'Barème',maxL:'Maximum',tip:'le conseil',timer:'Ouvrir le minuteur',prev:'Jeu précédent',next:'Jeu suivant',
- foot:'Inscriptions et questions dans le groupe WhatsApp',partners:'Devenir partenaire',orga:'Espace organisation',
+ foot:'Questions et annonces dans le groupe WhatsApp',navReg:'S’inscrire',ctaReg:'S’inscrire à la soirée',reg:'Inscription',fb:'Donner ton avis',partners:'Devenir partenaire',orga:'Espace organisation',
  faqT:'Vos questions',faqL:'Tout ce qu’on nous demande avant la première soirée.',
- faq:[['Faut-il connaître les jeux avant de venir ?','Non. Le MJ explique chaque jeu avant de commencer, et toutes les règles sont sur ce site, en français et en anglais.'],['Combien ça coûte ?','8 € de cotisation, dont 5 € vont à la cagnotte des 3 premiers. Pour le repas, chacun apporte un plat ou une boisson.'],['Je ne connais personne, c’est un problème ?','Au contraire. Les équipes sont tirées au sort à chaque jeu et le Carrefour des Duos fait parler tout le monde avec presque tout le monde.'],['Faut-il rester toute la nuit ?','Tu peux arriver ou partir quand tu veux. Mais les points se cumulent : pour viser la finale, mieux vaut être là dès 20h.'],['Les Kola, c’est de l’argent ?','Non, ce sont des jetons de jeu. Ils servent à miser et à négocier, et chaque Kola restante vaut 1 point à la fin. Le seul argent réel est la cagnotte.'],['Où et quand a lieu la prochaine soirée ?','La date et le lieu sont annoncés dans le groupe WhatsApp, environ 3 semaines avant. Les inscriptions se font aussi là-bas.']]},
+ faq:[['Faut-il connaître les jeux avant de venir ?','Non. Le MJ explique chaque jeu avant de commencer, et toutes les règles sont sur ce site, en français et en anglais.'],['Combien ça coûte ?','8 € de cotisation, dont 5 € vont à la cagnotte des 3 premiers. Pour le repas, chacun apporte un plat ou une boisson.'],['Je ne connais personne, c’est un problème ?','Au contraire. Les équipes sont tirées au sort à chaque jeu et le Carrefour des Duos fait parler tout le monde avec presque tout le monde.'],['Faut-il rester toute la nuit ?','Tu peux arriver ou partir quand tu veux. Mais les points se cumulent : pour viser la finale, mieux vaut être là dès 20h.'],['Les Kola, c’est de l’argent ?','Non, ce sont des jetons de jeu. Ils servent à miser et à négocier, et chaque Kola restante vaut 1 point à la fin. Le seul argent réel est la cagnotte.'],['Où et quand a lieu la prochaine soirée ?','La date et le lieu sont annoncés dans le groupe WhatsApp, environ 3 semaines avant. Les inscriptions se font sur la page Inscription du site.']]},
 en:{menu:'Menu',nav6:'Leaderboard',liveT:'Live leaderboard',liveOn:'live',liveNone:'The leaderboard appears here live during the night.',liveOff:'Leaderboard from the last night',liveAfter:'After',liveFinal:'final',legal:'Legal notice',privacy:'Privacy',rights:'All rights reserved.',madeIn:'Made with care in Franconia.',nav1:'Schedule',nav2:'Rules',nav3:'Points',nav4:'Timers',nav5:'FAQ',langBtn:'FR',langLbl:'Passer en français',kicker:'season 1 · Ndop Night',
  lead:'A night of strategy, alliances and bluff for Cameroonians in Bavaria. Seven games, one final, and a prize pot for the podium.',
  cta1:'Read the rules',cta2:'See the schedule',facts:[['7:30 pm to 4 am','the night'],['7 + 1','games and final'],['15 to 20+','players'],['€8','entry fee']],
@@ -302,9 +306,9 @@ en:{menu:'Menu',nav6:'Leaderboard',liveT:'Live leaderboard',liveOn:'live',liveNo
  c2T:'The prize pot',c2P:'An €8 entry fee, €5 of which goes to the pot. For 18 players:',c2N:'For dinner, everyone brings a dish or a drink.',
  c3T:'Who does what',roles:[['r','Game master','red badge, announces and rules'],['j','Organisers','yellow badge, scores and kit'],['w','Players','white badge, name and hometown']],
  back:'All games',dur:'length',fmt:'format',max:'maximum',rules:'Rules',ex:'Example',score:'Scoring',maxL:'Maximum',tip:'tip',timer:'Open the timer',prev:'Previous game',next:'Next game',
- foot:'Sign-ups and questions in the WhatsApp group',partners:'Become a partner',orga:'Organisers’ area',
+ foot:'Questions and announcements in the WhatsApp group',navReg:'Sign up',ctaReg:'Sign up for the night',reg:'Sign-up',fb:'Give feedback',partners:'Become a partner',orga:'Organisers’ area',
  faqT:'Your questions',faqL:'Everything people ask us before the first night.',
- faq:[['Do I need to know the games beforehand?','No. The game master explains each game before it starts, and every rule is on this site, in French and English.'],['How much does it cost?','An €8 entry fee, €5 of which goes to the prize pot for the top 3. For dinner, everyone brings a dish or a drink.'],['I don’t know anyone. Is that a problem?','Quite the opposite. Teams are drawn at random for every game, and Duos Crossroads gets everyone talking to almost everyone.'],['Do I have to stay all night?','Come and go as you like. But points add up over the night: to aim for the final, be there by 8 pm.'],['Are Kola real money?','No, they are game tokens. You use them to bid and haggle, and each Kola left is worth 1 point at the end. The only real money is the prize pot.'],['When and where is the next night?','The date and venue are announced in the WhatsApp group about 3 weeks ahead. Sign-ups happen there too.']]}};
+ faq:[['Do I need to know the games beforehand?','No. The game master explains each game before it starts, and every rule is on this site, in French and English.'],['How much does it cost?','An €8 entry fee, €5 of which goes to the prize pot for the top 3. For dinner, everyone brings a dish or a drink.'],['I don’t know anyone. Is that a problem?','Quite the opposite. Teams are drawn at random for every game, and Duos Crossroads gets everyone talking to almost everyone.'],['Do I have to stay all night?','Come and go as you like. But points add up over the night: to aim for the final, be there by 8 pm.'],['Are Kola real money?','No, they are game tokens. You use them to bid and haggle, and each Kola left is worth 1 point at the end. The only real money is the prize pot.'],['When and where is the next night?','The date and venue are announced in the WhatsApp group about 3 weeks ahead. Sign-ups happen on the website’s Sign-up page.']]}};
 let lang='fr';try{lang=localStorage.getItem('wb-lang')||'fr'}catch(e){}
 const L=()=>UI[lang],tx=o=>o?(o[lang]||o.fr):'';
 const time=t=>lang==='fr'?t:(()=>{const [h,m]=t.split('h').map(Number);const hh=h%12||12;return hh+':'+String(m).padStart(2,'0')+(h<12?' am':' pm')})();
