@@ -106,3 +106,4 @@ p{margin:0 0 2mm}
 .check li::before{content:"";position:absolute;left:0;top:1mm;width:3mm;height:3mm;border:1.3px solid var(--palm);border-radius:.6mm}
 .pattern-band{position:absolute;left:5mm;right:0;bottom:16mm;height:26mm;background:url(assets/pattern.jpg) center 30%/62mm auto repeat-x}
 .wide{margin-bottom:0}
+.acc::first-letter,.kick::first-letter,.kicker::first-letter{text-transform:uppercase}

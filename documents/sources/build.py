@@ -98,7 +98,7 @@ SCHED = [("19h30","Accueil, badges, cotisation, 10 Kola par joueur",None,"30 min
  ("03h45","Ambiance libre jusqu'au matin",None,"")]
 
 def foot(p, label="Dossier du maître du jeu"):
-    return f'<footer class="foot"><span>{KOLA("#141E4A","#fff",14)} wilbid Game Night, saison 1</span><span>{label}</span><span>p. {p}</span></footer>'
+    return f'<footer class="foot"><span>{KOLA("#141E4A","#fff",14)} Wilbid Game Night, saison 1</span><span>{label}</span><span>p. {p}</span></footer>'
 
 pages = []
 # Cover
@@ -119,7 +119,7 @@ rows = "".join(
     (f'<img src="assets/em-{s}.jpg" alt="">' if s else f'<i class="dot"></i>') +
     f'<span class="l">{E(l)}</span><span class="d">{d}</span></li>' for t,l,s,d in SCHED)
 pages.append(f'''<section class="page">
-<div class="kicker">01 · la nuit en un coup d'œil</div>
+<div class="kicker">01 · La nuit en un coup d'œil</div>
 <h2>Une nuit qui monte en intensité</h2>
 <p class="lead">On commence par des jeux qui font se rencontrer, on garde la stratégie lourde pour après le repas, et on finit par la finale à 4 joueurs.</p>
 <div class="two">
@@ -137,7 +137,7 @@ pages.append(f'''<section class="page">
 
 # Points + roles
 pages.append(f'''<section class="page">
-<div class="kicker">02 · points, kola et cagnotte</div>
+<div class="kicker">02 · Points, kola et cagnotte</div>
 <h2>Chaque jeu vaut au plus 15 PW</h2>
 <p class="lead">Aucun jeu ne décide seul du classement. Les Points Wilbid (PW) se cumulent toute la nuit, et la finale met 36 PW en jeu pour que les 4 finalistes gardent tous une chance.</p>
 <div class="two eq">
@@ -201,7 +201,7 @@ prows = "".join(f'<li><b>{a}</b><span>{E(b)}</span></li>' for a,b in prep)
 night = ["Tableau des scores affiché et feutres","Les 3 codes du Code du Chef, pliés","Les rôles des Feymen tirés","Les 9 énigmes et leurs réponses","Les anecdotes numérotées, prêtes à afficher","Minuteur chargé"]
 nrows = "".join(f"<li>{E(x)}</li>" for x in night)
 pages.append(f'''<section class="page">
-<div class="kicker">03 · matériel et préparation</div>
+<div class="kicker">03 · Matériel et préparation</div>
 <h2>57 € de matériel, réutilisé à chaque édition</h2>
 <p class="lead">Prix estimés sur Temu, à vérifier au moment de commander. Pour économiser : imprimer à la fac, et remplacer les jetons par des capsules ou des haricots secs.</p>
 <table class="tbl wide"><thead><tr><th>Article</th><th>Quantité</th><th>Coût estimé</th></tr></thead><tbody>{mrows}<tr class="tot"><td>Total</td><td></td><td>57 €</td></tr></tbody></table>

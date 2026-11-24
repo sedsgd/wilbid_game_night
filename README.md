@@ -22,7 +22,7 @@ Tout est en HTML, CSS et JavaScript, sans dépendance à installer. Le dépôt p
 | `supabase/` | Le schéma de la base en ligne |
 | `documents/dossier-mj/` | Le dossier du maître du jeu, en page web et en PDF A4 |
 | `documents/proposition/` | Le dossier de partenariat, en page web et en PDF 16:9 |
-| `documents/lettre-sponsoring/` | La lettre officielle de demande de sponsoring, en français et en allemand : page modifiable (adresse, signature) et PDF prêts à joindre |
+| `documents/lettre-sponsoring/` | La lettre officielle de demande de sponsoring, en français et en allemand : page modifiable (nos coordonnées, adresse du destinataire, paragraphes, logo du partenaire sur l’aperçu des badges) et PDF prêts à joindre (3 pages) |
 | `documents/sources/` | Les scripts qui génèrent ces deux documents |
 | `identite/` | L'identité visuelle Ndop Nuit : planches de tendance et maquettes |
 | `assets/` | Illustrations, emblèmes des jeux et motif ndop |

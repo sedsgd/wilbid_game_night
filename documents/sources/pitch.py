@@ -15,7 +15,7 @@ GAMES = [("mokolo","Le Marché de Mokolo","On troque pour réunir sa combinaison
 NIGHT = [("19h30","Accueil",""),("20h00","Mokolo, Qui est qui, Njangi, Duos","se rencontrer"),("22h45","Repas","chacun apporte un plat"),
  ("23h45","Wouri, Code du Chef, Feymen","la stratégie"),("02h45","Classement",""),("03h00","Finale","4 joueurs"),("03h30","Gains, photo, ambiance","")]
 
-def foot(n): return f'<div class="sfoot"><span>{KOLA("#F2B705","#141E4A",13)} wilbid Game Night</span><span>{n} / 8</span></div>'
+def foot(n): return f'<div class="sfoot"><span>{KOLA("#F2B705","#141E4A",13)} Wilbid Game Night</span><span>{n} / 8</span></div>'
 
 S = []
 S.append(f'''<section class="slide cover">

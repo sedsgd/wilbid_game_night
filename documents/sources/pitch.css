@@ -110,3 +110,4 @@ h2{font-size:30pt;line-height:1;margin:2mm 0 6mm;max-width:230mm;text-wrap:balan
 .tiers span{font-size:10.5pt;opacity:.85}
 .pub b{white-space:nowrap;font-size:34pt}
 .pub{grid-template-columns:.8fr 1.4fr .9fr 1fr}
+.acc::first-letter,.kick::first-letter,.kicker::first-letter{text-transform:uppercase}

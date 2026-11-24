@@ -226,6 +226,7 @@ body.locked .tabs,body.locked #lockBtn,body.locked #toDossier,body.locked #toTim
  .board li{grid-template-columns:40px minmax(0,1fr) auto;padding:10px 12px}.board .r{font-size:24px}.board .t{font-size:22px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.acc::first-letter,.kick::first-letter,.kicker::first-letter{text-transform:uppercase}
 </style>
 </head>
 <body>
@@ -539,7 +540,7 @@ const KOLA=(f,h,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 48 48" aria-hi
 function renderBadges(){
  const u=L();const ps=[...st.players].sort((a,b)=>({mj:0,org:1,p:2}[a.role]-{mj:0,org:1,p:2}[b.role]));
  $('#bsheet').innerHTML=ps.length?ps.map(p=>{const bg=p.role==='mj'?'#E0452F':p.role==='org'?'#F2B705':'#F4F3EF';const fill=p.role==='mj'?'#fff':p.role==='org'?'#141E4A':'#E0452F';
-  return `<div class="badge ${p.role}"><div class="bt"><i class="hole"></i>${p.photo===false?`<span class="np">${u.noPhoto}</span>`:''}</div>${KOLA(fill,bg,40)}<div class="nm">${esc(p.name)}</div><div class="rl">${u.bRole[p.role]}</div><div class="ct">${esc(p.city||'')}</div><div class="wb">wilbid Game Night</div></div>`}).join(''):`<div class="empty" style="color:#3A4270">${u.noP}</div>`;
+  return `<div class="badge ${p.role}"><div class="bt"><i class="hole"></i>${p.photo===false?`<span class="np">${u.noPhoto}</span>`:''}</div>${KOLA(fill,bg,40)}<div class="nm">${esc(p.name)}</div><div class="rl">${u.bRole[p.role]}</div><div class="ct">${esc(p.city||'')}</div><div class="wb">Wilbid Game Night</div></div>`}).join(''):`<div class="empty" style="color:#3A4270">${u.noP}</div>`;
 }
 $('#printBtn').addEventListener('click',()=>window.print());
 

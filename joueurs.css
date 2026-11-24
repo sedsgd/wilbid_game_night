@@ -90,3 +90,4 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
 @media(max-width:600px){.grid{grid-template-columns:minmax(0,1fr)}.send .btn{width:100%}.stars span{width:52px;height:52px}}
 @media(min-width:1600px){.wrap{max-width:1400px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.acc::first-letter,.kick::first-letter,.kicker::first-letter{text-transform:uppercase}
