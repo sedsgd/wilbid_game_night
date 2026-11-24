@@ -319,7 +319,7 @@ function renderHome(){
  $('#facts').innerHTML=L().facts.map(([a,b])=>`<div><b>${esc(a)}</b>${esc(b)}</div>`).join('');
  $('#sched').innerHTML=S.map(s=>{const g=s.id&&G.find(x=>x.id===s.id);
   if(g)return `<li><a href="#jeu-${g.id}"><span class="t">${time(s.at)}</span><img src="assets/em-${g.id}.jpg" alt=""><span><b>${esc(tx(g.name))}</b><small>${esc(lbl(g))} · ${esc(tx(g.kind))}</small></span><span class="d">${s.d}</span></a></li>`;
-  return `<li class="brk"><div class="row"><span class="t">${time(s.at)}</span><i class="dot"></i><span><b>${esc(tx(s))}</b></span><span class="d">${s.d}</span></div></li>`}).join('');
+  return `<li class="brk"><div class="row"><span class="t">${time(s.at)}</span>${s.img?`<img src="assets/em-${s.img}.jpg" alt="">`:'<i class="dot"></i>'}<span><b>${esc(tx(s))}</b></span><span class="d">${s.d}</span></div></li>`}).join('');
  $('#games').innerHTML=G.map(g=>`<li><a class="gcard${g.fin?' fin':''}" href="#jeu-${g.id}"><div class="top"><img src="assets/em-${g.id}.jpg" alt=""><span class="tag">${esc(lbl(g))}</span></div><b>${esc(tx(g.name))}</b><span>${esc(tx(g.kind))}</span><div class="meta"><span>${g.dur} ${L().min}</span><span>${L().upto} ${g.max} PW</span></div></a></li>`).join('');
  const u=L();
  $('#cols').innerHTML=`<div class="box"><h3>${u.c1T}</h3><p>${esc(u.c1P)}</p><ol>${u.c1.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>

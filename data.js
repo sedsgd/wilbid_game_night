@@ -26,20 +26,20 @@ window.WB_SUPABASE = window.WB_LOCAL ? {
 } : null;
 
 window.WB_SCHEDULE = [
- {at:'19h30', id:null, fr:'Accueil, badges, cotisation, 10 Kola par joueur', en:'Welcome, badges, fee, 10 Kola per player', d:'30 min'},
+ {at:'19h30', id:null, img:'accueil', fr:'Accueil, badges, cotisation, 10 Kola par joueur', en:'Welcome, badges, fee, 10 Kola per player', d:'30 min'},
  {at:'20h00', id:'mokolo', d:'30 min'},
  {at:'20h40', id:'quiestqui', d:'40 min'},
  {at:'21h25', id:'njangi', d:'30 min'},
  {at:'22h00', id:'duos', d:'45 min'},
- {at:'22h45', id:null, fr:'Repas et musique', en:'Dinner and music', d:'60 min'},
+ {at:'22h45', id:null, img:'repas', fr:'Repas et musique', en:'Dinner and music', d:'60 min'},
  {at:'23h45', id:'wouri', d:'45 min'},
  {at:'00h40', id:'code', d:'50 min'},
- {at:'01h30', id:null, fr:'Pause', en:'Break', d:'20 min'},
+ {at:'01h30', id:null, img:'pause', fr:'Pause', en:'Break', d:'20 min'},
  {at:'01h50', id:'feymen', d:'50 min'},
- {at:'02h45', id:null, fr:'Conversion des Kola, classement, finalistes', en:'Kola conversion, standings, finalists', d:'15 min'},
+ {at:'02h45', id:null, img:'classement', fr:'Conversion des Kola, classement, finalistes', en:'Kola conversion, standings, finalists', d:'15 min'},
  {at:'03h00', id:'trone', d:'30 min'},
- {at:'03h30', id:null, fr:'Remise des gains, photo de groupe', en:'Prize-giving, group photo', d:'15 min'},
- {at:'03h45', id:null, fr:'Ambiance libre jusqu’au matin', en:'Party until morning', d:''}
+ {at:'03h30', id:null, img:'gains', fr:'Remise des gains, photo de groupe', en:'Prize-giving, group photo', d:'15 min'},
+ {at:'03h45', id:null, img:'ambiance', fr:'Ambiance libre jusqu’au matin', en:'Party until morning', d:''}
 ];
 
 window.WB_GAMES = [
