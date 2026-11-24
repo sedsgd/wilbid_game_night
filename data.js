@@ -3,19 +3,19 @@
 window.WB_LOCAL = location.protocol === 'file:' || location.hostname.endsWith('github.io');
 window.WB_LINKS = window.WB_LOCAL ? {
   site: 'index.html', timers: 'minuteurs/index.html', app: 'classement.html',
-  partners: 'documents/proposition/index.html', dossier: 'documents/dossier-mj/index.html'
+  partners: 'partenaires.html', dossier: 'documents/dossier-mj/index.html'
 } : {
   site: 'https://claude.ai/artifact/2QtXWpNXxMSQ8yavfC1Kc6', timers: 'https://claude.ai/artifact/6mQzfqrQMX5pHaj2fk6MAy',
-  app: 'classement.html', partners: 'https://claude.ai/artifact/1oh4MXRkS3SR4KRsE5VuGz', dossier: 'https://claude.ai/artifact/Q26Zry3aeHvFVvAFvMXst9'
+  app: 'classement.html', partners: 'partenaires.html', dossier: 'https://claude.ai/artifact/Q26Zry3aeHvFVvAFvMXst9'
 };
 window.WB_TIMERS = window.WB_LINKS.timers;
 /* Mentions légales (Impressum, § 5 DDG) : à remplir par la personne responsable du site.
    Tant qu'un champ est vide, la page legal.html affiche « à compléter ». */
 window.WB_LEGAL = {
-  name: '',      // Prénom Nom de la personne responsable
+  name: 'Minister Of Enjoyment',  // Prénom Nom de la personne responsable
   street: '',    // Rue et numéro
-  city: '',      // Code postal et ville, par ex. 96047 Bamberg
-  email: ''      // Adresse de contact
+  city: '91052 Erlangen',  // Code postal et ville
+  email: 'delta98@yahoo.com'  // Adresse de contact (aussi utilisée sur la page partenaires)
 };
 /* Base Supabase (UE, Francfort) : classement en ligne et comptes organisateurs.
    La clé « anon » est publique par conception : la sécurité vient des règles RLS de la base.

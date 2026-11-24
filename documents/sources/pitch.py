@@ -94,7 +94,7 @@ S.append(f'''<section class="slide light over">
 <div class="hl"><i>Partenaire de soirée</i><b>Le lieu, ou une contribution à la cagnotte</b><span>Votre logo sur les badges, le livret et le post Instagram, et un jeu présenté par vous.</span></div>
 <div><i>Partenaire de saison</i><b>Un soutien sur les 4 soirées de l'année</b><span>Tout ce qui précède, une page sur notre site, et la finale « Le Trône de Kola » à votre nom.</span></div>
 </div>
-<div class="ready"><b>Parlons-en</b><span>Nous adaptons chaque formule à ce que vous pouvez offrir. Contact : l'équipe d'organisation Wilbid Game Night.</span></div>
+<div class="ready"><b>Parlons-en</b><span>Nous adaptons chaque formule à ce que vous pouvez offrir. Écrivez-nous : delta98@yahoo.com, ou via sedsgd.github.io/wilbid_game_night/partenaires.html</span></div>
 <div class="pat"></div>
 {foot(8)}</section>''')
 

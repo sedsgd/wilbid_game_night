@@ -36,6 +36,7 @@ h3{font-size:clamp(16px,4.2vw,19px);margin:26px 0 6px;letter-spacing:-.02em}
 p{margin:0 0 12px;color:#E4E6F2}
 section a{color:var(--palm)}
 .who{font-style:normal;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:4px 0 16px;line-height:1.7}
+.who .ln{display:block}
 .todo{color:var(--bg);background:var(--palm);border-radius:6px;padding:0 6px;font-weight:700;font-size:14px}
 .upd{color:var(--mute);font-size:14px;margin-top:20px}
 [hidden]{display:none!important}
@@ -59,7 +60,7 @@ footer{border-top:1px solid var(--line)}
  <div lang="fr" data-l="fr">
  <section id="mentions"><h2>Mentions légales <small>Impressum</small></h2>
   <p>Informations fournies au titre du § 5 DDG (Digitale-Dienste-Gesetz).</p>
-  <address class="who"><b class="js-name"></b><br><span class="js-street"></span><br><span class="js-city"></span><br>E-mail : <span class="js-mail"></span></address>
+  <address class="who"><b class="js-name ln"></b><span class="js-street ln"></span><span class="js-city ln"></span><span class="ln">E-mail : <span class="js-mail"></span></span></address>
   <p>Responsable du contenu au sens du § 18, al. 2 MStV : la personne indiquée ci-dessus, à la même adresse.</p>
   <p>Wilbid Game Night est une soirée de jeux privée et non commerciale entre étudiants camerounais de Bamberg, Erlangen et Nürnberg. Elle n’est pas une association inscrite.</p>
   <h3>Responsabilité</h3>
@@ -80,9 +81,11 @@ footer{border-top:1px solid var(--line)}
   <p>Les données d’une soirée sont gardées jusqu’à la fin de la saison (le semestre) pour le classement cumulé, puis supprimées.</p>
   <h3>5. Comptes organisateurs</h3>
   <p>Les organisateurs se connectent à l’espace organisation avec une adresse e-mail et un mot de passe. Supabase stocke l’adresse, une empreinte chiffrée du mot de passe et la date de connexion, et envoie les e-mails de confirmation. Base légale : art. 6, al. 1, b et f RGPD. Un compte est supprimé sur simple demande.</p>
-  <h3>6. Stockage sur ton appareil</h3>
+  <h3>6. Demandes de partenariat</h3>
+  <p>Le formulaire de la page « Devenir partenaire » enregistre le nom, l’entreprise ou l’association, l’e-mail, le téléphone s’il est donné, la formule choisie et le message, dans la même base Supabase à Francfort. Seuls les organisateurs y ont accès, uniquement pour répondre. Base légale : art. 6, al. 1, b RGPD (démarches avant un éventuel accord). Les demandes sont supprimées au plus tard un an après le dernier échange.</p>
+  <h3>7. Stockage sur ton appareil</h3>
   <p>Le site n’utilise pas de cookies. Il garde dans le stockage local de ton navigateur ta langue préférée et, pour les organisateurs, la session de connexion et une copie de travail de la soirée. Ces éléments sont nécessaires au fonctionnement demandé (§ 25, al. 2 TDDDG) et ne quittent pas ton appareil, sauf la soirée envoyée à la base décrite au point 4. Tu peux les effacer à tout moment dans les réglages de ton navigateur.</p>
-  <h3>7. Tes droits</h3>
+  <h3>8. Tes droits</h3>
   <p>Tu as le droit d’accéder à tes données, de les faire corriger ou effacer, d’en limiter le traitement, de les recevoir dans un format lisible (portabilité) et de t’opposer à un traitement fondé sur l’intérêt légitime (art. 15 à 21 RGPD). Écris à l’adresse des mentions légales.</p>
   <p>Tu peux aussi porter plainte auprès de l’autorité de contrôle compétente : Bayerisches Landesamt für Datenschutzaufsicht (BayLDA), Promenade 18, 91522 Ansbach, <a href="https://www.lda.bayern.de" rel="noopener">www.lda.bayern.de</a>.</p>
   <p class="upd">Dernière mise à jour : novembre 2026.</p>
@@ -97,7 +100,7 @@ footer{border-top:1px solid var(--line)}
  <div lang="en" data-l="en" hidden>
  <section id="mentions-en"><h2>Legal notice <small>Impressum</small></h2>
   <p>Information provided under § 5 DDG (German Digital Services Act).</p>
-  <address class="who"><b class="js-name"></b><br><span class="js-street"></span><br><span class="js-city"></span><br>Email: <span class="js-mail"></span></address>
+  <address class="who"><b class="js-name ln"></b><span class="js-street ln"></span><span class="js-city ln"></span><span class="ln">Email: <span class="js-mail"></span></span></address>
   <p>Responsible for content under § 18 (2) MStV: the person named above, at the same address.</p>
   <p>Wilbid Game Night is a private, non-commercial games night among Cameroonian students in Bamberg, Erlangen and Nürnberg. It is not a registered association.</p>
   <h3>Liability</h3>
@@ -118,9 +121,11 @@ footer{border-top:1px solid var(--line)}
   <p>A night’s data is kept until the end of the season (the semester) for the cumulative ranking, then deleted.</p>
   <h3>5. Organiser accounts</h3>
   <p>Organisers sign in to the organiser area with an email address and a password. Supabase stores the address, a hashed form of the password and the sign-in time, and sends the confirmation emails. Legal basis: Art. 6(1)(b) and (f) GDPR. An account is deleted on request.</p>
-  <h3>6. Storage on your device</h3>
+  <h3>6. Partnership requests</h3>
+  <p>The form on the “Become a partner” page stores the name, company or association, email, phone if given, the chosen package and the message, in the same Supabase database in Frankfurt. Only the organisers can see them, and only to reply. Legal basis: Art. 6(1)(b) GDPR (steps prior to a possible agreement). Requests are deleted at the latest one year after the last exchange.</p>
+  <h3>7. Storage on your device</h3>
   <p>The site does not use cookies. It keeps your preferred language in your browser’s local storage and, for organisers, the sign-in session and a working copy of the night. These are needed for the service you ask for (§ 25 (2) TDDDG) and do not leave your device, except the night sent to the database described in point 4. You can clear them at any time in your browser settings.</p>
-  <h3>7. Your rights</h3>
+  <h3>8. Your rights</h3>
   <p>You have the right to access your data, have it corrected or erased, restrict its processing, receive it in a readable format (portability) and object to processing based on legitimate interest (Art. 15 to 21 GDPR). Write to the address in the legal notice.</p>
   <p>You can also complain to the competent supervisory authority: Bayerisches Landesamt für Datenschutzaufsicht (BayLDA), Promenade 18, 91522 Ansbach, <a href="https://www.lda.bayern.de" rel="noopener">www.lda.bayern.de</a>.</p>
   <p class="upd">Last updated: November 2026.</p>
@@ -152,6 +157,7 @@ function apply(){const u=UI[lang];document.documentElement.lang=lang;
  const toc=[...document.querySelectorAll('.toc a')];toc.forEach((a,i)=>a.href=ANCH[lang][i]);
  const fl=[...document.querySelectorAll('.flinks a')].slice(1);fl.forEach((a,i)=>a.href=ANCH[lang][i]);
  [['.js-name','name'],['.js-street','street'],['.js-city','city'],['.js-mail','email']].forEach(([s,k])=>document.querySelectorAll(s).forEach(e=>{const v=(LG[k]||'').trim();
+  if(k==='street'){e.hidden=!v;e.textContent=v;return}
   if(v){if(k==='email'){e.innerHTML='';const a=document.createElement('a');a.href='mailto:'+v;a.textContent=v;e.append(a)}else e.textContent=v}else{e.innerHTML='<span class="todo"></span>';e.firstChild.textContent=u.todo}}));
 }
 document.getElementById('lang').addEventListener('click',()=>{lang=lang==='fr'?'en':'fr';try{localStorage.setItem('wb-lang',lang)}catch(e){}

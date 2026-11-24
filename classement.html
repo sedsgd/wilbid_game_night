@@ -159,6 +159,16 @@ body.locked .tabs,body.locked #lockBtn,body.locked #toDossier,body.locked #toTim
 .sync::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--mute)}
 .sync[data-s=ok]::before{background:#3BB273}.sync[data-s=saving]::before{background:var(--palm)}.sync[data-s=err]::before{background:var(--kola)}
 .sync[hidden]{display:none}
+.tabs a[hidden]{display:none}
+.prs{display:grid;gap:12px}
+.pr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px}
+.pr.done{opacity:.55}
+.pr h3{font-size:19px;margin:0;hyphens:manual}.pr .meta{color:var(--mute);font-size:13px}
+.pr .ct{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 18px;font-size:15px}.pr .ct a{font-weight:700;min-height:32px;display:inline-flex;align-items:center;overflow-wrap:anywhere}
+.pr .fm{display:inline-block;font-size:12px;font-weight:800;padding:3px 10px;border-radius:99px;background:var(--palm);color:var(--bg)}
+.pr p{grid-column:1/-1;margin:4px 0 0;white-space:pre-wrap;color:#DCDFF0;font-size:15px}
+.pr label{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;min-height:44px;cursor:pointer;white-space:nowrap}
+.pr input[type=checkbox]{width:20px;height:20px;accent-color:var(--palm)}
 /* badges */
 .bsheet{display:grid;grid-template-columns:repeat(auto-fill,54mm);gap:6mm;justify-content:center;background:#fff;padding:10mm;border-radius:12px}
 .badge{width:54mm;height:86mm;position:relative;overflow:hidden;color:#141E4A;background:#F4F3EF;border:.3mm solid #DAD8CF;display:flex;flex-direction:column;align-items:center;text-align:center;font-family:var(--ft)}
@@ -204,6 +214,7 @@ body.locked .tabs,body.locked #lockBtn,body.locked #toDossier,body.locked #toTim
   <a href="#scores" data-v="scores" data-i="t3">Scores</a>
   <a href="#classement" data-v="classement" data-i="t4">Classement</a>
   <a href="#badges" data-v="badges" data-i="t5">Badges</a>
+  <a href="#partenaires" data-v="partenaires" data-i="t6" id="tabP" hidden>Partenaires</a>
  </nav>
  <div class="row acts"><a class="ib lk" id="toSite" href="index.html" data-i="site">Site</a><a class="ib lk" id="toDossier" href="#" data-i="dossier">Dossier du MJ</a><a class="ib lk" id="toTimers" href="minuteurs/index.html" data-i="timers">Minuteurs</a><a class="ib lk" href="#ecran" data-i="proj">Écran</a><span class="sync" id="sync" hidden></span><button class="ib" id="lockBtn" type="button" data-i="lockB">Verrouiller</button><button class="ib" id="lang" type="button">EN</button></div>
 </div></header>
@@ -279,6 +290,10 @@ body.locked .tabs,body.locked #lockBtn,body.locked #toDossier,body.locked #toTim
  <div class="bsheet" id="bsheet"></div>
 </section>
 
+<section class="view" id="v-partenaires">
+ <div class="head"><div><h1 data-i="prT">Demandes de partenariat</h1><p id="prL"></p></div><button class="btn ghost" id="prReload" type="button" data-i="refresh">Actualiser</button></div>
+ <div class="prs" id="prList"></div>
+</section>
 <section class="view" id="v-ecran">
  <a class="ib ec-close" href="#classement" data-i="close" style="display:inline-flex;align-items:center;text-decoration:none">Fermer</a>
  <div class="ec-top"><div><div class="acc" id="ecSub"></div><h1 data-i="ecT">Classement</h1></div><svg width="72" height="72" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#F2B705"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#141E4A"/></svg></div>
@@ -287,7 +302,7 @@ body.locked .tabs,body.locked #lockBtn,body.locked #toDossier,body.locked #toTim
 </section>
 
 </div></main>
-<footer class="cfoot"><div class="wrap">© <span class="yr">2026</span> Wilbid Game Night. <span data-i="rights">Tous droits réservés.</span> <a href="legal.html" id="toLegal" data-i="legal">Mentions légales et confidentialité</a></div></footer>
+<footer class="cfoot"><div class="wrap"><span>© <span class="yr">2026</span> Wilbid Game Night. <span data-i="rights">Tous droits réservés.</span></span> <a href="legal.html" id="toLegal" data-i="legal">Mentions légales et confidentialité</a></div></footer>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="data.js"></script>
@@ -316,7 +331,7 @@ fr:{sub:'classement',t1:'Joueurs',t2:'Équipes',t3:'Scores',t4:'Classement',t5:'
  pinA:'Code (4 chiffres ou plus)',pinB:'Retape le code',create:'Créer le code',open:'Déverrouiller',
  errShort:'Le code doit faire au moins 4 caractères.',errSame:'Les deux codes ne sont pas identiques.',errBad:'Code incorrect.',
  lkWhy:'Les joueurs, les équipes et les scores sont enregistrés uniquement sur cet appareil. Quelqu’un qui ouvre cette page sur son propre téléphone ne voit rien de la soirée et ne peut rien modifier.',
- lkScreen:'Voir l’écran du classement',forgot:'Code oublié ?',forgotL:'Le code ne peut pas être récupéré. Tu peux effacer toutes les données de la soirée sur cet appareil et choisir un nouveau code. Exporte d’abord la soirée si tu peux encore l’ouvrir ailleurs.',wipe:'Effacer cet appareil',locked:'Espace verrouillé',timers:'Minuteurs',rights:'Tous droits réservés.',legal:'Mentions légales et confidentialité',
+ lkScreen:'Voir l’écran du classement',forgot:'Code oublié ?',forgotL:'Le code ne peut pas être récupéré. Tu peux effacer toutes les données de la soirée sur cet appareil et choisir un nouveau code. Exporte d’abord la soirée si tu peux encore l’ouvrir ailleurs.',wipe:'Effacer cet appareil',locked:'Espace verrouillé',timers:'Minuteurs',t6:'Partenaires',refresh:'Actualiser',prT:'Demandes de partenariat',prL:'Les demandes envoyées depuis la page « Devenir partenaire » du site. Coche une demande quand quelqu’un a répondu.',prOff:'Les demandes de partenariat s’affichent ici sur le site en ligne, une fois connecté.',prNone:'Aucune demande pour l’instant.',prDone:'Traitée',prF:{ami:'Ami de la soirée',soiree:'Partenaire de soirée',saison:'Partenaire de saison',autre:'Autre'},rights:'Tous droits réservés.',legal:'Mentions légales et confidentialité',
  cT:'Connexion organisation',cL:'Connecte-toi avec ton compte organisateur. La soirée est enregistrée en ligne et partagée entre les appareils de l’équipe.',
  cSuT:'Créer mon compte',cSuL:'Choisis un mot de passe. L’accès s’ouvre une fois ton e-mail ajouté à la liste des organisateurs.',
  cFgT:'Mot de passe oublié',cFgL:'Entre ton e-mail. Tu reçois un lien pour choisir un nouveau mot de passe.',
@@ -345,7 +360,7 @@ en:{sub:'leaderboard',t1:'Players',t2:'Teams',t3:'Scores',t4:'Leaderboard',t5:'B
  pinA:'Code (4 digits or more)',pinB:'Type the code again',create:'Create the code',open:'Unlock',
  errShort:'The code must be at least 4 characters.',errSame:'The two codes do not match.',errBad:'Wrong code.',
  lkWhy:'Players, teams and scores are stored on this device only. Someone opening this page on their own phone sees nothing of the night and cannot change anything.',
- lkScreen:'See the leaderboard screen',forgot:'Forgot the code?',forgotL:'The code cannot be recovered. You can erase all of the night’s data on this device and choose a new code. Export the night first if you can still open it elsewhere.',wipe:'Erase this device',locked:'Area locked',timers:'Timers',rights:'All rights reserved.',legal:'Legal notice and privacy',
+ lkScreen:'See the leaderboard screen',forgot:'Forgot the code?',forgotL:'The code cannot be recovered. You can erase all of the night’s data on this device and choose a new code. Export the night first if you can still open it elsewhere.',wipe:'Erase this device',locked:'Area locked',timers:'Timers',t6:'Partners',refresh:'Refresh',prT:'Partnership requests',prL:'Requests sent from the website’s “Become a partner” page. Tick a request once someone has replied.',prOff:'Partnership requests show here on the live website, once signed in.',prNone:'No requests yet.',prDone:'Handled',prF:{ami:'Friend of the night',soiree:'Night partner',saison:'Season partner',autre:'Other'},rights:'All rights reserved.',legal:'Legal notice and privacy',
  cT:'Organiser sign-in',cL:'Sign in with your organiser account. The night is saved online and shared between the team’s devices.',
  cSuT:'Create my account',cSuL:'Choose a password. Access opens once your email is on the organiser list.',
  cFgT:'Forgot password',cFgL:'Enter your email. You will get a link to choose a new password.',
@@ -483,7 +498,7 @@ function renderBadges(){
 $('#printBtn').addEventListener('click',()=>window.print());
 
 /* ---- routing & language ---- */
-const VIEWS=['joueurs','equipes','scores','classement','badges','ecran'];
+const VIEWS=['joueurs','equipes','scores','classement','badges','partenaires','ecran'];
 let view='joueurs';
 /* ---- verrou : code propre à l'appareil, stocké seulement sous forme d'empreinte SHA-256 ---- */
 const PINK='wb-pin-v1',SESS='wb-unlocked';
@@ -544,7 +559,7 @@ async function doAuth(session){cloud.user=session?session.user:null;cloud.org=fa
  if(cloud.user){try{const {data,error}=await sb.from('organisers').select('email').limit(1);if(error)throw error;cloud.org=!!(data&&data.length);
    if(cloud.org&&!cloud.night)await openNight()}catch(e){console.warn(e);cloud.down=true;setSync('err')}}
  cloud.ready=true;route()}
-async function logout(){try{await sb.auth.signOut()}catch(e){}if(cloud.chan)sb.removeChannel(cloud.chan);cloud.chan=null;cloud.night=null;cloud.user=null;cloud.org=false;setSync('off');toast(L().loggedOut);route()}
+async function logout(){prData=null;try{await sb.auth.signOut()}catch(e){}if(cloud.chan)sb.removeChannel(cloud.chan);cloud.chan=null;cloud.night=null;cloud.user=null;cloud.org=false;setSync('off');toast(L().loggedOut);route()}
 function renderCloudLock(){const u=L(),m=cloud.mode;$('#lkForm').hidden=true;$('#lkReset').hidden=true;
  const showForm=cloud.ready&&(!cloud.user||m==='new');
  $('#cForm').hidden=!showForm;$('#cState').hidden=showForm;
@@ -582,7 +597,22 @@ if(sb){
  window.addEventListener('online',()=>{if(cloud.night)schedulePush()});
  setSync('off');
 }
-function renderCurrent(){({joueurs:renderPlayers,equipes:renderTeams,scores:renderEntry,classement:renderBoard,badges:renderBadges,ecran:renderEcran})[view]()}
+function renderCurrent(){({joueurs:renderPlayers,equipes:renderTeams,scores:renderEntry,classement:renderBoard,badges:renderBadges,partenaires:renderPartners,ecran:renderEcran})[view]()}
+/* ---- demandes de partenariat (formulaire de partenaires.html, mode en ligne seulement) ---- */
+let prData=null,prErr=false;
+async function loadPartners(){if(!sb||!cloud.night)return;try{const {data,error}=await sb.from('partner_requests').select('*').order('created_at',{ascending:false}).limit(200);if(error)throw error;prData=data;prErr=false}catch(e){console.warn(e);prErr=true}if(view==='partenaires')renderPartners()}
+function renderPartners(){const u=L(),el=$('#prList');$('#prL').textContent=sb?u.prL:u.prOff;$('#prReload').hidden=!sb;
+ if(!sb){el.innerHTML='';return}
+ if(prData===null&&!prErr){el.innerHTML=`<div class="empty">${u.cWait}</div>`;loadPartners();return}
+ if(prErr){el.innerHTML=`<div class="empty">${u.cDown}</div>`;return}
+ if(!prData.length){el.innerHTML=`<div class="empty">${u.prNone}</div>`;return}
+ const F=u.prF,d=t=>new Date(t).toLocaleDateString(lang==='en'?'en-GB':'fr-FR',{day:'numeric',month:'short',year:'numeric'});
+ el.innerHTML=prData.map(r=>`<article class="pr${r.handled?' done':''}"><div><h3>${esc(r.name)}${r.org?` · ${esc(r.org)}`:''}</h3><div class="meta">${d(r.created_at)} · <span class="fm">${esc(F[r.formula]||r.formula||'')}</span></div></div>
+ <label><input type="checkbox" data-pr="${esc(r.id)}"${r.handled?' checked':''}> ${u.prDone}</label>
+ <div class="ct"><a href="mailto:${esc(r.email)}?subject=${encodeURIComponent('Wilbid Game Night')}">${esc(r.email)}</a>${r.phone?`<a href="tel:${esc(r.phone.replace(/[^+\d]/g,''))}">${esc(r.phone)}</a>`:''}</div>${r.message?`<p>${esc(r.message)}</p>`:''}</article>`).join('')}
+$('#prList').addEventListener('change',async e=>{const c=e.target.closest('[data-pr]');if(!c)return;const r=prData.find(x=>x.id===c.dataset.pr);if(!r)return;
+ const {error}=await sb.from('partner_requests').update({handled:c.checked}).eq('id',r.id);if(error){c.checked=!c.checked;toast(L().cDown);return}r.handled=c.checked;renderPartners()});
+$('#prReload').addEventListener('click',()=>{prData=null;prErr=false;renderPartners()});
 function route(){const h=location.hash.slice(1);view=VIEWS.includes(h)?h:(st.players.length?'classement':'joueurs');
  const locked=view!=='ecran'&&!unlocked();
  document.body.classList.toggle('locked',locked);$('#lock').hidden=!locked;
@@ -590,7 +620,7 @@ function route(){const h=location.hash.slice(1);view=VIEWS.includes(h)?h:(st.pla
  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+view));
  document.querySelectorAll('.tabs a').forEach(a=>a.classList.toggle('on',a.dataset.v===view));
  document.body.classList.toggle('ecran',view==='ecran');renderCurrent()}
-function applyLang(){const u=L();document.documentElement.lang=lang;document.querySelectorAll('[data-i]').forEach(e=>{const v=u[e.dataset.i];if(typeof v==='string')e.textContent=v});$('#lang').textContent=u.langBtn;if(sb){$('#lockBtn').textContent=u.logout;const y=$('#sync');setSync(y.dataset.s||'off')}
+function applyLang(){const u=L();document.documentElement.lang=lang;document.querySelectorAll('[data-i]').forEach(e=>{const v=u[e.dataset.i];if(typeof v==='string')e.textContent=v});$('#lang').textContent=u.langBtn;$('#tabP').hidden=!sb;if(sb){$('#lockBtn').textContent=u.logout;const y=$('#sync');setSync(y.dataset.s||'off')}
  const K=window.WB_LINKS||{};const ext=h=>/^https?:/.test(h);[['#toLegal',/^https?:/.test(K.site||'')?'https://sedsgd.github.io/wilbid_game_night/legal.html':'legal.html'],['.bar .logo',K.site],['#toSite',K.site],['#lkSite',K.site],['#toDossier',K.dossier],['#toTimers',K.timers]].forEach(([sel,h])=>{const a=$(sel);if(!a||!h)return;a.href=h;if(ext(h)){a.target='_blank';a.rel='noopener'}});
  if(document.body.classList.contains('locked'))renderLock();else renderCurrent()}
 $('#lang').addEventListener('click',()=>{lang=lang==='fr'?'en':'fr';try{localStorage.setItem('wb-lang',lang)}catch(e){}applyLang()});

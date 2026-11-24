@@ -66,3 +66,25 @@ create index boards_live_idx on public.boards (is_live, updated_at desc);
 
 -- Temps réel
 alter publication supabase_realtime add table public.boards, public.nights;
+
+-- Migration « partner_requests », appliquée le 24/11/2026 : formulaire de la page partenaires
+create table public.partner_requests (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  name text not null check (char_length(name) between 2 and 120),
+  org text check (org is null or char_length(org) <= 160),
+  email text not null check (char_length(email) between 5 and 200 and email like '%_@_%._%'),
+  phone text check (phone is null or char_length(phone) <= 40),
+  formula text check (formula is null or formula in ('ami','soiree','saison','autre')),
+  message text check (message is null or char_length(message) <= 2000),
+  lang text check (lang is null or lang in ('fr','en')),
+  handled boolean not null default false
+);
+alter table public.partner_requests enable row level security;
+create policy "anyone sends a partner request" on public.partner_requests
+  for insert to anon, authenticated with check (handled = false);
+create policy "organisers read partner requests" on public.partner_requests
+  for select to authenticated using ((select public.is_organiser()));
+create policy "organisers update partner requests" on public.partner_requests
+  for update to authenticated using ((select public.is_organiser())) with check ((select public.is_organiser()));
+create index partner_requests_created_idx on public.partner_requests (created_at desc);
