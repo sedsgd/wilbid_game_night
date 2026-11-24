@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wilbid Game Night, lettre de demande de sponsoring</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)' fill='%23F2B705'%3E%3Ccircle cx='14' cy='14' r='9.2'/%3E%3Ccircle cx='34' cy='14' r='9.2'/%3E%3Ccircle cx='14' cy='34' r='9.2'/%3E%3Ccircle cx='34' cy='34' r='9.2'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<style>
+/* VOICE  a formal letter from a student community: courteous, concrete, short enough to read in two minutes.
+   IDEA   plain white A4 business letter, signed by the ndop night: a thin ndop band on top, the kola mark, DIN 5008 layout so it fits a window envelope.
+   COLOUR white paper, indigo ink, kola red for the mark and subject, palm only as a hairline. TYPE Manrope body, Syne for the name and titles. */
+@page{size:A4;margin:0}
+:root{--ink:#141E4A;--mute:#4A5285;--line:#D9D6CC;--kola:#E0452F;--palm:#F2B705;--fd:Syne,Manrope,sans-serif;--ft:Manrope,system-ui,sans-serif;--fa:'Instrument Serif',Georgia,serif}
+*{box-sizing:border-box}
+html{background:#D8DAE6}
+body{margin:0;font:9.9pt/1.46 var(--ft);color:var(--ink);-webkit-font-smoothing:antialiased}
+.page{width:210mm;height:297mm;margin:10mm auto;background:#fff;position:relative;overflow:hidden;box-shadow:0 10px 40px rgba(20,30,74,.18);padding:0 20mm 0 25mm}
+.band{position:absolute;left:0;right:0;top:0;height:7mm;background:url(../../assets/pattern.jpg) center 8%/auto 600% repeat-x;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.head{position:absolute;left:25mm;right:20mm;top:15mm;display:flex;justify-content:space-between;align-items:flex-start}
+.brand{display:flex;align-items:center;gap:3mm}
+.brand b{font:800 17pt/1 var(--fd);letter-spacing:-.03em}
+.brand small{display:block;font:400 italic 11pt var(--fa);color:var(--kola);margin-top:1mm}
+.sender{text-align:right;font-size:8.4pt;line-height:1.5;color:var(--mute)}
+.sender b{color:var(--ink)}
+/* DIN 5008 B : champ adresse à 45 mm du haut, 85 × 45 mm */
+.addr{position:absolute;left:25mm;top:45mm;width:85mm;height:45mm}
+.ret{font-size:7pt;color:var(--mute);border-bottom:.3mm solid var(--line);padding-bottom:1mm;margin-bottom:3mm;white-space:nowrap}
+.to{font-size:10pt;line-height:1.45;min-height:30mm}
+.info{position:absolute;left:120mm;top:50mm;width:70mm;font-size:8.6pt;line-height:1.6}
+.info div{display:grid;grid-template-columns:19mm 1fr;gap:2mm}
+.info span:first-child{color:var(--mute)}
+.body{position:absolute;left:25mm;right:20mm;top:96mm}
+.subj{font-weight:800;font-size:10.6pt;margin:0 0 5mm}
+.subj i{display:block;width:12mm;height:.8mm;background:var(--kola);margin-bottom:2.5mm}
+.body p{margin:0 0 2.6mm;text-align:left}
+.sign{margin-top:4mm}
+.sign .nm{font-weight:800;margin-top:9mm}
+.sign .rl{color:var(--mute);font-size:9.2pt}
+.att{margin-top:3mm;font-size:8.6pt;color:var(--mute)}
+.foot{position:absolute;left:25mm;right:20mm;bottom:10mm;border-top:.3mm solid var(--line);padding-top:2.5mm;display:flex;justify-content:space-between;gap:4mm;font-size:7.6pt;color:var(--mute)}
+.foot b{color:var(--ink);font-family:var(--fd)}
+.pn{position:absolute;right:20mm;bottom:4.5mm;font-size:7pt;color:var(--mute)}
+/* page 2 */
+.p2 .body{top:38mm}
+.p2 h2{font:800 17pt/1.1 var(--fd);letter-spacing:-.025em;margin:0 0 2mm}
+.p2 .lead{color:var(--mute);margin-bottom:7mm}
+table{width:100%;border-collapse:collapse;font-size:9.4pt;margin-bottom:8mm}
+th{text-align:left;font:800 8.4pt var(--ft);text-transform:uppercase;letter-spacing:.06em;color:var(--mute);border-bottom:.5mm solid var(--ink);padding:0 3mm 2mm 0}
+td{vertical-align:top;border-bottom:.3mm solid var(--line);padding:3mm 3mm 3mm 0}
+td:first-child{width:38mm}
+td b{font:800 10.5pt var(--fd);letter-spacing:-.02em;display:block}
+td small{color:var(--kola);font:400 italic 10pt var(--fa)}
+tr.star td{background:#F7F5EF}
+tr.star td:first-child{border-left:1mm solid var(--palm);padding-left:2.5mm}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm;margin-bottom:8mm}
+.facts div{border-top:.6mm solid var(--ink);padding-top:2mm;font-size:8.6pt;color:var(--mute)}
+.facts b{display:block;font:800 15pt var(--fd);color:var(--ink);letter-spacing:-.02em}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:8mm}
+.cols h3{font:800 10.5pt var(--fd);margin:0 0 2mm}
+.cols ul{margin:0;padding-left:4.5mm;font-size:9.2pt}
+.cols li{margin-bottom:1.2mm}
+.kontakt{margin-top:8mm;background:var(--ink);color:#fff;border-radius:2.5mm;padding:5mm 6mm;display:flex;justify-content:space-between;align-items:center;gap:6mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.kontakt b{font:800 12pt var(--fd);color:var(--palm)}
+.kontakt span{font-size:9.2pt}
+/* editable fields */
+[contenteditable]{outline:none;border-radius:1mm;transition:background .15s}
+[contenteditable]:hover,[contenteditable]:focus{background:#FFF6D6}
+[contenteditable]:empty::before{content:attr(data-ph);color:#A3A7C2}
+/* screen toolbar */
+.bar{position:sticky;top:0;z-index:5;background:#141E4A;color:#F4F3EF;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 14px;padding:10px 16px;font:600 14px var(--ft)}
+.bar a,.bar button{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:99px;border:1.5px solid rgba(244,243,239,.45);background:transparent;color:inherit;font:800 14px var(--ft);text-decoration:none;cursor:pointer}
+.bar button.on{background:#F4F3EF;color:#141E4A;border-color:#F4F3EF}
+.bar .pr{background:#F2B705;border-color:#F2B705;color:#141E4A}
+.bar .tip{font-weight:500;font-size:13px;color:#B9C0E6;flex-basis:100%;text-align:center}
+[data-l]{display:none}body.fr [data-l=fr],body.de [data-l=de]{display:block}
+@media screen and (max-width:860px){.page{zoom:.46}}
+@media screen and (min-width:861px) and (max-width:1100px){.page{zoom:.8}}
+@media print{html{background:none}.bar{display:none}.page{margin:0;box-shadow:none;break-after:page}[contenteditable]:empty::before{content:""}}
+</style>
+</head>
+<body class="fr">
+<div class="bar"><a id="wbBack" href="../../index.html">← Wilbid</a><button type="button" data-set="fr" class="on">Français</button><button type="button" data-set="de">Deutsch</button><button type="button" class="pr" id="print">Imprimer ou PDF</button><a id="pdfL" href="Wilbid-lettre-sponsoring-FR.pdf" download>PDF prêt à joindre</a><span class="tip" id="tip">Clique sur l’adresse, la formule d’appel ou la signature pour les modifier, puis imprime ou enregistre en PDF.</span></div>
+
+<!-- ============ FRANÇAIS ============ -->
+<div data-l="fr">
+<section class="page">
+ <div class="band"></div>
+ <div class="head">
+  <div class="brand"><svg width="34" height="34" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#E0452F"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg><div><b>wilbid Game Night</b><small>Bamberg · Erlangen · Nürnberg</small></div></div>
+  <div class="sender"><b class="js-name"></b><br><span class="js-city"></span><br><span class="js-mail"></span><br>sedsgd.github.io/wilbid_game_night</div>
+ </div>
+ <div class="addr"><div class="ret">Wilbid Game Night · <span class="js-city"></span></div>
+  <div class="to" contenteditable="true" data-ph="Nom de l’entreprise ou de l’association&#10;À l’attention de …&#10;Rue et numéro&#10;Code postal et ville">Nom de l’entreprise ou de l’association<br>À l’attention du service communication<br>Rue et numéro<br>Code postal et ville</div></div>
+ <div class="info">
+  <div><span>Lieu, date</span><span><span class="js-cityonly"></span>, le <span class="js-date-fr"></span></span></div>
+  <div><span>Contact</span><span class="js-name"></span></div>
+  <div><span>E-mail</span><span class="js-mail"></span></div>
+  <div><span>Réf.</span><span>Partenariat saison 1</span></div>
+ </div>
+ <div class="body">
+  <p class="subj"><i></i>Objet : demande de partenariat pour la Wilbid Game Night, saison 1</p>
+  <p contenteditable="true">Madame, Monsieur,</p>
+  <p>Nous sommes un groupe d’étudiants camerounais installés à Bamberg, Erlangen et Nürnberg. Cette saison, nous organisons la Wilbid Game Night : une nuit entière de jeux de stratégie, de négociation et de bluff, qui réunit deux fois par semestre de 15 à plus de 20 participants, au sein d’une communauté de 35 membres.</p>
+  <p>Loin de chez eux, beaucoup d’étudiants ont peu d’occasions de se retrouver. La Wilbid Game Night leur offre un rendez-vous régulier : les équipes sont tirées au sort à chaque jeu, chacun fait connaissance, on réfléchit ensemble et on partage un repas. Nos huit jeux sont originaux et s’inspirent de la culture camerounaise : la tontine devient un jeu d’enchères, et la noix de kola sert de monnaie toute la nuit.</p>
+  <p>Nous vous écrivons pour vous proposer de soutenir cette initiative. Votre soutien peut prendre plusieurs formes : un lieu pour une nuit, des lots ou une contribution à la cagnotte, des boissons ou de la nourriture, ou l’impression de nos livrets, cartes et badges. Aujourd’hui, chaque soirée repose sur une cotisation de 8 € par joueur et environ 57 € de matériel : chaque apport profite directement aux participants.</p>
+  <p>En retour, nous vous offrons une visibilité tout au long de la nuit : votre logo sur les badges, les livrets et les cartes, une mention dans nos annonces WhatsApp et Instagram, un jeu ou la finale présentés en votre nom, et les photos de la soirée. Vous trouverez au verso nos trois formules, que nous adaptons volontiers à ce que vous pouvez offrir.</p>
+  <p>Nous serions heureux de vous présenter le projet de vive voix, par téléphone ou lors d’une rencontre. Vous pouvez nous répondre par e-mail à <b class="js-mail"></b> ou sur notre page partenaires : sedsgd.github.io/wilbid_game_night/partenaires.html.</p>
+  <p>Dans l’attente de votre réponse, nous vous prions d’agréer, Madame, Monsieur, l’expression de nos salutations distinguées.</p>
+  <div class="sign"><div class="nm js-name" contenteditable="true"></div><div class="rl">pour l’équipe d’organisation de la Wilbid Game Night</div></div>
+  <p class="att">Pièce jointe : dossier de partenariat (PDF)</p>
+ </div>
+ <div class="foot"><span><b>wilbid</b> Game Night · soirée étudiante privée et non commerciale</span><span class="js-mail"></span><span>sedsgd.github.io/wilbid_game_night</span></div>
+ <div class="pn">1 / 2</div>
+</section>
+<section class="page p2">
+ <div class="band"></div>
+ <div class="head"><div class="brand"><svg width="26" height="26" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#E0452F"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg><div><b style="font-size:13pt">wilbid Game Night</b></div></div><div class="sender">Annexe à la lettre du <span class="js-date-fr"></span></div></div>
+ <div class="body">
+  <h2>La soirée en bref</h2>
+  <p class="lead">Une nuit de jeux qui réunit la communauté étudiante camerounaise de Franconie.</p>
+  <div class="facts"><div><b>35</b>membres dans la communauté</div><div><b>15 à 20+</b>participants par soirée</div><div><b>4</b>soirées par an, deux par semestre</div><div><b>8 h</b>de 19h30 à 4h environ</div></div>
+  <h2>Nos formules de partenariat</h2>
+  <p class="lead">Chaque formule s’adapte à ce que vous pouvez offrir.</p>
+  <table>
+   <thead><tr><th>Formule</th><th>Votre apport</th><th>Votre visibilité</th></tr></thead>
+   <tbody>
+    <tr><td><b>Ami de la soirée</b><small>une soirée</small></td><td>Un lot, des boissons ou de la nourriture</td><td>Votre nom cité dans l’annonce et remercié pendant la soirée</td></tr>
+    <tr class="star"><td><b>Partenaire de soirée</b><small>une soirée</small></td><td>Le lieu, ou une contribution à la cagnotte</td><td>Votre logo sur les badges, le livret et le post Instagram, un jeu « présenté par » vous, un lot remis en votre nom</td></tr>
+    <tr><td><b>Partenaire de saison</b><small>quatre soirées</small></td><td>Un soutien sur les quatre soirées de l’année</td><td>Tout ce qui précède à chaque soirée, une place sur notre site, et la finale « Le Trône de Kola » à votre nom</td></tr>
+   </tbody>
+  </table>
+  <div class="cols">
+   <div><h3>Le programme d’une nuit</h3><ul><li>19h30, accueil et remise des badges</li><li>20h00, quatre jeux pour faire connaissance</li><li>22h45, repas partagé</li><li>23h45, trois jeux de stratégie</li><li>03h00, finale à quatre, puis remise des gains</li></ul></div>
+   <div><h3>Nos engagements</h3><ul><li>Un accord écrit simple, avant la soirée</li><li>Votre logo utilisé seulement avec votre accord</li><li>Un compte rendu et des photos après la soirée</li><li>Chaque apport affecté directement aux participants</li></ul></div>
+  </div>
+  <div class="kontakt"><b>Parlons-en</b><span><span class="js-name"></span> · <span class="js-mail"></span><br>sedsgd.github.io/wilbid_game_night/partenaires.html</span></div>
+ </div>
+ <div class="foot"><span><b>wilbid</b> Game Night · soirée étudiante privée et non commerciale</span><span class="js-mail"></span><span>sedsgd.github.io/wilbid_game_night</span></div>
+ <div class="pn">2 / 2</div>
+</section>
+</div>
+
+<!-- ============ DEUTSCH ============ -->
+<div data-l="de">
+<section class="page">
+ <div class="band"></div>
+ <div class="head">
+  <div class="brand"><svg width="34" height="34" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#E0452F"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg><div><b>wilbid Game Night</b><small>Bamberg · Erlangen · Nürnberg</small></div></div>
+  <div class="sender"><b class="js-name"></b><br><span class="js-city"></span><br><span class="js-mail"></span><br>sedsgd.github.io/wilbid_game_night</div>
+ </div>
+ <div class="addr"><div class="ret">Wilbid Game Night · <span class="js-city"></span></div>
+  <div class="to" contenteditable="true" data-ph="Firma oder Verein&#10;z. Hd. …&#10;Straße und Hausnummer&#10;PLZ und Ort">Firma oder Verein<br>z. Hd. Marketing / Sponsoring<br>Straße und Hausnummer<br>PLZ und Ort</div></div>
+ <div class="info">
+  <div><span>Ort, Datum</span><span><span class="js-cityonly"></span>, <span class="js-date-de"></span></span></div>
+  <div><span>Kontakt</span><span class="js-name"></span></div>
+  <div><span>E-Mail</span><span class="js-mail"></span></div>
+  <div><span>Betreff</span><span>Partnerschaft Saison 1</span></div>
+ </div>
+ <div class="body">
+  <p class="subj"><i></i>Sponsoringanfrage für die Wilbid Game Night, Saison 1</p>
+  <p contenteditable="true">Sehr geehrte Damen und Herren,</p>
+  <p>wir sind eine Gruppe kamerunischer Studierender in Bamberg, Erlangen und Nürnberg. In dieser Saison organisieren wir die Wilbid Game Night: eine ganze Nacht voller Strategie-, Verhandlungs- und Bluffspiele, die zweimal pro Semester 15 bis über 20 Teilnehmende aus einer Community von 35 Mitgliedern zusammenbringt.</p>
+  <p>Fern von zu Hause haben viele Studierende nur wenige Gelegenheiten, sich zu treffen. Die Wilbid Game Night bietet ihnen einen festen Treffpunkt: Bei jedem Spiel werden die Teams neu ausgelost, alle lernen sich kennen, man denkt gemeinsam nach und isst zusammen. Unsere acht Spiele sind Eigenentwicklungen und von der kamerunischen Kultur inspiriert: Aus der Tontine, einem traditionellen Sparkreis, wird ein Auktionsspiel, und die Kolanuss dient die ganze Nacht als Währung.</p>
+  <p>Wir möchten Sie einladen, diese Initiative zu unterstützen. Ihre Unterstützung kann verschiedene Formen annehmen: ein Veranstaltungsort für eine Nacht, Preise oder ein Beitrag zum Preisgeld, Getränke oder Speisen, oder der Druck unserer Spielhefte, Karten und Namensschilder. Derzeit finanziert sich jeder Abend über einen Teilnahmebeitrag von 8 € pro Person und rund 57 € Materialkosten: Jeder Beitrag kommt direkt den Teilnehmenden zugute.</p>
+  <p>Im Gegenzug bieten wir Ihnen Sichtbarkeit während der gesamten Nacht: Ihr Logo auf Namensschildern, Spielheften und Karten, eine Erwähnung in unseren WhatsApp- und Instagram-Ankündigungen, ein Spiel oder das Finale „präsentiert von“ Ihnen sowie die Fotos des Abends. Auf der Rückseite finden Sie unsere drei Partnerschaftspakete, die wir gerne an Ihre Möglichkeiten anpassen.</p>
+  <p>Gerne stellen wir Ihnen das Projekt persönlich vor, telefonisch oder bei einem Treffen. Sie erreichen uns per E-Mail unter <b class="js-mail"></b> oder über unsere Partnerseite: sedsgd.github.io/wilbid_game_night/partenaires.html.</p>
+  <p>Wir freuen uns auf Ihre Rückmeldung.</p>
+  <div class="sign"><div style="margin-top:-1mm">Mit freundlichen Grüßen</div><div class="nm js-name" contenteditable="true" style="margin-top:8mm"></div><div class="rl">für das Organisationsteam der Wilbid Game Night</div></div>
+  <p class="att">Anlage: Partnerschaftsmappe (PDF, auf Französisch)</p>
+ </div>
+ <div class="foot"><span><b>wilbid</b> Game Night · private Studierendenveranstaltung</span><span class="js-mail"></span><span>sedsgd.github.io/wilbid_game_night</span></div>
+ <div class="pn">1 / 2</div>
+</section>
+<section class="page p2">
+ <div class="band"></div>
+ <div class="head"><div class="brand"><svg width="26" height="26" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#E0452F"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg><div><b style="font-size:13pt">wilbid Game Night</b></div></div><div class="sender">Anlage zum Schreiben vom <span class="js-date-de"></span></div></div>
+ <div class="body">
+  <h2>Der Abend auf einen Blick</h2>
+  <p class="lead">Eine Spielenacht, die die kamerunische Studierenden-Community in Franken zusammenbringt.</p>
+  <div class="facts"><div><b>35</b>Mitglieder in der Community</div><div><b>15–20+</b>Teilnehmende pro Abend</div><div><b>4</b>Abende pro Jahr, zwei pro Semester</div><div><b>8 Std.</b>von 19:30 bis etwa 4 Uhr</div></div>
+  <h2>Unsere Partnerschaftspakete</h2>
+  <p class="lead">Jedes Paket passen wir gerne an Ihre Möglichkeiten an.</p>
+  <table>
+   <thead><tr><th>Paket</th><th>Ihr Beitrag</th><th>Ihre Sichtbarkeit</th></tr></thead>
+   <tbody>
+    <tr><td><b>Freund des Abends</b><small>ein Abend</small></td><td>Ein Preis, Getränke oder Speisen</td><td>Namentliche Erwähnung in der Ankündigung und Dank während des Abends</td></tr>
+    <tr class="star"><td><b>Partner des Abends</b><small>ein Abend</small></td><td>Der Veranstaltungsort oder ein Beitrag zum Preisgeld</td><td>Ihr Logo auf Namensschildern, Spielheft und Instagram-Post, ein Spiel „präsentiert von“ Ihnen, ein Preis in Ihrem Namen</td></tr>
+    <tr><td><b>Saisonpartner</b><small>vier Abende</small></td><td>Unterstützung für alle vier Abende des Jahres</td><td>Alle genannten Leistungen an jedem Abend, ein Platz auf unserer Website und das Finale „Der Kola-Thron“ in Ihrem Namen</td></tr>
+   </tbody>
+  </table>
+  <div class="cols">
+   <div><h3>Ablauf einer Nacht</h3><ul><li>19:30 Empfang und Namensschilder</li><li>20:00 vier Spiele zum Kennenlernen</li><li>22:45 gemeinsames Essen</li><li>23:45 drei Strategiespiele</li><li>3:00 Finale zu viert, danach Preisverleihung</li></ul></div>
+   <div><h3>Unsere Zusagen</h3><ul><li>Eine einfache schriftliche Vereinbarung vor dem Abend</li><li>Verwendung Ihres Logos nur mit Ihrer Freigabe</li><li>Ein kurzer Bericht mit Fotos nach dem Abend</li><li>Jeder Beitrag kommt direkt den Teilnehmenden zugute</li></ul></div>
+  </div>
+  <div class="kontakt"><b>Sprechen wir darüber</b><span><span class="js-name"></span> · <span class="js-mail"></span><br>sedsgd.github.io/wilbid_game_night/partenaires.html</span></div>
+ </div>
+ <div class="foot"><span><b>wilbid</b> Game Night · private Studierendenveranstaltung</span><span class="js-mail"></span><span>sedsgd.github.io/wilbid_game_night</span></div>
+ <div class="pn">2 / 2</div>
+</section>
+</div>
+
+<script src="../../data.js"></script>
+<script>
+{
+const LG=window.WB_LEGAL||{},q=new URLSearchParams(location.search);
+const name=(LG.name||'').trim()||'Wilbid Game Night',mail=(LG.email||'').trim(),city=(LG.city||'').trim()||'Erlangen';
+const cityOnly=city.replace(/^\d{4,5}\s*/,'');
+const d=new Date();
+document.querySelectorAll('.js-name').forEach(e=>{if(!e.textContent.trim())e.textContent=name});
+document.querySelectorAll('.js-mail').forEach(e=>e.textContent=mail);
+document.querySelectorAll('.js-city').forEach(e=>e.textContent=city);
+document.querySelectorAll('.js-cityonly').forEach(e=>e.textContent=cityOnly);
+document.querySelectorAll('.js-date-fr').forEach(e=>e.textContent=d.toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'}));
+document.querySelectorAll('.js-date-de').forEach(e=>e.textContent=d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'}));
+const TIP={fr:'Clique sur l’adresse, la formule d’appel ou la signature pour les modifier, puis imprime ou enregistre en PDF.',de:'Adresse, Anrede oder Unterschrift anklicken und anpassen, dann drucken oder als PDF speichern.'};
+const PR={fr:'Imprimer ou PDF',de:'Drucken oder PDF'};
+function set(l){document.body.className=l;document.documentElement.lang=l;document.querySelectorAll('[data-set]').forEach(b=>b.classList.toggle('on',b.dataset.set===l));document.getElementById('tip').textContent=TIP[l];const pl=document.getElementById('pdfL');pl.href=l==='de'?'Wilbid-Sponsoringanfrage-DE.pdf':'Wilbid-lettre-sponsoring-FR.pdf';pl.textContent=l==='de'?'Fertiges PDF':'PDF prêt à joindre';document.getElementById('print').textContent=PR[l];document.title=l==='de'?'Wilbid Game Night, Sponsoringanfrage':'Wilbid Game Night, lettre de demande de sponsoring'}
+document.querySelectorAll('[data-set]').forEach(b=>b.addEventListener('click',()=>set(b.dataset.set)));
+document.getElementById('print').addEventListener('click',()=>window.print());
+set(q.get('lang')==='de'?'de':'fr');
+if(q.has('blank'))document.querySelectorAll('.to').forEach(e=>e.innerHTML='');
+const l=location.protocol==='file:'||location.hostname.endsWith('github.io');if(!l){const a=document.getElementById('wbBack');a.href='https://claude.ai/artifact/2QtXWpNXxMSQ8yavfC1Kc6';a.target='_blank';a.rel='noopener'}
+}
+</script>
+</body>
+</html>
