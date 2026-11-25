@@ -1,0 +1,14 @@
+/* Wilbid Game Night, saison 2 « Toghu » : jetons de couleur et de police */
+:root{
+  --s2-velours:#17110E;   /* fond principal */
+  --s2-velours-2:#251B16; /* surfaces sur velours */
+  --s2-coton:#F6EBD9;     /* texte, fil blanc */
+  --s2-coton-2:#CDBFA8;   /* texte secondaire sur velours */
+  --s2-toghu:#F07A1A;     /* accent de la saison */
+  --s2-or:#F2B705;        /* gains, orga */
+  --s2-kola:#E0452F;      /* MJ */
+  --s2-raphia:#1E8A5A;    /* finale uniquement */
+  --s2-marque:Syne,"Arial Black",sans-serif;          /* 800 : logo, titres, scores */
+  --s2-texte:Manrope,system-ui,sans-serif;            /* 400-800 : texte */
+  --s2-accent:Gloock,Georgia,serif;                   /* accents, titres de saison */
+}
