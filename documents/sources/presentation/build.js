@@ -19,6 +19,7 @@ const G = Object.fromEntries(GAMES.map(g => [g.id, g]));
 const at = id => SCHED.find(s => s.id === id || s.img === id);
 
 /* Ndop Nuit : nuit indigo, rouge kola, jaune palme, violet safou */
+const S2 = { velours: '17110E', coton: 'F6EBD9', orange: 'F07A1A', or: 'F2B705' };   // identité saison 2 « Toghu »
 const HEX = { deep: '0D1538', navy: '141E4A', card: '1C2860', line: '2B3770', ink: 'F4F3EF', mute: 'B9C0E6', kola: 'E0452F', palm: 'F2B705', safou: '7A4FA3' };
 const THEME = {
   name: 'Wilbid Ndop Nuit', headFontFace: 'Arial', bodyFontFace: 'Arial',
@@ -32,9 +33,9 @@ async function prepImages() {
   const A = n => path.join(ROOT, 'assets', n);
   const out = {};
   // emblèmes détourés en cercle, pour qu'ils se posent sur n'importe quel fond
-  const ems = ['accueil','mokolo','quiestqui','njangi','duos','repas','wouri','code','pause','feymen','classement','trone','gains','ambiance','kola'];
+  const ems = ['accueil','mokolo','quiestqui','njangi','duos','repas','wouri','code','pause','feymen','classement','trone','gains','ambiance','kola','kongossa'];   // em-kongossa.jpg : à défaut, l’emblème kola
   for (const e of ems) {
-    const src = A(`em-${e}.jpg`); const meta = await sharp(src).metadata(); const s = Math.min(meta.width, meta.height);
+    const src = fs.existsSync(A(`em-${e}.jpg`)) ? A(`em-${e}.jpg`) : A('em-kola.jpg'); const meta = await sharp(src).metadata(); const s = Math.min(meta.width, meta.height);
     const r = s / 2 - 1;
     const mask = Buffer.from(`<svg width="${s}" height="${s}"><circle cx="${s/2}" cy="${s/2}" r="${r}" fill="#fff"/></svg>`);
     out[e] = path.join(TMP, `em-${e}.png`);
@@ -47,7 +48,7 @@ async function prepImages() {
     .composite([{ input: tile, tile: true, top: 0, left: 0 },
                 { input: { create: { width: 1920, height: 1080, channels: 4, background: { r: 13, g: 21, b: 56, alpha: 0.86 } } } }])
     .jpeg({ quality: 86 }).toFile(out.pattern);
-  out.hero = A('hero.jpg'); out.mokolo = A('mokolo.jpg');
+  out.hero = A('hero.jpg'); out.s2hero = path.join(__dirname, 'images/s2-hero.jpg'); out.mokolo = A('mokolo.jpg');
   // QR codes
   const qr = async (url, name) => { const f = path.join(TMP, name); await QR.toFile(f, url, { width: 600, margin: 2, color: { dark: '#' + HEX.deep, light: '#' + HEX.ink } }); return f; };
   out.qrAvis = await qr(SITE + 'avis.html', 'qr-avis.png');
@@ -100,7 +101,7 @@ async function build() {
     const s = pres.addSlide({ masterName: 'WB_MOTIF', sectionTitle: sec });
     emblem(s, o.em, 0.85, 1.15, 5.2);
     // bloc de texte centré verticalement sur l'emblème
-    const tH = lines(o.title, 46, 6.4, 0.6) * 0.72, aH = o.accent ? 0.75 : 0, bH = o.body ? lines(o.body, 20, 6.2) * 0.36 + 0.1 : 0, nH = o.next ? 0.75 : 0;
+    const tH = (o.titleLines || lines(o.title, 46, 6.4, 0.55)) * 0.72, aH = o.accent ? 0.75 : 0, bH = o.body ? lines(o.body, 20, 6.2) * 0.36 + 0.1 : 0, nH = o.next ? 0.75 : 0;
     let y = 3.75 - (0.5 + tH + 0.15 + aH + bH + nH) / 2;
     kicker(s, o.kicker, 6.3, y, 6.4, o.kColor); y += 0.5;
     tb(s, o.title, { x: 6.3, y, w: 6.4, h: tH, fontSize: 46, bold: true, valign: 'top', objectName: 'titre' }); y += tH + 0.15;
@@ -124,7 +125,7 @@ async function build() {
     kicker(s, 'Saison 1 · Ndop Nuit', M + 0.1, 1.5, 6.4);
     tb(s, 'Wilbid\nGame Night', { x: M + 0.1, y: 2.0, w: 6.6, h: 2.3, fontSize: 66, bold: true, valign: 'top', lineSpacingMultiple: 0.9 });
     tb(s, 'Une nuit de stratégie, d’alliances et de bluff', { x: M + 0.1, y: 4.35, w: 6.4, h: 0.6, fontSize: 24, italic: true, fontFace: SERIF, color: PALM });
-    tb(s, 'Installe-toi, prends ton badge et tes 10 Kola.\nOn commence à 20h00.', { x: M + 0.1, y: 5.3, w: 6.4, h: 0.9, fontSize: 18, color: MUTE });
+    tb(s, 'Installe-toi : badge, 10 Kola et enveloppe Kongossa.\nOn commence à 20h00.', { x: M + 0.1, y: 5.3, w: 6.4, h: 0.9, fontSize: 18, color: MUTE });
     NOTES(s, 'Écran d’attente, affiché pendant l’accueil (19h30 à 20h00). Musique douce. Les organisateurs distribuent badges et Kola, encaissent la cotisation.');
   }
 
@@ -161,7 +162,7 @@ async function build() {
       tb(s, big, { x: x + 0.4, y: 3.85, w: cw - 0.8, h: 0.9, fontSize: 38, bold: true, color: PALM });
       tb(s, txt, { x: x + 0.4, y: 4.8, w: cw - 0.8, h: 1.5, fontSize: 18, color: INK, valign: 'top' });
     });
-    NOTES(s, 'Vérifier que chacun a son badge, a payé sa cotisation et a reçu ses 10 Kola. Pour le repas, chacun a apporté un plat ou une boisson : les remercier.');
+    NOTES(s, 'Vérifier que chacun a son badge, a payé sa cotisation, a reçu ses 10 Kola et son enveloppe Opération Kongossa (à ne pas ouvrir avant 20h00). Pour le repas, chacun a apporté un plat ou une boisson : les remercier.');
   }
 
   // 4. qui fait quoi
@@ -204,7 +205,7 @@ async function build() {
          { x: x + 1.85, y, w: colW - 2.9, h: 0.64, fontSize: 16, valign: 'middle', fit: 'shrink' });
       tb(s, r.d, { x: x + colW - 1.0, y, w: 1.0, h: 0.64, fontSize: 14, color: MUTE, align: 'right', valign: 'middle' });
     });
-    tb(s, '+ le jeu fil rouge, toute la nuit en parallèle', { x: M, y: 6.35, w: 8, h: 0.4, fontSize: 16, italic: true, fontFace: SERIF, color: PALM });
+    tb(s, '+ Opération Kongossa, le jeu fil rouge, toute la nuit en parallèle', { x: M, y: 6.35, w: 8, h: 0.4, fontSize: 16, italic: true, fontFace: SERIF, color: PALM });
     NOTES(s, 'Le programme complet. Horaires indicatifs : on peut glisser de quelques minutes, le MJ garde le rythme avec les minuteurs.');
   }
 
@@ -230,22 +231,43 @@ async function build() {
     NOTES(s, 'Expliquer les PW et les Kola. Le classement est visible en direct sur l’écran de l’appli et sur le site.');
   }
 
-  // 7. jeu fil rouge (à compléter quand les règles seront prêtes)
+  // 7. jeu fil rouge : Opération Kongossa
+  interlude(sec, { em: 'kongossa', kicker: 'Toute la nuit · 20h00 à 02h40', title: 'Opération Kongossa', titleLines: 1, accent: 'Le jeu fil rouge : missions secrètes',
+    body: 'Dans ton enveloppe, 3 missions sur 3 autres joueurs. Pendant ce temps, 3 chasseurs te visent aussi.',
+    notes: 'Opération Kongossa, le jeu de toute la nuit. Les enveloppes ont été distribuées à l’accueil (19h30). Les missions ouvrent maintenant (20h00) et se ferment à la fin des Feymen (02h40).' });
   {
     const s = pres.addSlide({ masterName: 'WB_CONTENU', sectionTitle: sec });
-    s.addText('Le jeu de toute la nuit', { placeholder: 'title' });
-    tb(s, 'Il se joue en parallèle de tous les autres jeux, de maintenant jusqu’à la finale', { x: M, y: 1.35, w: W - 2 * M, h: 0.5, fontSize: 22, italic: true, fontFace: SERIF, color: PALM });
-    const cols = [['Le principe', 'Règles annoncées par le maître du jeu.'], ['Comment marquer', 'Les PW gagnés s’ajoutent à ton total.'], ['La fin', 'Résultats juste avant la remise des gains.']];
-    const cw = (W - 2 * M - 2 * 0.4) / 3;
-    cols.forEach(([t, d], i) => {
-      const x = M + i * (cw + 0.4);
-      card(s, x, 2.25, cw, 4.25);
-      s.addShape(pres.shapes.OVAL, { x: x + 0.4, y: 2.6, w: 0.8, h: 0.8, fill: { color: KOLA }, line: { color: KOLA, width: 0 }, objectName: 'numero' });
-      tb(s, String(i + 1), { x: x + 0.4, y: 2.6, w: 0.8, h: 0.8, fontSize: 26, bold: true, align: 'center', valign: 'middle' });
-      tb(s, t, { x: x + 0.4, y: 3.65, w: cw - 0.8, h: 0.6, fontSize: 24, bold: true });
-      tb(s, d, { x: x + 0.4, y: 4.35, w: cw - 0.8, h: 1.8, fontSize: 18, color: MUTE, valign: 'top' });
+    s.addText([{ text: 'Opération Kongossa' }, { text: '  ·  les règles', options: { color: MUTE, bold: false } }], { placeholder: 'title' });
+    const mis = [['Mot', 'Lui faire dire un mot précis'], ['Action', 'Lui faire faire quelque chose'], ['Secret', 'Lui soutirer une information']];
+    const mw = (7.35 - 2 * 0.3) / 3;
+    mis.forEach(([t, d], i) => {
+      const x = M + i * (mw + 0.3);
+      card(s, x, 1.55, mw, 2.25, null, 'mission-' + t);
+      tb(s, 'MISSION', { x: x + 0.3, y: 1.8, w: mw - 0.6, h: 0.35, fontSize: 13, bold: true, charSpacing: 2, color: KOLA });
+      tb(s, t, { x: x + 0.3, y: 2.15, w: mw - 0.6, h: 0.6, fontSize: 28, bold: true });
+      tb(s, d, { x: x + 0.3, y: 2.8, w: mw - 0.6, h: 0.85, fontSize: 16, color: MUTE, valign: 'top' });
     });
-    NOTES(s, 'À COMPLÉTER : le jeu fil rouge est en cours de conception. Remplacer le texte des trois cartes par son nom, ses règles et son barème dès qu’ils sont fixés.');
+    const steps = [
+      [KOLA, 'Mission réussie ?', 'Dis « Kongossa ! » et fais parapher ta carte par ta cible.'],
+      [PALM, 'Tu te sens visé ?', '« Je te vois ! » + son prénom + le type de mission. Juste : sa mission est grillée.'],
+      [SAFOU, '02h45', 'Cartes rendues au comptable avec les Kola, avant les finalistes.'],
+    ];
+    steps.forEach(([c, t, d], i) => {
+      const y = 4.15 + i * 0.85;
+      s.addShape(pres.shapes.OVAL, { x: M, y: y + 0.05, w: 0.46, h: 0.46, fill: { color: c }, line: { color: c, width: 0 }, objectName: 'puce' });
+      tb(s, [{ text: t + '  ', options: { bold: true } }, { text: d, options: { color: MUTE } }], { x: M + 0.7, y, w: 6.65, h: 0.75, fontSize: 16, valign: 'top' });
+    });
+    const cx = 8.45, cw = W - M - cx, cy = 1.55, ch = 5.2;
+    card(s, cx, cy, cw, ch, null, 'bareme');
+    tb(s, [{ text: 'Barème', options: { bold: true, color: PALM } }, { text: '   jusqu’à 15 PW', options: { color: MUTE, fontSize: 14 } }], { x: cx + 0.3, y: cy + 0.25, w: cw - 0.6, h: 0.5, fontSize: 22, valign: 'middle' });
+    const rows = [['Mission accomplie', '4 PW'], ['Les 3 missions accomplies', '+3 PW'], ['Démasquer son chasseur', '+2 PW'], ['Fausse accusation', '1 Kola à l’accusé']];
+    rows.forEach(([l, v], i) => {
+      const y = cy + 1.05 + i * 1.0;
+      if (i) s.addShape(pres.shapes.LINE, { x: cx + 0.3, y: y - 0.12, w: cw - 0.6, h: 0, line: { color: LINE, width: 1 }, objectName: 'separateur' });
+      tb(s, l, { x: cx + 0.3, y, w: 2.0, h: 0.8, fontSize: 17, valign: 'top' });
+      tb(s, v, { x: cx + cw - 0.3 - 1.7, y, w: 1.7, h: 0.75, fontSize: 17, bold: true, color: PALM, align: 'right', valign: 'top' });
+    });
+    NOTES(s, 'Expliquer Opération Kongossa. Les PW Kongossa entrent au classement à 02h45, avant l’annonce des finalistes. Une fausse accusation coûte 1 Kola, donnée à la personne accusée.');
   }
 
   /* ========== 2. LES JEUX ========== */
@@ -327,6 +349,16 @@ async function build() {
   sec = 'Finale'; pres.addSection({ title: sec });
   {
     const s = pres.addSlide({ masterName: 'WB_CONTENU', sectionTitle: sec });
+    s.addText('Opération Kongossa : les résultats', { placeholder: 'title' });
+    emblem(s, 'kongossa', M, 1.7, 3.0);
+    tb(s, 'Le meilleur kongosseur de la nuit est…', { x: M + 3.5, y: 2.0, w: 8.0, h: 0.7, fontSize: 28, italic: true, fontFace: SERIF, color: PALM });
+    tb(s, 'Prénom', { x: M + 3.5, y: 2.8, w: 8.0, h: 1.2, fontSize: 60, bold: true, objectName: 'meilleur-kongosseur' });
+    tb(s, '… missions accomplies · … PW', { x: M + 3.5, y: 4.1, w: 8.0, h: 0.6, fontSize: 22, color: MUTE, objectName: 'score-kongosseur' });
+    tb(s, 'Les PW Kongossa sont ajoutés au classement : place aux finalistes.', { x: M + 3.5, y: 5.2, w: 8.0, h: 0.6, fontSize: 18, color: INK });
+    NOTES(s, `${at('classement').at} · Les cartes Kongossa ont été rendues au comptable avec les Kola. Taper le prénom et le score du meilleur kongosseur avant de projeter. Ses PW (et ceux de tous) entrent au classement avant l’annonce des finalistes.`);
+  }
+  {
+    const s = pres.addSlide({ masterName: 'WB_CONTENU', sectionTitle: sec });
     s.addText('Les 4 finalistes', { placeholder: 'title' });
     tb(s, 'Les Kola sont converties : 1 Kola = 1 PW. Égalité : le plus de Kola passe.', { x: M, y: 1.35, w: W - 2 * M, h: 0.5, fontSize: 20, italic: true, fontFace: SERIF, color: PALM });
     const cw = (W - 2 * M - 3 * 0.35) / 4;
@@ -343,16 +375,6 @@ async function build() {
     NOTES(s, `${at('classement').at} · Conversion des Kola et annonce des finalistes. Avant de projeter, taper les 4 prénoms et leurs PW dans les cartes (ou afficher l’écran du classement de l’appli). Ramasser les paris du public.`);
   }
   game(G.trone, sec);
-  {
-    const s = pres.addSlide({ masterName: 'WB_CONTENU', sectionTitle: sec });
-    s.addText('Le jeu de toute la nuit : les résultats', { placeholder: 'title' });
-    emblem(s, 'kola', M, 1.7, 2.6);
-    tb(s, 'Le vainqueur du jeu fil rouge est…', { x: M + 3.1, y: 2.0, w: 8.4, h: 0.7, fontSize: 28, italic: true, fontFace: SERIF, color: PALM });
-    tb(s, 'Prénom', { x: M + 3.1, y: 2.8, w: 8.4, h: 1.2, fontSize: 60, bold: true, objectName: 'vainqueur-fil-rouge' });
-    tb(s, '… PW gagnés pendant la nuit', { x: M + 3.1, y: 4.1, w: 8.4, h: 0.6, fontSize: 22, color: MUTE });
-    NOTES(s, 'À COMPLÉTER selon les règles du jeu fil rouge. Annoncer les résultats avant le podium, car ses PW comptent dans le classement final.');
-  }
-
   /* ========== 4. CLÔTURE ========== */
   sec = 'Clôture'; pres.addSection({ title: sec });
   {
@@ -393,19 +415,18 @@ async function build() {
     tb(s, 'Scanne pour dire ce qu’on garde et ce qu’on change', { x: 9.3, y: 5.55, w: W - M - 9.6, h: 0.8, fontSize: 15, color: MUTE, align: 'center', valign: 'top' });
     NOTES(s, 'Remerciements. Citer les partenaires par leur nom s’il y en a (ajouter leurs logos sur cette slide). Inviter tout le monde à remplir le formulaire d’avis.');
   }
-  // saison 2 (à mettre à jour avec la nouvelle identité visuelle)
+  // saison 2 : identité « Toghu » (velours, coton, orange toghu, fil d'or)
   {
     const s = pres.addSlide({ masterName: 'WB_IMAGE', sectionTitle: sec });
-    s.background = { path: IMG.pattern };
-    s.addShape(pres.shapes.OVAL, { x: 7.9, y: 1.0, w: 5.0, h: 5.0, fill: { color: SAFOU }, line: { color: PALM, width: 4 }, shadow: shadow(), objectName: 'visuel-saison-2' });
-    tb(s, 'S2', { x: 7.9, y: 1.0, w: 5.0, h: 5.0, fontSize: 150, bold: true, align: 'center', valign: 'middle' });
-    kicker(s, 'Prochainement', M + 0.1, 1.45, 6.5, PALM);
-    tb(s, 'La saison 2 se prépare', { x: M + 0.1, y: 1.9, w: 6.9, h: 2.0, fontSize: 54, bold: true, valign: 'top' });
-    tb(s, 'Nouveaux jeux, nouvelle identité, même cagnotte à décrocher.', { x: M + 0.1, y: 4.0, w: 6.7, h: 0.9, fontSize: 24, italic: true, fontFace: SERIF, color: PALM });
-    s.addImage({ path: IMG.qrInsc, x: M + 0.1, y: 5.1, w: 1.6, h: 1.6, altText: 'QR code vers la page d’inscription', objectName: 'qr-inscription' });
-    tb(s, [{ text: 'Date annoncée dans le groupe WhatsApp', options: { bold: true, breakLine: true } }, { text: 'Scanne pour t’inscrire à la prochaine soirée', options: { color: MUTE } }],
-       { x: M + 2.0, y: 5.1, w: 5.2, h: 1.6, fontSize: 18, valign: 'middle', paraSpaceAfter: 4 });
-    NOTES(s, 'Annonce de la prochaine saison. À METTRE À JOUR quand l’identité visuelle de la saison 2 sera prête : remplacer le cercle « S2 » par son visuel, et ajouter la date si elle est connue.');
+    s.background = { color: S2.velours };
+    s.addImage({ path: IMG.s2hero, x: 0, y: 0, w: W, h: H, sizing: { type: 'cover', w: W, h: H }, altText: 'Visuel de la saison 2 Toghu : mains qui jouent aux kola sur un tissu toghu brodé', objectName: 'visuel-saison-2' });
+    tb(s, 'PROCHAINEMENT', { x: M + 0.1, y: 1.3, w: 5.5, h: 0.4, fontSize: 16, bold: true, charSpacing: 3, color: S2.orange });
+    tb(s, 'La saison 2\narrive.', { x: M + 0.1, y: 1.8, w: 5.6, h: 2.0, fontSize: 56, bold: true, color: S2.coton, valign: 'top', lineSpacingMultiple: 0.9 });
+    tb(s, 'Toghu', { x: M + 0.1, y: 3.85, w: 5.5, h: 1.0, fontSize: 54, fontFace: SERIF, color: S2.or });
+    s.addText('Date à annoncer', { isTextBox: true, shape: pres.shapes.ROUNDED_RECTANGLE, rectRadius: 0.25, x: M + 0.1, y: 4.95, w: 2.7, h: 0.55, fill: { color: S2.orange }, color: S2.velours, fontSize: 17, bold: true, align: 'center', valign: 'middle', margin: 0, objectName: 'date-saison-2' });
+    s.addImage({ path: IMG.qrInsc, x: M + 0.1, y: 5.7, w: 1.2, h: 1.2, altText: 'QR code vers la page d’inscription', objectName: 'qr-inscription' });
+    tb(s, 'Inscriptions\nsur le site', { x: M + 1.5, y: 5.7, w: 2.2, h: 1.2, fontSize: 15, color: S2.coton, valign: 'middle' });
+    NOTES(s, 'Annonce de la saison 2, « Toghu ». Remplacer « Date à annoncer » par la date dès qu’elle est fixée. Le QR code mène à la page d’inscription du site.');
   }
   interlude(sec, { em: 'ambiance', kicker: at('ambiance').at + ' · jusqu’au matin', kColor: PALM, title: 'À très vite !', accent: 'La fête continue, rentrez bien',
     body: 'Merci d’avoir fait de cette nuit la vôtre. On se retrouve à la saison 2.',
