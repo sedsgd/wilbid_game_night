@@ -169,6 +169,15 @@ body.g #game{display:block}body.g #home{display:none}
 .score tr:last-child td{border-bottom:0}
 .score .max{display:flex;justify-content:space-between;align-items:baseline;border-top:2px solid var(--paper-ink);margin-top:6px;padding-top:10px;font-weight:700}
 .score .max b{font:800 34px var(--fd);letter-spacing:-.03em}
+.fil{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:18px 24px;align-items:center;text-decoration:none;margin-bottom:22px;padding:18px 22px;border-radius:22px;border:1.5px dashed var(--palm);background:linear-gradient(120deg,rgba(242,183,5,.14),var(--card) 60%)}
+.fil:hover{border-style:solid}
+.fil img{width:92px;height:92px;border-radius:50%}
+.fil .tag{background:var(--palm);color:var(--bg)}
+.fil b{display:block;font:800 clamp(22px,2.6vw,30px)/1.1 var(--fd);letter-spacing:-.02em;margin:6px 0 4px}
+.fil p{margin:0;color:var(--mute);max-width:70ch}
+.fil .meta{display:flex;flex-direction:column;gap:4px;text-align:right;font-weight:700;white-space:nowrap}
+@media(max-width:700px){.fil{grid-template-columns:64px minmax(0,1fr)}.fil img{width:64px;height:64px}.fil .meta{grid-column:1/-1;flex-direction:row;gap:16px;text-align:left}}
+.fil-on .gp-hero .tag{background:var(--palm);color:var(--bg)}
 .tip{border-radius:18px;border:1px solid var(--line);padding:18px 20px;background:rgba(28,40,96,.5)}
 .tip .acc{font-size:20px;color:var(--palm);display:block;margin-bottom:4px}
 .tip p{margin:0;color:var(--mute)}
@@ -256,6 +265,7 @@ footer b{font-family:var(--fd);color:var(--ink)}
 
  <section class="band" id="regles"><div class="wrap">
   <div class="head"><h2 data-i="rulesT"></h2><span class="acc" data-i="rulesA"></span></div>
+  <div id="fil"></div>
   <ul class="games" id="games"></ul>
  </div></section>
 
@@ -278,7 +288,7 @@ footer b{font-family:var(--fd);color:var(--ink)}
 <script src="vendor/supabase.js"></script>
 <script>
 {
-const G=window.WB_GAMES,S=window.WB_SCHEDULE,TIMERS=window.WB_TIMERS;
+const G=window.WB_GAMES,S=window.WB_SCHEDULE,TIMERS=window.WB_TIMERS,F=window.WB_FIL,ALL=F?[F,...G]:G;
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const KOLA=(f,h,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="${f}"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="${h}"/></svg>`;
 const UI={
@@ -286,9 +296,9 @@ fr:{menu:'Menu',nav6:'Classement',liveT:'Classement en direct',liveOn:'en direct
  lead:'Une nuit de stratégie, d’alliances et de bluff entre Camerounais de Bavière. Sept jeux, une finale, et une cagnotte pour le podium.',
  cta1:'Lire les règles',cta2:'Voir le programme',facts:[['19h30 à 4h','la nuit'],['7 + 1','jeux et finale'],['15 à 20+','joueurs'],['8 €','cotisation']],
  schedT:'La nuit, heure par heure',schedL:'On commence par se rencontrer, on garde la stratégie lourde pour après le repas, et on finit par la finale.',
- rulesT:'Le livret de règles',rulesA:'en français et en anglais',game:'Jeu',final:'Finale',min:'min',upto:'jusqu’à',
+ rulesT:'Le livret de règles',fil:'Fil rouge',filNight:'toute la nuit',rulesA:'en français et en anglais',game:'Jeu',final:'Finale',min:'min',upto:'jusqu’à',
  ptsT:'Comment on compte',ptsA:'les Points Wilbid (PW)',
- c1T:'Les points',c1:['Après chaque jeu, le comptable note les PW de chacun.','Dans les jeux d’équipe, chaque membre reçoit les PW de l’équipe.','Avant la finale, les Kola sont converties : 1 Kola = 1 PW.','Les 4 premiers jouent la finale. Égalité : le plus de Kola passe.','Classement final = PW cumulés + PW de la finale.'],
+ c1T:'Les points',c1:['Après chaque jeu, le comptable note les PW de chacun.','Dans les jeux d’équipe, chaque membre reçoit les PW de l’équipe.','Avant la finale, les Kola sont converties : 1 Kola = 1 PW.','Les 4 premiers jouent la finale. Égalité : le plus de Kola passe.','Le fil rouge, Opération Kongossa, court toute la nuit et vaut aussi jusqu’à 15 PW.','Classement final = PW cumulés + PW de la finale.'],
  c1P:'Chaque jeu vaut au plus 15 PW : aucun jeu ne décide seul du classement.',
  c2T:'La cagnotte',c2P:'8 € de cotisation, dont 5 € pour la cagnotte. Pour 18 joueurs :',c2N:'Pour le repas, chacun apporte un plat ou une boisson.',
  c3T:'Qui fait quoi',roles:[['r','Maître du jeu','badge rouge, annonce et tranche'],['j','Organisateurs','badge jaune, scores et matériel'],['w','Joueurs','badge blanc, prénom et ville']],
@@ -300,9 +310,9 @@ en:{menu:'Menu',nav6:'Leaderboard',liveT:'Live leaderboard',liveOn:'live',liveNo
  lead:'A night of strategy, alliances and bluff for Cameroonians in Bavaria. Seven games, one final, and a prize pot for the podium.',
  cta1:'Read the rules',cta2:'See the schedule',facts:[['7:30 pm to 4 am','the night'],['7 + 1','games and final'],['15 to 20+','players'],['€8','entry fee']],
  schedT:'The night, hour by hour',schedL:'We start by meeting each other, keep the heavy strategy for after dinner, and end with the final.',
- rulesT:'The rulebook',rulesA:'in French and English',game:'Game',final:'Final',min:'min',upto:'up to',
+ rulesT:'The rulebook',fil:'All-night thread',filNight:'all night long',rulesA:'in French and English',game:'Game',final:'Final',min:'min',upto:'up to',
  ptsT:'How scoring works',ptsA:'Wilbid Points (PW)',
- c1T:'Points',c1:['After each game, the scorekeeper records everyone’s PW.','In team games, every member gets the team’s PW.','Before the final, Kola are converted: 1 Kola = 1 PW.','The top 4 play the final. Tie: most Kola goes through.','Final ranking = total PW + PW from the final.'],
+ c1T:'Points',c1:['After each game, the scorekeeper records everyone’s PW.','In team games, every member gets the team’s PW.','Before the final, Kola are converted: 1 Kola = 1 PW.','The top 4 play the final. Tie: most Kola goes through.','The all-night thread, Operation Kongossa, runs all night and is also worth up to 15 PW.','Final ranking = total PW + PW from the final.'],
  c1P:'Each game is worth at most 15 PW, so no single game decides the ranking.',
  c2T:'The prize pot',c2P:'An €8 entry fee, €5 of which goes to the pot. For 18 players:',c2N:'For dinner, everyone brings a dish or a drink.',
  c3T:'Who does what',roles:[['r','Game master','red badge, announces and rules'],['j','Organisers','yellow badge, scores and kit'],['w','Players','white badge, name and hometown']],
@@ -313,7 +323,7 @@ en:{menu:'Menu',nav6:'Leaderboard',liveT:'Live leaderboard',liveOn:'live',liveNo
 let lang='fr';try{lang=localStorage.getItem('wb-lang')||'fr'}catch(e){}
 const L=()=>UI[lang],tx=o=>o?(o[lang]||o.fr):'';
 const time=t=>lang==='fr'?t:(()=>{const [h,m]=t.split('h').map(Number);const hh=h%12||12;return hh+':'+String(m).padStart(2,'0')+(h<12?' am':' pm')})();
-const lbl=g=>g.fin?L().final:L().game+' '+g.num;
+const lbl=g=>g.fil?L().fil:g.fin?L().final:L().game+' '+g.num;
 const $=s=>document.querySelector(s);
 
 function renderHome(){
@@ -321,6 +331,7 @@ function renderHome(){
  $('#sched').innerHTML=S.map(s=>{const g=s.id&&G.find(x=>x.id===s.id);
   if(g)return `<li><a href="#jeu-${g.id}"><span class="t">${time(s.at)}</span><img src="assets/em-${g.id}.jpg" alt=""><span><b>${esc(tx(g.name))}</b><small>${esc(lbl(g))} · ${esc(tx(g.kind))}</small></span><span class="d">${s.d}</span></a></li>`;
   return `<li class="brk"><div class="row"><span class="t">${time(s.at)}</span>${s.img?`<img src="assets/em-${s.img}.jpg" alt="">`:'<i class="dot"></i>'}<span><b>${esc(tx(s))}</b></span><span class="d">${s.d}</span></div></li>`}).join('');
+ $('#fil').innerHTML=F?`<a class="fil" href="#jeu-${F.id}"><img src="assets/em-${F.id}.jpg" alt=""><div><span class="tag">${esc(lbl(F))}</span><b>${esc(tx(F.name))}</b><p>${esc(tx(F.pitch))}</p></div><div class="meta"><span>${L().filNight}</span><span>${L().upto} ${F.max} PW</span></div></a>`:'';
  $('#games').innerHTML=G.map(g=>`<li><a class="gcard${g.fin?' fin':''}" href="#jeu-${g.id}"><div class="top"><img src="assets/em-${g.id}.jpg" alt=""><span class="tag">${esc(lbl(g))}</span></div><b>${esc(tx(g.name))}</b><span>${esc(tx(g.kind))}</span><div class="meta"><span>${g.dur} ${L().min}</span><span>${L().upto} ${g.max} PW</span></div></a></li>`).join('');
  const u=L();
  $('#cols').innerHTML=`<div class="box"><h3>${u.c1T}</h3><p>${esc(u.c1P)}</p><ol>${u.c1.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>
@@ -329,14 +340,14 @@ function renderHome(){
 }
 
 function renderGame(id){
- const i=G.findIndex(x=>x.id===id),g=G[i],u=L();if(!g)return false;
- const pv=G[(i-1+G.length)%G.length],nx=G[(i+1)%G.length];
+ const i=ALL.findIndex(x=>x.id===id),g=ALL[i],u=L();if(!g)return false;
+ const pv=ALL[(i-1+ALL.length)%ALL.length],nx=ALL[(i+1)%ALL.length];
  const sc=tx(g.score);
  $('#game').innerHTML=`<section class="gp-hero"><div class="wrap">
   <a class="back" href="#regles">← ${u.back}</a>
   <img class="medal" src="assets/em-${g.id}.jpg" alt="">
   <div><span class="tag">${esc(lbl(g))}</span><span class="acc">${esc(tx(g.kind))}</span><h1>${esc(tx(g.name))}</h1>
-  <div class="stats"><div><b>${g.dur} min</b>${u.dur}</div><div><b>${esc(tx(g.fmt))}</b>${u.fmt}</div><div><b>${g.max} PW</b>${u.max}</div></div></div>
+  <div class="stats"><div><b>${g.fil?esc(tx(g.dur)):g.dur+' min'}</b>${u.dur}</div><div><b>${esc(tx(g.fmt))}</b>${u.fmt}</div><div><b>${g.max} PW</b>${u.max}</div></div></div>
  </div></section>
  <div class="wrap gp-body">
   <div><p class="pitch">${esc(tx(g.pitch))}</p><h2>${u.rules}</h2><ol class="rules">${tx(g.rules).map(r=>`<li>${esc(r)}</li>`).join('')}</ol>
@@ -347,7 +358,7 @@ function renderGame(id){
   </aside>
  </div>
  <div class="wrap pn"><a href="#jeu-${pv.id}"><img src="assets/em-${pv.id}.jpg" alt=""><span><small>${u.prev}</small><b>${esc(tx(pv.name))}</b></span></a><a class="nx" href="#jeu-${nx.id}"><span><small>${u.next}</small><b>${esc(tx(nx.name))}</b></span><img src="assets/em-${nx.id}.jpg" alt=""></a></div>`;
- document.body.classList.toggle('fin-on',!!g.fin);
+ document.body.classList.toggle('fin-on',!!g.fin);document.body.classList.toggle('fil-on',!!g.fil);
  return true;
 }
 

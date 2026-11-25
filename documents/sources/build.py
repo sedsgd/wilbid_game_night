@@ -88,14 +88,27 @@ GAMES = [
   mj="Ramasse les paris du public avant la première carte. Mets les finalistes au centre de la salle, debout, et révèle chaque carte en laissant un temps de suspense."),
 ]
 
-SCHED = [("19h30","Accueil, badges, cotisation, 10 Kola par joueur",None,"30 min"),
+SCHED = [("19h30","Accueil, badges, cotisation, 10 Kola et 3 missions Kongossa par joueur",None,"30 min"),
  ("20h00","Le Marché de Mokolo","mokolo","30 min"),("20h40","Qui est qui ?","quiestqui","40 min"),
  ("21h25","Le Njangi","njangi","30 min"),("22h00","Le Carrefour des Duos","duos","45 min"),
  ("22h45","Repas et musique",None,"60 min"),("23h45","Le Pont du Wouri","wouri","45 min"),
  ("00h40","Le Code du Chef","code","50 min"),("01h30","Pause",None,"20 min"),
- ("01h50","Les Feymen","feymen","50 min"),("02h45","Conversion des Kola, classement, finalistes",None,"15 min"),
+ ("01h50","Les Feymen","feymen","50 min"),("02h45","Missions Kongossa rendues, conversion des Kola, classement, finalistes",None,"15 min"),
  ("03h00","Finale : Le Trône de Kola","trone","30 min"),("03h30","Remise des gains, photo de groupe",None,"15 min"),
  ("03h45","Ambiance libre jusqu'au matin",None,"")]
+
+FIL = dict(n="∞", slug="kongossa", title="Opération Kongossa", kind="le fil rouge : missions secrètes toute la nuit", dur="la nuit", fmt="individuel", max="15",
+  pitch="Toute la nuit, chacun mène 3 missions secrètes sur 3 autres joueurs : lui faire dire un mot, lui faire faire une action, lui soutirer un secret. Et pendant ce temps, 3 chasseurs le visent aussi.",
+  rules=["À l'accueil, chaque joueur reçoit une enveloppe avec 3 missions, chacune sur une cible différente : Mot (lui faire dire un mot précis), Action (lui faire faire quelque chose) et Secret (apprendre une info sur elle).",
+         "Chacun est la cible de 3 chasseurs : un Mot, une Action et un Secret. Personne ne sait qui.",
+         "Ouvert de 20h00 à la fin des Feymen (02h40), pendant les jeux aussi, sans jamais retarder ni fausser un jeu. Pause pendant les règles et la finale.",
+         "Mission accomplie : on dit « Kongossa ! » à sa cible et on montre la carte, qu'elle paraphe. Pour un Mot, le chasseur ne doit jamais avoir dit ni écrit le mot. Pour un Secret, la cible confirme la réponse notée.",
+         "Une cible qui se sent visée dit « Je te vois ! », puis le prénom du chasseur et le type de mission. Juste : le chasseur lui donne sa carte, mission grillée. Faux : elle lui donne 1 Kola.",
+         "Pas de contact au-delà d'un check, pas de téléphone des autres. Une cible peut toujours dire non.",
+         "À 02h45, chacun rend ses cartes au comptable avec ses Kola."],
+  score=[("Mission accomplie", "4 PW"), ("Les 3 missions accomplies", "+3 PW"), ("Chasseur démasqué (sa carte te revient)", "+2 PW"), ("Fausse accusation", "1 Kola à l'accusé")],
+  mat="3 cartes par joueur, imprimées depuis l'onglet Kongossa de l'appli, et une enveloppe par joueur.",
+  mj="Tire les missions quand la liste des joueurs est définitive. Rappelle le jeu après le repas et à la pause. À 02h45, coche chaque carte dans l'appli (paraphée : accomplie ; rendue par la cible : grillée), qui calcule les PW.")
 
 def foot(p, label="Dossier du maître du jeu"):
     return f'<footer class="foot"><span>{KOLA("#141E4A","#fff",14)} Wilbid Game Night, saison 1</span><span>{label}</span><span>p. {p}</span></footer>'
@@ -109,7 +122,7 @@ pages.append(f'''<section class="page cover">
 <div class="cv-body">
 <div class="acc">programme de la soirée</div>
 <h1>Dossier du<br>maître du jeu</h1>
-<p class="cv-lead">Tout ce qu'il faut pour animer la Wilbid Game Night : l'ordre de la nuit, les règles des 8 jeux, le barème et le rôle du MJ à chaque étape.</p>
+<p class="cv-lead">Tout ce qu'il faut pour animer la Wilbid Game Night : l'ordre de la nuit, les règles des 8 jeux et du fil rouge, le barème et le rôle du MJ à chaque étape.</p>
 <div class="stats"><div><b>19h30 à 4h</b>la nuit</div><div><b>7 + 1</b>jeux et finale</div><div><b>15 à 20</b>joueurs</div><div><b>8 €</b>cotisation</div></div>
 </div></section>''')
 
@@ -165,12 +178,13 @@ pages.append(f'''<section class="page">
 </div>
 {foot(3)}</section>''')
 
-# Game pages
+# Game pages (le fil rouge d'abord)
+GAMES = [FIL] + GAMES
 for i, g in enumerate(GAMES):
     rules = "".join(f"<li>{E(r)}</li>" for r in g["rules"])
     score = "".join(f'<tr><td>{E(a)}</td><td>{E(b)}</td></tr>' for a,b in g["score"])
-    label = "Finale" if g["n"]=="F" else f'Jeu {g["n"]}'
-    fin = " finale" if g["n"]=="F" else ""
+    label = "Finale" if g["n"]=="F" else "Fil rouge" if g["n"]=="∞" else f'Jeu {g["n"]}'
+    fin = " finale" if g["n"]=="F" else " fil" if g["n"]=="∞" else ""
     pages.append(f'''<section class="page game{fin}">
 <header class="gh">
 <img class="em" src="assets/em-{g["slug"]}.jpg" alt="">
@@ -191,20 +205,20 @@ for i, g in enumerate(GAMES):
 # Material + prep
 mat = [("Jetons de poker (les Kola)","300","10 €"),("Impression des cartes, papier cartonné","~15 pages","12 €"),("Mini-tableaux blancs + feutres","6","12 €"),
  ("Porte-badges, cordon blanc (joueurs)","30","6 €"),("Porte-badges, cordon rouge et jaune (MJ, orga)","6","3 €"),("Petites enveloppes kraft","100","5 €"),
- ("Bâtonnets en bois","100","3 €"),("Stylos","20","3 €"),("Sablier ou minuteur","2","3 €")]
+ ("Bâtonnets en bois","100","3 €"),("Stylos","20","3 €"),("Sablier ou minuteur","2","3 €"),("Cartes Kongossa (papier cartonné) et enveloppes","~6 pages","3 €")]
 mrows = "".join(f"<tr><td>{E(a)}</td><td>{b}</td><td>{c}</td></tr>" for a,b,c in mat)
 prep = [("J-21","Sondage WhatsApp : date et inscriptions, annonce de la cotisation"),("J-20","Commande Temu (livraison 1 à 2 semaines)"),
  ("J-10","Formulaire d'anecdotes pour Qui est qui ?"),("J-7","Choix du MJ et du comptable, rédaction des 9 énigmes"),
  ("J-5","Impression et découpe des cartes et badges"),("J-3","Répétition des Feymen et de la finale à 4 ou 5"),
- ("J-1","Enveloppes, feuille de scores, équipes tirées au sort")]
+ ("J-1","Enveloppes, feuille de scores, équipes tirées au sort, missions Kongossa tirées et imprimées")]
 prows = "".join(f'<li><b>{a}</b><span>{E(b)}</span></li>' for a,b in prep)
-night = ["Tableau des scores affiché et feutres","Les 3 codes du Code du Chef, pliés","Les rôles des Feymen tirés","Les 9 énigmes et leurs réponses","Les anecdotes numérotées, prêtes à afficher","Minuteur chargé"]
+night = ["Les enveloppes Kongossa, une par joueur","Tableau des scores affiché et feutres","Les 3 codes du Code du Chef, pliés","Les rôles des Feymen tirés","Les 9 énigmes et leurs réponses","Les anecdotes numérotées, prêtes à afficher","Minuteur chargé"]
 nrows = "".join(f"<li>{E(x)}</li>" for x in night)
 pages.append(f'''<section class="page">
 <div class="kicker">03 · Matériel et préparation</div>
-<h2>57 € de matériel, réutilisé à chaque édition</h2>
+<h2>60 € de matériel, réutilisé à chaque édition</h2>
 <p class="lead">Prix estimés sur Temu, à vérifier au moment de commander. Pour économiser : imprimer à la fac, et remplacer les jetons par des capsules ou des haricots secs.</p>
-<table class="tbl wide"><thead><tr><th>Article</th><th>Quantité</th><th>Coût estimé</th></tr></thead><tbody>{mrows}<tr class="tot"><td>Total</td><td></td><td>57 €</td></tr></tbody></table>
+<table class="tbl wide"><thead><tr><th>Article</th><th>Quantité</th><th>Coût estimé</th></tr></thead><tbody>{mrows}<tr class="tot"><td>Total</td><td></td><td>60 €</td></tr></tbody></table>
 <div class="two eq mt">
 <div><h3>Le compte à rebours</h3><ul class="prep">{prows}</ul></div>
 <div class="card indigo"><h3>Dans le sac du MJ le soir même</h3><ul class="check">{nrows}</ul></div>

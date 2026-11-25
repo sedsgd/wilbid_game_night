@@ -76,6 +76,17 @@ icons['ambiance']=f'''
 <path d="M160 196 H204" stroke="{NAVY}" stroke-width="4"/>
 <g fill="{CH}"><ellipse cx="88" cy="172" rx="12" ry="9" transform="rotate(-20 88 172)"/><rect x="96" y="112" width="5" height="60"/><path d="M96 112 q22 6 26 26 q-10 -12 -26 -12z"/>
 <ellipse cx="262" cy="196" rx="12" ry="9" transform="rotate(-20 262 196)"/><ellipse cx="294" cy="186" rx="12" ry="9" transform="rotate(-20 294 186)"/><rect x="270" y="136" width="5" height="60"/><rect x="302" y="126" width="5" height="60"/><path d="M270 136 L307 126 V136 L275 146Z"/></g>'''
+# kongossa : enveloppe de missions scellée d'une kola, et le chuchotement
+icons['kongossa']=f'''
+<rect x="88" y="132" width="188" height="122" rx="8" fill="{CH}"/>
+<path d="M92 136 L182 206 L272 136" stroke="{NAVY}" stroke-width="6" fill="none" stroke-linejoin="round"/>
+<path d="M92 250 L158 196 M272 250 L206 196" stroke="{NAVY}" stroke-width="4" fill="none"/>
+{diamonds(118,238,128,5,6)}
+<circle cx="182" cy="206" r="24" fill="{RED}"/><path d="M164 206 Q182 199 200 206" stroke="{CH}" stroke-width="2.6" fill="none"/>
+<circle cx="182" cy="206" r="24" fill="none" stroke="{CH}" stroke-width="3" stroke-dasharray="3 4"/>
+<circle cx="150" cy="104" r="7" fill="{CH}"/><circle cx="182" cy="98" r="7" fill="{CH}"/><circle cx="214" cy="104" r="7" fill="{CH}"/>
+<path d="M118 112 q-14 -14 -8 -32 M252 80 q8 18 -6 32" stroke="{CH}" stroke-width="5" fill="none" stroke-linecap="round"/>
+<path d="M174 276 l8 -8 l8 8 l-8 8z" fill="{RED}"/>'''
 tex='''<filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".45" numOctaves="4" seed="7" result="n"/>
 <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -7 5.3" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter>
 <filter id="bgn"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="3"/><feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .05 0"/></filter>'''

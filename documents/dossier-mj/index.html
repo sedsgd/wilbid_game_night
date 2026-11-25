@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wilbid Game Night, dossier du maître du jeu</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)' fill='%23F2B705'%3E%3Ccircle cx='14' cy='14' r='9.2'/%3E%3Ccircle cx='34' cy='14' r='9.2'/%3E%3Ccircle cx='14' cy='34' r='9.2'/%3E%3Ccircle cx='34' cy='34' r='9.2'/%3E%3C/g%3E%3Cpath d='M24 19 29 24 24 29 19 24Z' fill='%23141E4A'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="../../fonts/fonts.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)' fill='%23F2B705'%3E%3Ccircle cx='14' cy='14' r='9.2'/%3E%3Ccircle cx='34' cy='14' r='9.2'/%3E%3Ccircle cx='14' cy='34' r='9.2'/%3E%3Ccircle cx='34' cy='34' r='9.2'/%3E%3C/g%3E%3Cpath d='M24 19 29 24 24 29 19 24Z' fill='%23141E4A'/%3E%3C/svg%3E"><link rel="stylesheet" href="../../fonts/fonts.css">
 <style>:root{
  --indigo:#141E4A;--indigo2:#2B3F9E;--chalk:#F4F3EF;--paper:#FFFFFF;--kola:#E0452F;--palm:#F2B705;--safou:#7A4FA3;
  --mute:#3A4270;--line:#DAD8CF;--tint:#EEF0FA;
@@ -91,6 +90,8 @@ p{margin:0 0 2mm}
 .badge{display:inline-block;background:var(--kola);color:#fff;font:800 9pt var(--f-text);padding:1.3mm 3.2mm;border-radius:99px;margin-bottom:2.5mm}
 .finale .badge{background:var(--safou)}
 .finale::before{background:var(--safou)}
+.fil .badge{background:var(--palm);color:var(--indigo)}
+.fil::before{background:var(--palm)}
 .gstats{grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--line);color:var(--mute);margin-bottom:5mm;padding-top:3mm}
 .gstats{grid-template-columns:27mm 1fr 30mm;gap:4mm}.gstats b{color:var(--indigo);font-size:12.5pt}
 .bottom{margin-top:6mm}
@@ -111,10 +112,10 @@ p{margin:0 0 2mm}
 .check li::before{content:"";position:absolute;left:0;top:1mm;width:3mm;height:3mm;border:1.3px solid var(--palm);border-radius:.6mm}
 .pattern-band{position:absolute;left:5mm;right:0;bottom:16mm;height:26mm;background:url(assets/pattern.jpg) center 30%/62mm auto repeat-x}
 .wide{margin-bottom:0}
+.acc::first-letter,.kick::first-letter,.kicker::first-letter{text-transform:uppercase}
 .wb-back{position:fixed;top:12px;left:12px;z-index:9;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 16px;border-radius:99px;background:#141E4A;color:#F4F3EF;font:800 14px Manrope,sans-serif;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.3)}
 .wb-back:hover{background:#2B3F9E}
 @media print{.wb-back{display:none}}
-.acc::first-letter,.kick::first-letter,.kicker::first-letter{text-transform:uppercase}
 </style></head><body>
 <a class="wb-back" id="wbBack" href="../../index.html">← Wilbid</a>
 <script>{const l=location.protocol==='file:'||location.hostname.endsWith('github.io');if(!l){const a=document.getElementById('wbBack');a.href='https://claude.ai/artifact/2QtXWpNXxMSQ8yavfC1Kc6';a.target='_blank';a.rel='noopener'}}</script>
@@ -125,14 +126,14 @@ p{margin:0 0 2mm}
 <div class="cv-body">
 <div class="acc">programme de la soirée</div>
 <h1>Dossier du<br>maître du jeu</h1>
-<p class="cv-lead">Tout ce qu'il faut pour animer la Wilbid Game Night : l'ordre de la nuit, les règles des 8 jeux, le barème et le rôle du MJ à chaque étape.</p>
+<p class="cv-lead">Tout ce qu'il faut pour animer la Wilbid Game Night : l'ordre de la nuit, les règles des 8 jeux et du fil rouge, le barème et le rôle du MJ à chaque étape.</p>
 <div class="stats"><div><b>19h30 à 4h</b>la nuit</div><div><b>7 + 1</b>jeux et finale</div><div><b>15 à 20</b>joueurs</div><div><b>8 €</b>cotisation</div></div>
 </div></section><section class="page">
 <div class="kicker">01 · La nuit en un coup d'œil</div>
 <h2>Une nuit qui monte en intensité</h2>
 <p class="lead">On commence par des jeux qui font se rencontrer, on garde la stratégie lourde pour après le repas, et on finit par la finale à 4 joueurs.</p>
 <div class="two">
-<ol class="sched"><li class="brk"><span class="t">19h30</span><i class="dot"></i><span class="l">Accueil, badges, cotisation, 10 Kola par joueur</span><span class="d">30 min</span></li><li class="ev"><span class="t">20h00</span><img src="assets/em-mokolo.jpg" alt=""><span class="l">Le Marché de Mokolo</span><span class="d">30 min</span></li><li class="ev"><span class="t">20h40</span><img src="assets/em-quiestqui.jpg" alt=""><span class="l">Qui est qui ?</span><span class="d">40 min</span></li><li class="ev"><span class="t">21h25</span><img src="assets/em-njangi.jpg" alt=""><span class="l">Le Njangi</span><span class="d">30 min</span></li><li class="ev"><span class="t">22h00</span><img src="assets/em-duos.jpg" alt=""><span class="l">Le Carrefour des Duos</span><span class="d">45 min</span></li><li class="brk"><span class="t">22h45</span><i class="dot"></i><span class="l">Repas et musique</span><span class="d">60 min</span></li><li class="ev"><span class="t">23h45</span><img src="assets/em-wouri.jpg" alt=""><span class="l">Le Pont du Wouri</span><span class="d">45 min</span></li><li class="ev"><span class="t">00h40</span><img src="assets/em-code.jpg" alt=""><span class="l">Le Code du Chef</span><span class="d">50 min</span></li><li class="brk"><span class="t">01h30</span><i class="dot"></i><span class="l">Pause</span><span class="d">20 min</span></li><li class="ev"><span class="t">01h50</span><img src="assets/em-feymen.jpg" alt=""><span class="l">Les Feymen</span><span class="d">50 min</span></li><li class="brk"><span class="t">02h45</span><i class="dot"></i><span class="l">Conversion des Kola, classement, finalistes</span><span class="d">15 min</span></li><li class="ev"><span class="t">03h00</span><img src="assets/em-trone.jpg" alt=""><span class="l">Finale : Le Trône de Kola</span><span class="d">30 min</span></li><li class="brk"><span class="t">03h30</span><i class="dot"></i><span class="l">Remise des gains, photo de groupe</span><span class="d">15 min</span></li><li class="brk"><span class="t">03h45</span><i class="dot"></i><span class="l">Ambiance libre jusqu&#x27;au matin</span><span class="d"></span></li></ol>
+<ol class="sched"><li class="brk"><span class="t">19h30</span><i class="dot"></i><span class="l">Accueil, badges, cotisation, 10 Kola et 3 missions Kongossa par joueur</span><span class="d">30 min</span></li><li class="ev"><span class="t">20h00</span><img src="assets/em-mokolo.jpg" alt=""><span class="l">Le Marché de Mokolo</span><span class="d">30 min</span></li><li class="ev"><span class="t">20h40</span><img src="assets/em-quiestqui.jpg" alt=""><span class="l">Qui est qui ?</span><span class="d">40 min</span></li><li class="ev"><span class="t">21h25</span><img src="assets/em-njangi.jpg" alt=""><span class="l">Le Njangi</span><span class="d">30 min</span></li><li class="ev"><span class="t">22h00</span><img src="assets/em-duos.jpg" alt=""><span class="l">Le Carrefour des Duos</span><span class="d">45 min</span></li><li class="brk"><span class="t">22h45</span><i class="dot"></i><span class="l">Repas et musique</span><span class="d">60 min</span></li><li class="ev"><span class="t">23h45</span><img src="assets/em-wouri.jpg" alt=""><span class="l">Le Pont du Wouri</span><span class="d">45 min</span></li><li class="ev"><span class="t">00h40</span><img src="assets/em-code.jpg" alt=""><span class="l">Le Code du Chef</span><span class="d">50 min</span></li><li class="brk"><span class="t">01h30</span><i class="dot"></i><span class="l">Pause</span><span class="d">20 min</span></li><li class="ev"><span class="t">01h50</span><img src="assets/em-feymen.jpg" alt=""><span class="l">Les Feymen</span><span class="d">50 min</span></li><li class="brk"><span class="t">02h45</span><i class="dot"></i><span class="l">Missions Kongossa rendues, conversion des Kola, classement, finalistes</span><span class="d">15 min</span></li><li class="ev"><span class="t">03h00</span><img src="assets/em-trone.jpg" alt=""><span class="l">Finale : Le Trône de Kola</span><span class="d">30 min</span></li><li class="brk"><span class="t">03h30</span><i class="dot"></i><span class="l">Remise des gains, photo de groupe</span><span class="d">15 min</span></li><li class="brk"><span class="t">03h45</span><i class="dot"></i><span class="l">Ambiance libre jusqu&#x27;au matin</span><span class="d"></span></li></ol>
 <div class="side">
 <div class="card indigo"><h3>Les principes</h3>
 <ul><li><b>Méninges d'abord</b> : déduction, négociation, alliances, enchères.</li>
@@ -169,7 +170,22 @@ p{margin:0 0 2mm}
 <div class="role yel"><svg width="34" height="34" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#F2B705"/></svg><div><b>Organisateurs</b><span>Badge jaune</span><p>Le comptable tient le tableau des scores. Les autres distribuent le matériel et aident le MJ.</p></div></div>
 <div class="role wht"><svg width="34" height="34" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#E0452F"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg><div><b>Joueurs</b><span>Badge blanc</span><p>Prénom bien visible et ville d'origine, pour que tout le monde se parle.</p></div></div>
 </div>
-<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 3</span></footer></section><section class="page game">
+<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 3</span></footer></section><section class="page game fil">
+<header class="gh">
+<img class="em" src="assets/em-kongossa.jpg" alt="">
+<div class="gt"><span class="badge">Fil rouge</span><div class="acc">le fil rouge : missions secrètes toute la nuit</div><h2>Opération Kongossa</h2></div>
+</header>
+<div class="gstats"><div><b>la nuit</b>durée</div><div><b>individuel</b>format</div><div><b>15 PW</b>au maximum</div></div>
+<p class="lead">Toute la nuit, chacun mène 3 missions secrètes sur 3 autres joueurs : lui faire dire un mot, lui faire faire une action, lui soutirer un secret. Et pendant ce temps, 3 chasseurs le visent aussi.</p>
+<h3>Règles</h3>
+<ol class="num"><li>À l&#x27;accueil, chaque joueur reçoit une enveloppe avec 3 missions, chacune sur une cible différente : Mot (lui faire dire un mot précis), Action (lui faire faire quelque chose) et Secret (apprendre une info sur elle).</li><li>Chacun est la cible de 3 chasseurs : un Mot, une Action et un Secret. Personne ne sait qui.</li><li>Ouvert de 20h00 à la fin des Feymen (02h40), pendant les jeux aussi, sans jamais retarder ni fausser un jeu. Pause pendant les règles et la finale.</li><li>Mission accomplie : on dit « Kongossa ! » à sa cible et on montre la carte, qu&#x27;elle paraphe. Pour un Mot, le chasseur ne doit jamais avoir dit ni écrit le mot. Pour un Secret, la cible confirme la réponse notée.</li><li>Une cible qui se sent visée dit « Je te vois ! », puis le prénom du chasseur et le type de mission. Juste : le chasseur lui donne sa carte, mission grillée. Faux : elle lui donne 1 Kola.</li><li>Pas de contact au-delà d&#x27;un check, pas de téléphone des autres. Une cible peut toujours dire non.</li><li>À 02h45, chacun rend ses cartes au comptable avec ses Kola.</li></ol>
+<div class="two eq bottom">
+<div class="card indigo score"><h3>Barème</h3><table><tr><td>Mission accomplie</td><td>4 PW</td></tr><tr><td>Les 3 missions accomplies</td><td>+3 PW</td></tr><tr><td>Chasseur démasqué (sa carte te revient)</td><td>+2 PW</td></tr><tr><td>Fausse accusation</td><td>1 Kola à l&#x27;accusé</td></tr></table></div>
+<div class="stack">
+<div class="card"><h3>Matériel</h3><p>3 cartes par joueur, imprimées depuis l&#x27;onglet Kongossa de l&#x27;appli, et une enveloppe par joueur.</p></div>
+<div class="card mjnote"><h3>Note pour le MJ</h3><p>Tire les missions quand la liste des joueurs est définitive. Rappelle le jeu après le repas et à la pause. À 02h45, coche chaque carte dans l&#x27;appli (paraphée : accomplie ; rendue par la cible : grillée), qui calcule les PW.</p></div>
+</div></div>
+<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 4</span></footer></section><section class="page game">
 <header class="gh">
 <img class="em" src="assets/em-mokolo.jpg" alt="">
 <div class="gt"><span class="badge">Jeu 1</span><div class="acc">échange et négociation, brise-glace</div><h2>Le Marché de Mokolo</h2></div>
@@ -184,7 +200,7 @@ p{margin:0 0 2mm}
 <div class="card"><h3>Matériel</h3><p>72 cartes marchandise (6 produits × 12) et 18 cartes objectif, imprimées et découpées.</p></div>
 <div class="card mjnote"><h3>Note pour le MJ</h3><p>Vérifie avant la soirée que chaque objectif reste atteignable : pas plus de 3 objectifs « 4 identiques » sur le même produit. Annonce à voix haute quand il reste 5 minutes, puis 1 minute.</p></div>
 </div></div>
-<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 4</span></footer></section><section class="page game">
+<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 5</span></footer></section><section class="page game">
 <header class="gh">
 <img class="em" src="assets/em-quiestqui.jpg" alt="">
 <div class="gt"><span class="badge">Jeu 2</span><div class="acc">déduction sociale</div><h2>Qui est qui ?</h2></div>
@@ -199,7 +215,7 @@ p{margin:0 0 2mm}
 <div class="card"><h3>Matériel</h3><p>Grilles et anecdotes imprimées, stylos.</p></div>
 <div class="card mjnote"><h3>Note pour le MJ</h3><p>Choisis des anecdotes ni trop évidentes ni gênantes, et écarte celles déjà racontées dans le groupe WhatsApp. Pendant la révélation, tiens les 30 secondes par personne, sinon le jeu déborde de 20 minutes.</p></div>
 </div></div>
-<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 5</span></footer></section><section class="page game">
+<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 6</span></footer></section><section class="page game">
 <header class="gh">
 <img class="em" src="assets/em-njangi.jpg" alt="">
 <div class="gt"><span class="badge">Jeu 3</span><div class="acc">enchères et psychologie</div><h2>Le Njangi</h2></div>
@@ -214,7 +230,7 @@ p{margin:0 0 2mm}
 <div class="card"><h3>Matériel</h3><p>Les jetons Kola de la soirée.</p></div>
 <div class="card mjnote"><h3>Note pour le MJ</h3><p>Compte « 1, 2, 3, ouvrez » : personne ne change sa mise après le 3. Garde une feuille avec la bouffe reportée d&#x27;un tour à l&#x27;autre pour éviter les disputes.</p></div>
 </div></div>
-<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 6</span></footer></section><section class="page game">
+<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 7</span></footer></section><section class="page game">
 <header class="gh">
 <img class="em" src="assets/em-duos.jpg" alt="">
 <div class="gt"><span class="badge">Jeu 4</span><div class="acc">énigmes à deux, rencontres</div><h2>Le Carrefour des Duos</h2></div>
@@ -229,7 +245,7 @@ p{margin:0 0 2mm}
 <div class="card"><h3>Matériel</h3><p>9 énigmes imprimées en 9 exemplaires, 1 minuteur, papiers.</p></div>
 <div class="card mjnote"><h3>Note pour le MJ</h3><p>Prépare les 9 énigmes et leurs réponses avant la soirée. Si le nombre de joueurs est impair, un organisateur complète le cercle hors classement. Les choix réciproques ne s&#x27;annoncent qu&#x27;aux deux personnes concernées, en privé.</p></div>
 </div></div>
-<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 7</span></footer></section><section class="page game">
+<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 8</span></footer></section><section class="page game">
 <header class="gh">
 <img class="em" src="assets/em-wouri.jpg" alt="">
 <div class="gt"><span class="badge">Jeu 5</span><div class="acc">négociation, alliances et trahison</div><h2>Le Pont du Wouri</h2></div>
@@ -244,7 +260,7 @@ p{margin:0 0 2mm}
 <div class="card"><h3>Matériel</h3><p>100 bâtonnets en bois, 6 enveloppes opaques.</p></div>
 <div class="card mjnote"><h3>Note pour le MJ</h3><p>Note dans un tableau secret ce que chaque équipe donne à chaque tour : tu en as besoin pour le contrôle de la mairie. N&#x27;annonce que le total, jamais le détail.</p></div>
 </div></div>
-<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 8</span></footer></section><section class="page game">
+<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 9</span></footer></section><section class="page game">
 <header class="gh">
 <img class="em" src="assets/em-code.jpg" alt="">
 <div class="gt"><span class="badge">Jeu 6</span><div class="acc">déduction, échange d&#x27;informations, bluff</div><h2>Le Code du Chef</h2></div>
@@ -259,7 +275,7 @@ p{margin:0 0 2mm}
 <div class="card"><h3>Matériel</h3><p>6 jeux de cartes symboles et 6 mini-tableaux blancs avec feutres.</p></div>
 <div class="card mjnote"><h3>Note pour le MJ</h3><p>Écris les 3 codes sur des papiers pliés avant le jeu. Si la file d&#x27;attente s&#x27;allonge, un organisateur t&#x27;aide à répondre avec une copie du code. Tiens une fiche d&#x27;essais par équipe.</p></div>
 </div></div>
-<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 9</span></footer></section><section class="page game">
+<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 10</span></footer></section><section class="page game">
 <header class="gh">
 <img class="em" src="assets/em-feymen.jpg" alt="">
 <div class="gt"><span class="badge">Jeu 7</span><div class="acc">rôles cachés, bluff, déduction</div><h2>Les Feymen</h2></div>
@@ -274,7 +290,7 @@ p{margin:0 0 2mm}
 <div class="card"><h3>Matériel</h3><p>Cartes rôle, cartes Honnête et Arnaque, petites enveloppes.</p></div>
 <div class="card mjnote"><h3>Note pour le MJ</h3><p>Tire les rôles avant le jeu. Ouvre les contrats à l&#x27;écart, avec un organisateur, et note chaque contrat et son résultat. Ne révèle les feymen qu&#x27;après le vote. Au-delà de 20 joueurs, ajoute 1 feyman par tranche de 6 joueurs.</p></div>
 </div></div>
-<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 10</span></footer></section><section class="page game finale">
+<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 11</span></footer></section><section class="page game finale">
 <header class="gh">
 <img class="em" src="assets/em-trone.jpg" alt="">
 <div class="gt"><span class="badge">Finale</span><div class="acc">la finale, bluff et enchères</div><h2>Le Trône de Kola</h2></div>
@@ -289,14 +305,14 @@ p{margin:0 0 2mm}
 <div class="card"><h3>Matériel</h3><p>4 jeux de cartes 1 à 8 et 8 cartes lot.</p></div>
 <div class="card mjnote"><h3>Note pour le MJ</h3><p>Ramasse les paris du public avant la première carte. Mets les finalistes au centre de la salle, debout, et révèle chaque carte en laissant un temps de suspense.</p></div>
 </div></div>
-<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 11</span></footer></section><section class="page">
+<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 12</span></footer></section><section class="page">
 <div class="kicker">03 · Matériel et préparation</div>
-<h2>57 € de matériel, réutilisé à chaque édition</h2>
+<h2>60 € de matériel, réutilisé à chaque édition</h2>
 <p class="lead">Prix estimés sur Temu, à vérifier au moment de commander. Pour économiser : imprimer à la fac, et remplacer les jetons par des capsules ou des haricots secs.</p>
-<table class="tbl wide"><thead><tr><th>Article</th><th>Quantité</th><th>Coût estimé</th></tr></thead><tbody><tr><td>Jetons de poker (les Kola)</td><td>300</td><td>10 €</td></tr><tr><td>Impression des cartes, papier cartonné</td><td>~15 pages</td><td>12 €</td></tr><tr><td>Mini-tableaux blancs + feutres</td><td>6</td><td>12 €</td></tr><tr><td>Porte-badges, cordon blanc (joueurs)</td><td>30</td><td>6 €</td></tr><tr><td>Porte-badges, cordon rouge et jaune (MJ, orga)</td><td>6</td><td>3 €</td></tr><tr><td>Petites enveloppes kraft</td><td>100</td><td>5 €</td></tr><tr><td>Bâtonnets en bois</td><td>100</td><td>3 €</td></tr><tr><td>Stylos</td><td>20</td><td>3 €</td></tr><tr><td>Sablier ou minuteur</td><td>2</td><td>3 €</td></tr><tr class="tot"><td>Total</td><td></td><td>57 €</td></tr></tbody></table>
+<table class="tbl wide"><thead><tr><th>Article</th><th>Quantité</th><th>Coût estimé</th></tr></thead><tbody><tr><td>Jetons de poker (les Kola)</td><td>300</td><td>10 €</td></tr><tr><td>Impression des cartes, papier cartonné</td><td>~15 pages</td><td>12 €</td></tr><tr><td>Mini-tableaux blancs + feutres</td><td>6</td><td>12 €</td></tr><tr><td>Porte-badges, cordon blanc (joueurs)</td><td>30</td><td>6 €</td></tr><tr><td>Porte-badges, cordon rouge et jaune (MJ, orga)</td><td>6</td><td>3 €</td></tr><tr><td>Petites enveloppes kraft</td><td>100</td><td>5 €</td></tr><tr><td>Bâtonnets en bois</td><td>100</td><td>3 €</td></tr><tr><td>Stylos</td><td>20</td><td>3 €</td></tr><tr><td>Sablier ou minuteur</td><td>2</td><td>3 €</td></tr><tr><td>Cartes Kongossa (papier cartonné) et enveloppes</td><td>~6 pages</td><td>3 €</td></tr><tr class="tot"><td>Total</td><td></td><td>60 €</td></tr></tbody></table>
 <div class="two eq mt">
-<div><h3>Le compte à rebours</h3><ul class="prep"><li><b>J-21</b><span>Sondage WhatsApp : date et inscriptions, annonce de la cotisation</span></li><li><b>J-20</b><span>Commande Temu (livraison 1 à 2 semaines)</span></li><li><b>J-10</b><span>Formulaire d&#x27;anecdotes pour Qui est qui ?</span></li><li><b>J-7</b><span>Choix du MJ et du comptable, rédaction des 9 énigmes</span></li><li><b>J-5</b><span>Impression et découpe des cartes et badges</span></li><li><b>J-3</b><span>Répétition des Feymen et de la finale à 4 ou 5</span></li><li><b>J-1</b><span>Enveloppes, feuille de scores, équipes tirées au sort</span></li></ul></div>
-<div class="card indigo"><h3>Dans le sac du MJ le soir même</h3><ul class="check"><li>Tableau des scores affiché et feutres</li><li>Les 3 codes du Code du Chef, pliés</li><li>Les rôles des Feymen tirés</li><li>Les 9 énigmes et leurs réponses</li><li>Les anecdotes numérotées, prêtes à afficher</li><li>Minuteur chargé</li></ul></div>
+<div><h3>Le compte à rebours</h3><ul class="prep"><li><b>J-21</b><span>Sondage WhatsApp : date et inscriptions, annonce de la cotisation</span></li><li><b>J-20</b><span>Commande Temu (livraison 1 à 2 semaines)</span></li><li><b>J-10</b><span>Formulaire d&#x27;anecdotes pour Qui est qui ?</span></li><li><b>J-7</b><span>Choix du MJ et du comptable, rédaction des 9 énigmes</span></li><li><b>J-5</b><span>Impression et découpe des cartes et badges</span></li><li><b>J-3</b><span>Répétition des Feymen et de la finale à 4 ou 5</span></li><li><b>J-1</b><span>Enveloppes, feuille de scores, équipes tirées au sort, missions Kongossa tirées et imprimées</span></li></ul></div>
+<div class="card indigo"><h3>Dans le sac du MJ le soir même</h3><ul class="check"><li>Les enveloppes Kongossa, une par joueur</li><li>Tableau des scores affiché et feutres</li><li>Les 3 codes du Code du Chef, pliés</li><li>Les rôles des Feymen tirés</li><li>Les 9 énigmes et leurs réponses</li><li>Les anecdotes numérotées, prêtes à afficher</li><li>Minuteur chargé</li></ul></div>
 </div>
-<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 12</span></footer></section>
+<footer class="foot"><span><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="#141E4A"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="#fff"/></svg> Wilbid Game Night, saison 1</span><span>Dossier du maître du jeu</span><span>p. 13</span></footer></section>
 </body></html>

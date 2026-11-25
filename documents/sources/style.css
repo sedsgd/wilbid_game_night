@@ -86,6 +86,8 @@ p{margin:0 0 2mm}
 .badge{display:inline-block;background:var(--kola);color:#fff;font:800 9pt var(--f-text);padding:1.3mm 3.2mm;border-radius:99px;margin-bottom:2.5mm}
 .finale .badge{background:var(--safou)}
 .finale::before{background:var(--safou)}
+.fil .badge{background:var(--palm);color:var(--indigo)}
+.fil::before{background:var(--palm)}
 .gstats{grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--line);color:var(--mute);margin-bottom:5mm;padding-top:3mm}
 .gstats{grid-template-columns:27mm 1fr 30mm;gap:4mm}.gstats b{color:var(--indigo);font-size:12.5pt}
 .bottom{margin-top:6mm}
