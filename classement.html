@@ -200,10 +200,38 @@ body.locked .tabs,body.locked #lockBtn,body.locked #toDossier,body.locked #toTim
 .badge .ct{font-size:7.5pt;opacity:.75}
 .badge .wb{position:absolute;bottom:4mm;font:800 7pt var(--fd)}
 .badge.mj{background:#E0452F;color:#fff}.badge.org{background:#F2B705}
+/* Opération Kongossa */
+.kgsum{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;color:var(--mute);font-size:14px}.kgsum b{font:800 24px var(--fd);color:var(--palm);margin-right:6px}
+.kgl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:12px}
+.kgp{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px}
+.kgp h3{display:flex;justify-content:space-between;gap:10px;align-items:baseline;font-size:19px;margin:0 0 4px}.kgp h3 span{font:800 18px var(--fd);color:var(--palm)}
+.kgm{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+.kgm .k{display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:99px;margin-right:6px;background:rgba(244,243,239,.12)}
+.kgm .k.mot{background:var(--palm);color:var(--bg)}.kgm .k.action{background:var(--kola);color:#fff}.kgm .k.secret{background:var(--safou);color:#fff}
+.kgm .tk{display:block;color:var(--mute);font-size:13px;margin-top:2px}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:99px;overflow:hidden}
+.seg button{min-height:40px;min-width:44px;padding:0 10px;border:0;background:transparent;color:var(--ink);font-weight:800;font-size:13px}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button.on[data-v=""]{background:rgba(244,243,239,.14)}.seg button.on[data-v=ok]{background:#3BB273;color:#fff}.seg button.on[data-v=burn]{background:var(--kola);color:#fff}
+.kgsheet{display:none}
+.kc{width:62mm;height:88mm;box-sizing:border-box;border:.3mm solid #C9C6BB;background:#F4F3EF;color:#141E4A;font-family:var(--ft);display:flex;flex-direction:column;overflow:hidden;break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.kc .bt{height:13mm;background:url(assets/pattern.jpg) center/26mm auto;display:flex;align-items:center;justify-content:space-between;padding:0 3mm}
+.kc .bt span{font:800 7pt var(--ft);text-transform:uppercase;letter-spacing:.08em;background:#141E4A;color:#fff;border-radius:2mm;padding:.8mm 2mm}
+.kc .bt img{width:10mm;height:10mm;border-radius:50%}
+.kc .in{flex:1;display:flex;flex-direction:column;padding:3mm 4mm 3.5mm}
+.kc .ty{font:800 13pt/1 var(--fd);letter-spacing:-.02em}.kc.mot .ty{color:#B98A00}.kc.action .ty{color:#E0452F}.kc.secret .ty{color:#7A4FA3}
+.kc .tg{margin-top:2.5mm;font-size:7pt;text-transform:uppercase;letter-spacing:.06em;opacity:.7}.kc .tn{font:800 15pt/1.05 var(--fd);letter-spacing:-.02em;word-break:break-word}
+.kc .ask{margin-top:2.5mm;font-size:7.5pt;opacity:.75}.kc .ts{font:700 10.5pt/1.25 var(--ft)}.kc.mot .ts{font:800 14pt/1.1 var(--fd)}
+.kc .ln{margin-top:auto;font-size:6.8pt;border-top:.3mm solid #141E4A;padding-top:1.5mm;display:flex;justify-content:space-between;gap:2mm}
+.kc .ans{margin-top:2mm;font-size:7pt;border-bottom:.3mm dotted #141E4A;padding-bottom:5mm}
+.kc .hn{font-size:6.5pt;opacity:.65;margin-top:1.5mm}
+.kc .rm{margin-top:auto;font-size:6.3pt;line-height:1.3;opacity:.8;padding-bottom:1.5mm}.kc .rm+.ln{margin-top:0}
 @media print{
  @page{size:A4;margin:8mm}
  body{background:#fff}body *{visibility:hidden}
- body:not(.pa) #bsheet,body:not(.pa) #bsheet *{visibility:visible}
+ body:not(.pa):not(.pk) #bsheet,body:not(.pa):not(.pk) #bsheet *{visibility:visible}
+ body.pk .kgsheet{display:grid;grid-template-columns:repeat(3,62mm);gap:3mm;position:absolute;left:0;top:0}
+ body.pk .kgsheet,body.pk .kgsheet *{visibility:visible}
  body.pa .ansheet{display:block;position:absolute;left:0;top:0;width:100%;color:#000;font:12pt/1.4 var(--ft)}
  body.pa .ansheet,body.pa .ansheet *{visibility:visible}
  .ansheet h2{font:800 20pt var(--fd);margin:0 0 6mm}.ansheet ol{margin:0;padding-left:10mm}.ansheet li{margin-bottom:4mm;break-inside:avoid}.ansheet .key{break-before:page}
@@ -236,6 +264,7 @@ body.locked .tabs,body.locked #lockBtn,body.locked #toDossier,body.locked #toTim
   <a href="#inscrits" data-v="inscrits" data-i="t0" id="tabI" hidden>Inscrits</a>
   <a href="#joueurs" data-v="joueurs" data-i="t1">Joueurs</a>
   <a href="#equipes" data-v="equipes" data-i="t2">Équipes</a>
+  <a href="#kongossa" data-v="kongossa" data-i="t7">Kongossa</a>
   <a href="#scores" data-v="scores" data-i="t3">Scores</a>
   <a href="#classement" data-v="classement" data-i="t4">Classement</a>
   <a href="#badges" data-v="badges" data-i="t5">Badges</a>
@@ -297,6 +326,13 @@ body.locked .tabs,body.locked #lockBtn,body.locked #toDossier,body.locked #toTim
  <div id="teams"></div>
 </section>
 
+<section class="view" id="v-kongossa">
+ <div class="head"><div><h1 data-i="kgT">Opération Kongossa</h1><p data-i="kgL"></p></div>
+  <div class="row"><button class="btn" id="kgDraw" type="button"></button><button class="btn ghost" id="kgPrint" type="button" data-i="kgPrint">Imprimer les cartes</button></div></div>
+ <div id="kgBox"></div>
+ <div id="kgSheet" class="kgsheet" aria-hidden="true"></div>
+</section>
+
 <section class="view" id="v-scores">
  <div class="head"><div><h1 data-i="sT">Saisir les points</h1><p data-i="sL"></p></div></div>
  <div class="gp" id="sgp"></div>
@@ -346,11 +382,12 @@ body.locked .tabs,body.locked #lockBtn,body.locked #toDossier,body.locked #toTim
 {
 const G=window.WB_GAMES,KEY='wb-score-v1';
 const EXTRA=[{id:'kola',max:null,name:{fr:'Kola restantes',en:'Kola left'},short:{fr:'Kola',en:'Kola'}},{id:'paris',max:3,name:{fr:'Paris du public',en:'Crowd bets'},short:{fr:'Paris',en:'Bets'}}];
-const COLS=[...G.map(g=>({id:g.id,max:g.max,name:g.name,short:g.fin?{fr:'Finale',en:'Final'}:{fr:'J'+g.num,en:'G'+g.num},team:['wouri','code'].includes(g.id),img:g.id})),...EXTRA];
+const FIL=window.WB_FIL,KGK=['mot','action','secret'];
+const COLS=[...G.map(g=>({id:g.id,max:g.max,name:g.name,short:g.fin?{fr:'Finale',en:'Final'}:{fr:'J'+g.num,en:'G'+g.num},team:['wouri','code'].includes(g.id),img:g.id})),...(FIL?[{id:FIL.id,max:FIL.max,name:FIL.name,short:{fr:'Kong.',en:'Kong.'},img:FIL.id}]:[]),...EXTRA];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const $=s=>document.querySelector(s);
 const UI={
-fr:{sub:'classement',t1:'Joueurs',t2:'Équipes',t3:'Scores',t4:'Classement',t5:'Badges',proj:'Écran',langBtn:'EN',
+fr:{sub:'classement',t1:'Joueurs',t7:'Kongossa',kgT:'Opération Kongossa',kgL:'Le fil rouge de la nuit. Tire les missions quand tous les joueurs sont inscrits, imprime les cartes (3 par joueur, une ligne par joueur) et glisse chaque ligne dans une enveloppe. Pendant la nuit, vide la boîte Kongossa et coche chaque carte (paraphée : accomplie ; marquée « grillée » : grillée). Les PW se calculent tout seuls.',kgDraw:'Tirer les missions',kgRedraw:'Refaire le tirage',kgSure:'Sûr ? Tout sera retiré',kgPrint:'Imprimer les cartes',kgNone:'Pas encore de missions. Ajoute au moins 4 joueurs, puis tire les missions.',kgLate:n=>`${n} joueur${n>1?'s':''} sans missions (arrivé${n>1?'s':''} après le tirage). Refais le tirage avant de distribuer les enveloppes.`,kgDone:'accomplies',kgBurn:'grillées',kgOpen:'en cours',kgOk:'Accomplie',kgBurnB:'Grillée',kgTarget:'Cible',kgHunter:'Chasseur',kgMission:'Mission',kgAns:'Réponse',kgSign:'Paraphe de la cible',kgRm:'Réussie : dis « Kongossa ! », fais parapher et dépose la carte dans la boîte. Démasqué(e) par ta cible : donne-lui cette carte. Fin à 02h40.',kgDrawn:'Missions tirées',kgReady:'Tout le monde est inscrit ? Tire les missions, puis imprime les cartes.',kgHint:'Ces PW se calculent dans l’onglet Kongossa, en cochant chaque carte de la boîte.',t2:'Équipes',t3:'Scores',t4:'Classement',t5:'Badges',proj:'Écran',langBtn:'EN',
  pT:'Les joueurs',pL:'Inscris tout le monde à l’accueil. Le MJ et les organisateurs restent hors classement. Le genre sert seulement à équilibrer les équipes.',
  addT:'Ajouter',fName:'Prénom',fCity:'Ville d’origine',add:'Ajouter',bulkT:'Coller une liste (un prénom par ligne, ville après une virgule)',bulkAdd:'Ajouter la liste',
  role:{p:'Joueur',mj:'MJ',org:'Organisation'},g:{'':'–',F:'F',H:'H'},noP:'Aucun joueur pour l’instant. Ajoute le premier avec le formulaire.',players:'joueurs',staff:'organisation',
@@ -385,7 +422,7 @@ fr:{sub:'classement',t1:'Joueurs',t2:'Équipes',t3:'Scores',t4:'Classement',t5:'
  cDown:'La base en ligne ne répond pas. Réessaie dans un instant.',retry:'Réessayer',logout:'Se déconnecter',loggedOut:'Déconnecté',
  lkWhyC:'Le classement public se met à jour tout seul sur le site. Seuls les comptes organisateurs peuvent modifier la soirée.',lkScreenC:'Voir le classement public',
  sync:{off:'Hors ligne',ok:'Synchronisé',saving:'Envoi…',err:'Pas de réseau, nouvel essai'},newOk:'Nouvelle soirée créée'},
-en:{sub:'leaderboard',t1:'Players',t2:'Teams',t3:'Scores',t4:'Leaderboard',t5:'Badges',proj:'Screen',langBtn:'FR',
+en:{sub:'leaderboard',t1:'Players',t7:'Kongossa',kgT:'Operation Kongossa',kgL:'The night’s all-night thread. Draw the missions once every player is in, print the cards (3 per player, one row per player) and slip each row into an envelope. During the night, empty the Kongossa box and tick each card (initialled: done; marked “burnt”: burnt). The PW are worked out for you.',kgDraw:'Draw the missions',kgRedraw:'Draw again',kgSure:'Sure? Everything will be redrawn',kgPrint:'Print the cards',kgNone:'No missions yet. Add at least 4 players, then draw the missions.',kgLate:n=>`${n} player${n>1?'s':''} without missions (added after the draw). Draw again before handing out the envelopes.`,kgDone:'done',kgBurn:'burnt',kgOpen:'open',kgOk:'Done',kgBurnB:'Burnt',kgTarget:'Target',kgHunter:'Hunter',kgMission:'Mission',kgAns:'Answer',kgSign:'Target’s initials',kgRm:'Done: say “Kongossa!”, get it initialled and drop it in the box. Unmasked by your target: hand them this card. Ends at 2:40 am.',kgDrawn:'Missions drawn',kgReady:'Is everyone in? Draw the missions, then print the cards.',kgHint:'These PW are worked out in the Kongossa tab, by ticking each card from the box.',t2:'Teams',t3:'Scores',t4:'Leaderboard',t5:'Badges',proj:'Screen',langBtn:'FR',
  pT:'Players',pL:'Register everyone at the door. The game master and organisers are not ranked. Gender is only used to balance teams.',
  addT:'Add',fName:'First name',fCity:'Hometown',add:'Add',bulkT:'Paste a list (one name per line, hometown after a comma)',bulkAdd:'Add the list',
  role:{p:'Player',mj:'GM',org:'Organiser'},g:{'':'–',F:'F',H:'M'},noP:'No players yet. Add the first one with the form.',players:'players',staff:'staff',
@@ -424,7 +461,7 @@ let lang='fr';try{lang=localStorage.getItem('wb-lang')||'fr'}catch(e){}
 const L=()=>UI[lang],tx=o=>o?(o[lang]||o.fr):'';
 
 /* ---- state ---- */
-const blank=()=>({players:[],scores:{},teams:{},order:[],hist:[]});
+const blank=()=>({players:[],scores:{},teams:{},order:[],hist:[],kg:null});
 let st=blank();
 const load=()=>{try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.players)st={...blank(),...s}}catch(e){}};
 let onPersist=()=>{};
@@ -490,7 +527,7 @@ function renderEntry(){
  const inp=p=>`<input type="number" inputmode="numeric" step="1" data-p="${p.id}" value="${typeof cur[p.id]==='number'?cur[p.id]:''}" placeholder="0" aria-label="${esc(p.name)}">`;
  const row=p=>`<div class="erow"><div><b>${esc(p.name)}</b><small>${esc(p.city||'')}</small></div><div>${inp(p)}<div class="warn" data-w="${p.id}"></div></div></div>`;
  let body='',hint='';
- if(sGame==='kola')hint=u.kolaHint;else if(sGame==='paris')hint=u.parisHint;
+ if(sGame==='kola')hint=u.kolaHint;else if(sGame==='paris')hint=u.parisHint;else if(FIL&&sGame===FIL.id)hint=u.kgHint;
  const t=st.teams[sGame];
  if(t&&t.length){
   body=t.map((m,i)=>`<div class="tbox"><div class="th"><b>${u.team} ${i+1}</b><label class="row note">${u.teamPW} <input type="number" inputmode="numeric" data-team="${i}" placeholder="0"></label></div>${m.map(id=>ps.find(p=>p.id===id)).filter(Boolean).map(row).join('')}</div>`).join('');
@@ -535,6 +572,52 @@ $('#resetBtn').addEventListener('click',()=>{const u=L();const box=document.crea
  const old=document.getElementById('resetBox');if(old)old.remove();box.id='resetBox';$('#v-classement .head').after(box);
  box.addEventListener('click',ev=>{if(ev.target.closest('[data-y]')){st=blank();box.remove();if(cloud.night)newNight();else{persist();renderCurrent()}}if(ev.target.closest('[data-n]'))box.remove()})});
 
+/* ---- Opération Kongossa : 3 missions par joueur (Mot, Action, Secret), chaque joueur est la cible d'un chasseur de chaque type ---- */
+let kgArm=0;
+function kgDraw(){
+ const ps=shuffle(ranked()),n=ps.length;if(n<4||!FIL)return false;
+ /* décalages distincts, jamais n/2 et jamais deux qui s'annulent : personne ne chasse son propre chasseur (dès 7 joueurs) */
+ const half=Math.floor((n-1)/2);
+ const offs=half>=3?shuffle(Array.from({length:half},(_,i)=>i+1)).slice(0,3).map(o=>Math.random()<.5?o:n-o):shuffle(Array.from({length:n-1},(_,i)=>i+1)).slice(0,3);
+ const m=[];KGK.forEach((k,ki)=>{const perm=shuffle(FIL.bank[k].map((_,i)=>i));ps.forEach((p,j)=>m.push({h:p.id,t:ps[(j+offs[ki])%n].id,k,i:perm[j%perm.length]}))});
+ /* un Mot qui est la ville d'origine de la cible (écrite sur son badge) serait gratuit : on l'échange avec un autre chasseur */
+ const norm=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+ const city=id=>norm(st.players.find(p=>p.id===id)?.city);
+ const clash=(x,i)=>FIL.bank.mot[i].some(w=>{const c=city(x.t);return c&&c.includes(norm(w))});
+ const mots=m.filter(x=>x.k==='mot');
+ mots.forEach(x=>{if(!clash(x,x.i))return;const y=mots.find(z=>z!==x&&!clash(x,z.i)&&!clash(z,x.i));if(y)[x.i,y.i]=[y.i,x.i]});
+ st.kg={m,s:{}};kgScore();return true;
+}
+function kgScore(){
+ if(!st.kg)return;const o={},s=st.kg.s||{};
+ const ids=[...new Set(st.kg.m.map(x=>x.h))].filter(id=>st.players.some(p=>p.id===id));
+ ids.forEach(id=>{const done=st.kg.m.filter((x,i)=>x.h===id&&s[i]==='ok').length,burnt=st.kg.m.filter((x,i)=>x.t===id&&s[i]==='burn').length;o[id]=Math.min(FIL.max,4*done+(done===3?3:0)+2*burnt)});
+ const any=Object.keys(s).length;
+ if(any){st.scores[FIL.id]=o;if(!st.order.includes(FIL.id))st.order.unshift(FIL.id)}else{delete st.scores[FIL.id];st.order=st.order.filter(x=>x!==FIL.id)}
+}
+const kgName=id=>st.players.find(p=>p.id===id)?.name||'?';
+const kgTask=x=>{const b=FIL.bank[x.k][x.i]||['',''];return lang==='en'?b[1]:b[0]};
+const kgQuote=t=>lang==='en'?'“'+t+'”':'« '+t+' »';
+function renderKg(){
+ const u=L(),kg=st.kg;
+ const btn=$('#kgDraw');btn.textContent=kgArm?u.kgSure:kg?u.kgRedraw:u.kgDraw;btn.classList.toggle('red',!!kgArm);btn.disabled=ranked().length<4;$('#kgPrint').disabled=!kg;
+ if(!kg){$('#kgBox').innerHTML=`<div class="empty">${ranked().length<4?u.kgNone:u.kgReady}</div>`;return}
+ const s=kg.s||{},have=new Set(kg.m.map(x=>x.h)),late=ranked().filter(p=>!have.has(p.id)).length;
+ const nOk=Object.values(s).filter(v=>v==='ok').length,nB=Object.values(s).filter(v=>v==='burn').length;
+ const hs=[...have].filter(id=>st.players.some(p=>p.id===id)).sort((a,b)=>kgName(a).localeCompare(kgName(b)));
+ $('#kgBox').innerHTML=`${late?`<p class="warn" style="margin-top:0">${u.kgLate(late)}</p>`:''}<div class="kgsum"><span><b>${nOk}</b>${u.kgDone}</span><span><b>${nB}</b>${u.kgBurn}</span><span><b>${kg.m.length-nOk-nB}</b>${u.kgOpen}</span></div>
+ <div class="kgl">${hs.map(id=>`<div class="kgp"><h3>${esc(kgName(id))}<span>${typeof st.scores[FIL.id]?.[id]==='number'?st.scores[FIL.id][id]:0} PW</span></h3>${kg.m.map((x,i)=>x.h===id?`<div class="kgm"><div><span class="k ${x.k}">${esc(tx(FIL.kinds[x.k]))}</span><b>${esc(kgName(x.t))}</b><span class="tk">${esc(tx(FIL.ask[x.k]))} ${x.k==='mot'?esc(kgQuote(kgTask(x))):esc(kgTask(x))}</span></div><div class="seg" role="group">${[['',' – '],['ok',u.kgOk],['burn',u.kgBurnB]].map(([v,l])=>`<button type="button" data-kg="${i}" data-v="${v}" class="${(s[i]||'')===v?'on':''}" aria-pressed="${(s[i]||'')===v}">${l}</button>`).join('')}</div></div>`:'').join('')}</div>`).join('')}</div>`;
+}
+$('#kgDraw').addEventListener('click',()=>{
+ if(st.kg&&!kgArm){kgArm=setTimeout(()=>{kgArm=0;renderKg()},4000);renderKg();return}
+ clearTimeout(kgArm);kgArm=0;if(kgDraw()){persist();toast(L().kgDrawn)}renderKg()});
+$('#kgBox').addEventListener('click',e=>{const b=e.target.closest('[data-kg]');if(!b||!st.kg)return;const i=b.dataset.kg;if(b.dataset.v)st.kg.s[i]=b.dataset.v;else delete st.kg.s[i];kgScore();persist();renderKg()});
+$('#kgPrint').addEventListener('click',()=>{const u=L(),kg=st.kg;if(!kg)return;
+ const hs=[...new Set(kg.m.map(x=>x.h))].filter(id=>st.players.some(p=>p.id===id)).sort((a,b)=>kgName(a).localeCompare(kgName(b)));
+ $('#kgSheet').innerHTML=hs.map(id=>KGK.map(k=>{const x=kg.m.find(y=>y.h===id&&y.k===k);if(!x)return '';
+  return `<div class="kc ${k}"><div class="bt"><span>${esc(tx(FIL.name))}</span><img src="assets/em-${FIL.id}.jpg" alt=""></div><div class="in"><div class="ty">${u.kgMission} ${esc(tx(FIL.kinds[k]))}</div><div class="tg">${u.kgTarget}</div><div class="tn">${esc(kgName(x.t))}</div><div class="ask">${esc(tx(FIL.ask[k]))}</div><div class="ts">${k==='mot'?esc(kgQuote(kgTask(x))):esc(kgTask(x))}</div>${k==='secret'?`<div class="ans">${u.kgAns} :</div>`:''}<div class="hn">${u.kgHunter} : ${esc(kgName(id))}</div><div class="rm">${u.kgRm}</div><div class="ln"><span>${u.kgSign}</span><span>Wilbid Game Night</span></div></div></div>`}).join('')).join('');
+ document.body.classList.add('pk');window.print()});
+
 /* ---- badges ---- */
 const KOLA=(f,h,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(45 24 24)" fill="${f}"><circle cx="14" cy="14" r="9.2"/><circle cx="34" cy="14" r="9.2"/><circle cx="14" cy="34" r="9.2"/><circle cx="34" cy="34" r="9.2"/></g><path d="M24 19 29 24 24 29 19 24Z" fill="${h}"/></svg>`;
 function renderBadges(){
@@ -545,7 +628,7 @@ function renderBadges(){
 $('#printBtn').addEventListener('click',()=>window.print());
 
 /* ---- routing & language ---- */
-const VIEWS=['inscrits','joueurs','equipes','scores','classement','badges','partenaires','ecran'];
+const VIEWS=['inscrits','joueurs','equipes','kongossa','scores','classement','badges','partenaires','ecran'];
 let view='joueurs';
 /* ---- verrou : code propre à l'appareil, stocké seulement sous forme d'empreinte SHA-256 ---- */
 const PINK='wb-pin-v1',SESS='wb-unlocked';
@@ -645,7 +728,7 @@ if(sb){
  window.addEventListener('online',()=>{if(cloud.night)schedulePush()});
  setSync('off');
 }
-function renderCurrent(){({joueurs:renderPlayers,equipes:renderTeams,scores:renderEntry,classement:renderBoard,badges:renderBadges,partenaires:renderPartners,inscrits:renderRegs,ecran:renderEcran})[view]()}
+function renderCurrent(){({joueurs:renderPlayers,equipes:renderTeams,kongossa:renderKg,scores:renderEntry,classement:renderBoard,badges:renderBadges,partenaires:renderPartners,inscrits:renderRegs,ecran:renderEcran})[view]()}
 /* ---- inscriptions et avis des joueurs (inscription.html, avis.html ; mode en ligne seulement) ---- */
 let rgData=null,fbData=null,rgErr=false;
 async function loadRegs(){if(!sb||!cloud.night)return;const id=cloud.night.id;
@@ -691,7 +774,7 @@ $('#anPrint').addEventListener('click',()=>{const u=L(),pick=st.anec||{};const r
  for(let i=rows.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[rows[i],rows[j]]=[rows[j],rows[i]]}
  $('#anSheet').innerHTML=`<h2>${u.anSheet}</h2><ol>${rows.map(r=>`<li>${esc(r.a)}</li>`).join('')}</ol><div class="key"><h2>${u.anKey}</h2><ol>${rows.map(r=>`<li>${esc(r.n)}</li>`).join('')}</ol></div>`;
  document.body.classList.add('pa');window.print()});
-window.addEventListener('afterprint',()=>document.body.classList.remove('pa'));
+window.addEventListener('afterprint',()=>document.body.classList.remove('pa','pk'));
 /* ---- demandes de partenariat (formulaire de partenaires.html, mode en ligne seulement) ---- */
 let prData=null,prErr=false;
 async function loadPartners(){if(!sb||!cloud.night)return;try{const {data,error}=await sb.from('partner_requests').select('*').order('created_at',{ascending:false}).limit(200);if(error)throw error;prData=data;prErr=false}catch(e){console.warn(e);prErr=true}if(view==='partenaires')renderPartners()}

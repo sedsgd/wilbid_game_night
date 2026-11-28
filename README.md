@@ -8,9 +8,9 @@ Tout est en HTML, CSS et JavaScript, sans dépendance à installer. Le dépôt p
 
 | Dossier ou fichier | Ce que c'est |
 | --- | --- |
-| `index.html` | Le site : accueil, programme, livret de règles des 8 jeux en français et en anglais, système de points |
+| `index.html` | Le site : accueil, programme, livret de règles des 8 jeux et du jeu fil rouge (Opération Kongossa) en français et en anglais, système de points |
 | `data.js` | Tous les textes du site et des règles, en `fr` et `en`. On corrige une règle ici, sans toucher au reste |
-| `classement.html` | L'appli du comptable : joueurs, tirage des équipes, saisie des PW, Kola, classement, écran projecteur, badges à imprimer |
+| `classement.html` | L'appli du comptable : joueurs, tirage des équipes, missions Kongossa (tirage, cartes à imprimer, calcul des PW), saisie des PW, Kola, classement, écran projecteur, badges à imprimer |
 | `minuteurs/` | Un minuteur par jeu pour le projecteur, avec les phases enchaînées et les alertes sonores (outil de l'espace organisation) |
 | `inscription.html` | Le formulaire d'inscription des joueurs : prénom, affichage public, anecdotes pour « Qui est qui ? », plat, photos (FR/EN) |
 | `avis.html` | Le formulaire d'avis après la soirée (FR/EN) |
@@ -50,6 +50,13 @@ Tout est en HTML, CSS et JavaScript, sans dépendance à installer. Le dépôt p
 - L'espace organisation est protégé par un code propre à chaque appareil. À la première ouverture, on choisit le code ; ensuite il est demandé à chaque nouvelle session du navigateur. Le bouton **Verrouiller** referme l'accès. Seule une empreinte SHA-256 du code est enregistrée.
 - Les données restent dans le navigateur de l'appareil du comptable (localStorage).
 - Code oublié : **Effacer cet appareil** supprime le code et les données de la soirée sur cet appareil.
+
+### Opération Kongossa, le jeu fil rouge
+
+- Toute la nuit, chaque joueur mène 3 missions secrètes (Mot, Action, Secret) sur 3 autres joueurs, et chaque joueur est la cible d'un chasseur de chaque type. Les règles et les 72 missions (24 par type, FR/EN) sont dans `WB_FIL` de `data.js`.
+- Onglet **Kongossa** : **Tirer les missions** quand la liste des joueurs est définitive, puis **Imprimer les cartes** (une ligne de 3 cartes par joueur, à glisser dans son enveloppe).
+- Les joueurs déposent les cartes paraphées ou grillées dans la boîte Kongossa (fermeture à 02h40). Le comptable la vide à chaque pause et coche chaque mission **Accomplie** ou **Grillée** : la colonne Kong. du classement se calcule seule (4 PW par mission, +3 PW pour les 3, +2 PW par chasseur démasqué, 15 PW au plus).
+- Le tirage évite qu'un joueur chasse son propre chasseur (dès 7 joueurs) et qu'un Mot soit la ville d'origine de sa cible.
 
 ### Dans les deux cas
 
