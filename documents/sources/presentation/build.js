@@ -279,17 +279,20 @@ async function build() {
     });
     const steps = [
       [KOLA, 'Mission réussie ?', 'Dis « Kongossa ! » et fais parapher ta carte par ta cible.'],
-      [PALM, 'Tu te sens visé ?', '« Je te vois ! » + son prénom + le type de mission. Juste : sa carte te revient. Faux : tu lui donnes 1 Kola.'],
+      [PALM, 'Tu te sens visé ?', '« Je te vois ! » + son prénom + le type de mission. Juste : il te donne sa carte, écris « grillée » dessus. Faux : tu lui donnes 1 Kola.'],
       [INK, 'Respect', 'Pas de contact au-delà d’un check, on ne touche pas aux téléphones, une cible peut toujours dire non.'],
-      [SAFOU, '02h45', 'Cartes rendues au comptable avec les Kola. Pause pendant les règles de chaque jeu.'],
+      [SAFOU, 'Boîte Kongossa', 'Carte paraphée ou grillée : dans la boîte près du comptable, tout de suite. Fermeture à 02h40.'],
     ];
+    let y = 3.8;
+    const stH = steps.map(([, t, d]) => lines(t + '  ' + d, 15, 6.65, 0.5) * 15 * 1.2 / 72 + 0.05);
+    const stGap = Math.min(0.3, (6.75 - y - stH.reduce((a, b) => a + b, 0)) / (steps.length - 1));
     steps.forEach(([c, t, d], i) => {
-      const y = 3.8 + i * 0.75;
       s.addShape(pres.shapes.OVAL, { x: M, y: y + 0.05, w: 0.46, h: 0.46, fill: { color: c }, line: { color: c, width: 0 }, objectName: 'puce' });
-      tb(s, [{ text: t + '  ', options: { bold: true } }, { text: d, options: { color: MUTE } }], { x: M + 0.7, y, w: 6.65, h: 0.7, fontSize: 15, valign: 'top' });
+      tb(s, [{ text: t + '  ', options: { bold: true } }, { text: d, options: { color: MUTE } }], { x: M + 0.7, y, w: 6.65, h: stH[i], fontSize: 15, valign: 'top' });
+      y += stH[i] + stGap;
     });
     scoreCard(s, FIL.score.fr, FIL.max, null, false);
-    NOTES(s, 'Le conseil à donner : ' + FIL.tip.fr + '\nExpliquer Opération Kongossa. Les PW Kongossa entrent au classement à 02h45, avant l’annonce des finalistes. Une fausse accusation coûte 1 Kola, donnée à la personne accusée.');
+    NOTES(s, 'Le conseil à donner : ' + FIL.tip.fr + '\nExpliquer Opération Kongossa. Une mission déjà accomplie ne peut plus être grillée. Pause pendant les explications du MJ. La boîte Kongossa ferme à 02h40 ; les PW Kongossa entrent au classement à 02h45, avant l’annonce des finalistes. Une fausse accusation coûte 1 Kola, donnée à la personne accusée.');
   }
 
   /* ========== 2. LES JEUX ========== */
@@ -301,7 +304,7 @@ async function build() {
       interlude(secTitle, {
         em: g.id, kicker: (fin ? 'La finale' : 'Jeu ' + g.num) + ' · ' + g.dur + ' min', kColor: fin ? PALM : KOLA,
         title: g.name.fr, accent: g.kind.fr.charAt(0).toUpperCase() + g.kind.fr.slice(1), body: g.pitch.fr,
-        notes: `${it ? it.at + ' · ' : ''}${g.name.fr} (${g.dur} min, ${g.fmt.fr}). Lire l’accroche à voix haute, puis passer aux règles. Préparer le minuteur : page Minuteurs, ${fin ? 'Finale' : 'jeu ' + g.num}.${g.id === 'feymen' ? ' Annoncer que les missions Kongossa se ferment à la fin de ce jeu (02h40).' : ''}`,
+        notes: `${it ? it.at + ' · ' : ''}${g.name.fr} (${g.dur} min, ${g.fmt.fr}). Lire l’accroche à voix haute, puis passer aux règles. Préparer le minuteur : page Minuteurs, ${fin ? 'Finale' : 'jeu ' + g.num}.${g.id === 'feymen' ? ' Annoncer que les missions Kongossa se ferment à la fin de ce jeu : dernières cartes dans la boîte Kongossa avant 02h40.' : ''}`,
       });
     }
     // règles + barème
@@ -344,7 +347,7 @@ async function build() {
   sec = 'Jeux 5 à 7'; pres.addSection({ title: sec });
   game(G.wouri, sec); game(G.code, sec);
   interlude(sec, { em: 'pause', kicker: at('pause').at + ' · ' + at('pause').d, kColor: PALM, title: 'Pause', accent: 'On souffle, on boit un coup',
-    body: 'Dernière ligne droite pour vos missions Kongossa : elles se ferment à la fin des Feymen.', next: `${at('feymen').at} · ${G.feymen.name.fr}`,
+    body: 'Dernière ligne droite pour vos missions Kongossa : la boîte ferme à 02h40, à la fin des Feymen.', next: `${at('feymen').at} · ${G.feymen.name.fr}`,
     notes: 'Pause de 20 minutes. Préparer les cartes rôle et les enveloppes des Feymen.' });
   game(G.feymen, sec);
 
@@ -358,7 +361,7 @@ async function build() {
     tb(s, 'Prénom', { x: M + 3.5, y: 2.8, w: 8.0, h: 1.2, fontSize: 60, bold: true, objectName: 'meilleur-kongosseur' });
     tb(s, '… missions accomplies · … PW', { x: M + 3.5, y: 4.1, w: 8.0, h: 0.6, fontSize: 22, color: MUTE, objectName: 'score-kongosseur' });
     tb(s, 'Les PW Kongossa sont ajoutés au classement : place aux finalistes.', { x: M + 3.5, y: 5.2, w: 8.0, h: 0.6, fontSize: 18, color: INK });
-    NOTES(s, `${at('classement').at} · Les cartes Kongossa ont été rendues au comptable avec les Kola. Taper le prénom et le score du meilleur kongosseur avant de projeter. Ses PW (et ceux de tous) entrent au classement avant l’annonce des finalistes.`);
+    NOTES(s, `${at('classement').at} · La boîte Kongossa a fermé à 02h40 et le comptable a compté les cartes. Taper le prénom et le score du meilleur kongosseur avant de projeter. Ses PW (et ceux de tous) entrent au classement avant l’annonce des finalistes.`);
   }
   {
     const s = pres.addSlide({ masterName: 'WB_CONTENU', sectionTitle: sec });
