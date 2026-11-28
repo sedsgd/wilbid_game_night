@@ -17,6 +17,13 @@ vm.runInNewContext(fs.readFileSync(path.join(ROOT, 'data.js'), 'utf8'), ctx);
 const GAMES = ctx.window.WB_GAMES, SCHED = ctx.window.WB_SCHEDULE;
 const G = Object.fromEntries(GAMES.map(g => [g.id, g]));
 const at = id => SCHED.find(s => s.id === id || s.img === id);
+/* Le jeu fil rouge (Opération Kongossa) : window.WB_FIL dans data.js. Copie de secours du barème tant qu'il n'y est pas. */
+const FIL = ctx.window.WB_FIL || { max: 15,
+  score: { fr: [['Mission accomplie','4 PW'],['Les 3 missions accomplies','+3 PW'],['Chasseur démasqué (sa carte te revient)','+2 PW'],['Fausse accusation','1 Kola à l’accusé']] },
+  tip: { fr: 'Le meilleur chasseur parle d’abord de tout autre chose. Et méfie-toi de qui te pose trop de questions.' } };
+/* Libellés courts du programme pour les moments sans jeu (ceux de data.js sont trop longs pour la slide) */
+const SHORT = { accueil: 'Accueil, badges, cotisation', repas: 'Repas et musique', pause: 'Pause', classement: 'Kongossa, Kola et finalistes',
+  gains: 'Remise des gains, photo', ambiance: 'Ambiance libre jusqu’au matin' };
 
 /* Ndop Nuit : nuit indigo, rouge kola, jaune palme, violet safou */
 const S2 = { velours: '17110E', coton: 'F6EBD9', orange: 'F07A1A', or: 'F2B705' };   // identité saison 2 « Toghu »
@@ -96,6 +103,29 @@ async function build() {
   /* largeur moyenne d'un caractère en Arial ≈ 0,5 em : estimation des lignes pour éviter les débordements */
   const lines = (txt, pt, w, f = 0.46) => Math.max(1, Math.ceil(txt.length * pt * f / 72 / (w - 0.1)));
 
+  /* carte « Barème » + conseil, à droite d'une slide de règles */
+  function scoreCard(s, S, max, tip, crowded) {
+    const cx = crowded ? 7.1 : 8.45, cw = W - M - cx, cy = 1.55, ch = 5.2;
+    card(s, cx, cy, cw, ch, null, 'bareme');
+    tb(s, [{ text: 'Barème', options: { bold: true, color: PALM } }, { text: `   jusqu’à ${max} PW`, options: { color: MUTE, fontSize: 14 } }], { x: cx + 0.3, y: cy + 0.25, w: cw - 0.6, h: 0.5, fontSize: 22, valign: 'middle' });
+    const vw = crowded ? 2.0 : 1.6, lw2 = cw - 0.6 - vw - 0.1;
+    const tpt = 16, tipH = tip ? lines(tip, tpt, cw - 0.6, 0.5) * tpt * 1.2 / 72 + 0.3 : 0;
+    let spt = 18, sh;
+    for (; spt >= 14; spt--) {
+      sh = S.map(([l, v]) => Math.max(lines(l, spt, lw2, 0.54), lines(v, spt, vw, 0.6)) * spt * 1.2 / 72 + 0.18);
+      if (sh.reduce((a, b) => a + b, 0) <= ch - 1.0 - tipH - 0.2) break;
+    }
+    let sy = cy + 0.95;
+    S.forEach(([l, v], i) => {
+      if (i) s.addShape(pres.shapes.LINE, { x: cx + 0.3, y: sy - 0.07, w: cw - 0.6, h: 0, line: { color: LINE, width: 1 }, objectName: 'separateur' });
+      tb(s, l, { x: cx + 0.3, y: sy, w: lw2, h: sh[i] - 0.14, fontSize: spt, valign: 'top' });
+      tb(s, v, { x: cx + cw - 0.3 - vw, y: sy, w: vw, h: sh[i] - 0.14, fontSize: spt, bold: true, color: PALM, align: 'right', valign: 'top' });
+      sy += sh[i];
+    });
+    if (tip) tb(s, [{ text: 'Le conseil  ', options: { bold: true, italic: false, fontFace: 'Arial', color: PALM } }, { text: tip }],
+       { x: cx + 0.3, y: cy + ch - tipH - 0.2, w: cw - 0.6, h: tipH, fontSize: tpt, italic: true, fontFace: SERIF, color: MUTE, valign: 'bottom' });
+  }
+
   /* « interlude » : emblème à gauche, texte à droite, sur le motif ndop */
   function interlude(sec, o) {
     const s = pres.addSlide({ masterName: 'WB_MOTIF', sectionTitle: sec });
@@ -138,10 +168,9 @@ async function build() {
     tb(s, 'Bienvenue !', { x: M + 0.1, y: 1.8, w: 7.6, h: 1.4, fontSize: 72, bold: true });
     tb(s, 'Welcome · Mbolo · On dit quoi ?', { x: M + 0.1, y: 3.25, w: 7.6, h: 0.6, fontSize: 28, italic: true, fontFace: SERIF, color: PALM });
     tb(s, [
-      { text: 'Ce soir : 7 jeux, une finale, une cagnotte pour le podium.', options: { breakLine: true } },
+      { text: 'Ce soir : 7 jeux, une finale, des missions secrètes toute la nuit et une cagnotte pour le podium.', options: { breakLine: true } },
       { text: 'Et surtout : de nouvelles têtes à rencontrer.' }
-    ], { x: M + 0.1, y: 4.3, w: 7.4, h: 1.2, fontSize: 22, color: INK, paraSpaceAfter: 8 });
-    tb(s, 'Le maître du jeu ouvre la soirée', { x: M + 0.1, y: 5.9, w: 7, h: 0.4, fontSize: 14, color: MUTE, italic: true });
+    ], { x: M + 0.1, y: 4.3, w: 7.4, h: 1.9, fontSize: 22, color: INK, paraSpaceAfter: 8, valign: 'top' });
     NOTES(s, 'Mot d’ouverture du maître du jeu (2 minutes). Saluer tout le monde, remercier d’être venus, présenter les organisateurs. Rappeler le but : jouer, rire, rencontrer de nouvelles personnes. Les règles de chaque jeu seront expliquées juste avant de jouer.');
   }
 
@@ -152,15 +181,16 @@ async function build() {
     const items = [
       ['accueil', 'Ton badge', 'Ton prénom et ta ville, en grand : c’est comme ça qu’on se présente ce soir.'],
       ['gains', '8 €', 'La cotisation. 5 € vont directement dans la cagnotte du podium.'],
-      ['kola', '10 Kola', 'Ta monnaie de la soirée. Garde-les bien : 1 Kola = 1 PW avant la finale.'],
+      ['kola', '10 Kola', 'Ta monnaie de la soirée. 1 Kola = 1 PW avant la finale.'],
+      ['kongossa', '3 missions', 'Ton enveloppe Kongossa. Garde-la secrète, on l’ouvre à 20h00.'],
     ];
-    const cw = (W - 2 * M - 2 * 0.4) / 3;
+    const cw = (W - 2 * M - 0.4) / 2, ch = (6.55 - 1.6 - 0.35) / 2;
     items.forEach(([em, big, txt], i) => {
-      const x = M + i * (cw + 0.4);
-      card(s, x, 1.65, cw, 4.85);
-      emblem(s, em, x + 0.4, 2.0, 1.6);
-      tb(s, big, { x: x + 0.4, y: 3.85, w: cw - 0.8, h: 0.9, fontSize: 38, bold: true, color: PALM });
-      tb(s, txt, { x: x + 0.4, y: 4.8, w: cw - 0.8, h: 1.5, fontSize: 18, color: INK, valign: 'top' });
+      const x = M + (i % 2) * (cw + 0.4), y = 1.6 + Math.floor(i / 2) * (ch + 0.35);
+      card(s, x, y, cw, ch);
+      emblem(s, em, x + 0.35, y + (ch - 1.6) / 2, 1.6);
+      tb(s, big, { x: x + 2.25, y: y + 0.3, w: cw - 2.55, h: 0.7, fontSize: 32, bold: true, color: PALM });
+      tb(s, txt, { x: x + 2.25, y: y + 1.05, w: cw - 2.55, h: ch - 1.3, fontSize: 18, color: INK, valign: 'top' });
     });
     NOTES(s, 'Vérifier que chacun a son badge, a payé sa cotisation, a reçu ses 10 Kola et son enveloppe Opération Kongossa (à ne pas ouvrir avant 20h00). Pour le repas, chacun a apporté un plat ou une boisson : les remercier.');
   }
@@ -170,7 +200,7 @@ async function build() {
     const s = pres.addSlide({ masterName: 'WB_CONTENU', sectionTitle: sec });
     s.addText('Qui fait quoi', { placeholder: 'title' });
     const roles = [
-      [KOLA, INK, 'Maître du jeu', 'Badge rouge', 'Il annonce, explique et tranche. Sa décision est finale.'],
+      [KOLA, INK, 'Maître du jeu', 'Badge rouge', 'Annonce, explique et tranche. Sa décision est finale.'],
       [PALM, DEEP, 'Organisateurs', 'Badge jaune', 'Scores, matériel et minuteurs. Une question ? Demande-leur.'],
       [INK, DEEP, 'Joueurs', 'Badge blanc', 'Prénom et ville. Tu joues, tu négocies, tu bluffes.'],
     ];
@@ -192,7 +222,7 @@ async function build() {
     s.addText('La nuit, heure par heure', { placeholder: 'title' });
     const rows = SCHED.map(it => {
       const g = it.id && G[it.id];
-      return { at: it.at, em: g ? g.id : it.img, name: g ? g.name.fr : it.fr, d: it.d, final: g && g.num === 'F', num: g ? g.num : null };
+      return { at: it.at, em: g ? g.id : it.img, name: g ? g.name.fr : (SHORT[it.img] || it.fr), d: it.d, final: g && g.num === 'F', num: g ? g.num : null };
     });
     const half = Math.ceil(rows.length / 2), colW = (W - 2 * M - 0.5) / 2, rh = 0.68;
     rows.forEach((r, i) => {
@@ -201,11 +231,11 @@ async function build() {
       emblem(s, r.em, x, y + 0.04, 0.56);
       tb(s, r.at, { x: x + 0.75, y, w: 1.05, h: 0.64, fontSize: 18, bold: true, color: PALM, valign: 'middle' });
       const label = r.num ? (r.final ? 'Finale · ' : `Jeu ${r.num} · `) : '';
-      tb(s, [{ text: label, options: { color: r.final ? PALM : KOLA, bold: true } }, { text: r.name.replace(/, 10 Kola par joueur/, '') }],
-         { x: x + 1.85, y, w: colW - 2.9, h: 0.64, fontSize: 16, valign: 'middle', fit: 'shrink' });
+      tb(s, [{ text: label, options: { color: r.final ? PALM : KOLA, bold: true } }, { text: r.name }],
+         { x: x + 1.85, y, w: colW - 2.9, h: 0.64, fontSize: 16, valign: 'middle' });
       tb(s, r.d, { x: x + colW - 1.0, y, w: 1.0, h: 0.64, fontSize: 14, color: MUTE, align: 'right', valign: 'middle' });
     });
-    tb(s, '+ Opération Kongossa, le jeu fil rouge, toute la nuit en parallèle', { x: M, y: 6.35, w: 8, h: 0.4, fontSize: 16, italic: true, fontFace: SERIF, color: PALM });
+    tb(s, '+ Opération Kongossa, le jeu fil rouge, de 20h00 à 02h40 en parallèle', { x: M, y: 6.35, w: 8, h: 0.4, fontSize: 16, italic: true, fontFace: SERIF, color: PALM });
     NOTES(s, 'Le programme complet. Horaires indicatifs : on peut glisser de quelques minutes, le MJ garde le rythme avec les minuteurs.');
   }
 
@@ -242,32 +272,24 @@ async function build() {
     const mw = (7.35 - 2 * 0.3) / 3;
     mis.forEach(([t, d], i) => {
       const x = M + i * (mw + 0.3);
-      card(s, x, 1.55, mw, 2.25, null, 'mission-' + t);
-      tb(s, 'MISSION', { x: x + 0.3, y: 1.8, w: mw - 0.6, h: 0.35, fontSize: 13, bold: true, charSpacing: 2, color: KOLA });
-      tb(s, t, { x: x + 0.3, y: 2.15, w: mw - 0.6, h: 0.6, fontSize: 28, bold: true });
-      tb(s, d, { x: x + 0.3, y: 2.8, w: mw - 0.6, h: 0.85, fontSize: 16, color: MUTE, valign: 'top' });
+      card(s, x, 1.55, mw, 1.95, null, 'mission-' + t);
+      tb(s, 'MISSION', { x: x + 0.3, y: 1.75, w: mw - 0.6, h: 0.35, fontSize: 13, bold: true, charSpacing: 2, color: KOLA });
+      tb(s, t, { x: x + 0.3, y: 2.05, w: mw - 0.6, h: 0.55, fontSize: 26, bold: true });
+      tb(s, d, { x: x + 0.3, y: 2.65, w: mw - 0.6, h: 0.75, fontSize: 15, color: MUTE, valign: 'top' });
     });
     const steps = [
       [KOLA, 'Mission réussie ?', 'Dis « Kongossa ! » et fais parapher ta carte par ta cible.'],
-      [PALM, 'Tu te sens visé ?', '« Je te vois ! » + son prénom + le type de mission. Juste : sa mission est grillée.'],
-      [SAFOU, '02h45', 'Cartes rendues au comptable avec les Kola, avant les finalistes.'],
+      [PALM, 'Tu te sens visé ?', '« Je te vois ! » + son prénom + le type de mission. Juste : sa carte te revient. Faux : tu lui donnes 1 Kola.'],
+      [INK, 'Respect', 'Pas de contact au-delà d’un check, on ne touche pas aux téléphones, une cible peut toujours dire non.'],
+      [SAFOU, '02h45', 'Cartes rendues au comptable avec les Kola. Pause pendant les règles de chaque jeu.'],
     ];
     steps.forEach(([c, t, d], i) => {
-      const y = 4.15 + i * 0.85;
+      const y = 3.8 + i * 0.75;
       s.addShape(pres.shapes.OVAL, { x: M, y: y + 0.05, w: 0.46, h: 0.46, fill: { color: c }, line: { color: c, width: 0 }, objectName: 'puce' });
-      tb(s, [{ text: t + '  ', options: { bold: true } }, { text: d, options: { color: MUTE } }], { x: M + 0.7, y, w: 6.65, h: 0.75, fontSize: 16, valign: 'top' });
+      tb(s, [{ text: t + '  ', options: { bold: true } }, { text: d, options: { color: MUTE } }], { x: M + 0.7, y, w: 6.65, h: 0.7, fontSize: 15, valign: 'top' });
     });
-    const cx = 8.45, cw = W - M - cx, cy = 1.55, ch = 5.2;
-    card(s, cx, cy, cw, ch, null, 'bareme');
-    tb(s, [{ text: 'Barème', options: { bold: true, color: PALM } }, { text: '   jusqu’à 15 PW', options: { color: MUTE, fontSize: 14 } }], { x: cx + 0.3, y: cy + 0.25, w: cw - 0.6, h: 0.5, fontSize: 22, valign: 'middle' });
-    const rows = [['Mission accomplie', '4 PW'], ['Les 3 missions accomplies', '+3 PW'], ['Démasquer son chasseur', '+2 PW'], ['Fausse accusation', '1 Kola à l’accusé']];
-    rows.forEach(([l, v], i) => {
-      const y = cy + 1.05 + i * 1.0;
-      if (i) s.addShape(pres.shapes.LINE, { x: cx + 0.3, y: y - 0.12, w: cw - 0.6, h: 0, line: { color: LINE, width: 1 }, objectName: 'separateur' });
-      tb(s, l, { x: cx + 0.3, y, w: 2.0, h: 0.8, fontSize: 17, valign: 'top' });
-      tb(s, v, { x: cx + cw - 0.3 - 1.7, y, w: 1.7, h: 0.75, fontSize: 17, bold: true, color: PALM, align: 'right', valign: 'top' });
-    });
-    NOTES(s, 'Expliquer Opération Kongossa. Les PW Kongossa entrent au classement à 02h45, avant l’annonce des finalistes. Une fausse accusation coûte 1 Kola, donnée à la personne accusée.');
+    scoreCard(s, FIL.score.fr, FIL.max, null, false);
+    NOTES(s, 'Le conseil à donner : ' + FIL.tip.fr + '\nExpliquer Opération Kongossa. Les PW Kongossa entrent au classement à 02h45, avant l’annonce des finalistes. Une fausse accusation coûte 1 Kola, donnée à la personne accusée.');
   }
 
   /* ========== 2. LES JEUX ========== */
@@ -279,7 +301,7 @@ async function build() {
       interlude(secTitle, {
         em: g.id, kicker: (fin ? 'La finale' : 'Jeu ' + g.num) + ' · ' + g.dur + ' min', kColor: fin ? PALM : KOLA,
         title: g.name.fr, accent: g.kind.fr.charAt(0).toUpperCase() + g.kind.fr.slice(1), body: g.pitch.fr,
-        notes: `${it ? it.at + ' · ' : ''}${g.name.fr} (${g.dur} min, ${g.fmt.fr}). Lire l’accroche à voix haute, puis passer aux règles. Préparer le minuteur : page Minuteurs, ${fin ? 'Finale' : 'jeu ' + g.num}.`,
+        notes: `${it ? it.at + ' · ' : ''}${g.name.fr} (${g.dur} min, ${g.fmt.fr}). Lire l’accroche à voix haute, puis passer aux règles. Préparer le minuteur : page Minuteurs, ${fin ? 'Finale' : 'jeu ' + g.num}.${g.id === 'feymen' ? ' Annoncer que les missions Kongossa se ferment à la fin de ce jeu (02h40).' : ''}`,
       });
     }
     // règles + barème
@@ -303,27 +325,8 @@ async function build() {
         tb(s, r, { x: tx, y, w: tw, h: hs[i], fontSize: pt, valign: 'top', lineSpacingMultiple: 1.0 });
         y += hs[i] + gap;
       });
-      // carte barème
-      const cx = crowded ? 7.1 : 8.45, cw = W - M - cx, cy = 1.55, ch = 5.2;
-      card(s, cx, cy, cw, ch, null, 'bareme');
-      tb(s, [{ text: 'Barème', options: { bold: true, color: PALM } }, { text: `   jusqu’à ${g.max} PW`, options: { color: MUTE, fontSize: 14 } }], { x: cx + 0.3, y: cy + 0.25, w: cw - 0.6, h: 0.5, fontSize: 22, valign: 'middle' });
-      const S = g.score.fr, vw = crowded ? 2.0 : 1.45, lw2 = cw - 0.6 - vw - 0.1;
-      const tpt = crowded ? 14 : 16, tipH = lines(g.tip.fr, tpt, cw - 0.6, 0.5) * tpt * 1.2 / 72 + 0.3;
-      let spt = 18, sh;
-      for (; spt >= 13; spt--) {
-        sh = S.map(([l, v]) => Math.max(lines(l, spt, lw2, 0.54), lines(v, spt, vw, 0.6)) * spt * 1.2 / 72 + 0.18);
-        if (sh.reduce((a, b) => a + b, 0) <= ch - 1.0 - tipH - 0.2) break;
-      }
-      let sy = cy + 0.95;
-      S.forEach(([l, v], i) => {
-        if (i) s.addShape(pres.shapes.LINE, { x: cx + 0.3, y: sy - 0.07, w: cw - 0.6, h: 0, line: { color: LINE, width: 1 }, objectName: 'separateur' });
-        tb(s, l, { x: cx + 0.3, y: sy, w: lw2, h: sh[i] - 0.14, fontSize: spt, valign: 'top' });
-        tb(s, v, { x: cx + cw - 0.3 - vw, y: sy, w: vw, h: sh[i] - 0.14, fontSize: spt, bold: true, color: PALM, align: 'right', valign: 'top' });
-        sy += sh[i];
-      });
-      tb(s, [{ text: 'Le conseil  ', options: { bold: true, italic: false, fontFace: 'Arial', color: PALM } }, { text: g.tip.fr }],
-         { x: cx + 0.3, y: cy + ch - tipH - 0.2, w: cw - 0.6, h: tipH, fontSize: tpt, italic: true, fontFace: SERIF, color: MUTE, valign: 'bottom' });
-      NOTES(s, `Expliquer les règles (5 minutes au plus), répondre aux questions, puis lancer le minuteur. Format : ${g.fmt.fr}.\nRègles complètes en anglais sur le site (bouton EN) pour les joueurs anglophones.`);
+      scoreCard(s, g.score.fr, g.max, crowded ? null : g.tip.fr, crowded);
+      NOTES(s, `Expliquer les règles (5 minutes au plus), répondre aux questions, puis lancer le minuteur. Format : ${g.fmt.fr}.${fin ? '' : '\nRappel : les missions Kongossa sont en pause pendant l’explication des règles.'}\nRègles complètes en anglais sur le site (bouton EN) pour les joueurs anglophones.${crowded ? '\nLe conseil à donner : ' + g.tip.fr : ''}`);
     }
   }
 
@@ -335,13 +338,13 @@ async function build() {
     body: 'Le comptable affiche le classement en direct.', next: `${at('repas').at} · Repas et musique`,
     notes: 'Passer sur l’écran du classement de l’appli (bouton Écran), puis revenir à la présentation pour le repas.' });
   interlude(sec, { em: 'repas', kicker: at('repas').at + ' · ' + at('repas').d, kColor: PALM, title: 'Repas et musique', accent: 'Merci à toutes celles et ceux qui ont cuisiné',
-    body: 'On mange, on danse, on refait ses alliances.', next: `${at('wouri').at} · ${G.wouri.name.fr}`,
+    body: 'On mange, on danse, on refait ses alliances… et on avance ses missions Kongossa.', next: `${at('wouri').at} · ${G.wouri.name.fr}`,
     notes: 'Laisser cette slide pendant tout le repas. Prévenir 10 minutes avant la reprise.' });
 
   sec = 'Jeux 5 à 7'; pres.addSection({ title: sec });
   game(G.wouri, sec); game(G.code, sec);
   interlude(sec, { em: 'pause', kicker: at('pause').at + ' · ' + at('pause').d, kColor: PALM, title: 'Pause', accent: 'On souffle, on boit un coup',
-    body: 'Les Feymen arrivent : regarde bien tes voisins.', next: `${at('feymen').at} · ${G.feymen.name.fr}`,
+    body: 'Dernière ligne droite pour vos missions Kongossa : elles se ferment à la fin des Feymen.', next: `${at('feymen').at} · ${G.feymen.name.fr}`,
     notes: 'Pause de 20 minutes. Préparer les cartes rôle et les enveloppes des Feymen.' });
   game(G.feymen, sec);
 
@@ -360,7 +363,7 @@ async function build() {
   {
     const s = pres.addSlide({ masterName: 'WB_CONTENU', sectionTitle: sec });
     s.addText('Les 4 finalistes', { placeholder: 'title' });
-    tb(s, 'Les Kola sont converties : 1 Kola = 1 PW. Égalité : le plus de Kola passe.', { x: M, y: 1.35, w: W - 2 * M, h: 0.5, fontSize: 20, italic: true, fontFace: SERIF, color: PALM });
+    tb(s, 'PW Kongossa ajoutés, Kola converties (1 Kola = 1 PW). Égalité : le plus de Kola passe.', { x: M, y: 1.35, w: W - 2 * M, h: 0.5, fontSize: 20, italic: true, fontFace: SERIF, color: PALM });
     const cw = (W - 2 * M - 3 * 0.35) / 4;
     for (let i = 0; i < 4; i++) {
       const x = M + i * (cw + 0.35);
@@ -402,7 +405,7 @@ async function build() {
   {
     const s = pres.addSlide({ masterName: 'WB_CONTENU', sectionTitle: sec });
     s.addText('Merci !', { placeholder: 'title' });
-    const th = [['Aux joueurs', 'pour les alliances, les bluffs et les fous rires'], ['Aux cuisiniers', 'pour chaque plat et chaque boisson partagés'], ['Au MJ et aux organisateurs', 'pour la préparation et les scores'], ['À nos partenaires', 'qui ont grossi la cagnotte']];
+    const th = [['Aux joueurs', 'pour les alliances, les bluffs et les fous rires'], ['À celles et ceux qui ont cuisiné', 'pour chaque plat et chaque boisson partagés'], ['Au MJ et aux organisateurs', 'pour la préparation et les scores'], ['À nos partenaires', 'pour leur soutien']];
     th.forEach(([t, d], i) => {
       const y = 1.6 + i * 1.2;
       s.addShape(pres.shapes.OVAL, { x: M, y: y + 0.12, w: 0.6, h: 0.6, fill: { color: i % 2 ? PALM : KOLA }, line: { color: i % 2 ? PALM : KOLA, width: 0 }, objectName: 'puce' });
