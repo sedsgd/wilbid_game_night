@@ -23,7 +23,8 @@ Tout est en HTML, CSS et JavaScript, sans dépendance à installer. Le dépôt p
 | `documents/dossier-mj/` | Le dossier du maître du jeu, en page web et en PDF A4 |
 | `documents/proposition/` | Le dossier de partenariat, en page web et en PDF 16:9 |
 | `documents/lettre-sponsoring/` | La lettre officielle de demande de sponsoring, en français et en allemand : page modifiable (nos coordonnées, adresse du destinataire, paragraphes, logo du partenaire sur l’aperçu des badges) et PDF prêts à joindre (3 pages) |
-| `documents/sources/` | Les scripts qui génèrent ces deux documents |
+| `documents/presentation-jour-j/` | La présentation PowerPoint projetée pendant toute la soirée : accueil, programme, points, couverture et règles de chaque jeu, repas, pause, finalistes, podium, photo, remerciements, annonce de la saison 2 et au revoir. Notes du MJ sous chaque slide |
+| `documents/sources/` | Les scripts qui génèrent ces documents. La présentation se régénère depuis `data.js` : `npm install pptxgenjs sharp qrcode` puis `node documents/sources/presentation/build.js` |
 | `identite/` | L'identité visuelle Ndop Nuit : planches de tendance et maquettes |
 | `assets/` | Illustrations, emblèmes des jeux et motif ndop |
 
