@@ -24,7 +24,8 @@ Tout est en HTML, CSS et JavaScript, sans dépendance à installer. Le dépôt p
 | `documents/proposition/` | Le dossier de partenariat, en page web et en PDF 16:9 |
 | `documents/lettre-sponsoring/` | La lettre officielle de demande de sponsoring, en français et en allemand : page modifiable (nos coordonnées, adresse du destinataire, paragraphes, logo du partenaire sur l’aperçu des badges) et PDF prêts à joindre (3 pages) |
 | `documents/sources/` | Les scripts qui génèrent ces deux documents |
-| `identite/` | L'identité visuelle Ndop Nuit : planches de tendance et maquettes |
+| `identite/` | L'identité visuelle Ndop Nuit (saison 1) : planches de tendance et maquettes |
+| `identite-s2/` | L'identité visuelle Toghu (saison 2) : charte, logo SVG et PNG, jetons `tokens.css`, visuel clé, motif, soleil et 8 emblèmes |
 | `assets/` | Illustrations, emblèmes des jeux et motif ndop |
 
 ## Publier avec GitHub Pages
@@ -68,3 +69,10 @@ Palette : indigo nuit `#141E4A`, indigo ndop `#2B3F9E`, craie `#F4F3EF`, rouge k
 Polices Google Fonts : Syne (titres et scores), Manrope (texte), Instrument Serif italique (accents).
 
 Les planches de `identite/canvas/` viennent de Claude Design et chargent leurs images depuis cet outil : elles servent de référence et ne s'affichent pas entièrement hors de Claude. Les illustrations sources sont dans le fichier Figma de la saison.
+
+### Saison 2, Toghu
+
+Velours noir brodé du Grassfield. Palette : velours `#17110E`, coton `#F6EBD9`, orange toghu `#F07A1A` (accent), fil d'or `#F2B705`, rouge kola `#E0452F` (MJ), raphia `#1E8A5A` (finale uniquement).
+Polices : Syne et Manrope comme en saison 1, Gloock pour les accents. Le symbole est la noix de kola entourée de seize rayons, huit longs et huit courts ; sans rayons sous 32 px.
+Charte : `identite-s2/index.html`. Logo et symbole prêts à l'emploi dans `identite-s2/logo/` (SVG au texte vectorisé et PNG transparents), régénérés par `identite-s2/sources/logo.py` puis `logo-png.js`.
+Illustrations et logo modifiable dans le fichier Figma « Wilbid Game Night, saison 2, identité Toghu ». Les polices de la charte sont hébergées dans `identite-s2/fonts/`.
