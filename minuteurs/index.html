@@ -81,7 +81,7 @@ body.on #timer{display:grid}body.on #home{display:none}
 .digits i.c{width:.28em;transform:translateY(-.07em)}
 .next{display:flex;flex-wrap:wrap;gap:6px 26px;color:var(--mute);font-size:clamp(15px,1.3vw,21px);font-weight:600}
 .next b{color:var(--chalk);font-weight:800}
-.note{color:var(--mute);font-size:clamp(14px,1.1vw,18px);max-width:40em;margin:0}
+.note{color:var(--mute);font-size:clamp(15px,1.3vw,23px);line-height:1.4;max-width:36em;margin:0}
 .foot{position:relative;z-index:2;display:flex;flex-direction:column;gap:14px;transition:opacity .5s}
 .track{display:flex;gap:3px;height:34px;align-items:stretch}
 .seg{position:relative;flex:1 1 0;border-radius:4px;background:rgba(244,243,239,.1);overflow:hidden;padding:0}
@@ -89,7 +89,7 @@ body.on #timer{display:grid}body.on #home{display:none}
 .seg.done{background:rgba(244,243,239,.55)}
 .seg .f{position:absolute;inset:0 auto 0 0;background:var(--accent);opacity:.75;width:0}
 .seg.cur{outline:2px solid var(--accent);outline-offset:2px}
-.seg span{position:absolute;left:8px;top:50%;transform:translateY(-50%);font:700 12px var(--ft);white-space:nowrap;color:var(--chalk);text-shadow:0 1px 3px rgba(13,21,56,.9);pointer-events:none}
+.seg span{position:absolute;left:8px;right:6px;top:50%;transform:translateY(-50%);font:700 12px var(--ft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left;color:var(--chalk);text-shadow:0 1px 3px rgba(13,21,56,.9);pointer-events:none}
 .ctrl{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}
 .cb{height:56px;min-width:56px;padding:0 18px;border-radius:99px;border:1.5px solid var(--line);display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 16px var(--ft);background:rgba(13,21,56,.6);transition:background .2s,transform .15s}
 .cb:hover{background:var(--indigo2)}.cb:active{transform:scale(.96)}
@@ -253,7 +253,7 @@ window.WILBID_TIMERS=[
 {id:'code',num:'6',at:'00h40',img:'code',name:{fr:'Le Code du Chef',en:'The Chief’s Code'},tag:{fr:'déduction et bluff',en:'deduction and bluff'},phases:[
  {fr:'Règles et équipes',en:'Rules and teams',s:300},
  {loop:3,unit:{fr:'Manche',en:'Round'},steps:[
-  {fr:'Trouvez le code',en:'Crack the code',s:720,tick:true,n:{fr:'1 essai par minute et par équipe, 1 Kola l’essai. Un gong marque chaque minute.',en:'1 guess per minute per team, 1 Kola each. A chime marks every minute.'}},
+  {fr:'Trouvez le code',en:'Crack the code',s:720,tick:true,n:{fr:'1 essai par minute et par équipe, 1 Kola l’essai. Un son marque chaque minute.',en:'1 guess per minute per team, 1 Kola each. A chime marks every minute.'}},
   {fr:'Résultats et nouveau code',en:'Results and new code',s:120,skipLast:true}]},
  {fr:'Bilan',en:'Wrap-up',s:240}]},
 {id:'feymen',num:'7',at:'01h50',img:'feymen',name:{fr:'Les Feymen',en:'The Feymen'},tag:{fr:'rôles cachés et bluff',en:'hidden roles and bluff'},phases:[
@@ -264,7 +264,7 @@ window.WILBID_TIMERS=[
   {fr:'Débat',en:'Debate',s:180}]},
  {fr:'Vote secret : 3 suspects',en:'Secret vote: 3 suspects',s:240},
  {fr:'Les feymen se révèlent',en:'Feymen revealed',s:300}]},
-{id:'trone',num:'F',fin:true,at:'03h00',img:'trone',name:{fr:'Le Trône de Kola',en:'The Kola Throne'},tag:{fr:'la finale',en:'the final'},phases:[
+{id:'trone',num:'F',fin:true,at:'03h00',img:'trone',name:{fr:'Le Trône de Kola',en:'The Kola Throne'},tag:{fr:'bluff et enchères',en:'bluff and bidding'},phases:[
  {fr:'Paris du public',en:'Crowd bets',s:180},
  {loop:8,unit:{fr:'Lot',en:'Prize'},steps:[
   {fr:'Posez votre carte',en:'Play your card',s:45,n:{fr:'Face cachée. La plus haute carte unique gagne le lot.',en:'Face down. The highest unique card wins the prize.'}},
@@ -284,8 +284,8 @@ const ORG=EXT?'https://sedsgd.github.io/wilbid_game_night/classement.html':'../c
 document.querySelectorAll('.js-legal').forEach(a=>{a.href=EXT?'https://sedsgd.github.io/wilbid_game_night/legal.html':'../legal.html';if(EXT){a.target='_blank';a.rel='noopener'}});
 document.querySelectorAll('.js-org').forEach(a=>{a.href=ORG;if(EXT){a.target='_blank';a.rel='noopener'}});
 const I18N={
- fr:{site:'Le site',org:'Organisation',rights:'Tous droits réservés.',legal:'Mentions légales',rules:'Règles du jeu',kick:'saison 1 · Ndop Nuit',title:'Les minuteurs de la nuit',lead:'Un minuteur par jeu, pensé pour le projecteur. Chaque jeu enchaîne ses phases tout seul, prévient à 5 minutes et à 1 minute, et sonne à la fin.',start:'Démarrer',pause:'Pause',resume:'Reprendre',prev:'Phase',next:'Phase',reset:'Recommencer',auto:'Enchaîner les phases',then:'Ensuite',endGame:'Fin du jeu dans',last:'Dernière phase',game:'Jeu',final:'Finale',brk:'Pause',over:'Temps écoulé !',again:'Rejouer',home:'Tous les minuteurs',left:'Plus que',min:'minutes',one:'Dernière minute',phases:'phases',of:'sur',done:'est terminé',keys:[['Espace','démarrer ou pause'],['← →','phase'],['R','recommencer la phase'],['+ −','une minute'],['F','plein écran'],['M','son'],['Échap','retour']]},
- en:{site:'Website',org:'Organisers',rights:'All rights reserved.',legal:'Legal notice',rules:'Game rules',kick:'season 1 · Ndop Night',title:'Timers for the night',lead:'One timer per game, built for the projector. Each game runs through its phases on its own, warns at 5 minutes and 1 minute, and rings at the end.',start:'Start',pause:'Pause',resume:'Resume',prev:'Phase',next:'Phase',reset:'Restart',auto:'Run phases back to back',then:'Next',endGame:'Game ends in',last:'Last phase',game:'Game',final:'Final',brk:'Break',over:'Time’s up!',again:'Play again',home:'All timers',left:'Only',min:'minutes left',one:'Last minute',phases:'phases',of:'of',done:'is over',keys:[['Space','start or pause'],['← →','phase'],['R','restart phase'],['+ −','one minute'],['F','fullscreen'],['M','sound'],['Esc','back']]}};
+ fr:{site:'Le site',org:'Organisation',rights:'Tous droits réservés.',legal:'Mentions légales',rules:'Règles du jeu',kick:'saison 1 · Ndop Nuit',title:'Les minuteurs de la nuit',lead:'Un minuteur par jeu, pensé pour le projecteur. Chaque jeu enchaîne ses phases tout seul, prévient à 5 minutes et à 1 minute, et sonne à la fin.',start:'Démarrer',pause:'Pause',resume:'Reprendre',prev:'Phase',next:'Phase',reset:'Recommencer',auto:'Enchaîner les phases',then:'Ensuite',endGame:'Fin du jeu dans',last:'Dernière phase',game:'Jeu',final:'Finale',brk:'Pause',over:'Temps écoulé !',again:'Rejouer',home:'Tous les minuteurs',left:'Plus que',min:'minutes',one:'Dernière minute',phases:'phases',of:'sur',done:'est terminé',keys:[['1 – 8','ouvrir un jeu'],['Espace','démarrer ou pause'],['← →','phase'],['R','recommencer la phase'],['+ −','une minute'],['F','plein écran'],['M','son'],['Échap','retour']]},
+ en:{site:'Website',org:'Organisers',rights:'All rights reserved.',legal:'Legal notice',rules:'Game rules',kick:'season 1 · Ndop Night',title:'Timers for the night',lead:'One timer per game, built for the projector. Each game runs through its phases on its own, warns at 5 minutes and 1 minute, and rings at the end.',start:'Start',pause:'Pause',resume:'Resume',prev:'Phase',next:'Phase',reset:'Restart',auto:'Run phases back to back',then:'Next',endGame:'Game ends in',last:'Last phase',game:'Game',final:'Final',brk:'Break',over:'Time’s up!',again:'Play again',home:'All timers',left:'Only',min:'minutes left',one:'Last minute',phases:'phases',of:'of',done:'is over',keys:[['1 – 8','open a game'],['Space','start or pause'],['← →','phase'],['R','restart phase'],['+ −','one minute'],['F','fullscreen'],['M','sound'],['Esc','back']]}};
 let lang='fr';try{lang=localStorage.getItem('wb-lang')||'fr'}catch(e){}
 const L=()=>I18N[lang],tx=o=>o?o[lang]||o.fr:'';
 const fmt=sec=>{sec=Math.max(0,Math.ceil(sec));const m=Math.floor(sec/60),s=sec%60;return m+':'+String(s).padStart(2,'0')};
@@ -306,12 +306,12 @@ const SND={
  end:()=>{[110,110*2.76,110*5.4,110*8.9].forEach((f,i)=>note(f,0,4.5-i*.8,.5/(i+1),'sine'));[784,659,523,392].forEach((f,i)=>bala(f,.5+i*.16,.4));note(55,0,3,.4,'sine')}};
 
 /* ---- état ---- */
-let game=null,steps=[],idx=0,rem=0,endAt=0,running=false,lastSec=-1,loop=null,wake=null,idleT=null;
+let game=null,steps=[],idx=0,rem=0,endAt=0,running=false,lastSec=-1,loop=0,wake=null,idleT=null;
 
 const grid=$('#grid');
 function renderHome(){
  grid.innerHTML=ORDER.map(id=>{const g=T.find(x=>x.id===id),n=rounds(g),lbl=g.brk?L().brk:g.fin?L().final:L().game+' '+g.num;
-  return `<li><button class="tile${g.brk?' brk':''}${g.fin?' fin':''}" type="button" data-id="${g.id}"><span class="t">${g.at}</span><img src="assets/em-${g.img}.jpg" alt=""><span><small>${lbl} · ${tx(g.tag)}</small><b>${tx(g.name)}</b><span>${Math.round(total(g)/60)} min${n?' · '+n:''}</span></span></button></li>`}).join('');
+  return `<li><button class="tile${g.brk?' brk':''}${g.fin?' fin':''}" type="button" data-id="${g.id}"><span class="t">${g.at}</span><img src="assets/em-${g.img}.jpg" alt=""><span><small>${g.brk?lbl:lbl+' · '+tx(g.tag)}</small><b>${tx(g.name)}</b><span>${Math.round(total(g)/60)} min${n?' · '+n:''}</span></span></button></li>`}).join('');
  $('#keys').innerHTML=L().keys.map(k=>`<span><kbd>${k[0]}</kbd>${k[1]}</span>`).join('');
  document.querySelectorAll('[data-i]').forEach(e=>{const v=L()[e.dataset.i];if(typeof v==='string')e.textContent=v});
  document.documentElement.lang=lang;
@@ -341,7 +341,7 @@ function close(){stop();game=null;$('#end').classList.remove('show');document.bo
 
 function setStep(i,keepRunning){
  idx=Math.max(0,Math.min(steps.length-1,i));rem=steps[idx].s*1000;lastSec=-1;
- if(keepRunning&&running)endAt=performance.now()+rem;else{running=false;}
+ if(keepRunning&&running)endAt=performance.now()+rem;else{running=false;clearInterval(loop)}
  $('#end').classList.remove('show');paint(true);
 }
 function curRem(){return running?Math.max(0,endAt-performance.now()):rem}
@@ -384,17 +384,20 @@ function frame(){
  }
  if(r<=0){
   if(idx<steps.length-1){
-   const over=-r;idx++;lastSec=-1;rem=steps[idx].s*1000;
-   if($('#auto').checked){endAt=performance.now()+rem-over}else running=false;
+   const auto=$('#auto').checked;let over=-r;idx++;lastSec=-1;
+   /* onglet resté en arrière-plan : on saute les phases déjà écoulées */
+   while(auto&&idx<steps.length-1&&over>=steps[idx].s*1000){over-=steps[idx].s*1000;idx++}
+   if(auto&&over>=steps[idx].s*1000){running=false;rem=0;clearInterval(loop);paint(true);finish();return}
+   rem=steps[idx].s*1000;
+   if(auto){endAt=performance.now()+rem-over}else{running=false;clearInterval(loop);unlock();document.body.classList.remove('idle')}
    SND.phase();const s2=steps[idx];banner(s2.round?tx(s2.unit)+' '+s2.round+' / '+s2.of:L().then,tx(s2));paint(true);
-  }else{running=false;rem=0;paint(true);finish();return}
+  }else{running=false;rem=0;clearInterval(loop);paint(true);finish();return}
  }else paint(false);
- loop=requestAnimationFrame(frame);
 }
-function start(){if(!game)return;actx();if(rem<=0)setStep(idx,false);running=true;endAt=performance.now()+rem;lastSec=Math.ceil(rem/1000);paint(true);cancelAnimationFrame(loop);loop=requestAnimationFrame(frame);lock();idle()}
-function stop(){if(running)rem=Math.max(0,endAt-performance.now());running=false;cancelAnimationFrame(loop);if(game)paint(true);unlock()}
+function start(){if(!game)return;actx();if(rem<=0)setStep(idx,false);running=true;endAt=performance.now()+rem;lastSec=Math.ceil(rem/1000);paint(true);clearInterval(loop);loop=setInterval(frame,100);lock();idle()}
+function stop(){if(running)rem=Math.max(0,endAt-performance.now());running=false;clearInterval(loop);document.body.classList.remove('idle');if(game)paint(true);unlock()}
 function toggle(){running?stop():start()}
-function shift(ms){if(running){endAt+=ms;if(endAt-performance.now()<0)endAt=performance.now()}else{rem=Math.max(0,rem+ms)}paint(false)}
+function shift(ms){if(running){endAt+=ms;if(endAt-performance.now()<0)endAt=performance.now()}else{rem=Math.max(1000,rem+ms)}paint(false)}
 function finish(){SND.end();$('#endK').textContent=tx(game.name)+' '+L().done;$('#end').classList.add('show');document.body.classList.remove('crit','warn');unlock()}
 let bt=null;
 function banner(k,t){const b=$('#banner');$('#bnK').textContent=k;$('#bnT').textContent=t;b.classList.remove('show');void b.offsetWidth;b.classList.add('show');clearTimeout(bt);bt=setTimeout(()=>b.classList.remove('show'),2900)}
@@ -406,7 +409,7 @@ function fullscreen(){try{document.fullscreenElement?document.exitFullscreen():d
 $('#bGo').onclick=toggle;
 $('#bReset').onclick=()=>setStep(idx,true);
 $('#bPrev').onclick=()=>setStep(idx-1,true);
-$('#bNext').onclick=()=>{setStep(idx+1,true);if(running)SND.phase()};
+$('#bNext').onclick=()=>{if(idx>=steps.length-1)return;setStep(idx+1,true);if(running)SND.phase()};
 $('#bPlus').onclick=()=>shift(60000);$('#bMinus').onclick=()=>shift(-60000);
 $('#track').addEventListener('click',e=>{const s=e.target.closest('.seg');if(s)setStep(+s.dataset.i,true)});
 $('#fs').onclick=fullscreen;
@@ -415,6 +418,7 @@ $('#back').onclick=$('#eHome').onclick=()=>{location.hash=''};
 $('#eAgain').onclick=()=>{setStep(0,false);start()};
 document.querySelectorAll('.js-lang').forEach(b=>b.onclick=()=>{lang=lang==='fr'?'en':'fr';try{localStorage.setItem('wb-lang',lang)}catch(e){}renderHome();if(game)paint(true)});
 document.addEventListener('mousemove',idle);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&running)lock()});
 document.addEventListener('keydown',e=>{
  if(e.target.closest('input,textarea'))return;
  if(!game){const n=parseInt(e.key,10);if(n>=1&&n<=8){location.hash=T.filter(g=>!g.brk)[n-1].id}return}
