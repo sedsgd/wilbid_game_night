@@ -1,8 +1,7 @@
 <title>Wilbid saison 2, Toghu</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;600;800&family=Gloock&display=swap" rel="stylesheet">
+<!-- Polices hébergées avec la page (aucun appel à Google, comme le reste du site) -->
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
 /* Layout : bandes pleine largeur sur velours, comme une étoffe déroulée ; le contenu reste aligné à gauche dans une colonne de 1200px.
    Saison 2 garde le logo, Syne et Manrope de la saison 1 ; elle change d'étoffe (ndop indigo -> toghu noir brodé) et d'accent (Gloock). */
@@ -14,7 +13,7 @@
   --or:#F2B705;        /* fil d'or, gains (repris de la saison 1) */
   --kola:#E0452F;      /* rouge kola, MJ (repris de la saison 1) */
   --raphia:#1E8A5A;    /* vert raphia, finale */
-  --bg:var(--velours);--fg:var(--coton);--mute:#CDBFA8;--line:#3A2D25;--panel:var(--velours-2);
+  --bg:#211915;--fg:var(--coton);--mute:#CDBFA8;--line:#3F3129;--panel:#2B211B; /* en sombre, la page est un ton au-dessus du velours pour garder le rythme des bandes */
   --f-marque:Syne,"Arial Black",system-ui,sans-serif;
   --f-texte:Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-accent:Gloock,Georgia,"Times New Roman",serif;
@@ -98,6 +97,9 @@ a{color:inherit}
 .ill figure{margin:0;border-radius:16px;overflow:hidden;position:relative;background:var(--velours)}
 .ill img{width:100%;height:100%;object-fit:cover}
 .ill .tall{grid-row:span 2}
+.lockups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.lockups figure{margin:0;border-radius:16px;padding:clamp(24px,4vw,44px);display:grid;place-items:center}
+.lockups img{width:100%;max-width:440px;height:auto}
 .ill figcaption{position:absolute;left:12px;bottom:12px;background:rgba(23,17,14,.8);color:var(--coton);padding:6px 10px;border-radius:8px;font-size:14px;font-weight:600}
 
 /* Emblèmes */
@@ -143,7 +145,8 @@ a{color:inherit}
 }
 @media (max-width:640px){
   .duo,.rules{grid-template-columns:minmax(0,1fr)}
-  .ill{grid-template-columns:minmax(0,1fr)}.ill .tall{grid-row:auto}
+  .ill{grid-template-columns:minmax(0,1fr)}.ill .tall{grid-row:auto;aspect-ratio:4/5}
+  .lockups{grid-template-columns:minmax(0,1fr)}
   .syms{grid-template-columns:repeat(2,minmax(0,1fr))}.sym{min-height:150px}
   .pal{grid-template-columns:repeat(2,minmax(0,1fr))}
   .badges{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -154,24 +157,16 @@ a{color:inherit}
 }
 </style>
 
-<!-- Symbole saison 2 : la noix de kola de la saison 1, entourée du soleil brodé du toghu -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <g id="kola"><g transform="rotate(45 32 32)"><circle cx="22" cy="22" r="9.2"/><circle cx="42" cy="22" r="9.2"/><circle cx="22" cy="42" r="9.2"/><circle cx="42" cy="42" r="9.2"/></g></g>
-    <g id="rays"></g>
-  </defs>
-</svg>
-
 <header class="hero vel">
   <img src="assets/hero.jpg" alt="Mains qui jouent aux cartes et aux noix de kola sur un toghu brodé">
   <div class="veil"></div>
   <div class="in">
     <div class="lock">
-      <svg class="symbol" data-k="#F2B705" data-r="#F07A1A" data-c="#17110E" width="96" height="96" viewBox="0 0 64 64" aria-hidden="true"></svg>
+      <svg class="symbol" data-k="#F2B705" data-r="#F07A1A" width="96" height="96" viewBox="0 0 64 64" aria-hidden="true"></svg>
       <div><div class="w">wilbid</div><small>Game Night</small></div>
     </div>
     <h1 class="s2">Saison 2, Toghu</h1>
-    <p>La première saison portait le ndop indigo de la nuit. La deuxième sort le toghu : le velours noir brodé des grandes fêtes du Grassfield, avec ses soleils, ses chevrons et son fil d'or.</p>
+    <p>La première saison portait le ndop indigo de la nuit. La deuxième sort le toghu : le velours noir brodé des grandes fêtes des Grassfields, avec ses soleils, ses chevrons et son fil d'or.</p>
     <nav class="jump" aria-label="Sections">
       <a href="#symbole">Symbole</a><a href="#palette">Palette</a><a href="#typo">Typographie</a><a href="#emblemes">Emblèmes</a><a href="#applications">Applications</a>
     </nav>
@@ -203,22 +198,26 @@ a{color:inherit}
 
 <section id="symbole" class="vel">
   <div class="in">
-    <div class="head"><h2>Le symbole se lève</h2><p class="lede">La noix de kola de la saison 1 reçoit une couronne de seize rayons, comme les soleils brodés au dos des toghus. Sans les rayons, c'est le symbole de toujours.</p></div>
+    <div class="head"><h2>Le symbole se lève</h2><p class="lede">La noix de kola de la saison 1 reçoit seize rayons, huit longs et huit courts, comme les soleils brodés au dos des toghus. Sans les rayons, c'est le symbole de toujours.</p></div>
     <div class="syms">
       <div class="sym big" style="background:#251B16">
-        <svg class="symbol" data-k="#F2B705" data-r="#F07A1A" data-c="#251B16" viewBox="0 0 64 64" role="img" aria-label="Symbole saison 2"></svg>
+        <svg class="symbol" data-k="#F2B705" data-r="#F07A1A" viewBox="0 0 64 64" role="img" aria-label="Symbole saison 2"></svg>
         <span class="serif" style="font-size:22px;color:#F2B705">symbole principal, sur velours</span>
       </div>
-      <div class="sym" style="background:#F6EBD9"><svg class="symbol" data-k="#E0452F" data-r="#17110E" data-c="#F6EBD9" viewBox="0 0 64 64" role="img" aria-label="Sur coton"></svg></div>
-      <div class="sym" style="background:#F07A1A"><svg class="symbol" data-k="#17110E" data-r="#F6EBD9" data-c="#F07A1A" viewBox="0 0 64 64" role="img" aria-label="Sur orange toghu"></svg></div>
-      <div class="sym" style="background:#1E8A5A"><svg class="symbol" data-k="#F2B705" data-r="#F6EBD9" data-c="#1E8A5A" viewBox="0 0 64 64" role="img" aria-label="Sur vert raphia, finale"></svg></div>
-      <div class="sym" style="background:#F2B705"><svg class="symbol" data-k="#17110E" data-r="#17110E" data-c="#F2B705" viewBox="0 0 64 64" role="img" aria-label="Sur fil d'or"></svg></div>
-      <div class="sym" style="background:#E0452F"><svg class="symbol" data-k="#F6EBD9" data-r="#F2B705" data-c="#E0452F" viewBox="0 0 64 64" role="img" aria-label="Sur rouge kola, MJ"></svg></div>
-      <div class="sym" style="background:#17110E;border:1px solid #3A2D25"><svg class="symbol" data-k="#F6EBD9" data-r="" data-c="#17110E" viewBox="0 0 64 64" role="img" aria-label="Sans rayons, favicon"></svg></div>
+      <div class="sym" style="background:#F6EBD9"><svg class="symbol" data-k="#E0452F" data-r="#17110E" viewBox="0 0 64 64" role="img" aria-label="Sur coton"></svg></div>
+      <div class="sym" style="background:#F07A1A"><svg class="symbol" data-k="#17110E" data-r="#F6EBD9" viewBox="0 0 64 64" role="img" aria-label="Sur orange toghu"></svg></div>
+      <div class="sym" style="background:#1E8A5A"><svg class="symbol" data-k="#F2B705" data-r="#F6EBD9" viewBox="0 0 64 64" role="img" aria-label="Sur vert raphia, finale"></svg></div>
+      <div class="sym" style="background:#F2B705"><svg class="symbol" data-k="#17110E" data-r="#17110E" viewBox="0 0 64 64" role="img" aria-label="Sur fil d'or"></svg></div>
+      <div class="sym" style="background:#E0452F"><svg class="symbol" data-k="#F6EBD9" data-r="#F2B705" viewBox="0 0 64 64" role="img" aria-label="Sur rouge kola, MJ"></svg></div>
+      <div class="sym" style="background:#17110E;border:1px solid #3A2D25"><svg class="symbol" data-k="#F6EBD9" data-r="" viewBox="0 0 64 64" role="img" aria-label="Sans rayons, favicon"></svg></div>
+    </div>
+    <div class="lockups">
+      <figure style="background:#251B16"><img src="logo/logo-saison-2-sur-velours.svg" alt="Logo wilbid Game Night saison 2, version pour fond sombre"></figure>
+      <figure style="background:#F6EBD9"><img src="logo/logo-saison-2-sur-coton.svg" alt="Logo wilbid Game Night saison 2, version pour fond clair"></figure>
     </div>
     <div class="why">
-      <p class="mute">Taille minimale avec rayons : 24 px à l'écran, 8 mm à l'impression. En dessous, on retire les rayons et on garde la noix seule.</p>
-      <p class="mute">Le losange au centre prend toujours la couleur du fond, pour que la noix reste ouverte.</p>
+      <p class="mute">Taille minimale avec rayons : 32 px à l'écran, 10 mm à l'impression. En dessous, on retire les rayons et on garde la noix seule.</p>
+      <p class="mute">On laisse toujours voir le fond entre la noix et les rayons : pas de pastille ni de cercle derrière le symbole.</p>
     </div>
   </div>
 </section>
@@ -322,28 +321,39 @@ a{color:inherit}
       <div><h3>On évite</h3><ul>
         <li>Mélanger l'indigo de la saison 1 et le velours sur le même support, sauf pour une comparaison voulue.</li>
         <li>Le vert raphia hors de la finale.</li>
-        <li>Les rayons du symbole sous 24 px.</li>
+        <li>Les rayons du symbole sous 32 px.</li>
         <li>Gloock en paragraphe ou en petits caractères.</li>
       </ul></div>
     </div>
     <div class="files">
       <h3>Fichiers</h3>
-      <p>Dans le dépôt : <code>identite-s2/</code>, avec les illustrations dans <code>identite-s2/assets/</code>.</p>
-      <p>Sources des illustrations : le fichier Figma « Wilbid Game Night, saison 2, identité Toghu ».</p>
+      <p>Tout est dans le dossier <code>identite-s2/</code> du dépôt et dans <code>identite-saison-2/</code> des fichiers du projet.</p>
+      <p><code>logo/</code> : le logo et le symbole en SVG (texte vectorisé, s'ouvre sans les polices) et en PNG transparent pour PowerPoint et WhatsApp.</p>
+      <p><code>assets/</code> : visuel clé, motif, soleil, planche et emblèmes. <code>tokens.css</code> : couleurs et polices. <code>fonts/</code> : les polices.</p>
+      <p>Sources des illustrations : le fichier Figma « Wilbid Game Night, saison 2, identité Toghu ». Le logo se régénère avec <code>sources/logo.py</code>.</p>
     </div>
   </div>
 </section>
 
 <script>
 (function(){
+  /* Symbole saison 2 : la noix de kola de la saison 1 et seize rayons, huit longs et huit courts.
+     Même géométrie que sources/logo.py (carré de 64, centre 32). */
+  function n(x){return Math.round(x*100)/100}
   var rays='';
-  for(var i=0;i<16;i++){var a=i*22.5;rays+='<path d="M32 2.5 34.6 9.5 29.4 9.5Z" transform="rotate('+a+' 32 32)"/>';}
-  var ring='<circle cx="32" cy="32" r="25.2" fill="none" stroke-width="1.6"/>';
+  for(var i=0;i<16;i++){
+    var long=i%2===0,a=i*Math.PI/8,ro=long?31:25.5,hb=long?1.9:1.6,ri=18.2;
+    var ux=Math.sin(a),uy=-Math.cos(a),px=Math.cos(a),py=Math.sin(a);
+    rays+='M'+n(32+ux*ro)+' '+n(32+uy*ro)+'L'+n(32+ux*ri+px*hb)+' '+n(32+uy*ri+py*hb)+'L'+n(32+ux*ri-px*hb)+' '+n(32+uy*ri-py*hb)+'Z';
+  }
+  function lobes(s){
+    var d=14.142*s,r=9.2*s;
+    return [[32,32-d],[32+d,32],[32,32+d],[32-d,32]].map(function(c){return '<circle cx="'+n(c[0])+'" cy="'+n(c[1])+'" r="'+n(r)+'"/>'}).join('');
+  }
   document.querySelectorAll('svg.symbol').forEach(function(s){
-    var k=s.dataset.k,r=s.dataset.r,c=s.dataset.c,h='';
-    if(r){h+='<g class="rays" fill="'+r+'" stroke="'+r+'">'+rays+ring.replace('stroke-width','stroke="'+r+'" stroke-width')+'</g>';}
-    var sc=r?0.78:1;
-    h+='<g transform="translate(32 32) scale('+sc+') translate(-32 -32)" fill="'+k+'"><use href="#kola"/><path d="M32 27 37 32 32 37 27 32Z" fill="'+c+'"/></g>';
+    var k=s.dataset.k,r=s.dataset.r,h='';
+    if(r){h+='<path class="rays" fill="'+r+'" d="'+rays+'"/>';}
+    h+='<g fill="'+k+'">'+lobes(r?0.64:1)+'</g>';
     s.innerHTML=h;
   });
   document.querySelectorAll('.c button').forEach(function(b){
