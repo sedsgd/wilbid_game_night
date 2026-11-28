@@ -387,7 +387,7 @@ const COLS=[...G.map(g=>({id:g.id,max:g.max,name:g.name,short:g.fin?{fr:'Finale'
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const $=s=>document.querySelector(s);
 const UI={
-fr:{sub:'classement',t1:'Joueurs',t7:'Kongossa',kgT:'Opération Kongossa',kgL:'Le fil rouge de la nuit. Tire les missions quand tous les joueurs sont inscrits, imprime les cartes (3 par joueur, une ligne par joueur) et glisse chaque ligne dans une enveloppe. À 02h45, coche chaque mission : les PW se calculent tout seuls.',kgDraw:'Tirer les missions',kgRedraw:'Refaire le tirage',kgSure:'Sûr ? Tout sera retiré',kgPrint:'Imprimer les cartes',kgNone:'Pas encore de missions. Ajoute au moins 4 joueurs, puis tire les missions.',kgLate:n=>`${n} joueur${n>1?'s':''} sans missions (arrivé${n>1?'s':''} après le tirage). Refais le tirage avant de distribuer les enveloppes.`,kgDone:'accomplies',kgBurn:'grillées',kgOpen:'en cours',kgOk:'Accomplie',kgBurnB:'Grillée',kgTarget:'Cible',kgHunter:'Chasseur',kgMission:'Mission',kgAns:'Réponse',kgSign:'Paraphe de la cible',kgRm:'Réussie : dis « Kongossa ! » et fais parapher. Démasqué(e) par ta cible : donne-lui cette carte. Missions ouvertes de 20h00 à 02h40.',kgDrawn:'Missions tirées',kgOff:'Les missions arrivent avec les joueurs : ajoute-les d’abord.',t2:'Équipes',t3:'Scores',t4:'Classement',t5:'Badges',proj:'Écran',langBtn:'EN',
+fr:{sub:'classement',t1:'Joueurs',t7:'Kongossa',kgT:'Opération Kongossa',kgL:'Le fil rouge de la nuit. Tire les missions quand tous les joueurs sont inscrits, imprime les cartes (3 par joueur, une ligne par joueur) et glisse chaque ligne dans une enveloppe. Pendant la nuit, vide la boîte Kongossa et coche chaque carte (paraphée : accomplie ; marquée « grillée » : grillée). Les PW se calculent tout seuls.',kgDraw:'Tirer les missions',kgRedraw:'Refaire le tirage',kgSure:'Sûr ? Tout sera retiré',kgPrint:'Imprimer les cartes',kgNone:'Pas encore de missions. Ajoute au moins 4 joueurs, puis tire les missions.',kgLate:n=>`${n} joueur${n>1?'s':''} sans missions (arrivé${n>1?'s':''} après le tirage). Refais le tirage avant de distribuer les enveloppes.`,kgDone:'accomplies',kgBurn:'grillées',kgOpen:'en cours',kgOk:'Accomplie',kgBurnB:'Grillée',kgTarget:'Cible',kgHunter:'Chasseur',kgMission:'Mission',kgAns:'Réponse',kgSign:'Paraphe de la cible',kgRm:'Réussie : dis « Kongossa ! », fais parapher et dépose la carte dans la boîte. Démasqué(e) par ta cible : donne-lui cette carte. Fin à 02h40.',kgDrawn:'Missions tirées',kgReady:'Tout le monde est inscrit ? Tire les missions, puis imprime les cartes.',kgHint:'Ces PW se calculent dans l’onglet Kongossa, en cochant chaque carte de la boîte.',t2:'Équipes',t3:'Scores',t4:'Classement',t5:'Badges',proj:'Écran',langBtn:'EN',
  pT:'Les joueurs',pL:'Inscris tout le monde à l’accueil. Le MJ et les organisateurs restent hors classement. Le genre sert seulement à équilibrer les équipes.',
  addT:'Ajouter',fName:'Prénom',fCity:'Ville d’origine',add:'Ajouter',bulkT:'Coller une liste (un prénom par ligne, ville après une virgule)',bulkAdd:'Ajouter la liste',
  role:{p:'Joueur',mj:'MJ',org:'Organisation'},g:{'':'–',F:'F',H:'H'},noP:'Aucun joueur pour l’instant. Ajoute le premier avec le formulaire.',players:'joueurs',staff:'organisation',
@@ -422,7 +422,7 @@ fr:{sub:'classement',t1:'Joueurs',t7:'Kongossa',kgT:'Opération Kongossa',kgL:'L
  cDown:'La base en ligne ne répond pas. Réessaie dans un instant.',retry:'Réessayer',logout:'Se déconnecter',loggedOut:'Déconnecté',
  lkWhyC:'Le classement public se met à jour tout seul sur le site. Seuls les comptes organisateurs peuvent modifier la soirée.',lkScreenC:'Voir le classement public',
  sync:{off:'Hors ligne',ok:'Synchronisé',saving:'Envoi…',err:'Pas de réseau, nouvel essai'},newOk:'Nouvelle soirée créée'},
-en:{sub:'leaderboard',t1:'Players',t7:'Kongossa',kgT:'Operation Kongossa',kgL:'The night’s all-night thread. Draw the missions once every player is in, print the cards (3 per player, one row per player) and slip each row into an envelope. At 2:45 am, tick each mission: the PW are worked out for you.',kgDraw:'Draw the missions',kgRedraw:'Draw again',kgSure:'Sure? Everything will be redrawn',kgPrint:'Print the cards',kgNone:'No missions yet. Add at least 4 players, then draw the missions.',kgLate:n=>`${n} player${n>1?'s':''} without missions (added after the draw). Draw again before handing out the envelopes.`,kgDone:'done',kgBurn:'burnt',kgOpen:'open',kgOk:'Done',kgBurnB:'Burnt',kgTarget:'Target',kgHunter:'Hunter',kgMission:'Mission',kgAns:'Answer',kgSign:'Target’s initials',kgRm:'Done: say “Kongossa!” and get it initialled. Unmasked by your target: hand them this card. Missions open from 8 pm to 2:40 am.',kgDrawn:'Missions drawn',kgOff:'Missions come with players: add them first.',t2:'Teams',t3:'Scores',t4:'Leaderboard',t5:'Badges',proj:'Screen',langBtn:'FR',
+en:{sub:'leaderboard',t1:'Players',t7:'Kongossa',kgT:'Operation Kongossa',kgL:'The night’s all-night thread. Draw the missions once every player is in, print the cards (3 per player, one row per player) and slip each row into an envelope. During the night, empty the Kongossa box and tick each card (initialled: done; marked “burnt”: burnt). The PW are worked out for you.',kgDraw:'Draw the missions',kgRedraw:'Draw again',kgSure:'Sure? Everything will be redrawn',kgPrint:'Print the cards',kgNone:'No missions yet. Add at least 4 players, then draw the missions.',kgLate:n=>`${n} player${n>1?'s':''} without missions (added after the draw). Draw again before handing out the envelopes.`,kgDone:'done',kgBurn:'burnt',kgOpen:'open',kgOk:'Done',kgBurnB:'Burnt',kgTarget:'Target',kgHunter:'Hunter',kgMission:'Mission',kgAns:'Answer',kgSign:'Target’s initials',kgRm:'Done: say “Kongossa!”, get it initialled and drop it in the box. Unmasked by your target: hand them this card. Ends at 2:40 am.',kgDrawn:'Missions drawn',kgReady:'Is everyone in? Draw the missions, then print the cards.',kgHint:'These PW are worked out in the Kongossa tab, by ticking each card from the box.',t2:'Teams',t3:'Scores',t4:'Leaderboard',t5:'Badges',proj:'Screen',langBtn:'FR',
  pT:'Players',pL:'Register everyone at the door. The game master and organisers are not ranked. Gender is only used to balance teams.',
  addT:'Add',fName:'First name',fCity:'Hometown',add:'Add',bulkT:'Paste a list (one name per line, hometown after a comma)',bulkAdd:'Add the list',
  role:{p:'Player',mj:'GM',org:'Organiser'},g:{'':'–',F:'F',H:'M'},noP:'No players yet. Add the first one with the form.',players:'players',staff:'staff',
@@ -527,7 +527,7 @@ function renderEntry(){
  const inp=p=>`<input type="number" inputmode="numeric" step="1" data-p="${p.id}" value="${typeof cur[p.id]==='number'?cur[p.id]:''}" placeholder="0" aria-label="${esc(p.name)}">`;
  const row=p=>`<div class="erow"><div><b>${esc(p.name)}</b><small>${esc(p.city||'')}</small></div><div>${inp(p)}<div class="warn" data-w="${p.id}"></div></div></div>`;
  let body='',hint='';
- if(sGame==='kola')hint=u.kolaHint;else if(sGame==='paris')hint=u.parisHint;
+ if(sGame==='kola')hint=u.kolaHint;else if(sGame==='paris')hint=u.parisHint;else if(FIL&&sGame===FIL.id)hint=u.kgHint;
  const t=st.teams[sGame];
  if(t&&t.length){
   body=t.map((m,i)=>`<div class="tbox"><div class="th"><b>${u.team} ${i+1}</b><label class="row note">${u.teamPW} <input type="number" inputmode="numeric" data-team="${i}" placeholder="0"></label></div>${m.map(id=>ps.find(p=>p.id===id)).filter(Boolean).map(row).join('')}</div>`).join('');
@@ -576,8 +576,16 @@ $('#resetBtn').addEventListener('click',()=>{const u=L();const box=document.crea
 let kgArm=0;
 function kgDraw(){
  const ps=shuffle(ranked()),n=ps.length;if(n<4||!FIL)return false;
- const offs=shuffle(Array.from({length:n-1},(_,i)=>i+1)).slice(0,3);
+ /* décalages distincts, jamais n/2 et jamais deux qui s'annulent : personne ne chasse son propre chasseur (dès 7 joueurs) */
+ const half=Math.floor((n-1)/2);
+ const offs=half>=3?shuffle(Array.from({length:half},(_,i)=>i+1)).slice(0,3).map(o=>Math.random()<.5?o:n-o):shuffle(Array.from({length:n-1},(_,i)=>i+1)).slice(0,3);
  const m=[];KGK.forEach((k,ki)=>{const perm=shuffle(FIL.bank[k].map((_,i)=>i));ps.forEach((p,j)=>m.push({h:p.id,t:ps[(j+offs[ki])%n].id,k,i:perm[j%perm.length]}))});
+ /* un Mot qui est la ville d'origine de la cible (écrite sur son badge) serait gratuit : on l'échange avec un autre chasseur */
+ const norm=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+ const city=id=>norm(st.players.find(p=>p.id===id)?.city);
+ const clash=(x,i)=>FIL.bank.mot[i].some(w=>{const c=city(x.t);return c&&c.includes(norm(w))});
+ const mots=m.filter(x=>x.k==='mot');
+ mots.forEach(x=>{if(!clash(x,x.i))return;const y=mots.find(z=>z!==x&&!clash(x,z.i)&&!clash(z,x.i));if(y)[x.i,y.i]=[y.i,x.i]});
  st.kg={m,s:{}};kgScore();return true;
 }
 function kgScore(){
@@ -585,19 +593,20 @@ function kgScore(){
  const ids=[...new Set(st.kg.m.map(x=>x.h))].filter(id=>st.players.some(p=>p.id===id));
  ids.forEach(id=>{const done=st.kg.m.filter((x,i)=>x.h===id&&s[i]==='ok').length,burnt=st.kg.m.filter((x,i)=>x.t===id&&s[i]==='burn').length;o[id]=Math.min(FIL.max,4*done+(done===3?3:0)+2*burnt)});
  const any=Object.keys(s).length;
- if(any){st.scores[FIL.id]=o;st.order=st.order.filter(x=>x!==FIL.id);st.order.push(FIL.id)}else{delete st.scores[FIL.id];st.order=st.order.filter(x=>x!==FIL.id)}
+ if(any){st.scores[FIL.id]=o;if(!st.order.includes(FIL.id))st.order.unshift(FIL.id)}else{delete st.scores[FIL.id];st.order=st.order.filter(x=>x!==FIL.id)}
 }
 const kgName=id=>st.players.find(p=>p.id===id)?.name||'?';
 const kgTask=x=>{const b=FIL.bank[x.k][x.i]||['',''];return lang==='en'?b[1]:b[0]};
+const kgQuote=t=>lang==='en'?'“'+t+'”':'« '+t+' »';
 function renderKg(){
  const u=L(),kg=st.kg;
  const btn=$('#kgDraw');btn.textContent=kgArm?u.kgSure:kg?u.kgRedraw:u.kgDraw;btn.classList.toggle('red',!!kgArm);btn.disabled=ranked().length<4;$('#kgPrint').disabled=!kg;
- if(!kg){$('#kgBox').innerHTML=`<div class="empty">${ranked().length<4?u.kgNone:u.kgNone}</div>`;return}
+ if(!kg){$('#kgBox').innerHTML=`<div class="empty">${ranked().length<4?u.kgNone:u.kgReady}</div>`;return}
  const s=kg.s||{},have=new Set(kg.m.map(x=>x.h)),late=ranked().filter(p=>!have.has(p.id)).length;
  const nOk=Object.values(s).filter(v=>v==='ok').length,nB=Object.values(s).filter(v=>v==='burn').length;
  const hs=[...have].filter(id=>st.players.some(p=>p.id===id)).sort((a,b)=>kgName(a).localeCompare(kgName(b)));
  $('#kgBox').innerHTML=`${late?`<p class="warn" style="margin-top:0">${u.kgLate(late)}</p>`:''}<div class="kgsum"><span><b>${nOk}</b>${u.kgDone}</span><span><b>${nB}</b>${u.kgBurn}</span><span><b>${kg.m.length-nOk-nB}</b>${u.kgOpen}</span></div>
- <div class="kgl">${hs.map(id=>`<div class="kgp"><h3>${esc(kgName(id))}<span>${typeof st.scores[FIL.id]?.[id]==='number'?st.scores[FIL.id][id]:0} PW</span></h3>${kg.m.map((x,i)=>x.h===id?`<div class="kgm"><div><span class="k ${x.k}">${esc(tx(FIL.kinds[x.k]))}</span><b>${esc(kgName(x.t))}</b><span class="tk">${esc(tx(FIL.ask[x.k]))} ${x.k==='mot'?'« '+esc(kgTask(x))+' »':esc(kgTask(x))}</span></div><div class="seg" role="group">${[['',' – '],['ok',u.kgOk],['burn',u.kgBurnB]].map(([v,l])=>`<button type="button" data-kg="${i}" data-v="${v}" class="${(s[i]||'')===v?'on':''}" aria-pressed="${(s[i]||'')===v}">${l}</button>`).join('')}</div></div>`:'').join('')}</div>`).join('')}</div>`;
+ <div class="kgl">${hs.map(id=>`<div class="kgp"><h3>${esc(kgName(id))}<span>${typeof st.scores[FIL.id]?.[id]==='number'?st.scores[FIL.id][id]:0} PW</span></h3>${kg.m.map((x,i)=>x.h===id?`<div class="kgm"><div><span class="k ${x.k}">${esc(tx(FIL.kinds[x.k]))}</span><b>${esc(kgName(x.t))}</b><span class="tk">${esc(tx(FIL.ask[x.k]))} ${x.k==='mot'?esc(kgQuote(kgTask(x))):esc(kgTask(x))}</span></div><div class="seg" role="group">${[['',' – '],['ok',u.kgOk],['burn',u.kgBurnB]].map(([v,l])=>`<button type="button" data-kg="${i}" data-v="${v}" class="${(s[i]||'')===v?'on':''}" aria-pressed="${(s[i]||'')===v}">${l}</button>`).join('')}</div></div>`:'').join('')}</div>`).join('')}</div>`;
 }
 $('#kgDraw').addEventListener('click',()=>{
  if(st.kg&&!kgArm){kgArm=setTimeout(()=>{kgArm=0;renderKg()},4000);renderKg();return}
@@ -606,7 +615,7 @@ $('#kgBox').addEventListener('click',e=>{const b=e.target.closest('[data-kg]');i
 $('#kgPrint').addEventListener('click',()=>{const u=L(),kg=st.kg;if(!kg)return;
  const hs=[...new Set(kg.m.map(x=>x.h))].filter(id=>st.players.some(p=>p.id===id)).sort((a,b)=>kgName(a).localeCompare(kgName(b)));
  $('#kgSheet').innerHTML=hs.map(id=>KGK.map(k=>{const x=kg.m.find(y=>y.h===id&&y.k===k);if(!x)return '';
-  return `<div class="kc ${k}"><div class="bt"><span>${esc(tx(FIL.name))}</span><img src="assets/em-${FIL.id}.jpg" alt=""></div><div class="in"><div class="ty">${u.kgMission} ${esc(tx(FIL.kinds[k]))}</div><div class="tg">${u.kgTarget}</div><div class="tn">${esc(kgName(x.t))}</div><div class="ask">${esc(tx(FIL.ask[k]))}</div><div class="ts">${k==='mot'?'« '+esc(kgTask(x))+' »':esc(kgTask(x))}</div>${k==='secret'?`<div class="ans">${u.kgAns} :</div>`:''}<div class="hn">${u.kgHunter} : ${esc(kgName(id))}</div><div class="rm">${u.kgRm}</div><div class="ln"><span>${u.kgSign}</span><span>Wilbid Game Night</span></div></div></div>`}).join('')).join('');
+  return `<div class="kc ${k}"><div class="bt"><span>${esc(tx(FIL.name))}</span><img src="assets/em-${FIL.id}.jpg" alt=""></div><div class="in"><div class="ty">${u.kgMission} ${esc(tx(FIL.kinds[k]))}</div><div class="tg">${u.kgTarget}</div><div class="tn">${esc(kgName(x.t))}</div><div class="ask">${esc(tx(FIL.ask[k]))}</div><div class="ts">${k==='mot'?esc(kgQuote(kgTask(x))):esc(kgTask(x))}</div>${k==='secret'?`<div class="ans">${u.kgAns} :</div>`:''}<div class="hn">${u.kgHunter} : ${esc(kgName(id))}</div><div class="rm">${u.kgRm}</div><div class="ln"><span>${u.kgSign}</span><span>Wilbid Game Night</span></div></div></div>`}).join('')).join('');
  document.body.classList.add('pk');window.print()});
 
 /* ---- badges ---- */

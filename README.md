@@ -55,7 +55,8 @@ Tout est en HTML, CSS et JavaScript, sans dépendance à installer. Le dépôt p
 
 - Toute la nuit, chaque joueur mène 3 missions secrètes (Mot, Action, Secret) sur 3 autres joueurs, et chaque joueur est la cible d'un chasseur de chaque type. Les règles et les 72 missions (24 par type, FR/EN) sont dans `WB_FIL` de `data.js`.
 - Onglet **Kongossa** : **Tirer les missions** quand la liste des joueurs est définitive, puis **Imprimer les cartes** (une ligne de 3 cartes par joueur, à glisser dans son enveloppe).
-- À 02h45, cocher chaque mission **Accomplie** ou **Grillée** : la colonne Kong. du classement se calcule seule (4 PW par mission, +3 PW pour les 3, +2 PW par chasseur démasqué, 15 PW au plus).
+- Les joueurs déposent les cartes paraphées ou grillées dans la boîte Kongossa (fermeture à 02h40). Le comptable la vide à chaque pause et coche chaque mission **Accomplie** ou **Grillée** : la colonne Kong. du classement se calcule seule (4 PW par mission, +3 PW pour les 3, +2 PW par chasseur démasqué, 15 PW au plus).
+- Le tirage évite qu'un joueur chasse son propre chasseur (dès 7 joueurs) et qu'un Mot soit la ville d'origine de sa cible.
 
 ### Dans les deux cas
 
