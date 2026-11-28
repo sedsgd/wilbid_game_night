@@ -55,7 +55,7 @@ async function prepImages() {
     .composite([{ input: tile, tile: true, top: 0, left: 0 },
                 { input: { create: { width: 1920, height: 1080, channels: 4, background: { r: 13, g: 21, b: 56, alpha: 0.86 } } } }])
     .jpeg({ quality: 86 }).toFile(out.pattern);
-  out.hero = A('hero.jpg'); out.s2hero = path.join(__dirname, 'images/s2-hero.jpg'); out.mokolo = A('mokolo.jpg');
+  out.hero = A('hero.jpg'); out.s2hero = path.join(__dirname, 'images/s2-hero.jpg'); out.s2logo = path.join(__dirname, 'images/s2-logo.png'); out.mokolo = A('mokolo.jpg');
   // QR codes
   const qr = async (url, name) => { const f = path.join(TMP, name); await QR.toFile(f, url, { width: 600, margin: 2, color: { dark: '#' + HEX.deep, light: '#' + HEX.ink } }); return f; };
   out.qrAvis = await qr(SITE + 'avis.html', 'qr-avis.png');
@@ -426,12 +426,13 @@ async function build() {
     const s = pres.addSlide({ masterName: 'WB_IMAGE', sectionTitle: sec });
     s.background = { color: S2.velours };
     s.addImage({ path: IMG.s2hero, x: 0, y: 0, w: W, h: H, sizing: { type: 'cover', w: W, h: H }, altText: 'Visuel de la saison 2 Toghu : mains qui jouent aux kola sur un tissu toghu brodé', objectName: 'visuel-saison-2' });
-    tb(s, 'PROCHAINEMENT', { x: M + 0.1, y: 1.3, w: 5.5, h: 0.4, fontSize: 16, bold: true, charSpacing: 3, color: S2.orange });
-    tb(s, 'La saison 2\narrive.', { x: M + 0.1, y: 1.8, w: 5.6, h: 2.0, fontSize: 56, bold: true, color: S2.coton, valign: 'top', lineSpacingMultiple: 0.9 });
-    tb(s, 'Toghu', { x: M + 0.1, y: 3.85, w: 5.5, h: 1.0, fontSize: 54, fontFace: SERIF, color: S2.or });
-    s.addText('Date à annoncer', { isTextBox: true, shape: pres.shapes.ROUNDED_RECTANGLE, rectRadius: 0.25, x: M + 0.1, y: 4.95, w: 2.7, h: 0.55, fill: { color: S2.orange }, color: S2.velours, fontSize: 17, bold: true, align: 'center', valign: 'middle', margin: 0, objectName: 'date-saison-2' });
-    s.addImage({ path: IMG.qrInsc, x: M + 0.1, y: 5.7, w: 1.2, h: 1.2, altText: 'QR code vers la page d’inscription', objectName: 'qr-inscription' });
-    tb(s, 'Inscriptions\nsur le site', { x: M + 1.5, y: 5.7, w: 2.2, h: 1.2, fontSize: 15, color: S2.coton, valign: 'middle' });
+    s.addImage({ path: IMG.s2logo, x: M + 0.1, y: 0.6, w: 3.3, h: 3.3 * 480 / 1877, altText: 'Logo Wilbid Game Night saison 2', objectName: 'logo-saison-2' });
+    tb(s, 'PROCHAINEMENT', { x: M + 0.1, y: 1.8, w: 5.5, h: 0.4, fontSize: 16, bold: true, charSpacing: 3, color: S2.orange });
+    tb(s, 'La saison 2\narrive.', { x: M + 0.1, y: 2.25, w: 5.6, h: 2.0, fontSize: 56, bold: true, color: S2.coton, valign: 'top', lineSpacingMultiple: 0.9 });
+    tb(s, 'Toghu', { x: M + 0.1, y: 4.1, w: 5.5, h: 1.0, fontSize: 54, fontFace: SERIF, color: S2.or });
+    s.addText('Date à annoncer', { isTextBox: true, shape: pres.shapes.ROUNDED_RECTANGLE, rectRadius: 0.25, x: M + 0.1, y: 5.15, w: 2.7, h: 0.55, fill: { color: S2.orange }, color: S2.velours, fontSize: 17, bold: true, align: 'center', valign: 'middle', margin: 0, objectName: 'date-saison-2' });
+    s.addImage({ path: IMG.qrInsc, x: M + 0.1, y: 5.9, w: 1.1, h: 1.1, altText: 'QR code vers la page d’inscription', objectName: 'qr-inscription' });
+    tb(s, 'Inscriptions\nsur le site', { x: M + 1.4, y: 5.9, w: 2.2, h: 1.1, fontSize: 15, color: S2.coton, valign: 'middle' });
     NOTES(s, 'Annonce de la saison 2, « Toghu ». Remplacer « Date à annoncer » par la date dès qu’elle est fixée. Le QR code mène à la page d’inscription du site.');
   }
   interlude(sec, { em: 'ambiance', kicker: at('ambiance').at + ' · jusqu’au matin', kColor: PALM, title: 'À très vite !', accent: 'La fête continue, rentrez bien',
